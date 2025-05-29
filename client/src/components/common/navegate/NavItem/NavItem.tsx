@@ -13,7 +13,13 @@ export const NavItem = ({ icon, label, selected, onClick }: NavItemProps) => {
       className={`${styles.NavItem} ${selected ? styles.selected : ''}`}
       onClick={onClick}
     >
-      <span className={styles.icon}>{icon}</span>
+      <div className={styles.icon_container}>
+        <div className={styles.state_layer}>
+          {/* <span className={styles.icon}>{icon}</span> */}
+          <span className={`material-symbols-outlined ${styles.icon}`}>{icon}</span>
+        </div>
+      </div>
+
       <span className={styles.label}>{label}</span>
     </button>
   )

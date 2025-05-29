@@ -1,31 +1,73 @@
 .NavItem {
   display: flex;
+  width: 104px;
+  padding: 6px 0px;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 10px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  width: 100%;
-  transition: all 0.2s ease-in-out;
-}
+  align-items: center;
+  gap: 4px;
+  box-sizing: border-box;
 
-.NavItem:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background: none;
+  border: none;
 }
 
 .selected {
-  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.icon_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.state_layer {
+  display: flex;
+  width: 56px;
+  height: 32px;
+  padding: 4px 0px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.NavItem:hover .state_layer {
+  background: var(--State-Layers-On-Surface-Opacity-08, rgba(29, 27, 32, 0.08));
+}
+
+.state_layer:focus {
+  background: var(--State-Layers-On-Secondary-Container-Opacity-12, rgba(74, 68, 89, 0.12));
+}
+
+.selected .state_layer {
+  background: var(--State-Layers-On-Surface-Opacity-10, rgba(29, 27, 32, 0.10));
+}
+
+.selected .icon {
+  font-variation-settings: 'FILL' 1;
 }
 
 .icon {
-  font-family: 'Material Symbols Outlined';
   font-size: 24px;
-  margin-bottom: 4px;
 }
 
 .label {
+  color: var(--M3-sys-light-on-surface-variant, #424940);
+  text-align: center;
+
+  /* M3/label/medium */
+  font-family: var(--Static-Label-Medium-Font, Roboto);
   font-size: 12px;
+  font-style: normal;
   font-weight: 500;
+  line-height: 16px; /* 133.333% */
+  letter-spacing: 0.5px;
+}
+
+.NavItem:hover .label {
+  font-weight: 600;
 }
