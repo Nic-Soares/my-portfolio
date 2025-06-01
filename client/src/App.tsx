@@ -3,7 +3,7 @@ import './style/global.css'
 import './style/normalize.css'
 
 import Sidebar from './components/layout/sidebar/Sidebar.tsx'
-import MainContent from './components/sections/home/MainContent.tsx' // Assuming MainContent is for the Home page
+import Home from './components/sections/home/Home.tsx' // Assuming MainContent is for the Home page
 
 // You will likely create other components for Projects, Services, and About Me later
 function ProjectsContent() { return <h2>Projects Page</h2>; }
@@ -19,7 +19,7 @@ function App() {
   const renderContent = () => {
     switch (activePage) {
       case 'Home':
-        return <MainContent />;
+        return <Home />;
       case 'Projects':
         return <ProjectsContent />;
       case 'Services':
@@ -36,7 +36,9 @@ function App() {
       {/* Pass activePage and setActivePage to Sidebar */}
       <Sidebar activePage={activePage} setActivePage={setActivePage} />
       {/* Render content based on the active page state */}
-      {renderContent()}
+      <div className='content'>
+        {renderContent()}
+      </div>
     </div>
   )
 }

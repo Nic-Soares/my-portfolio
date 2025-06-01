@@ -1,0 +1,12 @@
+.collaborate_section {
+  display: flex;
+  padding: 25px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 1 0 0;
+  align-self: stretch;
+
+  border-radius: var(--Corner-Large-increased, 20px);
+  background: var(--Schemes-Secondary-Container, #E0E6C3);
+}

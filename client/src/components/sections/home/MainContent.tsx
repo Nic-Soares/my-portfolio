@@ -1,14 +1,11 @@
-import './MainContent.css'
+import CollaborateSection from "./CollaborateSection"
 
-function MainContent() {
+const MainContent = () => {
   return (
-    <section className='main_content'>
-      <div className='content'>
-        <h1>Welcome to My Portfolio</h1>
-        <p>This is a sample portfolio website.</p>
-      </div>
-    </section>
-  );
+    <>
+      <CollaborateSection/>
+    </>
+  )
 }
 
-export default MainContent;
+export default MainContent
