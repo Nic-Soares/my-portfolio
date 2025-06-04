@@ -5,13 +5,15 @@ type NavItemProps = {
   label: string;
   selected?: boolean;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
-export const NavItem = ({ icon, label, selected, onClick }: NavItemProps) => {
+export const NavItem = ({ icon, label, selected, onClick, disabled }: NavItemProps) => {
   return (
     <button
       className={`${styles.NavItem} ${selected ? styles.selected : ''}`}
       onClick={onClick}
+      disabled={disabled}
     >
       <div className={styles.icon_container}>
         <div className={styles.state_layer}>

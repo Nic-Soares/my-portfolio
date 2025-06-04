@@ -13,8 +13,8 @@ function Sidebar({ activePage, setActivePage }: SidebarProps) {
       <NavRail>
         <NavItem icon='home' label='Home' selected={activePage === 'Home'} onClick={() => setActivePage('Home')} />
         <NavItem icon='folder' label='Projects' selected={activePage === 'Projects'} onClick={() => setActivePage('Projects')} />
-        <NavItem icon='concierge' label='Services' selected={activePage === 'Services'} onClick={() => setActivePage('Services')} />
-        <NavItem icon='account_circle' label='About me' selected={activePage === 'About me'} onClick={() => setActivePage('About me')} />
+        <NavItem icon='concierge' label='Services' selected={activePage === 'Services'} onClick={() => setActivePage('Services')} disabled={true} />
+        <NavItem icon='account_circle' label='About me' selected={activePage === 'About me'} onClick={() => setActivePage('About me')} disabled={true} />
       </NavRail>
 
       <NavRail className={styles['nav-footer']}>

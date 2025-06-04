@@ -19,7 +19,7 @@ function App() {
   const renderContent = () => {
     switch (activePage) {
       case 'Home':
-        return <Home />;
+        return <Home/>;
       case 'Projects':
         return <ProjectsContent />;
       case 'Services':
@@ -27,7 +27,7 @@ function App() {
       case 'About me':
         return <AboutMeContent />;
       default:
-        return <MainContent />; // Default to Home
+        return <Home/>; // Default to Home
     }
   };
 

@@ -11,3 +11,18 @@
   border-radius: var(--Corner-Large-increased, 20px);
   background: var(--Schemes-Surface-Container, #EFEEE2);
 }
+
+.hero-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}

@@ -1,0 +1,11 @@
+.testimonials_section {
+  display: flex;
+  padding: 30px;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1 0 0;
+  align-self: stretch;
+
+  border-radius: var(--Corner-Medium, 12px);
+  background: var(--Schemes-Tertiary-Container, #BDECE1);
+}

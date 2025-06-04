@@ -1,8 +1,10 @@
+import styles from './TestimonialsSection.module.css'
+
 const TestimonialSection  = () => {
   return (
-    <div>
+    <section className={styles['testimonials_section']}>
 
-    </div>
+    </section>
   )
 }
 

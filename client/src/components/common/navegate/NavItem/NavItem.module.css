@@ -39,6 +39,8 @@
   background: var(--State-Layers-On-Surface-Opacity-08, rgba(29, 27, 32, 0.08));
 }
 
+/* Default hover style - no disabled styles here */
+
 .state_layer:focus {
   background: var(--State-Layers-On-Secondary-Container-Opacity-12, rgba(74, 68, 89, 0.12));
 }
@@ -70,4 +72,20 @@
 
 .NavItem:hover .label {
   font-weight: 600;
+}
+
+/* Styles for disabled state */
+.NavItem:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Prevent hover effects when disabled */
+.NavItem:disabled:hover .state_layer {
+  background: none; /* Or a different background for disabled hover */
+}
+
+.NavItem:disabled .label {
+   /* Optional: adjust label color/style when disabled */
+   color: var(--M3-sys-light-on-surface-variant, rgba(66, 73, 64, 0.5)); /* Example: reduced opacity */
 }
