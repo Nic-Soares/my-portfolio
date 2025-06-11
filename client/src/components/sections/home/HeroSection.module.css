@@ -1,11 +1,8 @@
 .hero-section {
   /* Layout */
-  display: flex;
   padding: 32px;
   justify-content: space-between;
-  align-items: flex-start;
   flex: 1 0 0;
-  align-self: stretch;
 
   /* Style */
   border-radius: var(--Corner-Large-increased, 20px);

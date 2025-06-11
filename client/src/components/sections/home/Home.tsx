@@ -1,11 +1,17 @@
 import HeroSection from "./HeroSection"
-import MainContent from "./MainContent";
+import CollaborateSection from "./CollaborateSection";
+import TestimonialSection from "./TestimonialSection";
+import styles from "./Home.module.css";
 
 function Home() {
   return (
     <>
       <HeroSection/>
-      <MainContent/>
+
+      <div className={styles.main_content}>
+        <CollaborateSection/>
+        <TestimonialSection/>
+      </div>
     </>
   );
 }

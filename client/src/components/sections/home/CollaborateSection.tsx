@@ -1,10 +1,16 @@
+import Container from '../../layout/container/Container'
 import styles from './CollaborateSection.module.css'
 
 const CollaborateSection = () => {
   return (
-    <section className={styles['collaborate_section']}>
+    <Container className={styles['collaborate_section']}>
+        <div>
 
-    </section>
+        </div>
+        <div>
+
+        </div>
+    </Container>
   )
 }
 
