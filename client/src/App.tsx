@@ -32,14 +32,12 @@ function App() {
   };
 
   return (
-    <div className="container">
+    <>
       {/* Pass activePage and setActivePage to Sidebar */}
       <Sidebar activePage={activePage} setActivePage={setActivePage} />
       {/* Render content based on the active page state */}
-      <div className='content'>
-        {renderContent()}
-      </div>
-    </div>
+      {renderContent()}
+    </>
   )
 }
 
