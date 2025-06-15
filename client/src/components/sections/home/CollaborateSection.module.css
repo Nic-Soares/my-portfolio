@@ -1,6 +1,6 @@
 .collaborate-section {
   display: flex;
-  padding: 25px;
+  padding: 30px;
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
@@ -21,48 +21,32 @@
 
 .collaborate-section__service {
   display: flex;
+  width: 199px;
+  height: 293px;
+  max-width: 199px;
   max-height: 293px;
   padding: 20px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  flex: 1 0 0;
-  align-self: stretch;
+  box-sizing: border-box;
 
   border-radius: var(--Corner-Medium, 12px);
   background: var(--Schemes-Primary-Container, #D9EB99);
 }
 
-.collaborate-section__icon {
-  width: 32px;
-  height: 32px;
+.collaborate-section__company-logos {
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 0;
+  align-self: stretch;
 }
 
-.collaborate-section__title {
-  align-self: stretch;
-
-  color: var(--Schemes-On-Primary-Container, #171E00);
-  text-align: center;
-  font-family: Inter;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 26px; /* 173.333% */
-  letter-spacing: 0.5px;
-}
-
-.collaborate-section__description {
-  align-self: stretch;
-
-  color: var(--Schemes-On-Primary-Container, #171E00);
-  text-align: center;
-
-  /* M3/body/medium-emphasized */
-  font-family: var(--Static-Body-Medium-Font, Roboto);
-  font-size: var(--Static-Body-Medium-Size, 14px);
-  font-style: normal;
-  font-weight: 500;
-  line-height: var(--Static-Body-Medium-Line-Height, 20px); /* 142.857% */
-  letter-spacing: var(--Static-Body-Medium-Tracking, 0.25px);
+.collaborate-section__company-logo {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
 }

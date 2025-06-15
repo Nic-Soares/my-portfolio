@@ -3,11 +3,12 @@ import type { ReactNode } from 'react';
 
 type NavigationRailProps = {
   children: ReactNode;
+  className?: string;
 }
 
-export default function NavigationRail({ children }: NavigationRailProps) {
+export default function NavigationRail({ children, className }: NavigationRailProps) {
   return (
-    <div className={styles.nav_rail}>
+    <div className={`${styles.nav_rail} ${className || ''}`}>
       {children}
     </div>
   )
