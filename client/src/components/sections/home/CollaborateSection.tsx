@@ -10,8 +10,8 @@ const DataIcon = () => (
 
 const CollaborateSection = () => {
   return (
-    <Container className={styles['collaborate-section']}>
-      <div className={styles['collaborate-section__services']}>
+    <div className={styles['collaborate-section']}>
+      <Container className={styles['collaborate-section__services']}>
 
         <div className={styles['collaborate-section__service']}>
           <ServiceItem
@@ -44,9 +44,9 @@ const CollaborateSection = () => {
             description='Building dashboards with clear data visualization, process automation, and decision-making insights.'
           />
         </div>
-      </div>
+      </Container>
 
-      <div className={styles['collaborate-section__company-logos']}>
+      <Container className={styles['collaborate-section__company-logos']}>
         <div className={styles['collaborate-section__company-logo']}>
           <svg xmlns="http://www.w3.org/2000/svg" width="42" height="49" viewBox="0 0 42 49" fill="none">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2286 5.49951C12.0132 5.49951 9.04205 7.2149 7.43435 9.99951L1.66085 19.9995C0.0531559 22.7841 0.053153 26.2149 1.66085 28.9995L7.43435 38.9995C9.04205 41.7841 12.0132 43.4995 15.2286 43.4995H26.7756C29.991 43.4995 32.9621 41.7841 34.5698 38.9995L40.3433 28.9995C41.951 26.2149 41.951 22.7841 40.3433 19.9995L34.5698 9.99951C32.9621 7.2149 29.991 5.49951 26.7756 5.49951H15.2286ZM26.7756 11.4995L19.5587 11.4995C18.404 11.4995 17.6825 12.7494 18.2607 13.7489C20.0447 16.8327 21.8329 19.9142 23.6143 22.9995C24.1502 23.9277 24.1502 25.0713 23.6143 25.9995C21.8329 29.0849 20.0447 32.1663 18.2607 35.2501C17.6825 36.2496 18.404 37.4995 19.5587 37.4995H26.7756C27.8474 37.4995 28.8378 36.9277 29.3737 35.9995L35.1472 25.9995C35.6831 25.0713 35.6831 23.9277 35.1472 22.9995L29.3737 12.9995C28.8378 12.0713 27.8474 11.4995 26.7756 11.4995Z" fill="#191D08" fill-opacity="0.54"/>
@@ -102,8 +102,8 @@ const CollaborateSection = () => {
             <path d="M83.4657 19.865C83.4657 23.78 94.2657 20.459 94.2657 27.965C94.2657 31.745 91.1337 33.932 86.8407 33.932C82.4937 33.932 79.3887 31.934 78.7407 27.749H83.3036C83.6546 29.558 84.9237 30.557 86.8677 30.557C88.8117 30.557 89.8377 29.774 89.8377 28.505C89.8377 24.401 79.0107 27.533 79.0107 20.27C79.0107 17.192 81.5757 14.708 86.0847 14.708C89.8917 14.708 93.1857 16.517 93.7527 20.756H89.1357C88.7577 18.947 87.7047 18.083 85.9227 18.083C84.4107 18.083 83.4657 18.785 83.4657 19.865Z" fill="#191D08" fill-opacity="0.54"/>
           </svg>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

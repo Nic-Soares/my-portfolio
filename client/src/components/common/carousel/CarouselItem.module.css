@@ -1,0 +1,69 @@
+.carousel_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.shapes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  opacity: 0.15;
+}
+
+.shape {
+  background-color: #000;
+}
+
+.triangle {
+  width: 100px;
+  height: 100px;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.gear {
+  width: 100px;
+  height: 100px;
+  clip-path: polygon(
+    50% 0%, 60% 20%, 80% 20%, 70% 40%, 80% 60%, 60% 60%,
+    50% 80%, 40% 60%, 20% 60%, 30% 40%, 20% 20%, 40% 20%
+  );
+  border-radius: 20%;
+}
+
+.rounded {
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+}
+
+.text_content {
+  margin-top: 40px;
+}
+
+.text_content h4 {
+  font-weight: bold;
+  color: #0f2e21;
+  margin-bottom: 8px;
+}
+
+.text_content p {
+  color: #0f2e21;
+  max-width: 500px;
+  margin-bottom: 16px;
+}
+
+md-filled-button {
+  background-color: #4a582f;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
