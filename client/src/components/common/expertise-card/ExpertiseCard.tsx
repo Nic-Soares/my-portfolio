@@ -8,7 +8,7 @@ interface Props {
 
 const ExpertiseCard = ({ expertise }: Props) => {
 	return (
-		<Container className='expertise-card'>
+    <Container className={styles['expertise-card']}>
 				<div>
 				  {expertise.icon}
 				</div>
