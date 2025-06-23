@@ -1,5 +1,5 @@
 import HeroSection from "./HeroSection"
-import CollaborateSection from "./CollaborateSection";
+import ExperienceSection from "./ExperienceSection";
 import ProjectCarousel from "./ProjectCarousel";
 import styles from "./Home.module.css";
 
@@ -10,7 +10,7 @@ function Home() {
       <HeroSection/>
 
       <div className={styles.main_content}>
-        <CollaborateSection/>
+        <ExperienceSection/>
         <ProjectCarousel/>
       </div>
     </div>

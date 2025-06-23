@@ -1,0 +1,16 @@
+.experience-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 1 0 0;
+  align-self: stretch;
+}
+
+.trusted_companies {
+  display: flex;
+  padding: 30px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}

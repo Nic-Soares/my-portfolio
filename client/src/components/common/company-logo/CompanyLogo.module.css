@@ -1,0 +1,10 @@
+.company-logo {
+  display: flex;
+  padding: 30px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  box-sizing: border-box;
+
+  background: var(--Schemes-Surface-Container, #EFEEE2);
+}
