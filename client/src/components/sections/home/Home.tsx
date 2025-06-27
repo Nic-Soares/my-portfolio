@@ -8,11 +8,9 @@ function Home() {
     <div className={styles.home}>
 
       <HeroSection/>
+      <ExperienceSection/>
+      <ProjectCarousel/>
 
-      <div className={styles.main_content}>
-        <ExperienceSection/>
-        <ProjectCarousel/>
-      </div>
     </div>
   );
 }
