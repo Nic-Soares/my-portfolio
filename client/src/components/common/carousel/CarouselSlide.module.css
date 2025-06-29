@@ -1,0 +1,125 @@
+.carousel_slide_base {
+  position: absolute;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px; /* Ajuste para o tamanho do slide */
+  padding: 24px 0; /* px-6 py-8 */
+  box-sizing: border-box;
+  height: 100%; /* Garante que o slide ocupe a altura do container */
+}
+
+.carousel_slide_active {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  z-index: 20;
+  text-align: center;
+}
+
+.carousel_slide_next {
+  opacity: 0.5;
+  transform: translateX(200px) scale(0.9);
+  z-index: 10;
+  text-align: left;
+}
+
+.carousel_slide_prev {
+  opacity: 0.5;
+  transform: translateX(-200px) scale(0.9);
+  z-index: 10;
+  text-align: right;
+}
+
+.carousel_slide_hidden {
+  opacity: 0;
+  transform: scale(0.75);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.carousel_slide_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+  align-items: center;
+  text-align: center;
+}
+
+.shapes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  opacity: 0.15;
+  margin-bottom: 24px;
+}
+
+.shape {
+  background-color: #000;
+}
+
+.triangle {
+  width: 100px;
+  height: 100px;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.gear {
+  width: 100px;
+  height: 100px;
+  clip-path: polygon(
+    50% 0%, 60% 20%, 80% 20%, 70% 40%, 80% 60%, 60% 60%,
+    50% 80%, 40% 60%, 20% 60%, 30% 40%, 20% 20%, 40% 20%
+  );
+  border-radius: 20%;
+}
+
+.rounded {
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+}
+
+.text_content {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.text_content h4 {
+  font-weight: bold;
+  color: #0f2e21;
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+}
+
+.text_content p {
+  color: #0f2e21;
+  max-width: 500px;
+  margin-bottom: 16px;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+md-filled-button {
+  --md-filled-button-container-color: #4A5615;
+  --md-filled-button-label-text-color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+md-filled-button:hover {
+  --md-filled-button-container-color: #3a450f;
+}

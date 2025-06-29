@@ -2,10 +2,23 @@
   grid-area: experience;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 20px;
-  flex: 1 0 0;
-  align-self: stretch;
+  border-radius: 20px;
 }
 
+.experience-grid {
+  display: flex;
+  height: 100%;
+  padding: 30px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
 
+.experience-companies {
+  display: flex;
+  padding: 30px;
+
+  justify-content: space-between;
+  align-items: center;
+
+}

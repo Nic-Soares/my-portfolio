@@ -7,9 +7,9 @@ function Home() {
   return (
     <div className={styles.home}>
 
-      <HeroSection/>
-      <ExperienceSection/>
-      <ProjectCarousel/>
+      <HeroSection className={styles.heroSection}/>
+      <ExperienceSection className={styles.experienceSection}/>
+      <ProjectCarousel className={styles.projectCarousel}/>
 
     </div>
   );

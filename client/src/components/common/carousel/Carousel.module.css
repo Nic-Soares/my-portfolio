@@ -1,0 +1,36 @@
+.nav_button_left,
+.nav_button_right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  padding: 8px;
+  border-radius: 9999px; /* rounded-full */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow */
+  z-index: 30; /* z-10 */
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #0f2e21;
+}
+
+.nav_button_left {
+  left: 16px; /* left-4 */
+}
+
+.nav_button_right {
+  right: 16px; /* right-4 */
+}
+
+.slides_container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px; /* max-w-6xl */
+  height: 400px; /* Definir uma altura para o contêiner dos slides */
+}

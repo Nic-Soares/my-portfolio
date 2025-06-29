@@ -3,9 +3,24 @@
   grid-template-areas:
     "hero-section hero-section"
     "experience carousel";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 100vh;
   padding: 20px;
   gap: 20px;
 
   border-radius: var(--Corner-Extra-large, 28px) 0px 0px var(--Corner-Extra-large, 28px);
   background: var(--Schemes-Surface, #FBFAED);
+}
+
+.heroSection {
+  grid-area: hero-section;
+}
+
+.experienceSection {
+  grid-area: experience;
+}
+
+.projectCarousel {
+  grid-area: carousel;
 }

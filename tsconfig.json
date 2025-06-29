@@ -28,6 +28,6 @@
       "@shared/*": ["shared/*"]
     }
   },
-  "include": ["client/src", "client/vite-env.d.ts", "client/global.d.ts", "shared"],
+  "include": ["client/src", "client/vite-env.d.ts", "client/global.d.ts", "client/src/types/**/*.d.ts", "shared"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,9 +1,10 @@
 .projects_carousel {
   grid-area: carousel;
-  display: flex;
-  padding: 30px;
-  align-items: flex-start;
-  gap: 10px;
-  flex: 1 0 0;
-  align-self: stretch;
+  display: flex; /* Alterado de grid para flex para melhor controle do carrossel */
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Essencial para o posicionamento absoluto dos botões do carrossel */
+  width: 100%;
+  height: 500px; /* Altura fixa para o carrossel, movida do .carousel_container */
+  overflow: hidden; /* Garante que os slides fora de vista não causem scroll */
 }

@@ -1,12 +1,12 @@
 export interface Company {
-  id: string;
+  // id: string;
   name: string;
   logo: React.ReactNode;
   alt: string;
 }
 
 export interface Expertise {
-  id: string;
+  // id: string;
   icon: React.ReactNode;
   title: string;
   description: string;

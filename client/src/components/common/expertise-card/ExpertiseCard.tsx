@@ -8,14 +8,16 @@ interface Props {
 
 const ExpertiseCard = ({ expertise }: Props) => {
 	return (
-    <Container className={styles['expertise-card']}>
-				<div>
+    <Container className={styles['expertise-card']} background_color='#D9EB99' border_radius='12px'>
+      <div className={styles['expertise-card__header']}>
+        <span className={`material-symbols-outlined ${styles['expertise-card__icon']}`}>
 				  {expertise.icon}
-				</div>
-				<h3>
+        </span>
+				<h3 className={styles['expertise-card__title']}>
 				  {expertise.title}
 				</h3>
-				<p>
+      </div>
+				<p className={styles['expertise-card__description']}>
 				  {expertise.description}
 				</p>
 		</Container>
