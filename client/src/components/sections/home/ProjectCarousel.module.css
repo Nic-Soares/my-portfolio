@@ -1,10 +1,34 @@
 .projects_carousel {
   grid-area: carousel;
-  display: flex; /* Alterado de grid para flex para melhor controle do carrossel */
-  justify-content: center;
-  align-items: center;
-  position: relative; /* Essencial para o posicionamento absoluto dos botões do carrossel */
-  width: 100%;
-  height: 500px; /* Altura fixa para o carrossel, movida do .carousel_container */
-  overflow: hidden; /* Garante que os slides fora de vista não causem scroll */
+}
+
+.slides_container {
+  display: grid;
+  height: 100%;
+  gap: 8px;
+  flex: 1 0 0;
+  align-self: stretch;
+}
+
+/* Layout when first item is active */
+.slides_container.first_active {
+  grid-template-columns: 6fr 1fr;
+}
+
+/* Layout when middle item is active */
+.slides_container.middle_active {
+  grid-template-columns: 1fr 5fr 1fr;
+}
+
+/* Layout when last item is active */
+.slides_container.last_active {
+  grid-template-columns: 1fr 6fr;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .projects_carousel {
+    padding: 20px;
+    height: 400px;
+  }
 }

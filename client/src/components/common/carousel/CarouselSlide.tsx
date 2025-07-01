@@ -1,48 +1,37 @@
-import React from 'react'
 import styles from './CarouselSlide.module.css'
 
-interface SlideData {
+interface Project {
   id: number
   title: string
   description: string
 }
 
 interface CarouselSlideProps {
-  slide: SlideData
-  status: 'active' | 'next' | 'prev' | 'hidden'
+  project: Project
+  isActive: boolean
+  onSlideClick: (projectId: number) => void
+  position?: 'middle' | 'lateral'
 }
 
-const CarouselSlide: React.FC<CarouselSlideProps> = ({ slide, status }) => {
-  let slideClassName = `${styles.carousel_slide_base}`
+const CarouselSlide = ({ project, isActive, onSlideClick, position }: CarouselSlideProps) => {
+  const handleClick = () => {
+    onSlideClick(project.id)
+  }
 
-  if (status === 'active') {
-    slideClassName += ` ${styles.carousel_slide_active}`
-  } else if (status === 'next') {
-    slideClassName += ` ${styles.carousel_slide_next}`
-  } else if (status === 'prev') {
-    slideClassName += ` ${styles.carousel_slide_prev}`
-  } else {
-    slideClassName += ` ${styles.carousel_slide_hidden}`
+  const getSlideClass = () => {
+    let className = styles.slide
+    if (isActive) className += ` ${styles.active}`
+    if (position) className += ` ${styles[position]}`
+    return className
   }
 
   return (
-    <div key={slide.id} className={slideClassName}>
-      <div className={styles.carousel_slide_content}>
-        <div className={styles.shapes}>
-          <div className={`${styles.shape} ${styles.triangle}`} />
-          <div className={`${styles.shape} ${styles.gear}`} />
-          <div className={`${styles.shape} ${styles.rounded}`} />
-        </div>
-        <div className={styles.text_content}>
-          <h4>{slide.title}</h4>
-          <p>{slide.description}</p>
-        </div>
-        {status === 'active' && (
-          <md-filled-button>
-            More
-          </md-filled-button>
-        )}
-      </div>
+    <div
+      className={getSlideClass()}
+      onClick={handleClick}
+    >
+      <h4>{project.title}</h4>
+      <p>{project.description}</p>
     </div>
   )
 }
