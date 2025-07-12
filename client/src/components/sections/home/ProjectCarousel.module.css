@@ -1,8 +1,8 @@
-.projects_carousel {
-  grid-area: carousel;
+.project-carousel {
+  height: 100%;
 }
 
-.slides_container {
+.project-carousel__slides-container {
   display: grid;
   height: 100%;
   gap: 8px;
@@ -11,23 +11,23 @@
 }
 
 /* Layout when first item is active */
-.slides_container.first_active {
+.project-carousel__slides-container--first-active {
   grid-template-columns: 6fr 1fr;
 }
 
 /* Layout when middle item is active */
-.slides_container.middle_active {
+.project-carousel__slides-container--middle-active {
   grid-template-columns: 1fr 5fr 1fr;
 }
 
 /* Layout when last item is active */
-.slides_container.last_active {
+.project-carousel__slides-container--last-active {
   grid-template-columns: 1fr 6fr;
 }
 
 /* Responsiveness */
 @media (max-width: 768px) {
-  .projects_carousel {
+  .project-carousel {
     padding: 20px;
     height: 400px;
   }

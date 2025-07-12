@@ -13,6 +13,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "types": ["vite/client", "node"],
 
     /* Linting */
     "strict": true,
@@ -25,9 +26,10 @@
     "paths": {
       "@/*": ["client/src/*"],
       "@assets/*": ["client/assets/*"],
-      "@shared/*": ["shared/*"]
+      "@shared/*": ["shared/*"],
+      "@/types": ["client/src/types/index.ts"]
     }
   },
-  "include": ["client/src", "client/vite-env.d.ts", "client/global.d.ts", "client/src/types/**/*.d.ts", "shared"],
+  "include": ["client/src", "client/vite-env.d.ts", "client/global.d.ts", "client/src/types/**/*.d.ts", "shared", "shared/types"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

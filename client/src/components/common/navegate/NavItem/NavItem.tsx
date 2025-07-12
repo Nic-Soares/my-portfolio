@@ -1,28 +1,20 @@
-import styles from './NavItem.module.css'
-
-type NavItemProps = {
-  icon: string;
-  label: string;
-  selected?: boolean;
-  onClick?: () => void;
-  disabled?: boolean;
-}
+import styles from './NavItem.module.css';
+import type { NavItemProps } from '@/types';
 
 export const NavItem = ({ icon, label, selected, onClick, disabled }: NavItemProps) => {
   return (
     <button
-      className={`${styles.NavItem} ${selected ? styles.selected : ''}`}
+      className={`${styles['nav-item']} ${selected ? styles['nav-item--selected'] : ''}`}
       onClick={onClick}
       disabled={disabled}
     >
-      <div className={styles.icon_container}>
-        <div className={styles.state_layer}>
-          {/* <span className={styles.icon}>{icon}</span> */}
-          <span className={`material-symbols-outlined ${styles.icon}`}>{icon}</span>
+      <div className={styles['nav-item__icon-container']}>
+        <div className={styles['nav-item__state-layer']}>
+          <span className={`material-symbols-outlined ${styles['nav-item__icon']}`}>{icon}</span>
         </div>
       </div>
 
-      <span className={styles.label}>{label}</span>
+      <span className={styles['nav-item__label']}>{label}</span>
     </button>
-  )
-}
+  );
+};

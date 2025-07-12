@@ -1,6 +1,6 @@
 .expertise-card {
   display: flex;
-  max-width: 200px;
+
   padding: 20px;
   flex-direction: column;
   justify-content: center;
@@ -19,10 +19,11 @@
 
 .expertise-card__icon {
   font-size: 30px;
+  color: var(--md-sys-color-on-primary-container);
 }
 
 .expertise-card__title {
-  color: var(--Schemes-On-Primary-Container, #171E00);
+  color: var(--md-sys-color-on-primary-container);
   text-align: center;
   font-size: 15px;
   font-style: normal;
@@ -32,7 +33,7 @@
 }
 
 .expertise-card__description {
-  color: var(--Schemes-On-Primary-Container, #171E00);
+  color: var(--md-sys-color-on-primary-container);
   text-align: center;
 
   /* M3/body/medium-emphasized */

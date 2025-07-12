@@ -1,3 +1,16 @@
 .company-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.company-logo__svg {
+  width: 60px;
+  height: 60px;
+  fill: var(--md-sys-color-on-surface);
+  transition: fill 0.2s ease;
+}
+
+.company-logo__svg:hover {
+  fill: var(--md-sys-color-primary);
 }

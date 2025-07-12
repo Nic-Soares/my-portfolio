@@ -1,12 +1,8 @@
-import { useState } from 'react'
-import styles from './ProjectCarousel.module.css'
-import CarouselSlide from '@/components/common/carousel/CarouselSlide'
-
-interface Project {
-  id: number
-  title: string
-  description: string
-}
+import { useState } from 'react';
+import styles from './ProjectCarousel.module.css';
+import CarouselSlide from '@/components/common/carousel/CarouselSlide';
+import Container from '@/components/layout/container/Container';
+import type { Project, ProjectCarouselProps } from '@/types';
 
 const projects: Project[] = [
   {
@@ -24,44 +20,40 @@ const projects: Project[] = [
     title: '03',
     description: 'Mais conteúdo para terceiro item.',
   },
-]
-
-interface ProjectCarouselProps {
-  className?: string
-}
+];
 
 const ProjectCarousel = ({ className }: ProjectCarouselProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleSlideClick = (projectId: number) => {
-    const index = projects.findIndex(project => project.id === projectId)
-    setCurrentIndex(index)
-  }
+    const index = projects.findIndex(project => project.id === projectId);
+    setCurrentIndex(index);
+  };
 
   const getVisibleSlides = () => {
     if (currentIndex === 0) {
-      return [0, 1]
+      return [0, 1];
     } else if (currentIndex === projects.length - 1) {
-      return [currentIndex - 1, currentIndex]
+      return [currentIndex - 1, currentIndex];
     } else {
-      return [currentIndex - 1, currentIndex, currentIndex + 1]
+      return [currentIndex - 1, currentIndex, currentIndex + 1];
     }
-  }
+  };
 
   const getLayoutClass = () => {
-    if (currentIndex === 0) return styles.first_active
-    if (currentIndex === projects.length - 1) return styles.last_active
-    return styles.middle_active
-  }
+    if (currentIndex === 0) return styles['project-carousel__slides-container--first-active'];
+    if (currentIndex === projects.length - 1) return styles['project-carousel__slides-container--last-active'];
+    return styles['project-carousel__slides-container--middle-active'];
+  };
 
   return (
-    <section className={`${styles.projects_carousel} ${className || ''}`}>
-      <div className={`${styles.slides_container} ${getLayoutClass()}`}>
+    <Container className={`${styles['project-carousel']} ${className || ''}`} background_color='transparent'>
+      <div className={`${styles['project-carousel__slides-container']} ${getLayoutClass()}`}>
         {getVisibleSlides().map((slideIndex) => {
-          const project = projects[slideIndex]
-          const isActive = slideIndex === currentIndex
-          const position = isActive ? 'middle' : 'lateral'
-          
+          const project = projects[slideIndex];
+          const isActive = slideIndex === currentIndex;
+          const position = isActive ? 'middle' : 'lateral';
+
           return (
             <CarouselSlide
               key={project.id}
@@ -73,8 +65,8 @@ const ProjectCarousel = ({ className }: ProjectCarouselProps) => {
           )
         })}
       </div>
-    </section>
-  )
-}
+    </Container>
+  );
+};
 
-export default ProjectCarousel
+export default ProjectCarousel;

@@ -1,4 +1,4 @@
-import HeroSection from "./HeroSection"
+import HeroSection from "./HeroSection";
 import ExperienceSection from "./ExperienceSection";
 import ProjectCarousel from "./ProjectCarousel";
 import styles from "./Home.module.css";
@@ -6,11 +6,15 @@ import styles from "./Home.module.css";
 function Home() {
   return (
     <div className={styles.home}>
-
-      <HeroSection className={styles.heroSection}/>
-      <ExperienceSection className={styles.experienceSection}/>
-      <ProjectCarousel className={styles.projectCarousel}/>
-
+      <div className={styles['home__hero-section']}>
+        <HeroSection/>
+      </div>
+      <div className={styles['home__experience']}>
+        <ExperienceSection />
+      </div>
+      <div className={styles['home__carousel']}>
+        <ProjectCarousel />
+      </div>
     </div>
   );
 }

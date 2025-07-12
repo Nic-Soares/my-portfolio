@@ -1,8 +1,8 @@
-.slide {
+.carousel-slide {
   display: flex;
   padding: 32px;
 
-  background-color: #E6E9E0;
+  background-color: var(--md-sys-color-tertiary-container);
   background-image: url('../../../assets/images/forms.svg');
   background-size: clamp(60px, 8vw, 120px);
   background-repeat: no-repeat;
@@ -15,18 +15,15 @@
 }
 
 /* Slide do meio (ocupa mais colunas, destaque principal) */
-.slide.middle {
+.carousel-slide--middle {
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
   gap: 10px;
-
-  /* background-size: clamp(80px, 10vw, 150px); */
-  /* transform: scale(1.02); */
 }
 
-.slide.middle h4 {
-  color: var(--Schemes-On-Tertiary-Container, #00201B);
+.carousel-slide--middle h4 {
+  color: var(--md-sys-color-on-tertiary-container);
   text-align: center;
 
   /* M3/title/large-emphasized */
@@ -38,8 +35,8 @@
   letter-spacing: var(--Static-Title-Large-Tracking, 0px);
 }
 
-.slide.middle p {
-  color: var(--Schemes-On-Tertiary-Container, #00201B);
+.carousel-slide--middle p {
+  color: var(--md-sys-color-on-tertiary-container);
 
   /* M3/body/large */
   font-family: var(--Static-Body-Large-Font, Roboto);
@@ -51,35 +48,25 @@
 }
 
 /* Slides laterais (menores, menos destaque) */
-.slide.lateral {
+.carousel-slide--lateral {
   background-size: clamp(20px, 3vw, 60px);
 }
 
-.slide.lateral h4 {
+.carousel-slide--lateral h4 {
   display: none;
 }
 
-.slide.lateral p {
+.carousel-slide--lateral p {
   display: none;
 }
 
-/* .slide:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-.slide.active {
-  border: 2px solid #007bff;
-  box-shadow: 0 4px 16px rgba(0, 123, 255, 0.2);
-} */
-
-.slide h4 {
+.carousel-slide h4 {
   font-size: 2rem;
   font-weight: 700;
   color: #333;
 }
 
-.slide p {
+.carousel-slide p {
   font-size: 1rem;
   line-height: 1.5;
   color: #666;
@@ -87,40 +74,40 @@
 
 /* Responsiveness */
 @media (max-width: 768px) {
-  .slide {
+  .carousel-slide {
     padding: 16px;
   }
 
-  .slide h4 {
+  .carousel-slide h4 {
     font-size: 1.5rem;
   }
 
-  .slide p {
+  .carousel-slide p {
     font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
-  .slide {
+  .carousel-slide {
     background-size: clamp(40px, 10vw, 80px);
   }
 
-  .slide.middle {
+  .carousel-slide--middle {
     background-size: clamp(60px, 12vw, 100px);
     padding: 24px;
     transform: scale(1);
   }
 
-  .slide.middle h4 {
+  .carousel-slide--middle h4 {
     font-size: 2rem;
   }
 
-  .slide.lateral {
+  .carousel-slide--lateral {
     background-size: clamp(30px, 8vw, 60px);
     transform: scale(1);
   }
 
-  .slide.lateral h4 {
+  .carousel-slide--lateral h4 {
     font-size: 1.5rem;
   }
 }

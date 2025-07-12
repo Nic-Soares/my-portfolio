@@ -1,26 +1,33 @@
 .home {
   display: grid;
   grid-template-areas:
-    "hero-section hero-section"
-    "experience carousel";
-  grid-template-columns: 1fr 1fr;
+    "home__hero-section home__hero-section"
+    "home__experience home__carousel";
   grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   height: 100vh;
   padding: 20px;
   gap: 20px;
 
   border-radius: var(--Corner-Extra-large, 28px) 0px 0px var(--Corner-Extra-large, 28px);
-  background: var(--Schemes-Surface, #FBFAED);
+  background: var(--md-sys-color-surface);
 }
 
-.heroSection {
-  grid-area: hero-section;
+.home__hero-section {
+  grid-area: home__hero-section;
 }
 
-.experienceSection {
-  grid-area: experience;
+.home__experience {
+  grid-area: home__experience;
 }
 
-.projectCarousel {
-  grid-area: carousel;
+.home__carousel {
+  grid-area: home__carousel;
+}
+
+.home__hero-section,
+.home__experience,
+.home__carousel {
+  min-height: 0;
+  /* Opcional: overflow-y: auto; para scroll interno se necessário */
 }

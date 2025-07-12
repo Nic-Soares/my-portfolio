@@ -1,4 +1,4 @@
-.NavItem {
+.nav-item {
   display: flex;
   width: 104px;
   padding: 6px 0px;
@@ -12,10 +12,10 @@
   border: none;
 }
 
-.selected {
+.nav-item--selected {
 }
 
-.icon_container {
+.nav-item__icon-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@
   overflow: hidden;
 }
 
-.state_layer {
+.nav-item__state-layer {
   display: flex;
   width: 56px;
   height: 32px;
@@ -35,30 +35,29 @@
   box-sizing: border-box;
 }
 
-.NavItem:hover .state_layer {
-  background: var(--State-Layers-On-Surface-Opacity-08, rgba(29, 27, 32, 0.08));
+.nav-item:hover .nav-item__state-layer {
+  background: var(--md-state-layers-light-on-surface-opacity-0.08);
 }
 
-/* Default hover style - no disabled styles here */
-
-.state_layer:focus {
-  background: var(--State-Layers-On-Secondary-Container-Opacity-12, rgba(74, 68, 89, 0.12));
+.nav-item__state-layer:focus {
+  background: var(--md-state-layers-light-on-secondary-container-opacity-0.12);
 }
 
-.selected .state_layer {
-  background: var(--State-Layers-On-Surface-Opacity-10, rgba(29, 27, 32, 0.10));
+.nav-item--selected .nav-item__state-layer {
+  background: var(--md-state-layers-light-on-surface-opacity-0.10);
 }
 
-.selected .icon {
+.nav-item--selected .nav-item__icon {
   font-variation-settings: 'FILL' 1;
 }
 
-.icon {
+.nav-item__icon {
   font-size: 24px;
+  color: var(--md-sys-color-on-surface-variant);
 }
 
-.label {
-  color: var(--M3-sys-light-on-surface-variant, #424940);
+.nav-item__label {
+  color: var(--md-sys-color-on-surface-variant);
   text-align: center;
 
   /* M3/label/medium */
@@ -70,22 +69,21 @@
   letter-spacing: 0.5px;
 }
 
-.NavItem:hover .label {
+.nav-item:hover .nav-item__label {
   font-weight: 600;
 }
 
 /* Styles for disabled state */
-.NavItem:disabled {
+.nav-item:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
 /* Prevent hover effects when disabled */
-.NavItem:disabled:hover .state_layer {
-  background: none; /* Or a different background for disabled hover */
+.nav-item:disabled:hover .nav-item__state-layer {
+  background: none;
 }
 
-.NavItem:disabled .label {
-   /* Optional: adjust label color/style when disabled */
-   color: var(--M3-sys-light-on-surface-variant, rgba(66, 73, 64, 0.5)); /* Example: reduced opacity */
+.nav-item:disabled .nav-item__label {
+   color: var(--md-sys-color-on-surface-variant);
 }

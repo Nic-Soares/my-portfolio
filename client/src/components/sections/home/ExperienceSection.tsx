@@ -1,12 +1,12 @@
 import ExpertiseCard from '@/components/common/expertise-card/ExpertiseCard';
-import Container from '../../layout/container/Container'
-import styles from './ExperienceSection.module.css'
+import Container from '@/components/layout/container/Container';
+import styles from './ExperienceSection.module.css';
 import CompanyLogo from '@/components/common/company-logo/CompanyLogo';
 
 const ExperienceSection = () => {
   return (
     <div className={styles['experience-section']}>
-      <Container className={styles['experience-grid']} background_color='#EFEEE2' border_radius='20px 20px 0 0'>
+      <Container className={styles['experience-section__grid']} background_color='var(--md-sys-color-surface-container)' border_radius='20px 20px 0 0'>
 
         <ExpertiseCard
           expertise={{
@@ -41,7 +41,7 @@ const ExperienceSection = () => {
         />
 
       </Container>
-      <Container className={styles['experience-companies']}  background_color='#EFEEE2' border_radius='0 0 20px 20px'>
+      <Container className={styles['experience-section__companies']} background_color='var(--md-sys-color-surface-container)' border_radius='0 0 20px 20px'>
 
         <CompanyLogo
           company={{

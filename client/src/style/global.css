@@ -1,5 +1,9 @@
+@import './typography.css';
+@import './themes/light.css';
+@import './themes/dark.css';
+
 body {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   margin: 0;
   padding: 0;
@@ -14,9 +18,10 @@ body {
 #root {
   display: grid;
   grid-template-columns: 88px 1fr;
-  grid-template-rows: 100vh;
+  grid-template-rows: auto;
+  min-height: 100vh;
 
-  background: var(--Schemes-Surface-Container, #EFEEE2);
+  background: var(--md-sys-color-surface-container);
 }
 
 .material-symbols-outlined {
