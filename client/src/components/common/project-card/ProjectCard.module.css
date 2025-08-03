@@ -1,0 +1,57 @@
+.project-card {
+  display: grid;
+  grid-template-rows: 1fr 0.3fr;
+  max-width: 510px;
+  min-height: 395px;
+  max-height: 401.5px;
+  gap: 4px;
+
+  border-radius: var(--Corner-Large, 16px);
+  background: var(--md-sys-color-surface-container-low);
+}
+
+.project-card__preview {
+  background-color: var(--md-sys-color-tertiary-container);
+  background-image: url('../../../assets/images/forms.svg');
+  background-size: clamp(60px, 8vw, 120px);
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: inherit;
+}
+
+.project-card__content {
+  display: flex;
+  padding: 20px 20px 25px 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  align-self: stretch;
+}
+
+.project-card__title {
+  overflow: hidden;
+  color: var(--M3-sys-light-on-surface, #171C22);
+  text-overflow: ellipsis;
+
+  /* M3/title/large */
+  font-family: var(--Static-Title-Large-Font, Roboto);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 127.273% */
+}
+
+.project-card__update {
+  overflow: hidden;
+  color: var(--M3-sys-light-on-surface-variant, #3F4752);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  /* M3/body/large */
+  font-family: var(--Static-Body-Large-Font, Roboto);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.5px;
+}

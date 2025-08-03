@@ -8,32 +8,11 @@ import Home from '@/components/sections/home/Home';
 import type { PageType } from '@shared/types/types';
 
 // Placeholder components - será implementado futuramente
-function ProjectsContent() {
-  return (
-    <div style={{ padding: '40px', textAlign: 'center' }}>
-      <h2>Projects Page</h2>
-      <p>Em desenvolvimento...</p>
-    </div>
-  );
-}
+import Projects from '@/components/sections/projects/Projects';
 
-function ServicesContent() {
-  return (
-    <div style={{ padding: '40px', textAlign: 'center' }}>
-      <h2>Services Page</h2>
-      <p>Em desenvolvimento...</p>
-    </div>
-  );
-}
 
-function AboutMeContent() {
-  return (
-    <div style={{ padding: '40px', textAlign: 'center' }}>
-      <h2>About Me Page</h2>
-      <p>Em desenvolvimento...</p>
-    </div>
-  );
-}
+
+import UnderConstruction from '@/components/pages/under-construction/UnderConstruction';
 
 function App() {
   const [activePage, setActivePage] = useState<PageType>('Home');
@@ -44,11 +23,10 @@ function App() {
       case 'Home':
         return <Home />;
       case 'Projects':
-        return <ProjectsContent />;
+        return <Projects />;
       case 'Services':
-        return <ServicesContent />;
       case 'About me':
-        return <AboutMeContent />;
+        return <UnderConstruction />;
       default:
         return <Home />;
     }

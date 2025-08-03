@@ -1,5 +1,6 @@
 import Container from '@/components/layout/container/Container';
 import styles from './HeroSection.module.css';
+import IconButton from '@/components/common/buttons/icon-button/IconButton';
 
 const HeroSection  = () => {
   return (
@@ -29,9 +30,9 @@ const HeroSection  = () => {
       </div>
 
       <div className={styles['hero-section__social-links']}>
-        <div style={{ width: '50px', height: '50px', backgroundColor: 'gray' }}></div>
-        <div style={{ width: '50px', height: '50px', backgroundColor: 'gray' }}></div>
-        <div style={{ width: '50px', height: '50px', backgroundColor: 'gray' }}></div>
+        <IconButton width='narrow'/>
+        <IconButton width='narrow'/>
+        <IconButton width='narrow'/>
       </div>
     </Container>
   );

@@ -1,0 +1,33 @@
+.connected-button-group {
+  display: inline-flex;
+  white-space: nowrap;
+  /* width: auto; */
+  align-items: flex-start;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.xsmall {
+  height: 32px;
+  border-radius: 16px;
+}
+
+.small {
+  height: 40px;
+  border-radius: 20px;
+}
+
+.medium {
+  height: 56px;
+  border-radius: 28px;
+}
+
+.large {
+  height: 96px;
+  border-radius: 48px;
+}
+
+.xlarge {
+  height: 136px;
+  border-radius: 68px;
+}

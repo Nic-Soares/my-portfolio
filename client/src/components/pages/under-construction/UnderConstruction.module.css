@@ -1,0 +1,29 @@
+.under-construction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  color: var(--md-sys-color-on-surface);
+
+  border-radius: var(--Corner-Extra-large, 28px) 0px 0px var(--Corner-Extra-large, 28px);
+  background: var(--md-sys-color-surface);
+}
+
+.under-construction__title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.under-construction__message {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.under-construction__icon {
+  font-size: 4rem;
+  color: var(--md-sys-color-primary);
+  margin-bottom: 1rem;
+}

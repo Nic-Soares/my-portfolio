@@ -1,0 +1,33 @@
+.projects__header {
+  display: flex;
+  padding: 16px 24px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.projects__title {
+  color: var(--M3-sys-light-on-surface, #171C22);
+
+  /* M3/headline/large-emphasized */
+  font-family: var(--Static-Headline-Large-Font, Roboto);
+  font-size: var(--Static-Headline-Large-Size, 32px);
+  font-style: normal;
+  font-weight: 500;
+  line-height: var(--Static-Headline-Large-Line-Height, 40px); /* 125% */
+  letter-spacing: var(--Static-Headline-Large-Tracking, 0);
+}
+
+.projects__actions {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.projects__button-group {
+  /* vazio, mas mantido para estrutura */
+}
+
+.projects__search-bar {
+  /* Adicione estilos se necessário */
+}

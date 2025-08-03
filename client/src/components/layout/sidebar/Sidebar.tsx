@@ -2,6 +2,7 @@ import styles from './Sidebar.module.css';
 import NavRail from '@/components/common/navegate/NavRail/NavRail';
 import { NavItem } from '@/components/common/navegate/NavItem/NavItem';
 import type { SidebarProps } from '@/types';
+import IconButton from '@/components/common/buttons/icon-button/IconButton';
 
 function Sidebar({ activePage, setActivePage }: SidebarProps) {
   return (
@@ -14,8 +15,8 @@ function Sidebar({ activePage, setActivePage }: SidebarProps) {
       </NavRail>
 
       <NavRail className={styles['nav-footer']}>
-        <div style={{ width: '50px', height: '50px', backgroundColor: 'gray' }}></div>
-        <div style={{ width: '50px', height: '50px', backgroundColor: 'gray' }}></div>
+        <IconButton type='round' size='medium' style='outline' width='default'/>
+        <IconButton type='round' size='medium' style='outline' width='default'/>
       </NavRail>
     </aside>
   );

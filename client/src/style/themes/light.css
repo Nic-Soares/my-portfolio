@@ -59,6 +59,7 @@ body[data-theme="Light"] {
   --md-state-layers-light-on-secondary-container-opacity-10: rgba(25, 29, 8, 0.10);
   --md-state-layers-light-on-secondary-container-opacity-12: rgba(25, 29, 8, 0.12);
   --md-state-layers-light-on-secondary-container-opacity-16: rgba(25, 29, 8, 0.16);
+  --md-state-layers-light-on-primary-opacity-08: rgba(255, 255, 255, 0.08);
   --md-state-layers-light-on-primary-container-opacity-08: rgba(23, 30, 0, 0.08);
   --md-state-layers-light-on-primary-container-opacity-10: rgba(23, 30, 0, 0.10);
   --md-state-layers-light-on-primary-container-opacity-12: rgba(23, 30, 0, 0.12);

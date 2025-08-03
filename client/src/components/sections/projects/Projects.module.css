@@ -1,0 +1,10 @@
+.projects {
+  display: grid;
+  grid-template-rows: 88px 1fr;
+  height: 100vh;
+  padding: 20px;
+  gap: 20px;
+
+  border-radius: var(--Corner-Extra-large, 28px) 0px 0px var(--Corner-Extra-large, 28px);
+  background: var(--md-sys-color-surface);
+}

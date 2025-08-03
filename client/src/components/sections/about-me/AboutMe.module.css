@@ -1,0 +1,4 @@
+.about-me {
+  border-radius: var(--Corner-Extra-large, 28px) 0px 0px var(--Corner-Extra-large, 28px);
+  background: var(--md-sys-color-surface);
+}
