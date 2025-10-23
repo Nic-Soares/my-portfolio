@@ -13,10 +13,24 @@ function Sidebar({ activePage, setActivePage }: SidebarProps) {
         <NavItem icon='concierge' label='Services' selected={activePage === 'Services'} onClick={() => setActivePage('Services')} disabled={true} />
         <NavItem icon='account_circle' label='About me' selected={activePage === 'About me'} onClick={() => setActivePage('About me')} disabled={true} />
       </NavRail>
-
       <NavRail className={styles['nav-footer']}>
-        <IconButton type='round' size='medium' style='outline' width='default'/>
-        <IconButton type='round' size='medium' style='outline' width='default'/>
+        <IconButton 
+          type='round' 
+          size='medium' 
+          style='outline' 
+          width='default' 
+          toggleable={true}
+          icon='settings'
+        />
+        <IconButton 
+          type='round' 
+          size='medium' 
+          style='outline' 
+          width='default' 
+          toggleable={true}
+          icon='dark_mode'
+          selectedIcon='light_mode'
+        />
       </NavRail>
     </aside>
   );

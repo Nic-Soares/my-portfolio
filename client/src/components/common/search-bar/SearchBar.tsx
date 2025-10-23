@@ -29,7 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <div className={`${styles.searchBar} ${className}`}>
       <div className={styles.searchBar__container}>
-        <IconButton type='round' size='medium' style='standard' width='default'/>
+        <IconButton type='round' size='medium' style='standard' width='default' icon='search'/>
         <div className={styles.searchBar__content}>
           <input
             type="text"
@@ -39,7 +39,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             className={styles.searchBar__input}
           />
         </div>
-        <IconButton type='round' size='medium' style='standard' width='default'/>
+        <IconButton type='round' size='medium' style='standard' width='default' icon='close' onClick={handleClear}/>
       </div>
     </div>
   )

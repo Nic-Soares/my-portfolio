@@ -1,7 +1,7 @@
 .projects__header {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   padding: 16px 24px;
-  justify-content: space-between;
   align-items: center;
   align-self: stretch;
 }
@@ -19,9 +19,10 @@
 }
 
 .projects__actions {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
+  overflow: hidden;
 }
 
 .projects__button-group {

@@ -1,4 +1,4 @@
-import SegmentButton from '../segment-button/SegmentButton';
+import SegmentButton from '../buttons/segment-button/SegmentButton';
 import styles from './ConnectedButtonGroup.module.css'
 import type { ReactNode } from "react";
 import { useState } from 'react';
@@ -31,10 +31,10 @@ const ConnectedButtonGroup = ({
   selectable = true,
 }: ConnectedButtonGroupProps) => {
   const [internalSelectedIndex, setInternalSelectedIndex] = useState(-1);
-  
+
   // Use controlled or uncontrolled state
-  const selectedIndex = controlledSelectedIndex !== undefined 
-    ? controlledSelectedIndex 
+  const selectedIndex = controlledSelectedIndex !== undefined
+    ? controlledSelectedIndex
     : internalSelectedIndex;
 
   // Garante que o número de botões esteja entre 2 e 5
@@ -46,10 +46,10 @@ const ConnectedButtonGroup = ({
     if (displayedOptions[index]?.disabled || !selectable) {
       return;
     }
-    
+
     // If allowDeselect is true and clicking the same button, deselect it
     const newIndex = allowDeselect && selectedIndex === index ? -1 : index;
-    
+
     if (controlledSelectedIndex === undefined) {
       setInternalSelectedIndex(newIndex);
     }
@@ -59,8 +59,8 @@ const ConnectedButtonGroup = ({
   return (
     <div className={`${styles['connected-button-group']} ${styles[size]} ${className}`}>
       {displayedOptions.map((option, idx) => (
-        <SegmentButton 
-          key={idx} 
+        <SegmentButton
+          key={idx}
           label={option.label}
           icon={option.icon}
           selected={selectedIndex === idx}

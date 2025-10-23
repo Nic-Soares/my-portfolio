@@ -1,0 +1,256 @@
+.button {
+  all: unset;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.button__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.button__state-layer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.button__label {
+  color: var(--M3-sys-light-on-primary, var(--Schemes-On-Primary, #FFF));
+
+  /* M3/label/large */
+  font-family: var(--Static-Label-Large-Font, Roboto);
+  font-size: var(--Static-Label-Large-Size, 14px);
+  font-style: normal;
+  font-weight: 500;
+  line-height: var(--Static-Label-Large-Line-Height, 20px); /* 142.857% */
+  letter-spacing: var(--Static-Label-Large-Tracking, 0.1px);
+}
+
+.button__state-layer .material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400;
+  transition: font-variation-settings 0.2s ease;
+  font-size: 18px;
+}
+
+/* Type variants */
+.button--round .button__content {
+  border-radius: 100px;
+}
+
+.button--xsmall.button--square .button__content,
+.button--small.button--square .button__content {
+  border-radius: 16px;
+}
+
+.button--medium.button--square .button__content {
+  border-radius: 16px;
+}
+
+.button--large.button--square .button__content,
+.button--xlarge.button--square .button__content {
+  border-radius: 28px;
+}
+
+/* Size variants */
+.button--xsmall {
+  height: 40px;
+}
+
+.button--xsmall .button__state-layer {
+  padding: 8px 12px;
+  gap: 4px;
+}
+
+.button--small {
+  height: 48px;
+}
+
+.button--small .button__state-layer {
+  padding: 10px 16px;
+  gap: 6px;
+}
+
+.button--medium {
+  height: 56px;
+}
+
+.button--medium .button__state-layer {
+  padding: 12px 20px;
+  gap: 8px;
+}
+
+.button--large {
+  height: 64px;
+}
+
+.button--large .button__state-layer {
+  padding: 16px 24px;
+  gap: 8px;
+}
+
+.button--large .button__label {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.button--large .button__state-layer .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.button--xlarge {
+  height: 72px;
+}
+
+.button--xlarge .button__state-layer {
+  padding: 20px 28px;
+  gap: 10px;
+}
+
+.button--xlarge .button__label {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.button--xlarge .button__state-layer .material-symbols-outlined {
+  font-size: 24px;
+}
+
+/* Style variants */
+.button--filled .button__content {
+  background: var(--md-sys-color-primary);
+}
+
+.button--filled .button__label {
+  color: var(--md-sys-color-on-primary, white);
+}
+
+.button--tonal .button__content {
+  background: var(--md-sys-color-secondary-container);
+}
+
+.button--tonal .button__label {
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.button--outline .button__content {
+  background: transparent;
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.button--outline .button__label {
+  color: var(--md-sys-color-on-surface-variant, #49454F);
+}
+
+.button--standard .button__content {
+  background: transparent;
+}
+
+.button--standard .button__label {
+  color: var(--md-sys-color-on-surface-variant, #49454F);
+}
+
+/* Selected state */
+.button--selected.button--filled .button__content {
+  background: var(--md-sys-color-primary-container);
+}
+
+.button--selected.button--filled .button__label {
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.button--selected.button--tonal .button__content {
+  background: var(--md-sys-color-primary);
+}
+
+.button--selected.button--tonal .button__label {
+  color: var(--md-sys-color-on-primary);
+}
+
+.button--selected.button--outline .button__content {
+  background: var(--md-sys-color-inverse-surface);
+  border: none;
+}
+
+.button--selected.button--outline .button__label {
+  color: var(--md-sys-color-inverse-on-surface);
+}
+
+.button--selected.button--standard .button__content {
+  background: transparent;
+}
+
+.button--selected.button--standard .button__label {
+  color: var(--md-sys-color-primary);
+}
+
+/* Width variants */
+/* Narrow: reduces padding */
+.button--narrow .button__state-layer {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* Wide: increases padding */
+.button--wide .button__state-layer {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+/* Hover states */
+.button:hover .button__state-layer {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.button--filled:hover .button__state-layer {
+  background: var(--md-state-layers-light-on-primary-opacity-08, rgba(255, 255, 255, 0.08));
+}
+
+.button--tonal:hover .button__state-layer {
+  background: rgba(29, 25, 43, 0.08);
+}
+
+.button--outline:hover .button__state-layer,
+.button--standard:hover .button__state-layer {
+  background: rgba(73, 69, 79, 0.08);
+}
+
+/* Focus states */
+.button:focus-visible .button__state-layer {
+  background: rgba(0, 0, 0, 0.12);
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+}
+
+/* Active states */
+.button:active .button__state-layer {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.button--filled:active .button__state-layer {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.button--tonal:active .button__state-layer {
+  background: rgba(29, 25, 43, 0.12);
+}
+
+.button--outline:active .button__state-layer,
+.button--standard:active .button__state-layer {
+  background: rgba(73, 69, 79, 0.12);
+}
+
+/* Disabled state */
+.button:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.button:disabled .button__state-layer {
+  background: none;
+}
