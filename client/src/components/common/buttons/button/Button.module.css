@@ -1,256 +1,294 @@
+/* --- 1. Layout Base & Default Variables --- */
 .button {
-  all: unset;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+    all: unset;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    /* --- Default Variables (Base: xsmall/filled/round) --- */
+
+    /* Dimensions */
+    --btn-height: 40px;
+    --btn-padding: 8px 12px;
+    --btn-gap: 4px;
+    --btn-radius: 100px; /* Default round */
+
+    /* Colors */
+    --btn-bg: transparent;
+    --btn-border: none;
+    --btn-label-color: var(--md-sys-color-primary);
+    --btn-icon-color: var(--md-sys-color-primary);
+
+    /* Typography (Label Large default) */
+    --btn-font-family: var(--label-large-font);
+    --btn-font-weight: var(--label-large-weight);
+    --btn-font-size: var(--label-large-size);
+    --btn-line-height: var(--label-large-line-height);
+    --btn-tracking: var(--label-large-tracking);
+
+    /* Icon */
+    --btn-icon-size: 16.667px;
+    --btn-icon-padding: 1.67px;
+
+    /* State Layer */
+    --btn-state-layer-bg: transparent;
+
+    height: var(--btn-height);
 }
 
 .button__content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+
+    background: var(--btn-bg);
+    border: var(--btn-border);
+    border-radius: var(--btn-radius);
+    box-sizing: border-box;
 }
 
 .button__state-layer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    padding: var(--btn-padding);
+    gap: var(--btn-gap);
+    background: var(--btn-state-layer-bg);
 }
 
 .button__label {
-  color: var(--M3-sys-light-on-primary, var(--Schemes-On-Primary, #FFF));
-
-  /* M3/label/large */
-  font-family: var(--Static-Label-Large-Font, Roboto);
-  font-size: var(--Static-Label-Large-Size, 14px);
-  font-style: normal;
-  font-weight: 500;
-  line-height: var(--Static-Label-Large-Line-Height, 20px); /* 142.857% */
-  letter-spacing: var(--Static-Label-Large-Tracking, 0.1px);
+    font-family: var(--btn-font-family);
+    font-weight: var(--btn-font-weight);
+    font-size: var(--btn-font-size);
+    line-height: var(--btn-line-height);
+    letter-spacing: var(--btn-tracking);
+    color: var(--btn-label-color);
 }
 
-.button__state-layer .material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400;
-  transition: font-variation-settings 0.2s ease;
-  font-size: 18px;
+.button__state-layer :global(.material-symbols-outlined) {
+    font-variation-settings:
+        "FILL" 1,
+        "wght" 400;
+    /*transition: font-variation-settings 0.2s ease;*/
+    font-size: var(--btn-icon-size);
+    padding: var(--btn-icon-padding);
+    color: var(--btn-icon-color);
 }
 
-/* Type variants */
-.button--round .button__content {
-  border-radius: 100px;
-}
+/* --- 2. Size Variants --- */
 
-.button--xsmall.button--square .button__content,
-.button--small.button--square .button__content {
-  border-radius: 16px;
-}
-
-.button--medium.button--square .button__content {
-  border-radius: 16px;
-}
-
-.button--large.button--square .button__content,
-.button--xlarge.button--square .button__content {
-  border-radius: 28px;
-}
-
-/* Size variants */
 .button--xsmall {
-  height: 40px;
-}
-
-.button--xsmall .button__state-layer {
-  padding: 8px 12px;
-  gap: 4px;
+    --btn-height: 40px;
+    --btn-padding: 8px 12px;
+    --btn-gap: 4px;
+    /* Typography: Label Large */
 }
 
 .button--small {
-  height: 48px;
-}
-
-.button--small .button__state-layer {
-  padding: 10px 16px;
-  gap: 6px;
+    --btn-height: 48px;
+    --btn-padding: 10px 16px;
+    --btn-gap: 6px;
+    /* Typography: Label Large */
 }
 
 .button--medium {
-  height: 56px;
-}
+    --btn-height: 56px;
+    --btn-padding: 12px 20px;
+    --btn-gap: 8px;
 
-.button--medium .button__state-layer {
-  padding: 12px 20px;
-  gap: 8px;
+    /* Typography: Title Medium */
+    --btn-font-family: var(--title-medium-font);
+    --btn-font-weight: var(--title-medium-weight);
+    --btn-font-size: var(--title-medium-size);
+    --btn-line-height: var(--title-medium-line-height);
+    --btn-tracking: var(--title-medium-tracking);
 }
 
 .button--large {
-  height: 64px;
-}
+    --btn-height: 96px;
+    --btn-padding: 16px 24px;
+    --btn-gap: 8px;
+    --btn-icon-size: 26.667px;
+    --btn-icon-padding: 0px;
 
-.button--large .button__state-layer {
-  padding: 16px 24px;
-  gap: 8px;
-}
-
-.button--large .button__label {
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.button--large .button__state-layer .material-symbols-outlined {
-  font-size: 20px;
+    /* Typography: Headline Small */
+    --btn-font-family: var(--headline-small-font);
+    --btn-font-weight: var(--headline-small-weight);
+    --btn-font-size: var(--headline-small-size);
+    --btn-line-height: var(--headline-small-line-height);
+    --btn-tracking: var(--headline-small-tracking);
 }
 
 .button--xlarge {
-  height: 72px;
+    --btn-height: 136px;
+    --btn-padding: 20px 28px;
+    --btn-gap: 10px;
+    --btn-icon-size: 33.333px;
+    --btn-icon-padding: 0px;
+
+    /* Typography: Headline Large */
+    --btn-font-family: var(--headline-large-font);
+    --btn-font-weight: var(--headline-large-weight);
+    --btn-font-size: var(--headline-large-size);
+    --btn-line-height: var(--headline-large-line-height);
+    --btn-tracking: var(--headline-large-tracking);
 }
 
-.button--xlarge .button__state-layer {
-  padding: 20px 28px;
-  gap: 10px;
+/* --- 3. Type Variants (Shape) --- */
+
+.button--round {
+    --btn-radius: 100px;
 }
 
-.button--xlarge .button__label {
-  font-size: 18px;
-  line-height: 28px;
+.button--square.button--xsmall,
+.button--square.button--small {
+    --btn-radius: 12px;
 }
 
-.button--xlarge .button__state-layer .material-symbols-outlined {
-  font-size: 24px;
+.button--square.button--medium {
+    --btn-radius: 16px;
 }
 
-/* Style variants */
-.button--filled .button__content {
-  background: var(--md-sys-color-primary);
+.button--square.button--large,
+.button--square.button--xlarge {
+    --btn-radius: 28px;
 }
 
-.button--filled .button__label {
-  color: var(--md-sys-color-on-primary, white);
+/* --- 4. Style Variants (Colors) --- */
+
+/* Filled */
+.button--filled {
+    --btn-bg: var(--md-sys-color-primary);
+    --btn-label-color: var(--md-sys-color-on-primary);
+    --btn-icon-color: var(--md-sys-color-on-primary);
 }
 
-.button--tonal .button__content {
-  background: var(--md-sys-color-secondary-container);
+/* Tonal */
+.button--tonal {
+    --btn-bg: var(--md-sys-color-secondary-container);
+    --btn-label-color: var(--md-sys-color-on-secondary-container);
+    --btn-icon-color: var(--md-sys-color-on-secondary-container);
 }
 
-.button--tonal .button__label {
-  color: var(--md-sys-color-on-secondary-container);
+/* Outline */
+.button--outline {
+    --btn-bg: transparent;
+    --btn-border: 1px solid var(--md-sys-color-outline-variant);
+    --btn-label-color: var(--md-sys-color-on-surface-variant);
+    --btn-icon-color: var(--md-sys-color-on-surface-variant);
 }
 
-.button--outline .button__content {
-  background: transparent;
-  border: 1px solid var(--md-sys-color-outline-variant);
+/* Standard */
+.button--standard {
+    --btn-bg: transparent;
+    --btn-label-color: var(--md-sys-color-on-surface-variant);
+    --btn-icon-color: var(--md-sys-color-on-surface-variant);
 }
 
-.button--outline .button__label {
-  color: var(--md-sys-color-on-surface-variant, #49454F);
+/* --- 5. Selected State --- */
+
+.button--selected.button--filled {
+    --btn-bg: var(--md-sys-color-primary-container);
+    --btn-label-color: var(--md-sys-color-on-primary-container);
+    --btn-icon-color: var(--md-sys-color-on-primary-container);
 }
 
-.button--standard .button__content {
-  background: transparent;
+.button--selected.button--tonal {
+    --btn-bg: var(--md-sys-color-primary);
+    --btn-label-color: var(--md-sys-color-on-primary);
+    --btn-icon-color: var(--md-sys-color-on-primary);
 }
 
-.button--standard .button__label {
-  color: var(--md-sys-color-on-surface-variant, #49454F);
+.button--selected.button--outline {
+    --btn-bg: var(--md-sys-color-inverse-surface);
+    --btn-border: none;
+    --btn-label-color: var(--md-sys-color-inverse-on-surface);
+    --btn-icon-color: var(--md-sys-color-inverse-on-surface);
 }
 
-/* Selected state */
-.button--selected.button--filled .button__content {
-  background: var(--md-sys-color-primary-container);
+.button--selected.button--standard {
+    --btn-bg: transparent;
+    --btn-label-color: var(--md-sys-color-primary);
+    --btn-icon-color: var(--md-sys-color-primary);
 }
 
-.button--selected.button--filled .button__label {
-  color: var(--md-sys-color-on-primary-container);
-}
+/* --- 6. Width Variants --- */
 
-.button--selected.button--tonal .button__content {
-  background: var(--md-sys-color-primary);
-}
-
-.button--selected.button--tonal .button__label {
-  color: var(--md-sys-color-on-primary);
-}
-
-.button--selected.button--outline .button__content {
-  background: var(--md-sys-color-inverse-surface);
-  border: none;
-}
-
-.button--selected.button--outline .button__label {
-  color: var(--md-sys-color-inverse-on-surface);
-}
-
-.button--selected.button--standard .button__content {
-  background: transparent;
-}
-
-.button--selected.button--standard .button__label {
-  color: var(--md-sys-color-primary);
-}
-
-/* Width variants */
-/* Narrow: reduces padding */
 .button--narrow .button__state-layer {
-  padding-left: 8px;
-  padding-right: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
-/* Wide: increases padding */
 .button--wide .button__state-layer {
-  padding-left: 32px;
-  padding-right: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
 }
 
-/* Hover states */
-.button:hover .button__state-layer {
-  background: rgba(0, 0, 0, 0.08);
+/* --- 7. States (Hover, Focus, Active, Disabled) --- */
+
+/* Hover */
+.button:hover {
+    --btn-state-layer-bg: rgba(0, 0, 0, 0.08);
 }
 
-.button--filled:hover .button__state-layer {
-  background: var(--md-state-layers-light-on-primary-opacity-08, rgba(255, 255, 255, 0.08));
+.button--filled:hover {
+    --btn-state-layer-bg: var(
+        --md-state-layers-light-on-primary-opacity-08,
+        rgba(255, 255, 255, 0.08)
+    );
 }
 
-.button--tonal:hover .button__state-layer {
-  background: rgba(29, 25, 43, 0.08);
+.button--tonal:hover {
+    --btn-state-layer-bg: rgba(29, 25, 43, 0.08);
 }
 
-.button--outline:hover .button__state-layer,
-.button--standard:hover .button__state-layer {
-  background: rgba(73, 69, 79, 0.08);
+.button--outline:hover,
+.button--standard:hover {
+    --btn-state-layer-bg: rgba(73, 69, 79, 0.08);
 }
 
-/* Focus states */
-.button:focus-visible .button__state-layer {
-  background: rgba(0, 0, 0, 0.12);
-  outline: 2px solid var(--md-sys-color-primary);
-  outline-offset: 2px;
+/* Focus */
+.button:focus-visible {
+    outline: none;
 }
 
-/* Active states */
-.button:active .button__state-layer {
-  background: rgba(0, 0, 0, 0.12);
+.button:focus-visible .button__content {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
 }
 
-.button--filled:active .button__state-layer {
-  background: rgba(255, 255, 255, 0.12);
+/*.button--filled:focus-visible .button__content {
+    outline-color: var(--md-sys-color-primary);
+}*/
+
+/* Active */
+.button:active {
+    --btn-state-layer-bg: rgba(0, 0, 0, 0.12);
 }
 
-.button--tonal:active .button__state-layer {
-  background: rgba(29, 25, 43, 0.12);
+.button--filled:active {
+    --btn-state-layer-bg: rgba(255, 255, 255, 0.12);
 }
 
-.button--outline:active .button__state-layer,
-.button--standard:active .button__state-layer {
-  background: rgba(73, 69, 79, 0.12);
+.button--tonal:active {
+    --btn-state-layer-bg: rgba(29, 25, 43, 0.12);
 }
 
-/* Disabled state */
+.button--outline:active,
+.button--standard:active {
+    --btn-state-layer-bg: rgba(73, 69, 79, 0.12);
+}
+
+/* Disabled */
 .button:disabled {
-  opacity: 0.38;
-  cursor: not-allowed;
-}
-
-.button:disabled .button__state-layer {
-  background: none;
+    opacity: 0.38;
+    cursor: not-allowed;
+    --btn-state-layer-bg: none !important;
 }

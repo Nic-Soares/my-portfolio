@@ -1,66 +1,195 @@
 .hero-section {
-  /* Layout */
-  display: flex;
-  padding: 30px;
-  justify-content: space-between;
-  height: 100%;
+    /* Layout */
+    display: flex;
+    padding: 30px;
+    justify-content: space-between;
+    height: 100%;
 
-  /* Style */
-  background: var(--md-sys-color-surface-container);
+    /* Style */
+    background: var(--md-sys-color-surface-container);
 }
 
 .hero-section__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
 }
 
 .hero-section__text-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 35px;
 }
 
 .hero-section__actions {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .hero-section__actions md-filled-button {
-  height: 96px;
+    height: 96px;
+}
+
+/* --- DEFINIÇÃO DOS SVGs --- */
+:root {
+    /* 1. O SVG da BORDA VERDE (Exatamente o que você mandou) */
+    /* Atenção: converti o '#' da cor para '%23' para funcionar no CSS */
+    --svg-borda: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400' fill='none'%3E%3Cpath d='M255.327 8.86713C341.245 -28.4482 428.448 58.7541 391.133 144.672L384.963 158.878C373.57 185.109 373.57 214.891 384.963 241.122L391.133 255.327C428.448 341.245 341.245 428.448 255.327 391.133L241.122 384.963C214.891 373.57 185.109 373.57 158.878 384.963L144.672 391.133C58.7541 428.448 -28.4481 341.245 8.86719 255.327L15.0371 241.122C26.4296 214.891 26.4295 185.109 15.0371 158.878L8.86719 144.672C-28.4479 58.7542 58.7542 -28.4478 144.672 8.86713L158.878 15.037C185.109 26.4295 214.891 26.4295 241.122 15.037L255.327 8.86713ZM365.33 152.142C397.608 77.8226 322.177 2.3921 247.858 34.6699L235.57 40.0068C212.881 49.8612 187.119 49.8611 164.43 40.0068L152.142 34.6699C77.8227 2.39207 2.39213 77.8226 34.6699 152.142L40.0068 164.43C49.8612 187.119 49.8612 212.88 40.0068 235.57L34.6699 247.858C2.39224 322.177 77.8227 397.608 152.142 365.33L164.43 359.993C187.12 350.139 212.88 350.139 235.57 359.993L247.858 365.33C322.177 397.608 397.608 322.177 365.33 247.858L359.993 235.57C350.139 212.88 350.139 187.119 359.993 164.43L365.33 152.142Z' fill='%23566422'/%3E%3C/svg%3E");
+
+    /* 2. A MÁSCARA INTERNA (Extraí apenas o formato do buraco do seu SVG) */
+    --svg-mascara-interna: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cpath d='M365.33 152.142C397.608 77.8226 322.177 2.3921 247.858 34.6699L235.57 40.0068C212.881 49.8612 187.119 49.8611 164.43 40.0068L152.142 34.6699C77.8227 2.39207 2.39213 77.8226 34.6699 152.142L40.0068 164.43C49.8612 187.119 49.8612 212.88 40.0068 235.57L34.6699 247.858C2.39224 322.177 77.8227 397.608 152.142 365.33L164.43 359.993C187.12 350.139 212.88 350.139 235.57 359.993L247.858 365.33C322.177 397.608 397.608 322.177 365.33 247.858L359.993 235.57C350.139 212.88 350.139 187.119 359.993 164.43L365.33 152.142Z' fill='black'/%3E%3C/svg%3E");
+}
+
+/* --- DEFINIÇÃO DOS SVGs (Permanece igual) --- */
+:root {
+    --svg-borda: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400' fill='none'%3E%3Cpath d='M255.327 8.86713C341.245 -28.4482 428.448 58.7541 391.133 144.672L384.963 158.878C373.57 185.109 373.57 214.891 384.963 241.122L391.133 255.327C428.448 341.245 341.245 428.448 255.327 391.133L241.122 384.963C214.891 373.57 185.109 373.57 158.878 384.963L144.672 391.133C58.7541 428.448 -28.4481 341.245 8.86719 255.327L15.0371 241.122C26.4296 214.891 26.4295 185.109 15.0371 158.878L8.86719 144.672C-28.4479 58.7542 58.7542 -28.4478 144.672 8.86713L158.878 15.037C185.109 26.4295 214.891 26.4295 241.122 15.037L255.327 8.86713ZM365.33 152.142C397.608 77.8226 322.177 2.3921 247.858 34.6699L235.57 40.0068C212.881 49.8612 187.119 49.8611 164.43 40.0068L152.142 34.6699C77.8227 2.39207 2.39213 77.8226 34.6699 152.142L40.0068 164.43C49.8612 187.119 49.8612 212.88 40.0068 235.57L34.6699 247.858C2.39224 322.177 77.8227 397.608 152.142 365.33L164.43 359.993C187.12 350.139 212.88 350.139 235.57 359.993L247.858 365.33C322.177 397.608 397.608 322.177 365.33 247.858L359.993 235.57C350.139 212.88 350.139 187.119 359.993 164.43L365.33 152.142Z' fill='%23566422'/%3E%3C/svg%3E");
+    --svg-mascara-interna: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cpath d='M365.33 152.142C397.608 77.8226 322.177 2.3921 247.858 34.6699L235.57 40.0068C212.881 49.8612 187.119 49.8611 164.43 40.0068L152.142 34.6699C77.8227 2.39207 2.39213 77.8226 34.6699 152.142L40.0068 164.43C49.8612 187.119 49.8612 212.88 40.0068 235.57L34.6699 247.858C2.39224 322.177 77.8227 397.608 152.142 365.33L164.43 359.993C187.12 350.139 212.88 350.139 235.57 359.993L247.858 365.33C322.177 397.608 397.608 322.177 365.33 247.858L359.993 235.57C350.139 212.88 350.139 187.119 359.993 164.43L365.33 152.142Z' fill='black'/%3E%3C/svg%3E");
+    --svg-contra-parte: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400' fill='none'%3E%3Cpath d='M400 400H297.163C366.507 399.87 422.326 327.15 391.133 255.328L384.963 241.122C373.57 214.891 373.57 185.109 384.963 158.878L391.133 144.673C428.448 58.7551 341.246 -28.4478 255.328 8.86719L241.122 15.0371C214.891 26.4296 185.109 26.4296 158.878 15.0371L144.673 8.86719C58.7551 -28.4481 -28.4478 58.7541 8.86719 144.672L15.0371 158.878C26.4296 185.109 26.4296 214.891 15.0371 241.122L8.86719 255.327C-22.3261 327.149 33.4924 399.869 102.836 400H0V0H400V400ZM158.878 384.963C185.109 373.57 214.891 373.57 241.122 384.963L255.327 391.133C269.423 397.255 283.554 400.026 297.163 400H102.836C116.445 400.026 130.576 397.255 144.672 391.133L158.878 384.963Z' fill='%23E8E7DC'/%3E%3C/svg%3E");
 }
 
 .hero-section__image-container {
-  display: flex;
-  width: 552.546px;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
+    position: relative;
+    width: 400px;
+    height: 450px;
+    align-self: center; /* Centraliza verticalmente no flex container */
 }
 
-.hero-section__image-container img {
-  width: 490.5px;
-  height: 598px;
-  aspect-ratio: 490.50/598.00;
+/* --- CAMADA 1: O FUNDO DE BAMBU (Z-index 1) --- */
+.hero-section__inner-background {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
+    z-index: 1;
+    background-size: cover;
+    background-position: center center;
+    -webkit-mask-image: var(--svg-mascara-interna);
+    mask-image: var(--svg-mascara-interna);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center bottom;
+}
+
+/* --- CAMADA 2: A BORDA DE TRÁS (Z-index 2) --- */
+/* Esta é a borda que a cabeça da pessoa vai cobrir */
+.hero-section__clover-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
+    z-index: 2;
+    background-image: var(--svg-borda);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    pointer-events: none;
+}
+
+/* --- CAMADA 3: A PESSOA (Z-index 3) --- */
+/* Removemos a máscara daqui. Ela agora é uma imagem inteira na frente da camada 2 */
+.hero-section__person-popout {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    width: 105%;
+    height: auto;
+    /* NENHUMA MÁSCARA AQUI */
+}
+
+/* --- NOVA CAMADA 4: A BORDA DA FRENTE (Z-index 4) --- */
+/* Esta é a cópia da borda que vai cobrir a base da pessoa */
+.hero-section__clover-border--front {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
+    z-index: 4; /* Fica na frente de tudo */
+
+    /* Usa a mesma imagem da borda */
+    background-image: var(--svg-borda);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    pointer-events: none;
+
+    /* O TRUQUE: Uma máscara que esconde a parte de cima dessa camada */
+    /* Ajuste a porcentagem (60%) se precisar mostrar mais ou menos da borda frontal */
+    -webkit-mask-image: linear-gradient(to top, black 40%, transparent 60%);
+    mask-image: linear-gradient(to top, black 40%, transparent 60%);
+}
+
+/* --- CAMADA 4: O TAPA BURACO (COR DA SURFACE) --- */
+.hero-section__bottom-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Ocupa toda a largura para pegar os cantos */
+    height: 100px; /* Altura suficiente para cobrir os cantos da foto */
+    z-index: 3; /* Fica EM CIMA da pessoa (que é z-index 2 ou 3) */
+
+    /* A MÁGICA: Um círculo invertido.
+     - O centro é TRANSPARENTE (mostra a pessoa e o trevo).
+     - As bordas são BEGE (#E8E7DC) (cobrem os cantos quadrados da foto).
+
+     Ajuste o valor '65%' se o buraco estiver muito grande ou muito pequeno.
+  */
+    background: radial-gradient(
+        ellipse at center top,
+        transparent 0%,
+        #efeee2 65.5%
+    );
+
+    /* Garante que o mouse não interaja com essa camada de correção */
+    pointer-events: none;
+}
+
+/* --- CAMADA 4: O COBERTOR DE CANTOS (Contra-parte) --- */
+.hero-section__corner-cover {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 400px;
+    height: 400px; /* Ocupa a área toda para o SVG alinhar, mas será mascarado */
+    z-index: 4; /* Fica SOBRE a pessoa (que é z-index 3) */
+
+    /* Aplica o seu SVG Bege */
+    background-image: var(--svg-contra-parte);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    pointer-events: none;
+
+    /* A REGRA DE OURO: "Visível apenas do meio para baixo"
+     Isso garante que essa camada Bege fique invisível na parte de cima,
+     impedindo que ela corte a cabeça do Nicolas. */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #EFEEE2 60%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #EFEEE2 60%);
 }
 
 .hero-section__social-links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
 }
 
 .md-filled-button {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 .social-icon {
-  width: 24px;
-  height: 24px;
-  fill: var(--md-sys-color-on-primary)
+    width: 24px;
+    height: 24px;
+    fill: var(--md-sys-color-on-primary);
 }

@@ -1,92 +1,552 @@
-/* Typography - Material Design 3 Naming with Valid CSS Classes */
-/* Based on Material Design 3 textStyles.json */
+/* Typography - Material Design 3 */
+/* Based on Material 3 Design Kit (Community) */
 
 :root {
-  --font-roboto: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-roboto:
+        "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    /* Display Styles */
+    --display-large-font: var(--font-roboto);
+    --display-large-weight: 400;
+    --display-large-size: 57px;
+    --display-large-line-height: 64px;
+    --display-large-tracking: -0.25px;
+    --display-large-emphasized-weight: 500;
+
+    --display-medium-font: var(--font-roboto);
+    --display-medium-weight: 400;
+    --display-medium-size: 45px;
+    --display-medium-line-height: 52px;
+    --display-medium-tracking: 0px;
+    --display-medium-emphasized-weight: 500;
+
+    --display-small-font: var(--font-roboto);
+    --display-small-weight: 400;
+    --display-small-size: 36px;
+    --display-small-line-height: 44px;
+    --display-small-tracking: 0px;
+    --display-small-emphasized-weight: 500;
+
+    /* Headline Styles */
+    --headline-large-font: var(--font-roboto);
+    --headline-large-weight: 400;
+    --headline-large-size: 32px;
+    --headline-large-line-height: 40px;
+    --headline-large-tracking: 0px;
+    --headline-large-emphasized-weight: 500;
+
+    --headline-medium-font: var(--font-roboto);
+    --headline-medium-weight: 400;
+    --headline-medium-size: 28px;
+    --headline-medium-line-height: 36px;
+    --headline-medium-tracking: 0px;
+    --headline-medium-emphasized-weight: 500;
+
+    --headline-small-font: var(--font-roboto);
+    --headline-small-weight: 400;
+    --headline-small-size: 24px;
+    --headline-small-line-height: 32px;
+    --headline-small-tracking: 0px;
+    --headline-small-emphasized-weight: 500;
+
+    /* Title Styles */
+    --title-large-font: var(--font-roboto);
+    --title-large-weight: 400;
+    --title-large-size: 22px;
+    --title-large-line-height: 28px;
+    --title-large-tracking: 0px;
+    --title-large-emphasized-weight: 500;
+
+    --title-medium-font: var(--font-roboto);
+    --title-medium-weight: 500;
+    --title-medium-size: 16px;
+    --title-medium-line-height: 24px;
+    --title-medium-tracking: 0.15px;
+    --title-medium-emphasized-weight: 600;
+
+    --title-small-font: var(--font-roboto);
+    --title-small-weight: 500;
+    --title-small-size: 14px;
+    --title-small-line-height: 20px;
+    --title-small-tracking: 0.1px;
+    --title-small-emphasized-weight: 600;
+
+    /* Label Styles */
+    --label-large-font: var(--font-roboto);
+    --label-large-weight: 500;
+    --label-large-size: 14px;
+    --label-large-line-height: 20px;
+    --label-large-tracking: 0.1px;
+    --label-large-emphasized-weight: 600;
+
+    --label-medium-font: var(--font-roboto);
+    --label-medium-weight: 500;
+    --label-medium-size: 12px;
+    --label-medium-line-height: 16px;
+    --label-medium-tracking: 0.5px;
+    --label-medium-emphasized-weight: 600;
+
+    --label-small-font: var(--font-roboto);
+    --label-small-weight: 500;
+    --label-small-size: 11px;
+    --label-small-line-height: 16px;
+    --label-small-tracking: 0.5px;
+    --label-small-emphasized-weight: 600;
+
+    /* Body Styles */
+    --body-large-font: var(--font-roboto);
+    --body-large-weight: 400;
+    --body-large-size: 16px;
+    --body-large-line-height: 24px;
+    --body-large-tracking: 0.5px;
+    --body-large-emphasized-weight: 500;
+
+    --body-medium-font: var(--font-roboto);
+    --body-medium-weight: 400;
+    --body-medium-size: 14px;
+    --body-medium-line-height: 20px;
+    --body-medium-tracking: 0.25px;
+    --body-medium-emphasized-weight: 500;
+
+    --body-small-font: var(--font-roboto);
+    --body-small-weight: 400;
+    --body-small-size: 12px;
+    --body-small-line-height: 16px;
+    --body-small-tracking: 0.4px;
+    --body-small-emphasized-weight: 500;
 }
 
-/* Display Styles */
+/* ========================================
+   Display Styles
+   ======================================== */
+
+.display-large {
+    font-family: var(--display-large-font);
+    font-weight: var(--display-large-weight);
+    font-size: var(--display-large-size);
+    line-height: var(--display-large-line-height);
+    letter-spacing: var(--display-large-tracking);
+}
+
+.display-large-emphasized {
+    font-family: var(--display-large-font);
+    font-weight: var(--display-large-emphasized-weight);
+    font-size: var(--display-large-size);
+    line-height: var(--display-large-line-height);
+    letter-spacing: var(--display-large-tracking);
+}
+
 .display-medium {
-  font-family: var(--font-roboto);
-  font-weight: 400;
-  font-size: 45px;
-  line-height: 1.16;
-  letter-spacing: 0px;
+    font-family: var(--display-medium-font);
+    font-weight: var(--display-medium-weight);
+    font-size: var(--display-medium-size);
+    line-height: var(--display-medium-line-height);
+    letter-spacing: var(--display-medium-tracking);
 }
 
-/* Headline Styles */
+.display-medium-emphasized {
+    font-family: var(--display-medium-font);
+    font-weight: var(--display-medium-emphasized-weight);
+    font-size: var(--display-medium-size);
+    line-height: var(--display-medium-line-height);
+    letter-spacing: var(--display-medium-tracking);
+}
+
+.display-small {
+    font-family: var(--display-small-font);
+    font-weight: var(--display-small-weight);
+    font-size: var(--display-small-size);
+    line-height: var(--display-small-line-height);
+    letter-spacing: var(--display-small-tracking);
+}
+
+.display-small-emphasized {
+    font-family: var(--display-small-font);
+    font-weight: var(--display-small-emphasized-weight);
+    font-size: var(--display-small-size);
+    line-height: var(--display-small-line-height);
+    letter-spacing: var(--display-small-tracking);
+}
+
+/* ========================================
+   Headline Styles
+   ======================================== */
+
+.headline-large {
+    font-family: var(--headline-large-font);
+    font-weight: var(--headline-large-weight);
+    font-size: var(--headline-large-size);
+    line-height: var(--headline-large-line-height);
+    letter-spacing: var(--headline-large-tracking);
+}
+
+.headline-large-emphasized {
+    font-family: var(--headline-large-font);
+    font-weight: var(--headline-large-emphasized-weight);
+    font-size: var(--headline-large-size);
+    line-height: var(--headline-large-line-height);
+    letter-spacing: var(--headline-large-tracking);
+}
+
+.headline-medium {
+    font-family: var(--headline-medium-font);
+    font-weight: var(--headline-medium-weight);
+    font-size: var(--headline-medium-size);
+    line-height: var(--headline-medium-line-height);
+    letter-spacing: var(--headline-medium-tracking);
+}
+
+.headline-medium-emphasized {
+    font-family: var(--headline-medium-font);
+    font-weight: var(--headline-medium-emphasized-weight);
+    font-size: var(--headline-medium-size);
+    line-height: var(--headline-medium-line-height);
+    letter-spacing: var(--headline-medium-tracking);
+}
+
+.headline-small {
+    font-family: var(--headline-small-font);
+    font-weight: var(--headline-small-weight);
+    font-size: var(--headline-small-size);
+    line-height: var(--headline-small-line-height);
+    letter-spacing: var(--headline-small-tracking);
+}
+
 .headline-small-emphasized {
-  font-family: var(--font-roboto);
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 1.33;
-  letter-spacing: 0px;
+    font-family: var(--headline-small-font);
+    font-weight: var(--headline-small-emphasized-weight);
+    font-size: var(--headline-small-size);
+    line-height: var(--headline-small-line-height);
+    letter-spacing: var(--headline-small-tracking);
 }
 
-/* Title Styles */
+/* ========================================
+   Title Styles
+   ======================================== */
+
 .title-large {
-  font-family: var(--font-roboto);
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 1.27;
-  letter-spacing: 0px;
+    font-family: var(--title-large-font);
+    font-weight: var(--title-large-weight);
+    font-size: var(--title-large-size);
+    line-height: var(--title-large-line-height);
+    letter-spacing: var(--title-large-tracking);
 }
 
-/* Body Styles */
+.title-large-emphasized {
+    font-family: var(--title-large-font);
+    font-weight: var(--title-large-emphasized-weight);
+    font-size: var(--title-large-size);
+    line-height: var(--title-large-line-height);
+    letter-spacing: var(--title-large-tracking);
+}
+
+.title-medium {
+    font-family: var(--title-medium-font);
+    font-weight: var(--title-medium-weight);
+    font-size: var(--title-medium-size);
+    line-height: var(--title-medium-line-height);
+    letter-spacing: var(--title-medium-tracking);
+}
+
+.title-medium-emphasized {
+    font-family: var(--title-medium-font);
+    font-weight: var(--title-medium-emphasized-weight);
+    font-size: var(--title-medium-size);
+    line-height: var(--title-medium-line-height);
+    letter-spacing: var(--title-medium-tracking);
+}
+
+.title-small {
+    font-family: var(--title-small-font);
+    font-weight: var(--title-small-weight);
+    font-size: var(--title-small-size);
+    line-height: var(--title-small-line-height);
+    letter-spacing: var(--title-small-tracking);
+}
+
+.title-small-emphasized {
+    font-family: var(--title-small-font);
+    font-weight: var(--title-small-emphasized-weight);
+    font-size: var(--title-small-size);
+    line-height: var(--title-small-line-height);
+    letter-spacing: var(--title-small-tracking);
+}
+
+/* ========================================
+   Label Styles
+   ======================================== */
+
+.label-large {
+    font-family: var(--label-large-font);
+    font-weight: var(--label-large-weight);
+    font-size: var(--label-large-size);
+    line-height: var(--label-large-line-height);
+    letter-spacing: var(--label-large-tracking);
+}
+
+.label-large-emphasized {
+    font-family: var(--label-large-font);
+    font-weight: var(--label-large-emphasized-weight);
+    font-size: var(--label-large-size);
+    line-height: var(--label-large-line-height);
+    letter-spacing: var(--label-large-tracking);
+}
+
+.label-medium {
+    font-family: var(--label-medium-font);
+    font-weight: var(--label-medium-weight);
+    font-size: var(--label-medium-size);
+    line-height: var(--label-medium-line-height);
+    letter-spacing: var(--label-medium-tracking);
+}
+
+.label-medium-emphasized {
+    font-family: var(--label-medium-font);
+    font-weight: var(--label-medium-emphasized-weight);
+    font-size: var(--label-medium-size);
+    line-height: var(--label-medium-line-height);
+    letter-spacing: var(--label-medium-tracking);
+}
+
+.label-small {
+    font-family: var(--label-small-font);
+    font-weight: var(--label-small-weight);
+    font-size: var(--label-small-size);
+    line-height: var(--label-small-line-height);
+    letter-spacing: var(--label-small-tracking);
+}
+
+.label-small-emphasized {
+    font-family: var(--label-small-font);
+    font-weight: var(--label-small-emphasized-weight);
+    font-size: var(--label-small-size);
+    line-height: var(--label-small-line-height);
+    letter-spacing: var(--label-small-tracking);
+}
+
+/* ========================================
+   Body Styles
+   ======================================== */
+
 .body-large {
-  font-family: var(--font-roboto);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.5px;
+    font-family: var(--body-large-font);
+    font-weight: var(--body-large-weight);
+    font-size: var(--body-large-size);
+    line-height: var(--body-large-line-height);
+    letter-spacing: var(--body-large-tracking);
+}
+
+.body-large-emphasized {
+    font-family: var(--body-large-font);
+    font-weight: var(--body-large-emphasized-weight);
+    font-size: var(--body-large-size);
+    line-height: var(--body-large-line-height);
+    letter-spacing: var(--body-large-tracking);
 }
 
 .body-medium {
-  font-family: var(--font-roboto);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.43;
-  letter-spacing: 0.25px;
+    font-family: var(--body-medium-font);
+    font-weight: var(--body-medium-weight);
+    font-size: var(--body-medium-size);
+    line-height: var(--body-medium-line-height);
+    letter-spacing: var(--body-medium-tracking);
 }
 
-/* Label Styles */
-.label-large {
-  font-family: var(--font-roboto);
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.43;
-  letter-spacing: 0.1px;
+.body-medium-emphasized {
+    font-family: var(--body-medium-font);
+    font-weight: var(--body-medium-emphasized-weight);
+    font-size: var(--body-medium-size);
+    line-height: var(--body-medium-line-height);
+    letter-spacing: var(--body-medium-tracking);
 }
 
-/* Responsive */
+.body-small {
+    font-family: var(--body-small-font);
+    font-weight: var(--body-small-weight);
+    font-size: var(--body-small-size);
+    line-height: var(--body-small-line-height);
+    letter-spacing: var(--body-small-tracking);
+}
+
+.body-small-emphasized {
+    font-family: var(--body-small-font);
+    font-weight: var(--body-small-emphasized-weight);
+    font-size: var(--body-small-size);
+    line-height: var(--body-small-line-height);
+    letter-spacing: var(--body-small-tracking);
+}
+
+/* ========================================
+   Semantic HTML Tag Mapping
+   ======================================== */
+
+h1 {
+    font-family: var(--display-large-font);
+    font-weight: var(--display-large-weight);
+    font-size: var(--display-large-size);
+    line-height: var(--display-large-line-height);
+    letter-spacing: var(--display-large-tracking);
+}
+
+h2 {
+    font-family: var(--headline-large-font);
+    font-weight: var(--headline-large-weight);
+    font-size: var(--headline-large-size);
+    line-height: var(--headline-large-line-height);
+    letter-spacing: var(--headline-large-tracking);
+}
+
+h3 {
+    font-family: var(--headline-medium-font);
+    font-weight: var(--headline-medium-weight);
+    font-size: var(--headline-medium-size);
+    line-height: var(--headline-medium-line-height);
+    letter-spacing: var(--headline-medium-tracking);
+}
+
+h4 {
+    font-family: var(--headline-small-font);
+    font-weight: var(--headline-small-weight);
+    font-size: var(--headline-small-size);
+    line-height: var(--headline-small-line-height);
+    letter-spacing: var(--headline-small-tracking);
+}
+
+h5 {
+    font-family: var(--title-large-font);
+    font-weight: var(--title-large-weight);
+    font-size: var(--title-large-size);
+    line-height: var(--title-large-line-height);
+    letter-spacing: var(--title-large-tracking);
+}
+
+h6 {
+    font-family: var(--title-medium-font);
+    font-weight: var(--title-medium-weight);
+    font-size: var(--title-medium-size);
+    line-height: var(--title-medium-line-height);
+    letter-spacing: var(--title-medium-tracking);
+}
+
+p {
+    font-family: var(--body-large-font);
+    font-weight: var(--body-large-weight);
+    font-size: var(--body-large-size);
+    line-height: var(--body-large-line-height);
+    letter-spacing: var(--body-large-tracking);
+}
+
+small {
+    font-family: var(--body-small-font);
+    font-weight: var(--body-small-weight);
+    font-size: var(--body-small-size);
+    line-height: var(--body-small-line-height);
+    letter-spacing: var(--body-small-tracking);
+}
+
+label,
+button {
+    font-family: var(--label-large-font);
+    font-weight: var(--label-large-weight);
+    font-size: var(--label-large-size);
+    line-height: var(--label-large-line-height);
+    letter-spacing: var(--label-large-tracking);
+}
+
+caption,
+figcaption {
+    font-family: var(--body-small-font);
+    font-weight: var(--body-small-weight);
+    font-size: var(--body-small-size);
+    line-height: var(--body-small-line-height);
+    letter-spacing: var(--body-small-tracking);
+}
+
+/* ========================================
+   Responsive Typography
+   ======================================== */
+
+@media (max-width: 1024px) {
+    :root {
+        --display-large-size: 48px;
+        --display-large-line-height: 56px;
+        --display-medium-size: 38px;
+        --display-medium-line-height: 46px;
+    }
+}
+
 @media (max-width: 768px) {
-  .display-medium {
-    font-size: 36px;
-  }
-  
-  .headline-small-emphasized {
-    font-size: 20px;
-  }
+    :root {
+        --display-large-size: 40px;
+        --display-large-line-height: 48px;
+        --display-medium-size: 32px;
+        --display-medium-line-height: 40px;
+        --display-small-size: 28px;
+        --display-small-line-height: 36px;
+        --headline-large-size: 28px;
+        --headline-large-line-height: 36px;
+        --headline-medium-size: 24px;
+        --headline-medium-line-height: 32px;
+    }
 }
 
 @media (max-width: 480px) {
-  .display-medium {
-    font-size: 28px;
-  }
-  
-  .headline-small-emphasized {
-    font-size: 18px;
-  }
+    :root {
+        --display-large-size: 32px;
+        --display-large-line-height: 40px;
+        --display-medium-size: 28px;
+        --display-medium-line-height: 36px;
+        --display-small-size: 24px;
+        --display-small-line-height: 32px;
+        --headline-large-size: 24px;
+        --headline-large-line-height: 32px;
+        --headline-medium-size: 22px;
+        --headline-medium-line-height: 28px;
+        --headline-small-size: 20px;
+        --headline-small-line-height: 28px;
+    }
 }
 
-/* Color Classes - Material Design 3 */
-.text-on-surface { color: var(--md-sys-color-on-surface); }
-.text-on-primary { color: var(--md-sys-color-on-primary); }
-.text-on-secondary { color: var(--md-sys-color-on-secondary); }
-.text-on-tertiary { color: var(--md-sys-color-on-tertiary); }
-.text-on-error { color: var(--md-sys-color-on-error); }
-.text-on-surface-variant { color: var(--md-sys-color-on-surface-variant); }
-.text-on-primary-container { color: var(--md-sys-color-on-primary-container); }
-.text-on-secondary-container { color: var(--md-sys-color-on-secondary-container); }
-.text-on-tertiary-container { color: var(--md-sys-color-on-tertiary-container); }
-.text-on-error-container { color: var(--md-sys-color-on-error-container); }
+/* ========================================
+   Color Classes - Material Design 3
+   ======================================== */
+
+.text-on-surface {
+    color: var(--md-sys-color-on-surface);
+}
+
+.text-on-primary {
+    color: var(--md-sys-color-on-primary);
+}
+
+.text-on-secondary {
+    color: var(--md-sys-color-on-secondary);
+}
+
+.text-on-tertiary {
+    color: var(--md-sys-color-on-tertiary);
+}
+
+.text-on-error {
+    color: var(--md-sys-color-on-error);
+}
+
+.text-on-surface-variant {
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.text-on-primary-container {
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.text-on-secondary-container {
+    color: var(--md-sys-color-on-secondary-container);
+}
+
+.text-on-tertiary-container {
+    color: var(--md-sys-color-on-tertiary-container);
+}
+
+.text-on-error-container {
+    color: var(--md-sys-color-on-error-container);
+}
