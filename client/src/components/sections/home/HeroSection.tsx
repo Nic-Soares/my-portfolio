@@ -36,22 +36,22 @@ const HeroSection = () => {
       </div>
 
       <div className={styles["hero-section__image-container"]}>
-        <div
+        {/*<div
           className={styles["hero-section__inner-background"]}
           style={{ backgroundImage: `url(${innerBackground})` }}
-        ></div>
+        ></div>*/}
 
         <div className={styles["hero-section__clover-border"]}></div>
 
-        <img
+        {/*<img
           src={personPopout}
           alt="Nicolas Soares"
           className={styles["hero-section__person-popout"]}
-        />
+        />*/}
 
-        <div className={styles["hero-section__corner-cover"]}></div>
+        {/*<div className={styles["hero-section__corner-cover"]}></div>*/}
 
-        <div className={styles["hero-section__clover-border--front"]}></div>
+        {/*<div className={styles["hero-section__clover-border--front"]}></div>*/}
       </div>
 
       <div className={styles["hero-section__social-links"]}>
@@ -63,21 +63,21 @@ const HeroSection = () => {
           width="narrow"
           type="round"
           size="medium"
-          style="filled"
+          style="tonal"
           icon="mail"
         />
         <IconButton
           width="narrow"
           type="round"
           size="medium"
-          style="filled"
+          style="outline"
           icon="description"
         />
         <IconButton
           width="narrow"
           type="round"
           size="medium"
-          style="filled"
+          style="standard"
           icon="description"
         />
       </div>
