@@ -1,0 +1,38 @@
+.cards {
+    /* Usar grid com auto-fit/minmax. Alinhado ao novo min-width do ProjectCard (~431px)
+       para que o card controle sua largura e não fique "espremido". */
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(431px, 1fr)
+    ); /* 308px * 1.4 ≈ 431px */
+    gap: 25px 25px; /* row gap 8px, column gap 35px (vertical reduzido) */
+    grid-auto-rows: min-content; /* garantir que cada linha ocupe apenas o espaço necessário */
+    padding: 0 24px;
+    justify-items: center; /* centraliza a célula para permitir que o card controle max-width */
+    align-items: start;
+}
+
+/* Cada item direto dentro do container .cards (ex.: ProjectCard)
+   Não forçar largura: permitir que o ProjectCard determine sua própria largura/máxima.
+   Posicionamos o card centralizado dentro da coluna do grid para manter layout consistente. */
+.cards > * {
+    box-sizing: border-box;
+    width: 100%; /* faz o card preencher a coluna do grid, garantindo largura visível */
+    min-width: 431px; /* aumenta o mínimo horizontal do card dentro da célula do grid */
+    max-width: 714px; /* limite superior sugerido (pode ser respeitado pelo próprio card) */
+    justify-self: center; /* centraliza o card na coluna; remova se preferir alinhamento à esquerda */
+    align-self: start; /* garante que o card fique alinhado ao topo da célula (evita espaçamento vertical) */
+}
+
+/* Em telas pequenas, for\u00e7a uma coluna \u00fanica */
+@media (max-width: 480px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+    .cards > * {
+        max-width: 100%;
+        justify-self: stretch;
+        width: 100%;
+    }
+}

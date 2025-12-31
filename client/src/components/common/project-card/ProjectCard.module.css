@@ -1,57 +1,120 @@
 .project-card {
-  display: grid;
-  grid-template-rows: 1fr 0.3fr;
-  max-width: 510px;
-  min-height: 395px;
-  max-height: 401.5px;
-  gap: 4px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 308px; /* evita ficar demasiado estreito (aumentado 140%) */
+    max-height: 402px;
 
-  border-radius: var(--Corner-Large, 16px);
-  background: var(--md-sys-color-surface-container-low);
+    border-radius: var(--Corner-Large, 16px);
+    background: var(--md-sys-color-surface-container-low);
+
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    outline: none;
+
+    position: relative;
+    overflow: hidden; /* evita que o conteúdo interno 'estoure' verticalmente; áreas internas podem rolar */
 }
 
 .project-card__preview {
-  background-color: var(--md-sys-color-tertiary-container);
-  background-image: url('../../../assets/images/forms.svg');
-  background-size: clamp(60px, 8vw, 120px);
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: inherit;
+    background-color: var(--md-sys-color-tertiary-container);
+    background-image: url("../../../assets/images/forms.svg");
+    background-size: clamp(60px, 8vw, 120px);
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    z-index: 2; /* Preview fica acima do content */
+    width: 100%;
+    height: 300px;
+    border-radius: var(--Corner-Large, 16px);
+    overflow: hidden;
+}
+
+.project-card__preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.project-card__state-layer {
+    display: none; /* Não é mais necessário */
 }
 
 .project-card__content {
-  display: flex;
-  padding: 20px 20px 25px 20px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-  align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    flex: 1 1 auto; /* permite que o content ocupe o espaço disponível sem ultrapassar o max-height do card */
+    min-height: 0; /* importante para que flex children possam encolher e rolar corretamente */
+    overflow: hidden; /* evita estouro do conteúdo dentro do card */
+    background: var(--md-sys-color-surface-container-low);
+    z-index: 1; /* Content fica abaixo do preview */
+    position: relative;
+    border-radius: var(--Corner-Large, 16px);
+}
+
+.project-card__content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    transition: background-color 0.2s ease;
+    border-radius: var(--Corner-Large, 16px);
+    pointer-events: none;
+    z-index: 1;
+    border-radius: inherit;
+}
+
+.project-card:hover .project-card__content::before {
+    background-color: red;
+    opacity: 0.5;
+}
+
+.project-card__info {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px 25px 20px;
+    gap: 4px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    flex: 1 1 auto; /* permite que a área de info cresça/encolha dentro do content */
+    min-height: 0; /* necessário para que overflow funcione dentro de flex containers */
+    overflow: auto; /* quando o conteúdo interno for maior que o espaço disponível, permite rolagem interna */
 }
 
 .project-card__title {
-  overflow: hidden;
-  color: var(--M3-sys-light-on-surface, #171C22);
-  text-overflow: ellipsis;
+    overflow: hidden;
+    color: var(--M3-sys-light-on-surface, #171c22);
+    text-overflow: ellipsis;
+    margin: 0;
 
-  /* M3/title/large */
-  font-family: var(--Static-Title-Large-Font, Roboto);
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 28px; /* 127.273% */
+    /* M3/title/large */
+    font-family: var(--Static-Title-Large-Font, Roboto);
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 127.273% */
 }
 
 .project-card__update {
-  overflow: hidden;
-  color: var(--M3-sys-light-on-surface-variant, #3F4752);
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    overflow: hidden;
+    color: var(--M3-sys-light-on-surface-variant, #3f4752);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
 
-  /* M3/body/large */
-  font-family: var(--Static-Body-Large-Font, Roboto);
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px; /* 150% */
-  letter-spacing: 0.5px;
+    /* M3/body/large */
+    font-family: var(--Static-Body-Large-Font, Roboto);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.5px;
 }

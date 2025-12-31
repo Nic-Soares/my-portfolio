@@ -141,3 +141,21 @@
   fill: white;
   color: white;
 }
+
+/* Non-interactive visual state
+   Applied when a button should be purely visual (no pointer cursor,
+   no pointer interactions on inner elements). Keyboard interactivity
+   is handled via tabIndex in the component (set to -1 when noninteractive). */
+.noninteractive {
+  cursor: default;
+}
+
+/* Prevent pointer interactions on inner elements so hover effects don't trigger.
+   The button itself may still have pointer-events for other reasons, but inner
+   elements won't respond to pointer events when the parent has .noninteractive. */
+.noninteractive .state-layer,
+.noninteractive .icon,
+.noninteractive .label {
+  pointer-events: none;
+  /* keep visual appearance but avoid hover/focus styles */
+}
