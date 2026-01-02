@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./SearchBar.module.css";
-import IconButton from "../buttons/icon-button/IconButton";
 
 interface SearchBarProps {
   placeholder?: string;
@@ -117,16 +116,16 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </div>
 
         {query && (
-          <div className={styles.searchBar__trailingIcon}>
-            <IconButton
-              type="round"
-              size="medium"
-              style="standard"
-              width="default"
-              icon="close"
-              onClick={handleClear}
-              disabled={disabled}
-            />
+          <div
+            className={styles.searchBar__trailingIcon}
+            onClick={handleClear}
+            role="button"
+            aria-label="Clear search"
+            tabIndex={-1}
+          >
+            <span className="material-symbols-outlined" aria-hidden="true">
+              close
+            </span>
           </div>
         )}
       </div>
