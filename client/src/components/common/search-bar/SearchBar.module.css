@@ -1,80 +1,259 @@
-.searchBar {
-  display: flex;
-  width: 417.25px;
-  height: 56px;
-  min-width: 360px;
-  max-width: 720px;
-  align-items: center;
-  gap: 4px;
-  flex-shrink: 0;
+/* ============================================
+   Material Design 3 Search Bar Styles
+   ============================================ */
 
-  border-radius: 28px;
-  background: var(--Schemes-Surface-Container-High, #EAE9DC);
+.searchBar {
+    display: flex;
+    width: 100%;
+    min-width: 360px;
+    max-width: 720px;
+    height: 56px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+
+    /* MD3 Surface Container High */
+    background: var(--md-sys-color-surface-container-high, #eae9dc);
+    border-radius: 28px;
+
+    /* MD3 Elevation Level 0 */
+    box-shadow: var(--elevation-search-bar, var(--m3-elevation-0, none));
+
+    /* Smooth transitions */
+    transition:
+        background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+        box-shadow 200ms cubic-bezier(0.2, 0, 0, 1),
+        z-index 0ms;
+
+    /* Prevent text selection on container */
+    user-select: none;
+    cursor: text;
 }
+
+/* Hover State */
+.searchBar:hover:not(.searchBar--disabled) {
+    background: var(--md-sys-color-surface-container-highest, #e4e3d6);
+}
+
+/* Focused State - MD3 Elevation Level 1 */
+.searchBar--focused {
+    background: var(--md-sys-color-surface-container-high, #eae9dc);
+    box-shadow: var(
+        --elevation-search-bar-focused,
+        var(
+            --m3-elevation-1,
+            0px 1px 3px rgba(0, 0, 0, 0.15),
+            0px 1px 2px rgba(0, 0, 0, 0.3)
+        )
+    );
+    z-index: 2;
+}
+
+/* Disabled State */
+.searchBar--disabled {
+    background: var(--md-sys-color-surface-container-high, #eae9dc);
+    opacity: 0.38;
+    cursor: not-allowed;
+}
+
+/* Filled State (quando há conteúdo) */
+.searchBar--filled {
+    background: var(--md-sys-color-surface-container-high, #eae9dc);
+}
+
+/* ============================================
+   Container
+   ============================================ */
 
 .searchBar__container {
-  display: flex;
-  padding: 4px;
-  align-items: center;
-  gap: 4px;
-  flex: 1 0 0;
-  align-self: stretch;
+    display: flex;
+    padding: 0 8px 0 4px;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    height: 100%;
+    width: 100%;
 }
 
-.searchBar__icon {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+/* ============================================
+   Icons
+   ============================================ */
+
+.searchBar__leadingIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding-left: 8px;
+    color: var(--md-sys-color-on-surface, #1b1c15);
+    opacity: 0.64;
+    transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1);
+    pointer-events: none;
+    user-select: none;
 }
 
-.searchBar__icon-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-
-  border-radius: 100px;
+.searchBar__leadingIcon .material-symbols-outlined {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
 }
 
-.searchBar__icon-state-layer {
-  display: flex;
-  padding: 8px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+.searchBar--focused .searchBar__leadingIcon {
+    opacity: 1;
+    color: var(--md-sys-color-on-surface-variant, #46483c);
 }
 
-.searchBar__icon-state-layer svg {
-  width: 24px;
-  height: 24px;
+.searchBar__trailingIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--md-sys-color-on-surface-variant, #46483c);
+
+    /* Smooth entry animation */
+    animation: fadeInScale 200ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.searchBar__content {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1 0 0;
-  align-self: stretch;
+/* ============================================
+   Input Wrapper & Input
+   ============================================ */
+
+.searchBar__inputWrapper {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+    min-width: 0;
+    position: relative;
 }
 
 .searchBar__input {
-  width: 100%;
-  height: 100%;
-  background: none;
-  border: none;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+
+    /* MD3 Typography - Body Large */
+    font-family: var(
+        --body-large-font,
+        var(--font-roboto, "Roboto", sans-serif)
+    );
+    font-size: var(--body-large-size, 16px);
+    font-weight: var(--body-large-weight, 400);
+    line-height: var(--body-large-line-height, 24px);
+    letter-spacing: var(--body-large-tracking, 0.5px);
+
+    color: var(--md-sys-color-on-surface, #1b1c15);
+
+    /* Allow text selection in input */
+    user-select: text;
+    cursor: text;
+
+    /* Remove default input styles */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
-.searchBar:focus {
-  outline: none;
-  box-shadow: none;
+/* Placeholder Styles */
+.searchBar__input::placeholder {
+    color: var(--md-sys-color-on-surface-variant, #46483c);
+    opacity: 0.64;
+    transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.searchBar__actions {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+.searchBar--focused .searchBar__input::placeholder {
+    opacity: 0.48;
 }
 
-.searchBar__clearButton {
+.searchBar__input:disabled {
+    cursor: not-allowed;
+    color: var(--md-sys-color-on-surface, #1b1c15);
+}
 
+/* Remove autofill background */
+.searchBar__input:-webkit-autofill,
+.searchBar__input:-webkit-autofill:hover,
+.searchBar__input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--md-sys-color-on-surface, #1b1c15);
+    -webkit-box-shadow: 0 0 0px 1000px
+        var(--md-sys-color-surface-container-high, #eae9dc) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+    .searchBar {
+        min-width: 280px;
+        max-width: 100%;
+    }
+
+    .searchBar__container {
+        gap: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .searchBar {
+        min-width: 240px;
+        height: 48px;
+        border-radius: 24px;
+    }
+}
+
+/* ============================================
+   High Contrast & Accessibility
+   ============================================ */
+
+@media (prefers-contrast: high) {
+    .searchBar {
+        border: 2px solid var(--md-sys-color-outline, #77786a);
+    }
+
+    .searchBar--focused {
+        border-color: var(--md-sys-color-primary, #566422);
+        border-width: 3px;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .searchBar,
+    .searchBar__leadingIcon,
+    .searchBar__trailingIcon,
+    .searchBar__input,
+    .searchBar__input::placeholder {
+        transition: none;
+        animation: none;
+    }
+}
+
+/* Focus visible for keyboard navigation */
+.searchBar:focus-within {
+    outline: none;
+}
+
+.searchBar__input:focus-visible {
+    outline: none;
 }

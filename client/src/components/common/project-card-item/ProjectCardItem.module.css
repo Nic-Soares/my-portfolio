@@ -1,4 +1,5 @@
 .project-card {
+    all: unset;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -11,10 +12,10 @@
 
     cursor: pointer;
     transition: transform 0.2s ease;
-    outline: none;
 
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .project-card__preview {
@@ -52,7 +53,7 @@
     height: 100%; /* ocupa todo o espaço disponível do card */
     min-height: 0;
     overflow: hidden;
-    background: var(--md-sys-color-surface-container-low);
+    background: var(--md-sys-color-surface-container);
     z-index: 1;
     position: relative;
     border-radius: var(--Corner-Large, 16px);
@@ -73,9 +74,47 @@
     border-radius: inherit;
 }
 
+/* --- States (Hover, Focus, Active, Disabled) --- */
+
+/* Hover */
 .project-card:hover .project-card__content::before {
-    background-color: red;
-    opacity: 0.5;
+    background-color: var(--md-state-layers-light-on-surface-opacity-08);
+}
+
+/* Focus */
+.project-card:focus-visible {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+    border-radius: 48px;
+}
+
+.project-card:focus-visible .project-card__content {
+    outline: none;
+    border-radius: 48px;
+}
+
+.project-card:focus-visible .project-card__content::before {
+    border-radius: 48px;
+}
+
+/* Active (Pressed) */
+.project-card:active .project-card__content::before {
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+/* Disabled */
+.project-card--disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.project-card--disabled .project-card__content::before {
+    background-color: transparent !important;
+}
+
+.project-card--disabled:hover .project-card__content::before {
+    background-color: transparent !important;
 }
 
 .project-card__info {

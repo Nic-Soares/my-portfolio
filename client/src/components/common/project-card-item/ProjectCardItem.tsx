@@ -1,6 +1,6 @@
 import ConnectedButtonGroup from "../connected-button-group/ConnectedButtonGroup";
 import styles from "./ProjectCardItem.module.css";
-import type { ReactNode } from "react";
+import type { ReactNode, KeyboardEvent } from "react";
 
 type ProjectCategory =
   | "Frontend"
@@ -33,6 +33,11 @@ interface ProjectCardItemProps {
   allowDeselect?: boolean;
   selectable?: boolean;
   interactive?: boolean;
+
+  // Button-like props
+  onClick?: () => void;
+  disabled?: boolean;
+  tabIndex?: number;
 }
 
 const ProjectCardItem = ({
@@ -47,6 +52,9 @@ const ProjectCardItem = ({
   allowDeselect = true,
   selectable = false,
   interactive = true,
+  onClick,
+  disabled = false,
+  tabIndex = 0,
 }: ProjectCardItemProps) => {
   // Use buttonGroupOptions if provided, otherwise convert categories to options
   const options =
@@ -55,8 +63,36 @@ const ProjectCardItem = ({
       label: category,
     }));
 
+  const handleClick = () => {
+    if (disabled) return;
+    onClick?.();
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (disabled) return;
+    // Ativar com Enter ou Space
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onClick?.();
+    }
+  };
+
+  const className = [
+    styles["project-card"],
+    disabled ? styles["project-card--disabled"] : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <div className={styles["project-card"]}>
+    <button
+      className={className}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      disabled={disabled}
+      tabIndex={disabled ? -1 : tabIndex}
+      type="button"
+    >
       <div className={styles["project-card__content"]}>
         <div className={styles["project-card__preview"]}>
           {imageUrl && <img src={imageUrl} alt={title} />}
@@ -77,7 +113,7 @@ const ProjectCardItem = ({
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

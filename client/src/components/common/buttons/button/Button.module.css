@@ -262,6 +262,11 @@
 .button:focus-visible .button__content {
     outline: 2px solid var(--md-sys-color-primary);
     outline-offset: 2px;
+    border-radius: 100px;
+}
+
+.button:focus-visible .button__state-layer {
+    border-radius: 100px;
 }
 
 /*.button--filled:focus-visible .button__content {

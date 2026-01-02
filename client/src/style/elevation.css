@@ -1,0 +1,131 @@
+/* ============================================
+   Material Design 3 - Elevation System
+   ============================================
+
+   Elevation provides visual cues about depth and hierarchy.
+   MD3 uses a combination of shadows and tonal overlays.
+
+   Light Theme: Darker shadows with subtle opacity
+   Dark Theme: Similar shadows with adjusted opacity for dark surfaces
+   ============================================ */
+
+/* Light Theme Elevations */
+body[data-theme="Light"] {
+    --m3-elevation-light-0: none;
+    --m3-elevation-light-1: 0px 1px 3px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
+    --m3-elevation-light-2: 0px 2px 6px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
+    --m3-elevation-light-3: 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 4px 8px rgba(0, 0, 0, 0.15);
+    --m3-elevation-light-4: 0px 2px 3px rgba(0, 0, 0, 0.3), 0px 6px 10px rgba(0, 0, 0, 0.15);
+    --m3-elevation-light-5: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 12px rgba(0, 0, 0, 0.15);
+
+    /* Active elevation alias */
+    --m3-elevation-0: var(--m3-elevation-light-0);
+    --m3-elevation-1: var(--m3-elevation-light-1);
+    --m3-elevation-2: var(--m3-elevation-light-2);
+    --m3-elevation-3: var(--m3-elevation-light-3);
+    --m3-elevation-4: var(--m3-elevation-light-4);
+    --m3-elevation-5: var(--m3-elevation-light-5);
+}
+
+/* Dark Theme Elevations */
+body[data-theme="Dark"] {
+    --m3-elevation-dark-0: none;
+    --m3-elevation-dark-1: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px rgba(0, 0, 0, 0.15);
+    --m3-elevation-dark-2: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px rgba(0, 0, 0, 0.15);
+    --m3-elevation-dark-3: 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 4px 8px rgba(0, 0, 0, 0.15);
+    --m3-elevation-dark-4: 0px 2px 3px rgba(0, 0, 0, 0.3), 0px 6px 10px rgba(0, 0, 0, 0.15);
+    --m3-elevation-dark-5: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 12px rgba(0, 0, 0, 0.15);
+
+    /* Active elevation alias */
+    --m3-elevation-0: var(--m3-elevation-dark-0);
+    --m3-elevation-1: var(--m3-elevation-dark-1);
+    --m3-elevation-2: var(--m3-elevation-dark-2);
+    --m3-elevation-3: var(--m3-elevation-dark-3);
+    --m3-elevation-4: var(--m3-elevation-dark-4);
+    --m3-elevation-5: var(--m3-elevation-dark-5);
+}
+
+/* ============================================
+   Component-Specific Elevation Aliases
+   ============================================
+
+   These provide semantic meaning to elevation levels
+   and make it easier to maintain consistency across components.
+   ============================================ */
+
+body[data-theme="Light"],
+body[data-theme="Dark"] {
+    /* Surface levels (no elevation) */
+    --elevation-surface: var(--m3-elevation-0);
+
+    /* Interactive components */
+    --elevation-card: var(--m3-elevation-1);
+    --elevation-card-hover: var(--m3-elevation-2);
+    --elevation-card-active: var(--m3-elevation-1);
+
+    /* Buttons */
+    --elevation-button: var(--m3-elevation-0);
+    --elevation-button-hover: var(--m3-elevation-1);
+    --elevation-button-pressed: var(--m3-elevation-0);
+    --elevation-fab: var(--m3-elevation-3);
+    --elevation-fab-hover: var(--m3-elevation-4);
+    --elevation-fab-pressed: var(--m3-elevation-3);
+
+    /* Search & Input */
+    --elevation-search-bar: var(--m3-elevation-0);
+    --elevation-search-bar-focused: var(--m3-elevation-1);
+
+    /* Menus & Dialogs */
+    --elevation-menu: var(--m3-elevation-2);
+    --elevation-dialog: var(--m3-elevation-3);
+    --elevation-modal: var(--m3-elevation-5);
+
+    /* Navigation */
+    --elevation-app-bar: var(--m3-elevation-0);
+    --elevation-app-bar-scrolled: var(--m3-elevation-2);
+    --elevation-navigation-drawer: var(--m3-elevation-1);
+    --elevation-bottom-sheet: var(--m3-elevation-1);
+
+    /* Other components */
+    --elevation-chip: var(--m3-elevation-0);
+    --elevation-chip-hover: var(--m3-elevation-1);
+    --elevation-snackbar: var(--m3-elevation-3);
+    --elevation-tooltip: var(--m3-elevation-2);
+}
+
+/* ============================================
+   Elevation Utility Classes (Optional)
+   ============================================
+
+   Use these classes for quick elevation application
+   Example: <div class="elevation-1">...</div>
+   ============================================ */
+
+.elevation-0 {
+    box-shadow: var(--m3-elevation-0);
+}
+
+.elevation-1 {
+    box-shadow: var(--m3-elevation-1);
+}
+
+.elevation-2 {
+    box-shadow: var(--m3-elevation-2);
+}
+
+.elevation-3 {
+    box-shadow: var(--m3-elevation-3);
+}
+
+.elevation-4 {
+    box-shadow: var(--m3-elevation-4);
+}
+
+.elevation-5 {
+    box-shadow: var(--m3-elevation-5);
+}
+
+/* Elevation transitions for interactive elements */
+.elevation-transition {
+    transition: box-shadow 200ms cubic-bezier(0.2, 0, 0, 1);
+}

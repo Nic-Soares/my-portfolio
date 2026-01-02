@@ -9,6 +9,7 @@
     gap: 25px 25px; /* row gap 8px, column gap 35px (vertical reduzido) */
     grid-auto-rows: min-content; /* garantir que cada linha ocupe apenas o espaço necessário */
     padding: 0 24px;
+    margin-top: 20px;
     justify-items: center; /* centraliza a célula para permitir que o card controle max-width */
     align-items: start;
 }
