@@ -1,15 +1,14 @@
-
-import styles from './Projects.module.css';
-import ProjectsCards from './ProjectsCards';
-import ProjectsHeader from './ProjectsHeader';
+import styles from "./Projects.module.css";
+import ProjectGrid from "./ProjectGrid";
+import ProjectsHero from "./ProjectsHero";
 
 const Projects = () => {
-	return (
-		<div className={styles['projects']}>
-  		<ProjectsHeader/>
-  		<ProjectsCards/>
-		</div>
-	);
-}
+  return (
+    <div className={styles["projects"]}>
+      <ProjectsHero />
+      <ProjectGrid />
+    </div>
+  );
+};
 
 export default Projects;

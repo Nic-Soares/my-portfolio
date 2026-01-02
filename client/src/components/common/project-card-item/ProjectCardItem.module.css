@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-width: 308px; /* evita ficar demasiado estreito (aumentado 140%) */
-    max-height: 402px;
+    min-width: 308px;
+    height: 100%; /* permite que o card se ajuste ao container pai */
+    min-height: 395px; /* garante um tamanho mínimo */
 
     border-radius: var(--Corner-Large, 16px);
     background: var(--md-sys-color-surface-container-low);
@@ -13,7 +14,7 @@
     outline: none;
 
     position: relative;
-    overflow: hidden; /* evita que o conteúdo interno 'estoure' verticalmente; áreas internas podem rolar */
+    overflow: hidden;
 }
 
 .project-card__preview {
@@ -23,9 +24,10 @@
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
-    z-index: 2; /* Preview fica acima do content */
+    z-index: 2;
     width: 100%;
-    height: 300px;
+    min-height: 180px; /* altura mínima da imagem */
+    flex: 1 1 auto; /* permite que a preview cresça e encolha */
     border-radius: var(--Corner-Large, 16px);
     overflow: hidden;
 }
@@ -45,13 +47,13 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
+    gap: 4px;
     width: 100%;
-    flex: 1 1 auto; /* permite que o content ocupe o espaço disponível sem ultrapassar o max-height do card */
-    min-height: 0; /* importante para que flex children possam encolher e rolar corretamente */
-    overflow: hidden; /* evita estouro do conteúdo dentro do card */
+    height: 100%; /* ocupa todo o espaço disponível do card */
+    min-height: 0;
+    overflow: hidden;
     background: var(--md-sys-color-surface-container-low);
-    z-index: 1; /* Content fica abaixo do preview */
+    z-index: 1;
     position: relative;
     border-radius: var(--Corner-Large, 16px);
 }
@@ -80,13 +82,27 @@
     display: flex;
     flex-direction: column;
     padding: 20px 20px 25px 20px;
-    gap: 4px;
+    gap: 10px;
     width: 100%;
     position: relative;
     z-index: 2;
-    flex: 1 1 auto; /* permite que a área de info cresça/encolha dentro do content */
-    min-height: 0; /* necessário para que overflow funcione dentro de flex containers */
-    overflow: auto; /* quando o conteúdo interno for maior que o espaço disponível, permite rolagem interna */
+    flex: 0 0 auto; /* não cresce nem encolhe, mantém seu tamanho baseado no conteúdo */
+    min-height: fit-content; /* se ajusta ao conteúdo */
+    overflow: visible; /* permite que o conteúdo seja visível */
+}
+
+.connected-button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.project-card__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
 }
 
 .project-card__title {
@@ -103,7 +119,7 @@
     line-height: 28px; /* 127.273% */
 }
 
-.project-card__update {
+.project-card__subtitle {
     overflow: hidden;
     color: var(--M3-sys-light-on-surface-variant, #3f4752);
     text-overflow: ellipsis;

@@ -1,161 +1,204 @@
+/* --- 1. Layout Base & Default Variables --- */
 .segment {
-  display: flex;
-  height: inherit;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  border: none;
-  cursor: pointer;
+    all: unset;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-sizing: border-box;
 
-  border-radius: 4px;
-  background: var(--md-sys-color-secondary-container);
+    /* --- Default Variables (Base: small) --- */
+
+    /* Dimensions */
+    --seg-height: 40px;
+    --seg-padding: 10px 16px;
+    --seg-gap: 4px;
+    --seg-radius: 4px;
+
+    /* Colors */
+    --seg-bg: var(--md-sys-color-secondary-container);
+    --seg-label-color: var(--md-sys-color-on-secondary-container);
+    --seg-icon-color: var(--md-sys-color-on-secondary-container);
+
+    /* Typography (Label Large default) */
+    --seg-font-family: var(--label-large-font, Roboto);
+    --seg-font-weight: 500;
+    --seg-font-size: var(--label-large-size, 14px);
+    --seg-line-height: var(--label-large-line-height, 20px);
+    --seg-tracking: var(--label-large-tracking, 0.1px);
+
+    /* Icon */
+    --seg-icon-size: 18px;
+
+    /* State Layer */
+    --seg-state-layer-bg: transparent;
+
+    height: var(--seg-height);
 }
 
+.segment__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+
+    background: var(--seg-bg);
+    border-radius: var(--seg-radius);
+    box-sizing: border-box;
+}
+
+.segment__state-layer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    padding: var(--seg-padding);
+    gap: var(--seg-gap);
+    background: var(--seg-state-layer-bg);
+    border-radius: inherit;
+}
+
+.segment__label {
+    font-family: var(--seg-font-family);
+    font-weight: var(--seg-font-weight);
+    font-size: var(--seg-font-size);
+    line-height: var(--seg-line-height);
+    letter-spacing: var(--seg-tracking);
+    color: var(--seg-label-color);
+}
+
+.segment__state-layer :global(.material-symbols-outlined) {
+    font-variation-settings:
+        "FILL" 1,
+        "wght" 400;
+    font-size: var(--seg-icon-size);
+    color: var(--seg-icon-color);
+}
+
+/* --- 2. Size Variants --- */
+
+.segment--xsmall {
+    --seg-height: 32px;
+    --seg-padding: 8px 12px;
+    --seg-gap: 4px;
+    --seg-icon-size: 16.67px;
+    --seg-font-size: 11px;
+    --seg-line-height: 16px;
+}
+
+.segment--small {
+    --seg-height: 40px;
+    --seg-padding: 10px 16px;
+    --seg-gap: 4px;
+    --seg-icon-size: 18px;
+    /* Typography: Label Large (default) */
+}
+
+.segment--medium {
+    --seg-height: 56px;
+    --seg-padding: 12px 20px;
+    --seg-gap: 8px;
+    --seg-icon-size: 20px;
+}
+
+.segment--large {
+    --seg-height: 96px;
+    --seg-padding: 16px 24px;
+    --seg-gap: 12px;
+    --seg-icon-size: 24px;
+    --seg-font-size: 16px;
+    --seg-line-height: 24px;
+}
+
+.segment--xlarge {
+    --seg-height: 136px;
+    --seg-padding: 20px 28px;
+    --seg-gap: 16px;
+    --seg-icon-size: 28px;
+    --seg-font-size: 18px;
+    --seg-line-height: 26px;
+}
+
+/* --- 3. Selected State --- */
+
+.segment__content {
+    transition: 
+        background 300ms cubic-bezier(0.2, 0, 0, 1),
+        border-radius 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.segment__state-layer {
+    transition: background 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.segment__label {
+    transition: color 250ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.segment__state-layer :global(.material-symbols-outlined) {
+    transition: color 250ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.segment--selected {
+    --seg-bg: var(--md-sys-color-secondary);
+    --seg-label-color: white;
+    --seg-icon-color: white;
+}
+
+.segment--selected .segment__content {
+    border-radius: 24px;
+}
+
+/* --- 4. States (Hover, Focus, Active, Disabled) --- */
+
+/* Hover */
 .segment:hover {
-  border-radius: 12px;
-  transition: all 200ms cubic-bezier(0.2, 0, 0, 1);
-  transform: scale(1);
+    --seg-state-layer-bg: var(--md-state-layers-light-on-secondary-container-opacity-10, rgba(74, 68, 89, 0.1));
+    --seg-radius: 12px;
 }
 
-
-.segment.selected {
-  border-radius: 24px;
-  background: var(--md-sys-color-secondary);
+.segment--selected:hover {
+    --seg-state-layer-bg: rgba(255, 255, 255, 0.08);
 }
 
-.state-layer {
-  display: flex;
-  flex: 1 0 0;
-  padding: 10px 16px;
-  justify-content: center;
-  align-items: center;
-  border-radius: inherit;
+/* Focus */
+.segment:focus-visible {
+    outline: none;
 }
 
-/* Hover e focus nativos */
-.state-layer:hover {
-  background: var(--md-state-layers-light-on-secondary-container-opacity-10);
+.segment:focus-visible .segment__content {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
 }
 
-.state-layer.small {
-  gap: 4px;
+/* Active */
+.segment:active {
+    --seg-state-layer-bg: rgba(74, 68, 89, 0.12);
 }
 
-.stete-layer.medium {
-  gap: 8px;
+.segment--selected:active {
+    --seg-state-layer-bg: rgba(255, 255, 255, 0.12);
 }
 
-.stete-layer.large {
-  gap: 12px;
+/* Disabled */
+.segment:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+    --seg-state-layer-bg: transparent !important;
 }
 
-.stete-layer.large {
-  gap: 16px;
+/* --- 5. Non-interactive State --- */
+
+.segment--noninteractive {
+    cursor: default;
 }
 
-.label {
-  color: var(--M3-sys-light-on-secondary-container, #4A4459));
-
-  /* M3/label/large */
-  font-family: var(--Static-Label-Large-Font, Roboto);
-  font-size: var(--Static-Label-Large-Size, 14px);
-  font-style: normal;
-  font-weight: 500;
-  line-height: var(--Static-Label-Large-Line-Height, 20px); /* 142.857% */
-  letter-spacing: var(--Static-Label-Large-Tracking, 0.1px);
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  fill: var(--md-sys-color-on-secondary-container);
-}
-
-.icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Estados do botão */
-
-.state-disabled {
-  background: var(--md-state-layers-light-on-surface-opacity-10);
-  cursor: not-allowed;
-}
-
-/* Size classes for icon */
-.icon.xsmall {
-  width: 16.67px;
-  height: 16.67px;
-}
-
-.icon.small {
-  width: 18px;
-  height: 18px;
-}
-
-.icon.medium {
-  width: 20px;
-  height: 20px;
-}
-
-.icon.large {
-  width: 24px;
-  height: 24px;
-}
-
-.icon.xlarge {
-  width: 28px;
-  height: 28px;
-}
-
-/* Size classes for label */
-.label.xsmall {
-  font-size: 11px;
-  line-height: 16px;
-}
-
-.label.small {
-  font-size: 12px;
-  line-height: 18px;
-}
-
-.label.medium {
-  font-size: 14px;
-  line-height: 20px;
-}
-
-.label.large {
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.label.xlarge {
-  font-size: 18px;
-  line-height: 26px;
-}
-
-/* Selected styling */
-.selected {
-  fill: white;
-  color: white;
-}
-
-/* Non-interactive visual state
-   Applied when a button should be purely visual (no pointer cursor,
-   no pointer interactions on inner elements). Keyboard interactivity
-   is handled via tabIndex in the component (set to -1 when noninteractive). */
-.noninteractive {
-  cursor: default;
-}
-
-/* Prevent pointer interactions on inner elements so hover effects don't trigger.
-   The button itself may still have pointer-events for other reasons, but inner
-   elements won't respond to pointer events when the parent has .noninteractive. */
-.noninteractive .state-layer,
-.noninteractive .icon,
-.noninteractive .label {
-  pointer-events: none;
-  /* keep visual appearance but avoid hover/focus styles */
+.segment--noninteractive .segment__state-layer,
+.segment--noninteractive .segment__icon,
+.segment--noninteractive .segment__label {
+    pointer-events: none;
 }

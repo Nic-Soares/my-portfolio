@@ -68,11 +68,10 @@ const ConnectedButtonGroup = ({
   // Helper to render an option's icon. Supports:
   // - string (material symbol name) => renders <span className="material-symbols-outlined">name</span>
   // - ReactNode => rendered as-is (custom SVG/component)
+  // - undefined/null => no icon rendered (icon-less button)
   const renderOptionIcon = (option: ButtonOption, isSelected: boolean) => {
-    const defaultIcon = "stars";
     const chosen =
-      (isSelected && option.selectedIcon ? option.selectedIcon : option.icon) ??
-      defaultIcon;
+      isSelected && option.selectedIcon ? option.selectedIcon : option.icon;
 
     if (!chosen) return undefined;
 
