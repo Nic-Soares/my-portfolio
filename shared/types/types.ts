@@ -44,7 +44,7 @@ export interface CarouselSlideProps {
   project: Project;
   isActive: boolean;
   onSlideClick: (projectId: number) => void;
-  position?: 'middle' | 'lateral';
+  position?: "middle" | "lateral";
 }
 
 export interface ProjectCarouselProps {
@@ -59,8 +59,13 @@ export interface CompanyLogoProps {
   company: Company;
 }
 
-export type PageType = 'Home' | 'Projects' | 'Services' | 'About me';
+export type PageType =
+  | "Home"
+  | "Projects"
+  | "ProjectDetail"
+  | "Services"
+  | "About me";
 
-export type ThemeType = 'Light' | 'Dark';
+export type ThemeType = "Light" | "Dark";
 
-export type LanguageType = 'pt' | 'en';
+export type LanguageType = "pt" | "en";

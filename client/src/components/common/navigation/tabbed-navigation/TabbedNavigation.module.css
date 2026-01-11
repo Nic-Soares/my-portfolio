@@ -1,0 +1,14 @@
+.nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* Espaço para fixar no topo se necessário (sticky) */
+}
+
+.container {
+  display: inline-flex;
+  padding: 4px;
+  /* Exemplo de fundo ou borda para a barra de navegação, se desejado */
+  /* background-color: var(--md-sys-color-surface-container); */
+  /* border-radius: 100px; */
+}

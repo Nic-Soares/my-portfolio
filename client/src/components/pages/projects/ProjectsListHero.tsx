@@ -1,5 +1,5 @@
-import styles from "./ProjectsHero.module.css";
 import ConnectedButtonGroup from "@/components/common/connected-button-group/ConnectedButtonGroup";
+import styles from "./ProjectsListHero.module.css";
 import SearchBar from "@/components/common/search-bar/SearchBar";
 
 const options = [
@@ -9,17 +9,13 @@ const options = [
   { label: "Arquivados" },
 ];
 
-const ProjectsHero = () => {
+const ProjectsListHero = () => {
   return (
     <header className={styles["projects__header"]}>
       <h1 className={styles["projects__title"]}>Projects</h1>
       <div className={styles["projects__actions"]}>
         <div className={styles["projects__button-group"]}>
-          <ConnectedButtonGroup
-            options={options}
-            size="medium"
-            allowDeselect={true}
-          />
+          <ConnectedButtonGroup options={options} />
         </div>
         <div className={styles["projects__search-bar"]}>
           <SearchBar />
@@ -29,4 +25,4 @@ const ProjectsHero = () => {
   );
 };
 
-export default ProjectsHero;
+export default ProjectsListHero;

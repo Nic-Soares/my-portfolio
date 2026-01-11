@@ -1,0 +1,68 @@
+/* Restore original layout and simple text design; keep the tag styles you liked,
+   plus minimal global typography utilities used by the JSX (headline-large, body-large).
+*/
+
+/* Main container (restored to original spacing) */
+.project-meta {
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+    align-self: stretch;
+    margin-top: 162px;
+}
+
+/* Sidebar (left column) - mirrors the original simple layout */
+.project-meta__sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+/* Row/item layout (restored to original values) */
+.project-meta__item {
+    display: flex;
+    min-width: 350px;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Labels like \"Category\", \"Year\" - keep the original italic style */
+.project-meta__label {
+    font-style: italic;
+}
+
+/* Values next to labels (simple, readable) */
+.project-meta__value {
+    margin-left: 6px;
+    color: inherit;
+}
+
+/* Tech stack area (kept / improved from the updated version you liked) */
+.project-meta__stack {
+    margin-top: 6px;
+}
+
+.project-meta__stack-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.project-meta__stack-tag {
+    background: rgba(2, 132, 199, 0.08); /* soft blue tint */
+    color: #0369a1; /* blue-700 */
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    line-height: 1;
+    white-space: nowrap;
+    border: 1px solid rgba(3, 105, 161, 0.06);
+}
+
+/* Description column (right column) - keep simple and readable */
+.project-meta__description {
+    flex: 1 1 auto;
+    min-width: 0;
+}

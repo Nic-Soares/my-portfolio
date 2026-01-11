@@ -30,7 +30,6 @@
     --icon-btn-state-layer-bg: transparent;
 
     height: var(--icon-btn-height);
-    width: var(--icon-btn-width);
 }
 
 .icon-button__content {
@@ -161,10 +160,24 @@
     --icon-btn-icon-color: var(--md-sys-color-on-surface-variant);
 }
 
-/* Standard */
-.icon-button--standard {
-    --icon-btn-bg: transparent;
-    --icon-btn-icon-color: var(--md-sys-color-on-surface-variant);
+/* Text (placeholder - replace previous 'standard') */
+.icon-button--text {
+    /* TODO: fill style variables for text icon-button */
+    /* Example:
+       --icon-btn-bg: transparent;
+       --icon-btn-icon-color: var(--md-sys-color-on-surface-variant);
+    */
+}
+
+/* Elevated (placeholder) */
+.icon-button--elevated {
+    /* TODO: fill style variables for elevated icon-button */
+    /* Example:
+       --icon-btn-bg: var(--md-sys-color-surface);
+       --icon-btn-icon-color: var(--md-sys-color-on-surface);
+       --icon-btn-border: none;
+       // consider elevation variables if you use them
+    */
 }
 
 /* --- 5. Selected State --- */
@@ -185,9 +198,18 @@
     --icon-btn-icon-color: var(--md-sys-color-inverse-on-surface);
 }
 
-.icon-button--selected.icon-button--standard {
-    --icon-btn-bg: transparent;
-    --icon-btn-icon-color: var(--md-sys-color-primary);
+/* Selected state placeholder for text */
+.icon-button--selected.icon-button--text {
+    /* TODO: define selected variables for text variant */
+    /* Example:
+       --icon-btn-bg: transparent;
+       --icon-btn-icon-color: var(--md-sys-color-primary);
+    */
+}
+
+/* Selected state placeholder for elevated */
+.icon-button--selected.icon-button--elevated {
+    /* TODO: define selected variables for elevated variant */
 }
 
 /* --- 6. Width Variants --- */
@@ -255,8 +277,10 @@
     --icon-btn-state-layer-bg: rgba(29, 25, 43, 0.08);
 }
 
+/* Outline, Text and Elevated hover states */
 .icon-button--outline:hover,
-.icon-button--standard:hover {
+.icon-button--text:hover,
+.icon-button--elevated:hover {
     --icon-btn-state-layer-bg: rgba(73, 69, 79, 0.08);
 }
 
@@ -283,8 +307,10 @@
     --icon-btn-state-layer-bg: rgba(29, 25, 43, 0.12);
 }
 
+/* Outline, Text and Elevated active states */
 .icon-button--outline:active,
-.icon-button--standard:active {
+.icon-button--text:active,
+.icon-button--elevated:active {
     --icon-btn-state-layer-bg: rgba(73, 69, 79, 0.12);
 }
 

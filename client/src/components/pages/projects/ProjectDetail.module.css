@@ -1,0 +1,108 @@
+.page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vh - 64px);
+    overflow-y: auto;
+    border-radius: var(--Corner-Extra-large, 28px) 0px 0px
+        var(--Corner-Extra-large, 28px);
+    background: var(--md-sys-color-background);
+}
+
+.article-tab-list {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    max-width: 1760px;
+    margin: 0 auto;
+    transition-duration: 0.3s;
+    transition-property: max-width, margin;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    z-index: 1;
+}
+
+.navigation-container {
+    display: flex;
+    justify-content: center;
+    height: 88px;
+    margin: 0 8px;
+    padding-top: 9px;
+    gap: 8px;
+    transition:
+        height 0.3s cubic-bezier(0.2, 0, 0, 1),
+        opacity 0.2s cubic-bezier(0.2, 0, 0, 1);
+    border-radius: 0 0 40px 40px;
+    background: var(--mio-theme-color-background);
+    opacity: 1;
+}
+
+.tabbed-navigation {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: flex-start;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0;
+    border-radius: 40px;
+    background: var(--mio-theme-color-surface-1);
+    text-align: center;
+    white-space: nowrap;
+    overflow: visible !important;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Ensure the element carrying the `tabbed-navigation` class (the same element that also
+   receives the ConnectedButtonGroup module class) overrides module sizing and overflow.
+   Many module classes are applied on the same node, so targeting the `.tabbed-navigation`
+   class directly ensures our rules apply regardless of the module-generated classnames.
+*/
+.tabbed-navigation > * {
+    overflow: visible !important;
+    width: auto !important;
+    display: inline-flex !important;
+}
+
+/* Make sure individual buttons and inner layers can render visual states outside bounds */
+.tabbed-navigation button,
+.tabbed-navigation .segment,
+.tabbed-navigation .segment__content,
+.tabbed-navigation .segment__state-layer {
+    overflow: visible !important;
+    z-index: 4;
+}
+
+.page-content-height {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+}
+
+@media screen and (max-width: 960px) {
+    .page-content-height {
+        height: auto;
+    }
+}
+
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 8px 8px 0;
+    color: var(--mio-theme-color-on-background);
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    outline: none;
+}
+
+.content-conteiner {
+    width: 100%;
+    max-width: 1200px;
+}

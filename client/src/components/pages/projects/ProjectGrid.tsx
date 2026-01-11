@@ -1,7 +1,11 @@
 import styles from "./ProjectGrid.module.css";
 import ProjectCardItem from "@/components/common/project-card-item/ProjectCardItem";
 
-const ProjectGrid = () => {
+interface ProjectGridProps {
+  onProjectSelect: (projectId: string) => void;
+}
+
+const ProjectGrid = ({ onProjectSelect }: ProjectGridProps) => {
   return (
     <div className={styles["cards"]}>
       <ProjectCardItem
@@ -11,6 +15,7 @@ const ProjectGrid = () => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
+        onClick={() => onProjectSelect("E-commerce Platform")}
       />
       <ProjectCardItem
         title="Mobile Banking App"
@@ -19,6 +24,7 @@ const ProjectGrid = () => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
+        onClick={() => onProjectSelect("Mobile Banking App")}
       />
       <ProjectCardItem
         title="Data Analytics Dashboard"
@@ -27,6 +33,7 @@ const ProjectGrid = () => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
+        onClick={() => onProjectSelect("Data Analytics Dashboard")}
       />
       <ProjectCardItem
         title="DevOps Pipeline"
@@ -35,6 +42,7 @@ const ProjectGrid = () => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
+        onClick={() => onProjectSelect("DevOps Pipeline")}
       />
       <ProjectCardItem
         title="Design System"
@@ -43,6 +51,7 @@ const ProjectGrid = () => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
+        onClick={() => onProjectSelect("Design System")}
       />
       <ProjectCardItem
         title="API Gateway"
@@ -51,6 +60,7 @@ const ProjectGrid = () => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
+        onClick={() => onProjectSelect("API Gateway")}
       />
       <ProjectCardItem
         title="Machine Learning Model"
@@ -59,6 +69,7 @@ const ProjectGrid = () => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
+        onClick={() => onProjectSelect("Machine Learning Model")}
       />
       <ProjectCardItem
         title="Portfolio Website"
@@ -67,6 +78,7 @@ const ProjectGrid = () => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
+        onClick={() => onProjectSelect("Portfolio Website")}
       />
     </div>
   );

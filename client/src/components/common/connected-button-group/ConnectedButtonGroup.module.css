@@ -7,29 +7,33 @@
     overflow: hidden;
 }
 
+/* Size variants - correspondem às alturas do Button */
 .xsmall {
-    min-height: 32px;
-    height: 32px;
-    border-radius: 16px;
-}
-
-.small {
     min-height: 40px;
     height: 40px;
     border-radius: 20px;
 }
 
+.small {
+    min-height: 48px;
+    height: 48px;
+    border-radius: 24px;
+}
+
 .medium {
+    min-height: 56px;
     height: 56px;
     border-radius: 28px;
 }
 
 .large {
+    min-height: 96px;
     height: 96px;
     border-radius: 48px;
 }
 
 .xlarge {
+    min-height: 136px;
     height: 136px;
     border-radius: 68px;
 }

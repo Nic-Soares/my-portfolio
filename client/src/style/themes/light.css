@@ -45,6 +45,7 @@ body[data-theme="Light"] {
   --md-sys-color-tertiary-container: rgb(189 236 225);
   --md-sys-color-tertiary-fixed: rgb(189 236 225);
   --md-sys-color-tertiary-fixed-dim: rgb(161 208 197);
+  --md-sys-color-background: rgb(251, 250, 237);
 
   /* Material Design 3 State Layer Opacity Variables */
   --md-state-layers-light-on-surface-opacity-08: rgba(27, 28, 21, 0.08);
@@ -67,6 +68,4 @@ body[data-theme="Light"] {
   --md-state-layers-light-surface-container-low-opacity-08: rgba(245, 244, 232, 0.08);
   --md-state-layers-light-surface-container-opacity-08: rgb(239, 238, 226, 0.08);
 
-  /* Custom/Legacy variables for specific components */
-  --add-ons-section-background: rgb(245 245 245);
 }
