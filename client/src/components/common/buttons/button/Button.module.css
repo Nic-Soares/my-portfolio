@@ -150,17 +150,33 @@
 /* --- 3. Type Variants (Shape) --- */
 
 
-/* Round: nunca muda border-radius, nem em hover/focus/selected */
+/* Round */
 .button--round {
-    --btn-radius: 100px !important;
+    --btn-radius: 100px;
 }
 
-/* Garante que nenhum estado sobrescreve o round */
-.button--round:hover,
-.button--round:focus-visible,
-.button--round.button--selected {
-    --btn-radius: 100px !important;
+/* Tamanhos Pequenos (XSmall e Small) -> Viram 12px */
+.button--round.button--xsmall:active,
+.button--round.button--xsmall.button--selected,
+.button--round.button--small:active,
+.button--round.button--small.button--selected {
+    --btn-radius: 8px;
 }
+
+/* Tamanho Médio (Medium) -> Vira 16px */
+.button--round.button--medium:active,
+.button--round.button--medium.button--selected {
+    --btn-radius: 12px;
+}
+
+/* Tamanhos Grandes (Large e XLarge) -> Viram 20px (ou 16px se preferir manter igual ao médio) */
+.button--round.button--large:active,
+.button--round.button--large.button--selected,
+.button--round.button--xlarge:active,
+.button--round.button--xlarge.button--selected {
+    --btn-radius: 16px;
+}
+
 /* --- Lógica para Botões Quadrados (Square) --- */
 
 /* 1. Estado Normal (Definição Base) */
