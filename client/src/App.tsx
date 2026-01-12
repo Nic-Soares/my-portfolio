@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "./style/global.css";
-import "./style/normalize.css";
+import "./styles/global.css";
+import "./styles/normalize.css";
 
 import Sidebar from "@/components/layout/sidebar/Sidebar";
 import Home from "@/components/pages/home/Home";
@@ -13,7 +13,9 @@ import type { PageType } from "@shared/types/types";
 
 function App() {
   const [activePage, setActivePage] = useState<PageType>("Home");
-  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(
+    null,
+  );
 
   const handleProjectSelect = (projectId: string) => {
     setSelectedProjectId(projectId);
