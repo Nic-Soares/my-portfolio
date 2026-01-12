@@ -1,6 +1,6 @@
-import ConnectedButtonGroup from "@/components/common/connected-button-group/ConnectedButtonGroup";
+import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup";
 import styles from "./ProjectsListHero.module.css";
-import SearchBar from "@/components/common/search-bar/SearchBar";
+import SearchBar from "@/components/ui/SearchBar/SearchBar";
 
 const options = [
   { label: "Todos" },

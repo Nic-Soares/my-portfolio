@@ -2,7 +2,7 @@ import styles from "./Sidebar.module.css";
 import NavRail from "@/components/common/navigation/navigation-rail/NavRail";
 import { NavItem } from "@/components/common/navigation/navigation-rail/NavItem";
 import type { SidebarProps } from "@/types";
-import IconButton from "@/components/common/buttons/icon-button/IconButton";
+import IconButton from "@/components/ui/IconButton/IconButton";
 
 function Sidebar({ activePage, setActivePage }: SidebarProps) {
   return (

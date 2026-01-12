@@ -1,6 +1,6 @@
 import React from "react";
 import ProjectDetailHero from "./ProjectDetailHero";
-import { ProjectMeta } from "@/components/common/project-meta/ProjectMeta";
+import { ProjectMeta } from "@/components/ui/ProjectMeta/ProjectMeta";
 import styles from "./ProjectDetail.module.css";
 import NotFound from "@/components/pages/not-found/NotFound";
 

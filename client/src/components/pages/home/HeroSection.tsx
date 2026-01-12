@@ -1,7 +1,7 @@
 import Container from "@/components/layout/container/Container";
 import styles from "./HeroSection.module.css";
-import IconButton from "@/components/common/buttons/icon-button/IconButton";
-import Button from "@/components/common/buttons/button/Button";
+import IconButton from "@/components/ui/IconButton/IconButton";
+import Button from "@/components/ui/Button/Button";
 import innerBackground from "@assets/images/inner-background.png";
 import personPopout from "@assets/images/person-popout.png";
 
