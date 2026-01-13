@@ -28,14 +28,15 @@ const ProjectCarousel = ({ className }: ProjectCarouselProps) => {
 
   const handleSlideClick = (projectId: number) => {
     const index = projects.findIndex((project) => project.id === projectId);
-    setCurrentIndex(index);
+    if (index >= 0) setCurrentIndex(index);
   };
 
   const getVisibleSlides = () => {
+    if (projects.length === 0) return [];
     if (currentIndex === 0) {
-      return [0, 1];
+      return [0, Math.min(1, projects.length - 1)];
     } else if (currentIndex === projects.length - 1) {
-      return [currentIndex - 1, currentIndex];
+      return [Math.max(0, currentIndex - 1), currentIndex];
     } else {
       return [currentIndex - 1, currentIndex, currentIndex + 1];
     }

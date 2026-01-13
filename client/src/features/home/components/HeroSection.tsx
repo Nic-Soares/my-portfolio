@@ -36,22 +36,24 @@ const HeroSection = () => {
       </div>
 
       <div className={styles["hero-section__image-container"]}>
-        {/*<div
+        {/* background image placeholder (kept for potential future use) */}
+        {/* <div
           className={styles["hero-section__inner-background"]}
           style={{ backgroundImage: `url(${innerBackground})` }}
-        ></div>*/}
+        ></div> */}
 
         <div className={styles["hero-section__clover-border"]}></div>
 
-        {/*<img
+        {/* person image placeholder */}
+        {/* <img
           src={personPopout}
           alt="Nicolas Soares"
           className={styles["hero-section__person-popout"]}
-        />*/}
+        /> */}
 
-        {/*<div className={styles["hero-section__corner-cover"]}></div>*/}
-
-        {/*<div className={styles["hero-section__clover-border--front"]}></div>*/}
+        {/* optional overlays */}
+        {/* <div className={styles["hero-section__corner-cover"]}></div> */}
+        {/* <div className={styles["hero-section__clover-border--front"]}></div> */}
       </div>
 
       <div className={styles["hero-section__social-links"]}>

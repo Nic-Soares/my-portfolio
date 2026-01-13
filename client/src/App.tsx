@@ -3,7 +3,7 @@ import "./styles/global.css";
 import "./styles/normalize.css";
 
 import Sidebar from "@/components/layout/sidebar/Sidebar";
-import Home from "@/components/pages/home/Home";
+import { HomePage as Home } from "@/features/home";
 import UnderConstruction from "@/components/pages/under-construction/UnderConstruction";
 
 // Updated imports
