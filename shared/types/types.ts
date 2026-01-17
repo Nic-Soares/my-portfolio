@@ -62,9 +62,7 @@ export interface CompanyLogoProps {
 export type PageType =
   | "Home"
   | "Projects"
-  | "ProjectDetail"
-  | "Services"
-  | "About me";
+  | "ProjectDetail";
 
 export type ThemeType = "Light" | "Dark";
 

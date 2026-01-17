@@ -1,7 +1,7 @@
 import ExpertiseCard from '@/features/home/components/ExpertiseCard/ExpertiseCard';
 import Container from '@/components/layout/container/Container';
 import styles from './ExperienceSection.module.css';
-import CompanyLogo from '@/components/common/company-logo/CompanyLogo';
+import CompanyLogo from '@/components/ui/CompanyLogo/CompanyLogo';
 
 const ExperienceSection = () => {
   return (

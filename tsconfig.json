@@ -25,7 +25,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["client/src/*"],
-      "@assets/*": ["client/assets/*"],
+      "@assets/*": ["client/src/assets/*"],
       "@shared/*": ["shared/*"],
       "@/types": ["client/src/types/index.ts"]
     }

@@ -1,8 +1,8 @@
 import styles from "./WorkGrid.module.css";
-import WorkCard from "./WorkMeta/WorkCard";
+import WorkCard from "./WorkCard/WorkCard";
 
 interface WorkGridProps {
-  onProjectSelect: (projectId: string) => void;
+  onProjectSelect?: (projectId: string) => void;
 }
 
 const WorkGrid = ({ onProjectSelect }: WorkGridProps) => {
@@ -15,7 +15,7 @@ const WorkGrid = ({ onProjectSelect }: WorkGridProps) => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
-        onClick={() => onProjectSelect("E-commerce Platform")}
+        onClick={() => onProjectSelect?.("E-commerce Platform")}
       />
       <WorkCard
         title="Mobile Banking App"
@@ -24,7 +24,7 @@ const WorkGrid = ({ onProjectSelect }: WorkGridProps) => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
-        onClick={() => onProjectSelect("Mobile Banking App")}
+        onClick={() => onProjectSelect?.("Mobile Banking App")}
       />
       <WorkCard
         title="Data Analytics Dashboard"
@@ -33,7 +33,7 @@ const WorkGrid = ({ onProjectSelect }: WorkGridProps) => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
-        onClick={() => onProjectSelect("Data Analytics Dashboard")}
+        onClick={() => onProjectSelect?.("Data Analytics Dashboard")}
       />
       <WorkCard
         title="DevOps Pipeline"
@@ -42,7 +42,7 @@ const WorkGrid = ({ onProjectSelect }: WorkGridProps) => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
-        onClick={() => onProjectSelect("DevOps Pipeline")}
+        onClick={() => onProjectSelect?.("DevOps Pipeline")}
       />
       <WorkCard
         title="Design System"
@@ -51,7 +51,7 @@ const WorkGrid = ({ onProjectSelect }: WorkGridProps) => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
-        onClick={() => onProjectSelect("Design System")}
+        onClick={() => onProjectSelect?.("Design System")}
       />
       <WorkCard
         title="API Gateway"
@@ -60,7 +60,7 @@ const WorkGrid = ({ onProjectSelect }: WorkGridProps) => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
-        onClick={() => onProjectSelect("API Gateway")}
+        onClick={() => onProjectSelect?.("API Gateway")}
       />
       <WorkCard
         title="Machine Learning Model"
@@ -69,7 +69,7 @@ const WorkGrid = ({ onProjectSelect }: WorkGridProps) => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
-        onClick={() => onProjectSelect("Machine Learning Model")}
+        onClick={() => onProjectSelect?.("Machine Learning Model")}
       />
       <WorkCard
         title="Portfolio Website"
@@ -78,7 +78,7 @@ const WorkGrid = ({ onProjectSelect }: WorkGridProps) => {
         buttonGroupSize="small"
         selectable={false}
         interactive={true}
-        onClick={() => onProjectSelect("Portfolio Website")}
+        onClick={() => onProjectSelect?.("Portfolio Website")}
       />
     </div>
   );

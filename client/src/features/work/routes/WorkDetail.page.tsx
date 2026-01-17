@@ -1,28 +1,23 @@
 import React from "react";
-import ProjectDetailHero from "../components/WorkDetailHero";
-import { ProjectMeta } from "@/components/ui/ProjectMeta/ProjectMeta";
-import styles from "./ProjectDetail.module.css";
-import NotFound from "@/components/pages/not-found/NotFound";
+import WorkDetailHero from "../components/WorkDetailHero";
+import WorkMeta from "../components/WorkMeta/WorkMeta";
+import styles from "./WorkDetail.page.module.css";
+import NotFound from "@/app/pages/NotFound/NotFound";
+
 
 interface WorkDetailProps {
-  projectId: string | null;
+  projectId?: string | null;
 }
 
 const WorkDetailPage: React.FC<WorkDetailProps> = ({ projectId }) => {
   if (!projectId) return <NotFound />;
 
-  const sectionOptions = [
-    { label: "Intro" },
-    { label: "Desafio" },
-    { label: "Visual" },
-    { label: "Construção" },
-    { label: "Técnico" },
-  ];
+  /* sectionOptions removed — not used */
 
   return (
     <main className={styles["page-content"]}>
       <div className={styles["landing-page"]}>
-        <ProjectDetailHero />
+        <WorkDetailHero />
         <nav className="article-tab-list">
           <div className="navigation-container">
             <div className={styles["tabbed-navigation"]}>
@@ -32,7 +27,7 @@ const WorkDetailPage: React.FC<WorkDetailProps> = ({ projectId }) => {
         </nav>
 
         <div className={styles["content-conteiner"]}>
-          <ProjectMeta
+          <WorkMeta
             category="Frontend"
             year="2024"
             role="Lead Developer"

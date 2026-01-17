@@ -1,5 +1,5 @@
-import styles from "./ProjectDetailHero.module.css";
-import InfoSection from "@/features/work/components/InfoSection/InfoSection";
+import styles from "./WorkDetailHero.module.css";
+import InfoSection from "./InfoSection/InfoSection";
 
 const WorkDetailHero = () => {
   return (

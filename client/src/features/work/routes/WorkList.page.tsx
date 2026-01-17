@@ -1,16 +1,16 @@
-import styles from "./WorkListPage.module.css";
-import ProjectGrid from "../components/WorkGrid";
-import WorkListPageHero from "../components/WorkListHero";
+import styles from "./WorkList.page.module.css";
+import WorkGrid from "../components/WorkGrid";
+import WorkListHero from "../components/WorkListHero";
 
 interface WorkListPageProps {
-  onProjectSelect: (projectId: string) => void;
+  onProjectSelect?: (projectId: string) => void;
 }
 
 const WorkListPage = ({ onProjectSelect }: WorkListPageProps) => {
   return (
     <div className={styles["projects"]}>
-      <WorkListPageHero />
-      <ProjectGrid onProjectSelect={onProjectSelect} />
+      <WorkListHero />
+      <WorkGrid onProjectSelect={onProjectSelect} />
     </div>
   );
 };

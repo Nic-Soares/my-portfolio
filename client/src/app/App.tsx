@@ -1,14 +1,13 @@
 import { useState } from "react";
-import "./styles/global.css";
-import "./styles/normalize.css";
+import "../styles/global.css";
+import "../styles/normalize.css";
 
 import Sidebar from "@/components/layout/sidebar/Sidebar";
 import { HomePage as Home } from "@/features/home";
 import UnderConstruction from "@/app/pages/UnderConstruction/UnderConstruction";
 
 // Updated imports
-import ProjectDetail from "./components/pages/projects/ProjectDetail";
-import ProjectsList from "@/components/pages/projects/ProjectsList";
+import { WorkListPage, WorkDetailPage } from "@/features/work";
 import type { PageType } from "@shared/types/types";
 
 function App() {
@@ -27,13 +26,9 @@ function App() {
       case "Home":
         return <Home />;
       case "Projects":
-        return <ProjectsList onProjectSelect={handleProjectSelect} />;
+        return <WorkListPage onProjectSelect={handleProjectSelect} />;
       case "ProjectDetail":
-        return <ProjectDetail projectId={selectedProjectId} />;
-      case "Services":
-        return <UnderConstruction />;
-      case "About me":
-        return <UnderConstruction />;
+        return <WorkDetailPage projectId={selectedProjectId} />;
       default:
         return <Home />;
     }

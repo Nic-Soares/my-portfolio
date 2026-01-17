@@ -10,6 +10,7 @@
 .project-carousel__slides-container {
   display: grid;
   height: 100%;
+  width: 100%;
   gap: 8px;
   align-self: stretch;
   transition: all 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
