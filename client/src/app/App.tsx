@@ -4,7 +4,7 @@ import "./styles/normalize.css";
 
 import Sidebar from "@/components/layout/sidebar/Sidebar";
 import { HomePage as Home } from "@/features/home";
-import UnderConstruction from "@/components/pages/under-construction/UnderConstruction";
+import UnderConstruction from "@/app/pages/UnderConstruction/UnderConstruction";
 
 // Updated imports
 import ProjectDetail from "./components/pages/projects/ProjectDetail";
