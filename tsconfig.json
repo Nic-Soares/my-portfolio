@@ -25,11 +25,14 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["client/src/*"],
-      "@assets/*": ["client/assets/*"],
-      "@shared/*": ["shared/*"],
-      "@/types": ["client/src/types/index.ts"]
-    }
+      "@assets/*": ["client/src/assets/*"],
+    },
   },
-  "include": ["client/src", "client/vite-env.d.ts", "client/global.d.ts", "client/src/types/**/*.d.ts", "shared", "shared/types"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    "client/src",
+    "client/vite-env.d.ts",
+    "client/global.d.ts",
+    "client/src/types/**/*.d.ts",
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }],
 }

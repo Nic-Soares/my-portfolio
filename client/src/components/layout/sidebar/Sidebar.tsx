@@ -1,13 +1,20 @@
 import styles from "./Sidebar.module.css";
-import NavRail from "@/components/common/navigation/navigation-rail/NavRail";
-import { NavItem } from "@/components/common/navigation/navigation-rail/NavItem";
-import type { SidebarProps } from "@/types";
-import IconButton from "@/components/common/buttons/icon-button/IconButton";
+import NavigationRail from "../navigation/navigation-rail/NavigationRail";
+import { NavItem } from "../navigation/navigation-rail/NavItem";
+import type { Dispatch, SetStateAction } from "react";
+
+type SidebarProps = {
+  activePage: "Home" | "Projects" | "ProjectDetail";
+  setActivePage: Dispatch<
+    SetStateAction<"Home" | "Projects" | "ProjectDetail">
+  >;
+};
+import IconButton from "@/components/ui/IconButton/IconButton";
 
 function Sidebar({ activePage, setActivePage }: SidebarProps) {
   return (
     <aside className={styles.sidebar}>
-      <NavRail>
+      <NavigationRail>
         <NavItem
           icon="home"
           label="Home"
@@ -26,22 +33,8 @@ function Sidebar({ activePage, setActivePage }: SidebarProps) {
           selected={activePage === "ProjectDetail"}
           onClick={() => setActivePage("ProjectDetail")}
         />
-        <NavItem
-          icon="concierge"
-          label="Services"
-          selected={activePage === "Services"}
-          onClick={() => setActivePage("Services")}
-          disabled={true}
-        />
-        <NavItem
-          icon="account_circle"
-          label="About me"
-          selected={activePage === "About me"}
-          onClick={() => setActivePage("About me")}
-          disabled={true}
-        />
-      </NavRail>
-      <NavRail className={styles["nav-footer"]}>
+      </NavigationRail>
+      <NavigationRail className={styles["nav-footer"]}>
         <IconButton
           type="round"
           size="medium"
@@ -59,7 +52,7 @@ function Sidebar({ activePage, setActivePage }: SidebarProps) {
           icon="dark_mode"
           selectedIcon="light_mode"
         />
-      </NavRail>
+      </NavigationRail>
     </aside>
   );
 }

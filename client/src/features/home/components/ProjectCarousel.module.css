@@ -1,0 +1,118 @@
+.project-carousel {
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Container that holds the slides; layout changes depending on active index */
+.project-carousel__slides-container {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  gap: 8px;
+  align-self: stretch;
+  transition: all 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-sizing: border-box;
+  align-items: stretch;
+}
+
+/* Layout when first item is active */
+.project-carousel__slides-container--first-active {
+  grid-template-columns: 6fr 1fr;
+}
+
+/* Layout when middle item is active */
+.project-carousel__slides-container--middle-active {
+  grid-template-columns: 1fr 5fr 1fr;
+}
+
+/* Layout when last item is active */
+.project-carousel__slides-container--last-active {
+  grid-template-columns: 1fr 6fr;
+}
+
+/* Slide helpers: ensure slides fill their grid cells and animate transform/opacity nicely */
+.project-carousel__slide {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 220ms ease;
+  will-change: transform, opacity;
+}
+
+/* State variants for slides (JS supplies isActive/position) */
+.project-carousel__slide--middle {
+  transform: scale(1);
+  opacity: 1;
+  z-index: 2;
+}
+
+.project-carousel__slide--lateral {
+  transform: scale(0.95);
+  opacity: 0.9;
+  z-index: 1;
+}
+
+/* Small visual spacing and fallback for internal content */
+.project-carousel__slide-inner {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  background: var(--md-sys-color-surface-container, #fff);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(9, 10, 11, 0.06);
+  overflow: hidden;
+}
+
+/* Responsiveness: stack into a single-column carousel on small screens */
+@media (max-width: 768px) {
+  .project-carousel {
+    padding: 12px;
+    height: auto;
+  }
+
+  .project-carousel__slides-container,
+  .project-carousel__slides-container--first-active,
+  .project-carousel__slides-container--middle-active,
+  .project-carousel__slides-container--last-active {
+    display: flex;
+    gap: 12px;
+    grid-template-columns: none;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .project-carousel__slide {
+    min-width: 260px;
+    flex: 0 0 260px;
+    scroll-snap-align: center;
+  }
+
+  .project-carousel__slide-inner {
+    padding: 16px;
+    border-radius: 10px;
+  }
+}
+
+/* Minor accessibility focus outline for keyboard navigation */
+.project-carousel__slide:focus {
+  outline: 3px solid rgba(99, 102, 241, 0.15);
+  outline-offset: 4px;
+}
+
+/* Utility: when animation is not desired (reduced motion) */
+@media (prefers-reduced-motion: reduce) {
+  .project-carousel__slides-container,
+  .project-carousel__slide {
+    transition: none !important;
+    animation: none !important;
+  }
+}
