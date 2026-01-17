@@ -2,8 +2,8 @@ import Container from "@/components/layout/container/Container";
 import styles from "./HeroSection.module.css";
 import IconButton from "@/components/ui/IconButton/IconButton";
 import Button from "@/components/ui/Button/Button";
-import innerBackground from "@assets/images/inner-background.png";
-import personPopout from "@assets/images/person-popout.png";
+// import innerBackground from "@assets/images/inner-background.png"; // placeholder kept for reference
+// import personPopout from "@assets/images/person-popout.png"; // placeholder kept for reference
 
 const githubIcon = (
   <svg viewBox="0 0 24 24" fill="">

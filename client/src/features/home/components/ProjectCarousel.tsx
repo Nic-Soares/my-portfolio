@@ -1,8 +1,20 @@
 import { useState } from "react";
 import styles from "./ProjectCarousel.module.css";
-import CarouselSlide from "@/components/ui/Carousel/CarouselSlide";
+import CarouselSlide from "../../../components/ui/Carousel/CarouselSlide";
 import Container from "@/components/layout/container/Container";
-import type { Project, ProjectCarouselProps } from "@/types";
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  imageUrl?: string;
+  technologies?: string[];
+  demoUrl?: string;
+  githubUrl?: string;
+}
+
+interface ProjectCarouselProps {
+  className?: string;
+}
 
 const projects: Project[] = [
   {

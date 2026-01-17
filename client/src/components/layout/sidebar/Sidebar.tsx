@@ -1,7 +1,14 @@
 import styles from "./Sidebar.module.css";
 import NavigationRail from "../navigation/navigation-rail/NavigationRail";
 import { NavItem } from "../navigation/navigation-rail/NavItem";
-import type { SidebarProps } from "@/types";
+import type { Dispatch, SetStateAction } from "react";
+
+type SidebarProps = {
+  activePage: "Home" | "Projects" | "ProjectDetail";
+  setActivePage: Dispatch<
+    SetStateAction<"Home" | "Projects" | "ProjectDetail">
+  >;
+};
 import IconButton from "@/components/ui/IconButton/IconButton";
 
 function Sidebar({ activePage, setActivePage }: SidebarProps) {
@@ -26,8 +33,6 @@ function Sidebar({ activePage, setActivePage }: SidebarProps) {
           selected={activePage === "ProjectDetail"}
           onClick={() => setActivePage("ProjectDetail")}
         />
-
-
       </NavigationRail>
       <NavigationRail className={styles["nav-footer"]}>
         <IconButton

@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import styles from "./Button.module.css";
 
 interface ButtonProps {
@@ -38,9 +38,14 @@ const Button = ({
 }: ButtonProps) => {
   // Estado interno apenas se toggleable e selected não for controlado externamente
   const [internalSelected, setInternalSelected] = useState(false);
-  
+
   // Se externalSelected foi passado, usa ele. Senão, se toggleable, usa interno. Caso contrário, false.
-  const isSelected = externalSelected !== undefined ? externalSelected : (toggleable ? internalSelected : false);
+  const isSelected =
+    externalSelected !== undefined
+      ? externalSelected
+      : toggleable
+        ? internalSelected
+        : false;
   const isInteractive = interactive && !disabled;
 
   if (!visible) return null;
@@ -59,7 +64,7 @@ const Button = ({
   const renderIcon = () => {
     const iconName = isSelected && selectedIcon ? selectedIcon : icon;
     if (!iconName) return null;
-    
+
     if (typeof iconName === "string") {
       return <span className="material-symbols-outlined">{iconName}</span>;
     }
@@ -68,7 +73,7 @@ const Button = ({
 
   const handleClick = () => {
     if (!isInteractive) return;
-    
+
     if (toggleable && externalSelected === undefined) {
       // Modo toggleable com estado interno
       const newState = !internalSelected;

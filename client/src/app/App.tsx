@@ -4,11 +4,15 @@ import "../styles/normalize.css";
 
 import Sidebar from "@/components/layout/sidebar/Sidebar";
 import { HomePage as Home } from "@/features/home";
-import UnderConstruction from "@/app/pages/UnderConstruction/UnderConstruction";
 
 // Updated imports
 import { WorkListPage, WorkDetailPage } from "@/features/work";
-import type { PageType } from "@shared/types/types";
+
+/**
+ * Local PageType for the app (co-located in this file to avoid cross-module shared types)
+ * Keeps the app self-contained while in early development.
+ */
+type PageType = "Home" | "Projects" | "ProjectDetail";
 
 function App() {
   const [activePage, setActivePage] = useState<PageType>("Home");
