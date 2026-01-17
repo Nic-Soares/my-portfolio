@@ -1,7 +1,7 @@
 import styles from "./ProjectDetailHero.module.css";
 import InfoSection from "@/components/common/info-section/InfoSection";
 
-const ProjectDetailHero = () => {
+const WorkDetailHero = () => {
   return (
     <header>
       <div className={styles.splitAsset}>
@@ -18,4 +18,4 @@ const ProjectDetailHero = () => {
   );
 };
 
-export default ProjectDetailHero;
+export default WorkDetailHero;

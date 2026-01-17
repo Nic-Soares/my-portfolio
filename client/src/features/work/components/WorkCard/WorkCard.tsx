@@ -1,8 +1,8 @@
-import ConnectedButtonGroup from "../connected-button-group/ConnectedButtonGroup";
-import styles from "./ProjectCardItem.module.css";
+import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup";
+import styles from "./WorkCard.module.css";
 import type { ReactNode, KeyboardEvent } from "react";
 
-type ProjectCategory =
+type WorkCategory =
   | "Frontend"
   | "Backend"
   | "Mobile"
@@ -18,9 +18,9 @@ interface ButtonOption {
   disabled?: boolean;
 }
 
-interface ProjectCardItemProps {
+interface WorkCardProps {
   // Project-specific props
-  categories?: ProjectCategory[];
+  categories?: WorkCategory[];
   title?: string;
   company?: string;
   imageUrl?: string;
@@ -40,7 +40,7 @@ interface ProjectCardItemProps {
   tabIndex?: number;
 }
 
-const ProjectCardItem = ({
+const WorkCard = ({
   categories = ["Frontend", "Backend", "Data"],
   title = "Project Title",
   company = "Company Name",
@@ -55,7 +55,7 @@ const ProjectCardItem = ({
   onClick,
   disabled = false,
   tabIndex = 0,
-}: ProjectCardItemProps) => {
+}: WorkCardProps) => {
   // Use buttonGroupOptions if provided, otherwise convert categories to options
   const options =
     buttonGroupOptions ||
@@ -117,4 +117,4 @@ const ProjectCardItem = ({
   );
 };
 
-export default ProjectCardItem;
+export default WorkCard;

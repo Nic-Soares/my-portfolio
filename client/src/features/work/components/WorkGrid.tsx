@@ -1,14 +1,14 @@
-import styles from "./ProjectGrid.module.css";
-import ProjectCardItem from "@/components/common/project-card-item/ProjectCardItem";
+import styles from "./WorkGrid.module.css";
+import WorkCard from "./WorkMeta/WorkCard";
 
-interface ProjectGridProps {
+interface WorkGridProps {
   onProjectSelect: (projectId: string) => void;
 }
 
-const ProjectGrid = ({ onProjectSelect }: ProjectGridProps) => {
+const WorkGrid = ({ onProjectSelect }: WorkGridProps) => {
   return (
     <div className={styles["cards"]}>
-      <ProjectCardItem
+      <WorkCard
         title="E-commerce Platform"
         categories={["Frontend", "Backend"]}
         company="Amazon"
@@ -17,7 +17,7 @@ const ProjectGrid = ({ onProjectSelect }: ProjectGridProps) => {
         interactive={true}
         onClick={() => onProjectSelect("E-commerce Platform")}
       />
-      <ProjectCardItem
+      <WorkCard
         title="Mobile Banking App"
         categories={["Mobile", "Backend"]}
         company="Nubank"
@@ -26,7 +26,7 @@ const ProjectGrid = ({ onProjectSelect }: ProjectGridProps) => {
         interactive={true}
         onClick={() => onProjectSelect("Mobile Banking App")}
       />
-      <ProjectCardItem
+      <WorkCard
         title="Data Analytics Dashboard"
         categories={["Data", "Frontend"]}
         company="Google"
@@ -35,7 +35,7 @@ const ProjectGrid = ({ onProjectSelect }: ProjectGridProps) => {
         interactive={true}
         onClick={() => onProjectSelect("Data Analytics Dashboard")}
       />
-      <ProjectCardItem
+      <WorkCard
         title="DevOps Pipeline"
         categories={["DevOps", "Backend"]}
         company="Microsoft"
@@ -44,7 +44,7 @@ const ProjectGrid = ({ onProjectSelect }: ProjectGridProps) => {
         interactive={true}
         onClick={() => onProjectSelect("DevOps Pipeline")}
       />
-      <ProjectCardItem
+      <WorkCard
         title="Design System"
         categories={["Design", "Frontend"]}
         company="Figma"
@@ -53,7 +53,7 @@ const ProjectGrid = ({ onProjectSelect }: ProjectGridProps) => {
         interactive={true}
         onClick={() => onProjectSelect("Design System")}
       />
-      <ProjectCardItem
+      <WorkCard
         title="API Gateway"
         categories={["Backend", "DevOps"]}
         company="Netflix"
@@ -62,7 +62,7 @@ const ProjectGrid = ({ onProjectSelect }: ProjectGridProps) => {
         interactive={true}
         onClick={() => onProjectSelect("API Gateway")}
       />
-      <ProjectCardItem
+      <WorkCard
         title="Machine Learning Model"
         categories={["Data", "Backend"]}
         company="OpenAI"
@@ -71,7 +71,7 @@ const ProjectGrid = ({ onProjectSelect }: ProjectGridProps) => {
         interactive={true}
         onClick={() => onProjectSelect("Machine Learning Model")}
       />
-      <ProjectCardItem
+      <WorkCard
         title="Portfolio Website"
         categories={["Frontend", "Design"]}
         company="Personal Project"
@@ -84,4 +84,4 @@ const ProjectGrid = ({ onProjectSelect }: ProjectGridProps) => {
   );
 };
 
-export default ProjectGrid;
+export default WorkGrid;

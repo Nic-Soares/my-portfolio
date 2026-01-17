@@ -1,14 +1,14 @@
 import React from "react";
-import ProjectDetailHero from "./ProjectDetailHero";
+import ProjectDetailHero from "../components/WorkDetailHero";
 import { ProjectMeta } from "@/components/ui/ProjectMeta/ProjectMeta";
 import styles from "./ProjectDetail.module.css";
 import NotFound from "@/components/pages/not-found/NotFound";
 
-interface ProjectDetailProps {
+interface WorkDetailProps {
   projectId: string | null;
 }
 
-const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
+const WorkDetailPage: React.FC<WorkDetailProps> = ({ projectId }) => {
   if (!projectId) return <NotFound />;
 
   const sectionOptions = [
@@ -46,4 +46,4 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId }) => {
   );
 };
 
-export default ProjectDetail;
+export default WorkDetailPage;
