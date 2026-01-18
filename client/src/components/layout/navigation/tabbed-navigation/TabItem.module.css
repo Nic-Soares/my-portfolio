@@ -1,0 +1,308 @@
+/* TabItem.module.css
+   Aligned with Button.module.css variable names and behavior.
+   - Uses the same --btn-* variables so Tabs and Buttons share tokens/behavior.
+   - Tabs remain rounded-only and do NOT change border-radius on hover/active/selected.
+   - Selected/hover/active effects modify ONLY the state-layer background (no size/border/radius changes).
+*/
+
+.tab {
+    all: unset;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    /* --- Default Variables (Base: xsmall/filled) --- */
+
+    /* Dimensions */
+    --btn-height: 40px;
+    --btn-padding: 8px 12px;
+    --btn-gap: 4px;
+    --btn-radius: 100px; /* Tabs are always rounded */
+
+    /* Colors */
+    --btn-bg: transparent;
+    --btn-border: none;
+    --btn-label-color: var(--md-sys-color-primary);
+    --btn-icon-color: var(--md-sys-color-primary);
+
+    /* Typography (Label Large default) */
+    --btn-font-family: var(--label-large-font);
+    --btn-font-weight: var(--label-large-weight);
+    --btn-font-size: var(--label-large-size);
+    --btn-line-height: var(--label-large-line-height);
+    --btn-tracking: var(--label-large-tracking);
+
+    /* Icon */
+    --btn-icon-size: 16.667px;
+    --btn-icon-padding: 1.67px;
+
+    /* State Layer */
+    --btn-state-layer-bg: transparent;
+
+    height: var(--btn-height);
+}
+
+.tab__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+
+    background: var(--btn-bg);
+    border: var(--btn-border);
+    border-radius: var(--btn-radius);
+    box-sizing: border-box;
+    /* Keep shape stable; only visual layer transitions */
+    transition: background 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.tab__state-layer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    padding: var(--btn-padding);
+    gap: var(--btn-gap);
+    background: var(--btn-state-layer-bg);
+    box-sizing: border-box;
+    transition: background 120ms linear;
+}
+
+.tab__label {
+    font-family: var(--btn-font-family);
+    font-weight: var(--btn-font-weight);
+    font-size: var(--btn-font-size);
+    line-height: var(--btn-line-height);
+    letter-spacing: var(--btn-tracking);
+    color: var(--btn-label-color);
+}
+
+/* Icon style inside state layer */
+.tab__state-layer :global(.material-symbols-outlined) {
+    font-variation-settings:
+        "FILL" 1,
+        "wght" 400;
+    font-size: var(--btn-icon-size);
+    padding: var(--btn-icon-padding);
+    color: var(--btn-icon-color);
+}
+
+/* --- Size Variants --- */
+
+.tab--xsmall {
+    --btn-height: 40px;
+    --btn-padding: 8px 12px;
+    --btn-gap: 4px;
+}
+
+.tab--small {
+    --btn-height: 48px;
+    --btn-padding: 10px 16px;
+    --btn-gap: 6px;
+}
+
+.tab--medium {
+    --btn-height: 56px;
+    --btn-padding: 12px 20px;
+    --btn-gap: 8px;
+
+    /* Typography: Title Medium */
+    --btn-font-family: var(--title-medium-font);
+    --btn-font-weight: var(--title-medium-weight);
+    --btn-font-size: var(--title-medium-size);
+    --btn-line-height: var(--title-medium-line-height);
+    --btn-tracking: var(--title-medium-tracking);
+}
+
+.tab--large {
+    --btn-height: 96px;
+    --btn-padding: 16px 24px;
+    --btn-gap: 8px;
+    --btn-icon-size: 26.667px;
+    --btn-icon-padding: 0px;
+
+    /* Typography: Headline Small */
+    --btn-font-family: var(--headline-small-font);
+    --btn-font-weight: var(--headline-small-weight);
+    --btn-font-size: var(--headline-small-size);
+    --btn-line-height: var(--headline-small-line-height);
+    --btn-tracking: var(--headline-small-tracking);
+}
+
+.tab--xlarge {
+    --btn-height: 136px;
+    --btn-padding: 20px 28px;
+    --btn-gap: 10px;
+    --btn-icon-size: 33.333px;
+    --btn-icon-padding: 0px;
+
+    /* Typography: Headline Large */
+    --btn-font-family: var(--headline-large-font);
+    --btn-font-weight: var(--headline-large-weight);
+    --btn-font-size: var(--headline-large-size);
+    --btn-line-height: var(--headline-large-line-height);
+    --btn-tracking: var(--headline-large-tracking);
+}
+
+/* --- Shape: tabs are always rounded (no square variant) --- */
+/* radius is defined by --btn-radius above and never changed by states */
+
+/* --- Style Variants (Colors) --- */
+
+/* Filled (explicitly set for filled behaviour) */
+.tab--filled {
+    --btn-bg: var(--md-sys-color-primary);
+    --btn-label-color: var(--md-sys-color-on-primary);
+    --btn-icon-color: var(--md-sys-color-on-primary);
+}
+
+/* Tonal */
+.tab--tonal {
+    --btn-bg: var(--md-sys-color-secondary-container);
+    --btn-label-color: var(--md-sys-color-on-secondary-container);
+    --btn-icon-color: var(--md-sys-color-on-secondary-container);
+}
+
+/* Outline */
+.tab--outline {
+    --btn-bg: transparent;
+    --btn-border: 1px solid var(--md-sys-color-outline-variant);
+    --btn-label-color: var(--md-sys-color-on-surface-variant);
+    --btn-icon-color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Text */
+.tab--text {
+    --btn-bg: transparent;
+    --btn-label-color: var(--md-sys-color-on-surface-variant);
+    --btn-icon-color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Elevated (placeholder) */
+.tab--elevated {
+    /* placeholder if needed */
+}
+
+/* --- Selected State --- */
+/* Mirror Button.module.css selected vars but ensure selected visuals are shown via the state-layer */
+.tab--selected.tab--filled {
+    --btn-bg: var(--md-sys-color-primary-container);
+    --btn-label-color: var(--md-sys-color-on-primary-container);
+    --btn-icon-color: var(--md-sys-color-on-primary-container);
+    /* stronger state-layer overlay for selected filled tabs */
+    --btn-state-layer-bg: var(
+        --md-state-layers-light-on-primary-opacity-12,
+        rgba(255, 255, 255, 0.12)
+    );
+}
+
+.tab--selected.tab--tonal {
+    --btn-bg: var(--md-sys-color-primary);
+    --btn-label-color: var(--md-sys-color-on-primary);
+    --btn-icon-color: var(--md-sys-color-on-primary);
+    --btn-state-layer-bg: rgba(29, 25, 43, 0.12);
+}
+
+.tab--selected.tab--outline {
+    --btn-state-layer-bg: var(--md-sys-color-inverse-surface);
+    --btn-border: none;
+    --btn-label-color: var(--md-sys-color-inverse-on-surface);
+    --btn-icon-color: var(--md-sys-color-inverse-on-surface);
+    /* subtle overlay to ensure selected state reads on outline backgrounds */
+    --btn-state-layer-bg: rgba(0, 0, 0, 0.06);
+}
+
+/* --- Width Variants --- */
+
+.tab--narrow .tab__state-layer {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.tab--wide .tab__state-layer {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+/* --- States (Hover, Focus, Active, Disabled) --- */
+
+/* Hover: only affect state-layer background (visual layer), do not change radius */
+.tab:hover {
+    --btn-state-layer-bg: rgba(0, 0, 0, 0.08);
+}
+
+.tab--filled:hover {
+    --btn-state-layer-bg: var(
+        --md-state-layers-light-on-primary-opacity-08,
+        rgba(255, 255, 255, 0.08)
+    );
+}
+
+.tab--tonal:hover {
+    --btn-state-layer-bg: rgba(29, 25, 43, 0.08);
+}
+
+.tab--outline:hover,
+.tab--text:hover {
+    --btn-state-layer-bg: rgba(73, 69, 79, 0.08);
+}
+
+/* Focus */
+.tab:focus-visible {
+    outline: none;
+}
+
+/* For accessibility, show a visible outline on the content — still does not change shape */
+.tab:focus-visible .tab__content {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+}
+
+/* Active: only change the state-layer background (press effect). No radius or size changes. */
+.tab:active {
+    --btn-state-layer-bg: rgba(0, 0, 0, 0.12);
+}
+
+.tab--filled:active {
+    --btn-state-layer-bg: rgba(255, 255, 255, 0.12);
+}
+
+.tab--tonal:active {
+    --btn-state-layer-bg: rgba(29, 25, 43, 0.12);
+}
+
+.tab--outline:active,
+.tab--text:active {
+    --btn-state-layer-bg: rgba(73, 69, 79, 0.12);
+}
+
+/* Disabled */
+.tab:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+    --btn-state-layer-bg: none !important;
+    pointer-events: none;
+}
+
+/* Non-interactive (visual only) */
+.tab--noninteractive {
+    cursor: default;
+    pointer-events: none;
+}
+
+/* Selected visual transition for state-layer only */
+/* Keep same transition intent as Button but only for visual layer */
+.tab--selected .tab__content {
+    transition: background-color 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ensure state-layer uses the btn var so overlays actually display */
+.tab__state-layer {
+    background: var(--btn-state-layer-bg);
+}
+/* --- End of Tab styles --- */

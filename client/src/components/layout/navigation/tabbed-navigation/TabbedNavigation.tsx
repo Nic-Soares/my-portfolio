@@ -1,63 +1,179 @@
-import type { FC } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./TabbedNavigation.module.css";
+import TabItem from "./TabItem";
 
-interface TabOption {
-  label: string;
+type TabItem = {
+  id: string;
+  label?: string;
   icon?: string;
+  selectedIcon?: string;
   disabled?: boolean;
-}
+  toggleable?: boolean;
+  visible?: boolean;
+};
 
-interface TabNavigationProps {
-  options: TabOption[];
-  selectedIndex: number;
-  onSelectionChange: (index: number) => void;
+type Props = {
+  tabs?: TabItem[];
+  selectedId?: string;
+  onSelect?: (id: string) => void;
   className?: string;
+  buttonSize?: "xsmall" | "small" | "medium" | "large" | "xlarge";
+  buttonStyle?: "filled" | "tonal" | "outline" | "text" | "elevated";
+  buttonWidth?: "narrow" | "default" | "wide";
+};
+
+const MIN_VISIBLE_TABS = 2;
+const MAX_VISIBLE_TABS = 5;
+
+function makePlaceholder(index: number): TabItem {
+  return {
+    id: `__placeholder_${Date.now()}_${index}`,
+    label: "",
+    disabled: true,
+    visible: true,
+  };
 }
 
-const TabbedNavigation: FC<TabNavigationProps> = ({
-  options,
-  selectedIndex,
-  onSelectionChange,
+/**
+ * TabbedNavigation
+ *
+ * - Uses the CSS module's `nav` and `navigation-container` classes.
+ * - Adds an inner container (styles.container) for the actual tab layout.
+ * - Enforces between 2 and 5 visible tabs (appends placeholders or trims extras).
+ * - Supports controlled (`selectedId`) and uncontrolled usage.
+ */
+const TabbedNavigation: React.FC<Props> = ({
+  tabs = [],
+  selectedId,
+  onSelect,
   className = "",
+  buttonSize = "xsmall",
+  buttonStyle = "filled",
+  buttonWidth = "default",
 }) => {
-  if (!options || options.length === 0) return null;
+  // Normalize tabs to respect visibility bounds (but keep invisible items where provided).
+  const normalizedTabs = useMemo<TabItem[]>(() => {
+    const provided = Array.isArray(tabs) ? tabs.slice() : [];
+    const visible = provided.filter((t) => t.visible !== false);
+
+    // Trim if too many visible
+    if (visible.length > MAX_VISIBLE_TABS) {
+      const result: TabItem[] = [];
+      let visibleCount = 0;
+      for (const t of provided) {
+        if (t.visible === false) {
+          result.push(t);
+          continue;
+        }
+        if (visibleCount < MAX_VISIBLE_TABS) {
+          result.push(t);
+          visibleCount++;
+        } else {
+          // skip
+        }
+      }
+      const trimmedIds = visible.slice(MAX_VISIBLE_TABS).map((t) => t.id);
+      console.warn(
+        `[TabbedNavigation] More than ${MAX_VISIBLE_TABS} visible tabs provided. Trimming: ${trimmedIds.join(
+          ", ",
+        )}`,
+      );
+      return result;
+    }
+
+    // Append placeholders if too few visible
+    if (visible.length < MIN_VISIBLE_TABS) {
+      const needed = MIN_VISIBLE_TABS - visible.length;
+      const result = provided.slice();
+      for (let i = 0; i < needed; i++) {
+        result.push(makePlaceholder(i));
+      }
+      console.warn(
+        `[TabbedNavigation] Fewer than ${MIN_VISIBLE_TABS} visible tabs provided. Appended ${needed} placeholder(s).`,
+      );
+      return result;
+    }
+
+    return provided;
+  }, [tabs]);
+
+  // Only render tabs that are visible
+  const renderTabs = useMemo(
+    () => normalizedTabs.filter((t) => t.visible !== false),
+    [normalizedTabs],
+  );
+
+  const isControlled = selectedId !== undefined;
+
+  const [internalSelectedId, setInternalSelectedId] = useState<
+    string | undefined
+  >(() => {
+    if (isControlled) return selectedId;
+    return renderTabs[0]?.id;
+  });
+
+  const currentSelectedId = isControlled ? selectedId : internalSelectedId;
+
+  // Keep internal selected id valid if renderTabs changes (uncontrolled mode)
+  useEffect(() => {
+    if (isControlled) return;
+    if (!renderTabs.length) {
+      setInternalSelectedId(undefined);
+      return;
+    }
+    const exists = renderTabs.some((t) => t.id === internalSelectedId);
+    if (!exists) {
+      setInternalSelectedId(renderTabs[0].id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [renderTabs, isControlled]);
+
+  const handleClick = (tab: TabItem) => {
+    if (tab.disabled) return;
+
+    // toggleable behavior: in uncontrolled mode, clicking the same selected tab toggles off
+    if (tab.toggleable && currentSelectedId === tab.id) {
+      if (!isControlled) setInternalSelectedId(undefined);
+      onSelect?.(tab.id);
+      return;
+    }
+
+    if (!isControlled) setInternalSelectedId(tab.id);
+    onSelect?.(tab.id);
+  };
+
+  if (!renderTabs.length) return null;
 
   return (
     <nav
-      className={`${styles.nav} ${className}`}
-      role="tablist"
+      className={`${styles["nav"]} ${className}`.trim()}
       aria-label="Tabbed navigation"
     >
-      {options.map((opt, idx) => {
-        const isSelected = idx === selectedIndex;
-        const handleClick = () => {
-          if (!opt.disabled) onSelectionChange(idx);
-        };
-
-        return (
-          <button
-            key={idx}
-            role="tab"
-            aria-selected={isSelected}
-            aria-disabled={opt.disabled || false}
-            className={[
-              styles.tab,
-              isSelected ? styles["tab--active"] : "",
-              opt.disabled ? styles["tab--disabled"] : "",
-            ].join(" ")}
-            onClick={handleClick}
-            tabIndex={isSelected ? 0 : -1}
-            disabled={opt.disabled}
-          >
-            {opt.icon && (
-              <span className={`${styles.icon} material-symbols-outlined`}>
-                {opt.icon}
-              </span>
-            )}
-            <span className={styles.label}>{opt.label}</span>
-          </button>
-        );
-      })}
+      {/* Use the provided navigation-container styles */}
+      <div className={styles["navigation-container"]}>
+        {/* Inner container dedicated to the tab layout */}
+        <div className={styles["tabbed-navigation"]}>
+          {renderTabs.map((tab) => {
+            const isSelected = currentSelectedId === tab.id;
+            return (
+              <div className={styles["tab"]} key={tab.id}>
+                <TabItem
+                  label={tab.label}
+                  icon={tab.icon}
+                  selectedIcon={tab.selectedIcon}
+                  disabled={tab.disabled}
+                  selected={isSelected}
+                  toggleable={!!tab.toggleable}
+                  size={buttonSize}
+                  style={buttonStyle}
+                  width={buttonWidth}
+                  onClick={() => handleClick(tab)}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </nav>
   );
 };
