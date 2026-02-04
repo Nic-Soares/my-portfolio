@@ -1,5 +1,5 @@
 import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup";
-import styles from "./WorkListHero.module.css";
+import styles from "./ProjectListHero.module.css";
 import SearchBar from "@/components/ui/SearchBar/SearchBar";
 
 const options = [
@@ -9,7 +9,7 @@ const options = [
   { label: "Arquivados" },
 ];
 
-const WorkListHero = () => {
+const ProjectListHero = () => {
   return (
     <header className={styles["projects__header"]}>
       <h1 className={styles["projects__title"]}>Projects</h1>
@@ -25,4 +25,4 @@ const WorkListHero = () => {
   );
 };
 
-export default WorkListHero;
+export default ProjectListHero;

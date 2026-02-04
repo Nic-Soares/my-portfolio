@@ -34,7 +34,7 @@ body {
     grid-template-rows: auto;
     min-height: 100vh;
 
-    background: var(--md-sys-color-surface-container);
+    background: var(--md-sys-color-background);
 }
 
 .material-symbols-outlined {

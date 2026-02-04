@@ -1,37 +1,30 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./Sidebar.module.css";
 import NavigationRail from "../navigation/navigation-rail/NavigationRail";
 import { NavItem } from "../navigation/navigation-rail/NavItem";
-import type { Dispatch, SetStateAction } from "react";
-
-type SidebarProps = {
-  activePage: "Home" | "Projects" | "ProjectDetail";
-  setActivePage: Dispatch<
-    SetStateAction<"Home" | "Projects" | "ProjectDetail">
-  >;
-};
 import IconButton from "@/components/ui/IconButton/IconButton";
 
-function Sidebar({ activePage, setActivePage }: SidebarProps) {
+function Sidebar() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const isHome = location.pathname === "/";
+  const isProjects = location.pathname.startsWith("/projects");
+
   return (
     <aside className={styles.sidebar}>
       <NavigationRail>
         <NavItem
           icon="home"
           label="Home"
-          selected={activePage === "Home"}
-          onClick={() => setActivePage("Home")}
+          selected={isHome}
+          onClick={() => navigate("/")}
         />
         <NavItem
           icon="folder"
           label="Projects"
-          selected={activePage === "Projects"}
-          onClick={() => setActivePage("Projects")}
-        />
-        <NavItem
-          icon="description"
-          label="Project Detail"
-          selected={activePage === "ProjectDetail"}
-          onClick={() => setActivePage("ProjectDetail")}
+          selected={isProjects}
+          onClick={() => navigate("/projects")}
         />
       </NavigationRail>
       <NavigationRail className={styles["nav-footer"]}>

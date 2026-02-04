@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./WorkMeta.module.css";
+import styles from "./ProjectMetadata.module.css";
 
-interface WorkMetaProps {
+interface ProjectMetadataProps {
   category: string;
   year: string;
   role: string;
@@ -10,7 +10,7 @@ interface WorkMetaProps {
   techStack: string[];
 }
 
-export const WorkMeta: React.FC<WorkMetaProps> = ({
+export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
   category,
   year,
   role,
@@ -88,4 +88,4 @@ export const WorkMeta: React.FC<WorkMetaProps> = ({
   );
 };
 
-export default WorkMeta;
+export default ProjectMetadata;

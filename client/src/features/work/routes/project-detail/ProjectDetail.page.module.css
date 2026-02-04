@@ -1,0 +1,43 @@
+/* Page layout for Project Detail */
+.page-content {
+    display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 64px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+}
+
+.page-content-height {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+}
+
+.content-conteiner {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    width: 100%;
+}
+
+.content-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    width: 100%;
+}
+
+.article-page {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+    margin: 8px auto;
+    line-height: 1.5;
+    overflow: visible;
+}
+
+.animation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}

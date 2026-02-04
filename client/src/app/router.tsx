@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { HomePage } from "@/features/home";
-import { WorkListPage, WorkDetailPage } from "@/features/work";
+import { ProjectListPage, ProjectDetailPage } from "@/features/work";
 import NotFound from "@/app/pages/NotFound/NotFound";
 import UnderConstruction from "@/app/pages/UnderConstruction/UnderConstruction";
 
@@ -11,11 +11,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/work",
-    element: <WorkListPage />,
+    element: <ProjectListPage />,
   },
   {
     path: "/work/:id",
-    element: <WorkDetailPage />,
+    element: <ProjectDetailPage />,
   },
   {
     path: "/coming-soon",

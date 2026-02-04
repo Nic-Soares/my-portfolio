@@ -1,48 +1,24 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "../styles/global.css";
 import "../styles/normalize.css";
 
 import Sidebar from "@/components/layout/sidebar/Sidebar";
 import { HomePage as Home } from "@/features/home";
-
-// Updated imports
-import { WorkListPage, WorkDetailPage } from "@/features/work";
-
-/**
- * Local PageType for the app (co-located in this file to avoid cross-module shared types)
- * Keeps the app self-contained while in early development.
- */
-type PageType = "Home" | "Projects" | "ProjectDetail";
+import { ProjectListPage, ProjectDetailPage } from "@/features/work";
+import NotFound from "@/app/pages/NotFound/NotFound";
 
 function App() {
-  const [activePage, setActivePage] = useState<PageType>("Home");
-  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(
-    null,
-  );
-
-  const handleProjectSelect = (projectId: string) => {
-    setSelectedProjectId(projectId);
-    setActivePage("ProjectDetail");
-  };
-
-  const renderContent = () => {
-    switch (activePage) {
-      case "Home":
-        return <Home />;
-      case "Projects":
-        return <WorkListPage onProjectSelect={handleProjectSelect} />;
-      case "ProjectDetail":
-        return <WorkDetailPage projectId={selectedProjectId} />;
-      default:
-        return <Home />;
-    }
-  };
-
   return (
-    <>
-      <Sidebar activePage={activePage} setActivePage={setActivePage} />
-      {renderContent()}
-    </>
+    <BrowserRouter>
+      <Sidebar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<ProjectListPage />} />
+        <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+        <Route path="/404" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/404" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import styles from "./TabbedNavigation.module.css";
 import TabItem from "./TabItem";
 
@@ -112,6 +112,10 @@ const TabbedNavigation: React.FC<Props> = ({
     return renderTabs[0]?.id;
   });
 
+  const [isSticky, setIsSticky] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
   const currentSelectedId = isControlled ? selectedId : internalSelectedId;
 
   // Keep internal selected id valid if renderTabs changes (uncontrolled mode)
@@ -127,6 +131,25 @@ const TabbedNavigation: React.FC<Props> = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [renderTabs, isControlled]);
+
+  // Detect sticky state using IntersectionObserver
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsSticky(!entry.isIntersecting);
+      },
+      { threshold: [1] },
+    );
+
+    observer.observe(sentinel);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const handleClick = (tab: TabItem) => {
     if (tab.disabled) return;
@@ -145,36 +168,44 @@ const TabbedNavigation: React.FC<Props> = ({
   if (!renderTabs.length) return null;
 
   return (
-    <nav
-      className={`${styles["nav"]} ${className}`.trim()}
-      aria-label="Tabbed navigation"
-    >
-      {/* Use the provided navigation-container styles */}
-      <div className={styles["navigation-container"]}>
-        {/* Inner container dedicated to the tab layout */}
-        <div className={styles["tabbed-navigation"]}>
-          {renderTabs.map((tab) => {
-            const isSelected = currentSelectedId === tab.id;
-            return (
-              <div className={styles["tab"]} key={tab.id}>
-                <TabItem
-                  label={tab.label}
-                  icon={tab.icon}
-                  selectedIcon={tab.selectedIcon}
-                  disabled={tab.disabled}
-                  selected={isSelected}
-                  toggleable={!!tab.toggleable}
-                  size={buttonSize}
-                  style={buttonStyle}
-                  width={buttonWidth}
-                  onClick={() => handleClick(tab)}
-                />
-              </div>
-            );
-          })}
+    <>
+      {/* Sentinel element to detect when nav becomes sticky */}
+      <div ref={sentinelRef} style={{ height: "1px", marginTop: "-1px" }} />
+
+      <nav
+        ref={navRef}
+        className={`${styles["nav"]} ${isSticky ? styles["nav--sticky"] : ""} ${className}`.trim()}
+        aria-label="Tabbed navigation"
+      >
+        {/* Use the provided navigation-container styles */}
+        <div
+          className={`${styles["navigation-container"]} ${isSticky ? styles["navigation-container--compact"] : ""}`}
+        >
+          {/* Inner container dedicated to the tab layout */}
+          <div className={styles["tabbed-navigation"]}>
+            {renderTabs.map((tab) => {
+              const isSelected = currentSelectedId === tab.id;
+              return (
+                <div className={styles["tab"]} key={tab.id}>
+                  <TabItem
+                    label={tab.label}
+                    icon={tab.icon}
+                    selectedIcon={tab.selectedIcon}
+                    disabled={tab.disabled}
+                    selected={isSelected}
+                    toggleable={!!tab.toggleable}
+                    size={buttonSize}
+                    style={buttonStyle}
+                    width={buttonWidth}
+                    onClick={() => handleClick(tab)}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 

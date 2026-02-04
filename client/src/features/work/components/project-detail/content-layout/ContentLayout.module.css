@@ -1,0 +1,23 @@
+.content-conteiner {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.carbon-conteiner {
+    flex: 1;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    overflow: visible;
+}
+
+@media screen and (min-width: 1294px) {
+  .carbon-container {
+    margin-left: 116px;
+  }
+}
+
+.summary {
+    width: 156px;
+    margin: 112px 24px 0;
+}
