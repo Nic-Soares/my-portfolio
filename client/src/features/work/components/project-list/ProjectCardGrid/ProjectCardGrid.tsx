@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./ProjectCardGrid.module.css";
-import ProjectCard from "../project-card/ProjectCard";
-import { projectsData } from "../../../data/projects.data";
+import ProjectCard from "../ProjectCard/ProjectCard";
+import { projectsData } from "../../../data/projects/spotify-clone.data";
 
 const ProjectCardGrid = () => {
   const navigate = useNavigate();
