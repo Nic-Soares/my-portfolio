@@ -33,25 +33,19 @@ export const projectsData: ProjectData[] = [
             type: "header",
             level: 1,
             text: "O Projeto",
-            id: "intro",
           },
           {
-            type: "paragraph",
-            text: "Clone funcional do Spotify desenvolvido para demonstrar capacidades fullstack, desde a arquitetura de APIs REST até a criação de interfaces modernas e responsivas.",
-          },
-          {
-            type: "paragraph",
-            text: "Este projeto foi construído acompanhando uma live técnica da <strong>Hashtag Treinamentos</strong>, onde pude aplicar conceitos de desenvolvimento fullstack em um cenário real.",
-          },
-          {
-            type: "paragraph",
-            text: "<strong>🎯 Propósito do Projeto:</strong><br/>Plataforma completa de streaming que permite aos usuários navegar por catálogos de artistas e músicas, reproduzir áudios e explorar conteúdo musical.",
+            type: "content-group",
+            html: `
+              <p>Clone funcional do Spotify desenvolvido para demonstrar capacidades fullstack, desde a arquitetura de APIs REST até a criação de interfaces modernas e responsivas.</p>
+              <p>Este projeto foi construído acompanhando uma live técnica da <strong>Hashtag Treinamentos</strong>, onde pude aplicar conceitos de desenvolvimento fullstack em um cenário real.</p>
+              <p><strong>🎯 Propósito do Projeto:</strong><br/>Plataforma completa de streaming que permite aos usuários navegar por catálogos de artistas e músicas, reproduzir áudios e explorar conteúdo musical.</p>
+            `,
           },
           {
             type: "header",
             level: 2,
             text: "✨ Funcionalidades Principais",
-            id: "features",
           },
           {
             type: "image",
@@ -101,7 +95,6 @@ export const projectsData: ProjectData[] = [
             type: "header",
             level: 2,
             text: "📸 Galeria",
-            id: "gallery",
           },
           {
             type: "image",
@@ -122,7 +115,6 @@ export const projectsData: ProjectData[] = [
             type: "header",
             level: 2,
             text: "🎨 Design e Interface",
-            id: "design",
           },
           {
             type: "paragraph",
@@ -151,15 +143,13 @@ export const projectsData: ProjectData[] = [
             type: "header",
             level: 2,
             text: "⚡ Performance",
-            id: "performance",
           },
           {
-            type: "paragraph",
-            text: "A aplicação foi otimizada para garantir carregamento rápido e navegação fluida. Utilizamos lazy loading para imagens e implementamos estratégias de cache para reduzir chamadas à API.",
-          },
-          {
-            type: "paragraph",
-            text: "O bundle final foi otimizado com Vite, resultando em chunks pequenos e carregamento eficiente. O tempo de First Contentful Paint (FCP) ficou abaixo de 1.5s em conexões 4G.",
+            type: "content-group",
+            html: `
+              <p>A aplicação foi otimizada para garantir carregamento rápido e navegação fluida. Utilizamos lazy loading para imagens e implementamos estratégias de cache para reduzir chamadas à API.</p>
+              <p>O bundle final foi otimizado com Vite, resultando em chunks pequenos e carregamento eficiente. O tempo de First Contentful Paint (FCP) ficou abaixo de 1.5s em conexões 4G.</p>
+            `,
           },
           {
             type: "header",
@@ -179,7 +169,6 @@ export const projectsData: ProjectData[] = [
             type: "header",
             level: 2,
             text: "🔐 Segurança",
-            id: "security",
           },
           {
             type: "paragraph",
@@ -193,7 +182,6 @@ export const projectsData: ProjectData[] = [
             type: "header",
             level: 2,
             text: "📱 Responsividade",
-            id: "responsive",
           },
           {
             type: "paragraph",
@@ -226,7 +214,6 @@ export const projectsData: ProjectData[] = [
             type: "header",
             level: 1,
             text: "🏗️ Diagrama de Arquitetura",
-            id: "diagram",
           },
           {
             type: "code",
@@ -259,7 +246,6 @@ export const projectsData: ProjectData[] = [
             type: "header",
             level: 2,
             text: "💻 Trechos de Código Relevantes",
-            id: "code",
           },
           {
             type: "header",
@@ -301,7 +287,6 @@ export const songsArray = responseSongs.data;`,
             type: "header",
             level: 2,
             text: "🗄️ Modelagem do Banco de Dados",
-            id: "db",
           },
           {
             type: "header",
@@ -359,7 +344,6 @@ export const songsArray = responseSongs.data;`,
             type: "header",
             level: 1,
             text: "🔗 Links do Projeto",
-            id: "links",
           },
           {
             type: "list",
@@ -372,7 +356,6 @@ export const songsArray = responseSongs.data;`,
             type: "header",
             level: 2,
             text: "🚀 Como Rodar Localmente",
-            id: "setup",
           },
           {
             type: "header",
@@ -404,7 +387,6 @@ npm run dev
             type: "header",
             level: 2,
             text: "📦 Stack Tecnológica",
-            id: "stack",
           },
           {
             type: "header",
@@ -453,7 +435,6 @@ npm run dev
             type: "header",
             level: 2,
             text: "📚 Aprendizados",
-            id: "learning",
           },
           {
             type: "paragraph",
@@ -482,7 +463,6 @@ npm run dev
             type: "header",
             level: 2,
             text: "🚀 Próximos Passos",
-            id: "next-steps",
           },
           {
             type: "paragraph",
@@ -505,7 +485,6 @@ npm run dev
             type: "header",
             level: 2,
             text: "🤝 Contribuições",
-            id: "contributions",
           },
           {
             type: "paragraph",
@@ -519,7 +498,6 @@ npm run dev
             type: "header",
             level: 2,
             text: "📄 Licença",
-            id: "license",
           },
           {
             type: "paragraph",
@@ -529,7 +507,6 @@ npm run dev
             type: "header",
             level: 2,
             text: "🙏 Agradecimentos",
-            id: "thanks",
           },
           {
             type: "paragraph",

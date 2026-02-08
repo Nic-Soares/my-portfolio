@@ -1,5 +1,6 @@
 // components/layout/ContentLayout.tsx
 import { ReactNode } from 'react';
+import styles from './ContentLayout.module.css'
 
 interface ContentLayoutProps {
   children: ReactNode;      // O conteúdo principal (Texto, código, imagens)
@@ -8,18 +9,18 @@ interface ContentLayoutProps {
 
 export const ContentLayout = ({ children, rightSidebar }: ContentLayoutProps) => {
   return (
-    <div className="layout-container"> {/* Grid principal */}
+    <div className={styles["content-container"]}> {/* Grid principal */}
       
-      {/* 1. Coluna Principal (Esquerda/Centro) */}
-      <main className="main-content">
-        <div className="carbon-component">
-          {children}
+      <main className={styles["carbon-container"]}>
+        <div className={styles["carbon-component"]}>
+          <article>
+            {children}
+          </article>
         </div>
       </main>
 
-      {/* 2. Coluna Lateral (Direita) */}
-      <aside className="right-sidebar">
-        <div className="sticky-wrapper">
+      <aside className={styles["right-sidebar"]}>
+        <div className={styles["sticky-wrapper"]}>
           {rightSidebar}
         </div>
       </aside>

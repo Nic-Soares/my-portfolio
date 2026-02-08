@@ -1,10 +1,16 @@
 // Define todos os tipos de blocos que nosso sistema aceita
 export type ContentBlock =
-  | { type: "header"; level: 1 | 2 | 3; text: string; id?: string }
+  | { type: "header"; level: 1 | 2 | 3; text: string }
   | { type: "paragraph"; text: string }
   | { type: "image"; src: string; alt: string }
-  | { type: "code"; code: string; language?: string; title?: string }
-  | { type: "list"; items: string[] };
+  | {
+      type: "code";
+      code: string;
+      language?: string;
+      title?: string;
+    }
+  | { type: "list"; items: string[] }
+  | { type: "content-group"; html: string };
 
 // Define a estrutura do menu lateral
 export interface SidebarItem {

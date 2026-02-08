@@ -1,6 +1,5 @@
-.content-conteiner {
+.content-container {
     display: flex;
-    flex-direction: row-reverse;
     justify-content: center;
 }
 
@@ -9,6 +8,22 @@
     max-width: -moz-fit-content;
     max-width: fit-content;
     overflow: visible;
+}
+
+.carbon-component {
+    display: block;
+    margin-top: 112px;
+}
+
+.right-sidebar {
+    display: block;
+    margin-top: 64px;
+}
+
+
+
+article {
+    display: block;
 }
 
 @media screen and (min-width: 1294px) {

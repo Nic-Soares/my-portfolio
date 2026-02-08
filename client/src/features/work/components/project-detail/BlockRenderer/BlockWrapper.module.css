@@ -1,0 +1,45 @@
+.block {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 48px;
+}
+
+.block.snug {
+    padding-bottom: 24px;
+}
+
+/* Copy button container positioned on the left */
+.copy-button-container {
+    position: absolute;
+    left: -48px;
+    top: 8px;
+    display: flex;
+    align-items: center;
+    z-index: 5;
+}
+
+.scroll-target {
+    position: absolute;
+    top: -120px;
+}
+
+/* Text chunk styles */
+.text-chunk > :first-child {
+    margin-top: 0;
+}
+
+.text-chunk > :last-child {
+    margin-bottom: 0;
+}
+
+.text-chunk p {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    max-width: 760px;
+}
+
+.text-chunk ul,
+.text-chunk ol {
+    max-width: 760px;
+}
