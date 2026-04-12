@@ -27,5 +27,4 @@ dist-ssr
 tsconfig.tsbuildinfo
 vite.config.js
 vite.config.d.ts
-contexto/arquitetura-analise.md
-contexto/mapa-fowler.md
+contexto/
