@@ -7,4 +7,7 @@
  *   import { projectsData } from '@/features/work/data/projects';
  */
 
-export { projectsData } from "./spotify-clone.data";
+import { projectsData as spotifyClone } from "./spotify-clone.data";
+import { referenceData } from "./reference.data";
+
+export const projectsData = [...spotifyClone, referenceData];
