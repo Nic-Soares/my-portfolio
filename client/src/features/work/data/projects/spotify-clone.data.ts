@@ -32,21 +32,20 @@ export const projectsData: ProjectData[] = [
           {
             type: "header",
             level: 1,
-            text: "O Projeto",
-          },
+            text: "O Projeto", id: "intro" },
           {
             type: "content-group",
+            id: "intro",
             html: `
               <p>Clone funcional do Spotify desenvolvido para demonstrar capacidades fullstack, desde a arquitetura de APIs REST até a criação de interfaces modernas e responsivas.</p>
               <p>Este projeto foi construído acompanhando uma live técnica da <strong>Hashtag Treinamentos</strong>, onde pude aplicar conceitos de desenvolvimento fullstack em um cenário real.</p>
-              <p><strong>🎯 Propósito do Projeto:</strong><br/>Plataforma completa de streaming que permite aos usuários navegar por catálogos de artistas e músicas, reproduzir áudios e explorar conteúdo musical.</p>
+              <p><strong>Propósito do Projeto:</strong><br/>Plataforma completa de streaming que permite aos usuários navegar por catálogos de artistas e músicas, reproduzir áudios e explorar conteúdo musical.</p>
             `,
           },
           {
             type: "header",
             level: 2,
-            text: "✨ Funcionalidades Principais",
-          },
+            text: "Funcionalidades Principais", id: "features" },
           {
             type: "image",
             src: "/demo.gif",
@@ -94,8 +93,7 @@ export const projectsData: ProjectData[] = [
           {
             type: "header",
             level: 2,
-            text: "📸 Galeria",
-          },
+            text: "Galeria", id: "gallery" },
           {
             type: "image",
             src: "/screenshots/home.png",
@@ -114,8 +112,7 @@ export const projectsData: ProjectData[] = [
           {
             type: "header",
             level: 2,
-            text: "🎨 Design e Interface",
-          },
+            text: "Design e Interface", id: "design" },
           {
             type: "paragraph",
             text: "O design da aplicação foi inspirado no Spotify original, mantendo a paleta de cores escura característica e a navegação intuitiva. A interface foi construída do zero utilizando CSS Modules, garantindo encapsulamento e evitando conflitos de estilos.",
@@ -142,8 +139,7 @@ export const projectsData: ProjectData[] = [
           {
             type: "header",
             level: 2,
-            text: "⚡ Performance",
-          },
+            text: "Performance", id: "performance" },
           {
             type: "content-group",
             html: `
@@ -168,8 +164,7 @@ export const projectsData: ProjectData[] = [
           {
             type: "header",
             level: 2,
-            text: "🔐 Segurança",
-          },
+            text: "Segurança", id: "security" },
           {
             type: "paragraph",
             text: "Implementamos diversas práticas de segurança para proteger a aplicação e os dados dos usuários. Todas as comunicações com a API são feitas via HTTPS, e utilizamos CORS configurado adequadamente no backend.",
@@ -181,8 +176,7 @@ export const projectsData: ProjectData[] = [
           {
             type: "header",
             level: 2,
-            text: "📱 Responsividade",
-          },
+            text: "Responsividade", id: "responsive" },
           {
             type: "paragraph",
             text: "A interface foi desenvolvida com mobile-first approach, garantindo que funcione perfeitamente em dispositivos de todos os tamanhos. Utilizamos media queries e unidades relativas (rem, %, vw/vh) para garantir adaptabilidade.",
@@ -245,8 +239,7 @@ export const projectsData: ProjectData[] = [
           {
             type: "header",
             level: 2,
-            text: "💻 Trechos de Código Relevantes",
-          },
+            text: "Trechos de Código Relevantes", id: "code" },
           {
             type: "header",
             level: 3,
@@ -343,20 +336,18 @@ export const songsArray = responseSongs.data;`,
           {
             type: "header",
             level: 1,
-            text: "🔗 Links do Projeto",
-          },
+            text: "Links do Projeto", id: "links" },
           {
             type: "list",
             items: [
-              '<strong>🌐 Aplicação Online:</strong> <a href="https://spotify-web-ehgp.onrender.com" target="_blank">Acessar Demo</a>',
-              '<strong>📂 GitHub:</strong> <a href="#" target="_blank">Acessar Código Fonte</a>',
+              '<strong>Aplicação Online:</strong> <a href="https://spotify-web-ehgp.onrender.com" target="_blank">Acessar Demo</a>',
+              '<strong>GitHub:</strong> <a href="#" target="_blank">Acessar Código Fonte</a>',
             ],
           },
           {
             type: "header",
             level: 2,
-            text: "🚀 Como Rodar Localmente",
-          },
+            text: "Como Rodar Localmente", id: "setup" },
           {
             type: "header",
             level: 3,
@@ -386,8 +377,7 @@ npm run dev
           {
             type: "header",
             level: 2,
-            text: "📦 Stack Tecnológica",
-          },
+            text: "Stack Tecnológica", id: "stack" },
           {
             type: "header",
             level: 3,
@@ -420,22 +410,21 @@ npm run dev
           {
             type: "header",
             level: 2,
-            text: "🎯 Destaques Técnicos",
+            text: "Destaques Técnicos",
           },
           {
             type: "list",
             items: [
-              "✅ Arquitetura REST bem definida",
-              "✅ TypeScript strict mode",
-              "✅ Deploy fullstack (Render)",
-              "✅ Roteamento dinâmico",
+              "Arquitetura REST bem definida",
+              "TypeScript strict mode",
+              "Deploy fullstack (Render)",
+              "Roteamento dinâmico",
             ],
           },
           {
             type: "header",
             level: 2,
-            text: "📚 Aprendizados",
-          },
+            text: "Aprendizados", id: "learning" },
           {
             type: "paragraph",
             text: "Este projeto proporcionou diversos aprendizados técnicos e de arquitetura. Foi fundamental para consolidar conhecimentos em desenvolvimento fullstack e integração entre frontend e backend.",
@@ -462,8 +451,7 @@ npm run dev
           {
             type: "header",
             level: 2,
-            text: "🚀 Próximos Passos",
-          },
+            text: "Próximos Passos", id: "next-steps" },
           {
             type: "paragraph",
             text: "Existem várias funcionalidades que podem ser implementadas para tornar o projeto ainda mais completo e próximo da aplicação real do Spotify.",
@@ -484,8 +472,7 @@ npm run dev
           {
             type: "header",
             level: 2,
-            text: "🤝 Contribuições",
-          },
+            text: "Contribuições", id: "contributions" },
           {
             type: "paragraph",
             text: "Este é um projeto de código aberto e contribuições são bem-vindas! Se você encontrou algum bug ou tem sugestões de melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.",
@@ -497,8 +484,7 @@ npm run dev
           {
             type: "header",
             level: 2,
-            text: "📄 Licença",
-          },
+            text: "Licença", id: "license" },
           {
             type: "paragraph",
             text: "Este projeto está sob a licença MIT. Você é livre para usar, modificar e distribuir o código, desde que mantenha a atribuição original.",
@@ -506,8 +492,7 @@ npm run dev
           {
             type: "header",
             level: 2,
-            text: "🙏 Agradecimentos",
-          },
+            text: "Agradecimentos", id: "thanks" },
           {
             type: "paragraph",
             text: "Agradecimento especial à <strong>Hashtag Treinamentos</strong> pela live técnica que serviu de base para este projeto. Também agradeço à comunidade open source pelas bibliotecas e ferramentas utilizadas.",

@@ -50,14 +50,16 @@ export const BlockWrapper = ({
       <div className={styles["scroll-target"]}></div>
 
       {/* Conteúdo principal */}
-      {dangerouslySetInnerHTML ? (
-        <div
-          className={styles["text-chunk"]}
-          dangerouslySetInnerHTML={dangerouslySetInnerHTML}
-        />
-      ) : (
-        <div className={styles["text-chunk"]}>{children}</div>
-      )}
+      <div className={styles.chunk}>
+        {dangerouslySetInnerHTML ? (
+          <div
+            className={styles["text-chunk"]}
+            dangerouslySetInnerHTML={dangerouslySetInnerHTML}
+          />
+        ) : (
+          <div className={styles["text-chunk"]}>{children}</div>
+        )}
+      </div>
     </div>
   );
 };

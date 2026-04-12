@@ -11,8 +11,8 @@ const generateBlockId = (block: ContentBlock): string => {
 };
 
 export const BlockRenderer = ({ block }: { block: ContentBlock }) => {
-  // Gera ID automático para todos os blocos
-  const blockId = generateBlockId(block);
+  // Usa o ID fornecido no JSON (âncora) ou gera um automático
+  const blockId = block.id || generateBlockId(block);
 
   switch (block.type) {
     case "header": {
