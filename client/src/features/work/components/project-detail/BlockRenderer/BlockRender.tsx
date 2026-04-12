@@ -1,4 +1,3 @@
-import React from "react";
 import { ContentBlock } from "../../../data/types";
 import { blockRegistry } from "./blocks/blockRegistry";
 
