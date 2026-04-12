@@ -13,7 +13,7 @@ const githubIcon = (
 
 const HeroSection = () => {
   return (
-    <Container border_radius="20px" className={styles["hero-section"]}>
+    <Container borderRadius="20px" className={styles["hero-section"]}>
       <div className={styles["hero-section__content"]}>
         <div className={styles["hero-section__text-content"]}>
           <h4 className="headline-small-emphasized text-on-surface">

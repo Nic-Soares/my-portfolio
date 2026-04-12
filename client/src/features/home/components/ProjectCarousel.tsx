@@ -65,7 +65,7 @@ const ProjectCarousel = ({ className }: ProjectCarouselProps) => {
   return (
     <Container
       className={`${styles["project-carousel"]} ${className || ""}`}
-      background_color="transparent"
+      backgroundColor="transparent"
     >
       <div
         className={`${styles["project-carousel__slides-container"]} ${getLayoutClass()}`}
