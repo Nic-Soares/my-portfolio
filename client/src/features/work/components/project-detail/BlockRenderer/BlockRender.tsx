@@ -1,7 +1,6 @@
 import React from "react";
 import { ContentBlock } from "../../../data/types";
-import { CodeBlock } from "../../../../../components/ui/CodeBlock/CodeBlock";
-import { BlockWrapper } from "./BlockWrapper";
+import { blockRegistry } from "./blocks/blockRegistry";
 
 // Gera um ID único para cada bloco
 const generateBlockId = (block: ContentBlock): string => {
@@ -14,61 +13,12 @@ export const BlockRenderer = ({ block }: { block: ContentBlock }) => {
   // Usa o ID fornecido no JSON (âncora) ou gera um automático
   const blockId = block.id || generateBlockId(block);
 
-  switch (block.type) {
-    case "header": {
-      const Tag = `h${block.level}` as "h1" | "h2" | "h3";
-      return (
-        <BlockWrapper id={blockId} isSnug={true}>
-          {React.createElement(Tag, null, block.text)}
-        </BlockWrapper>
-      );
-    }
+  const BlockComponent = blockRegistry[block.type];
 
-    case "paragraph":
-      // dangerouslySetInnerHTML permite usar <strong> dentro do texto do JSON
-      return (
-        <BlockWrapper id={blockId}>
-          <p dangerouslySetInnerHTML={{ __html: block.text }} />
-        </BlockWrapper>
-      );
-
-    case "image":
-      return (
-        <BlockWrapper id={blockId}>
-          <div className="project-img-wrapper">
-            <img src={block.src} alt={block.alt} />
-          </div>
-        </BlockWrapper>
-      );
-
-    case "code":
-      return (
-        <BlockWrapper id={blockId}>
-          <CodeBlock code={block.code} title={block.title} />
-        </BlockWrapper>
-      );
-
-    case "list":
-      return (
-        <BlockWrapper id={blockId}>
-          <ul>
-            {block.items.map((item, idx) => (
-              <li key={idx} dangerouslySetInnerHTML={{ __html: item }} />
-            ))}
-          </ul>
-        </BlockWrapper>
-      );
-
-    case "content-group":
-      // Tipo para agrupar múltiplos elementos HTML dentro do mesmo bloco
-      return (
-        <BlockWrapper
-          id={blockId}
-          dangerouslySetInnerHTML={{ __html: block.html }}
-        />
-      );
-
-    default:
-      return null;
+  if (!BlockComponent) {
+    console.warn(`Block type "${block.type}" is not registered.`);
+    return null; // Fallback: return null if the block type is unknown
   }
+
+  return <BlockComponent block={block} blockId={blockId} />;
 };
