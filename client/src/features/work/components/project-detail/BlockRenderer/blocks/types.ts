@@ -1,6 +1,12 @@
 import { ContentBlock } from "../../../../data/types";
 
-export interface BlockComponentProps<T extends ContentBlock = ContentBlock> {
+export interface BaseBlockComponentProps {
+  block: ContentBlock;
+  blockId?: string;
+}
+
+export interface BlockComponentProps<
+  T extends ContentBlock = ContentBlock,
+> extends BaseBlockComponentProps {
   block: T;
-  blockId: string;
 }

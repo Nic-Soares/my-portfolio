@@ -2,16 +2,9 @@ import React from "react";
 import { ContentBlock } from "../../../data/types";
 import { blockRegistry } from "./blocks/blockRegistry";
 
-// Gera um ID único para cada bloco
-const generateBlockId = (block: ContentBlock): string => {
-  const timestamp = Date.now();
-  const random = Math.random().toString(36).substring(2, 9);
-  return `block-${block.type}-${random}-${timestamp}`;
-};
-
 export const BlockRenderer = ({ block }: { block: ContentBlock }) => {
-  // Usa o ID fornecido no JSON (âncora) ou gera um automático
-  const blockId = block.id || generateBlockId(block);
+  // Use Option A: Only rely on the optional block.id for deterministic anchors
+  const blockId = block.id;
 
   const BlockComponent = blockRegistry[block.type];
 
