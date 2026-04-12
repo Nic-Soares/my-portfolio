@@ -1,6 +1,6 @@
 # ADR-003 — Padrão de Renderização de Blocos
 
-**Status:** Proposto  
+**Status:** Aceito  
 **Data:** 2026-04-12
 **Autor:** Nicolau  
 **Contexto:** Refatoração guiada pelo catálogo de Fowler — branch `refactor/architecture-foundations`
