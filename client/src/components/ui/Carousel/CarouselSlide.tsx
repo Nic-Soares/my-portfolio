@@ -1,15 +1,6 @@
 import styles from "./CarouselSlide.module.css";
 import clsx from "clsx";
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl?: string;
-  technologies?: string[];
-  demoUrl?: string;
-  githubUrl?: string;
-}
+import type { Project } from "@/types/project";
 
 interface CarouselSlideProps {
   project: Project;

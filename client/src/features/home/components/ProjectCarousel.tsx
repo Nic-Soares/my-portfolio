@@ -2,15 +2,7 @@ import { useState } from "react";
 import styles from "./ProjectCarousel.module.css";
 import CarouselSlide from "../../../components/ui/Carousel/CarouselSlide";
 import Container from "@/components/layout/container/Container";
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl?: string;
-  technologies?: string[];
-  demoUrl?: string;
-  githubUrl?: string;
-}
+import type { Project } from "@/types/project";
 
 interface ProjectCarouselProps {
   className?: string;
