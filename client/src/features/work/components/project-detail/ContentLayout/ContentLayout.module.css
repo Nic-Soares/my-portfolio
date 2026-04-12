@@ -1,10 +1,11 @@
 .content-container {
     display: flex;
+    flex-direction: row-reverse;
     justify-content: center;
 }
 
-.carbon-conteiner {
-    flex: 1;
+.carbon-container {
+    flex: 1 1 0%;
     max-width: -moz-fit-content;
     max-width: fit-content;
     overflow: visible;
@@ -13,26 +14,18 @@
 .carbon-component {
     display: block;
     margin-top: 112px;
+    color: var(
+        --mio-theme-color-on-background,
+        var(--md-sys-color-on-background, inherit)
+    );
 }
-
-.right-sidebar {
-    display: block;
-    margin-top: 64px;
-}
-
-
 
 article {
     display: block;
 }
 
 @media screen and (min-width: 1294px) {
-  .carbon-container {
-    margin-left: 116px;
-  }
-}
-
-.summary {
-    width: 156px;
-    margin: 112px 24px 0;
+    .carbon-container {
+        margin-left: 116px;
+    }
 }

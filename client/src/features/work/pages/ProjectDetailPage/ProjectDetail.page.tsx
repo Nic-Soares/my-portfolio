@@ -45,7 +45,7 @@ const ProjectDetailPage: React.FC = () => {
             <ContentLayout
               rightSidebar={
                 <SummaryNav
-                  title="Nesta página"
+                  title={currentTab.title}
                   items={currentTab.sidebarItems || []}
                 />
               }
