@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { projectsData } from "../../../data/projects";
-import type { ProjectTab } from "../../../data/types";
+import { useProjectData } from "../../../hooks/useProjectData";
+import type { ProjectTab } from "../../../data/project-data.types";
 
 /**
  * Hook: useProjectDetail
@@ -14,7 +14,8 @@ import type { ProjectTab } from "../../../data/types";
  */
 export const useProjectDetail = (projectSlug: string | undefined) => {
   // Find the project from the aggregated projects data
-  const project = projectsData.find((p) => p.slug === projectSlug);
+  const { getProjectBySlug } = useProjectData();
+  const project = getProjectBySlug(projectSlug as string);
 
   // Initial selected tab (first tab of the project, if any)
   const initialTabId = project?.tabs[0]?.id;

@@ -1,5 +1,5 @@
 // data/projects.ts
-import { ProjectData } from "../types";
+import { ProjectData } from "../project-data.types";
 import demoVideo from "../../assets/video/Google_Mio_Tokens_1080x1080.mp4";
 
 export const projectsData: ProjectData[] = [

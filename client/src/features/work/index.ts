@@ -7,7 +7,7 @@ export {
   ProjectCard,
   ProjectCardGrid,
   ProjectListHero,
-} from "./components/project-list";
+} from "./components/ProjectList";
 
 // Components - Project Detail
 export {
@@ -15,4 +15,4 @@ export {
   ContentLayout,
   SummaryNav,
   ProjectDetailHero,
-} from "./components/project-detail";
+} from "./components/ProjectDetail";

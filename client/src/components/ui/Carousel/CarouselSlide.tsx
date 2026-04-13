@@ -1,31 +1,27 @@
 import styles from "./CarouselSlide.module.css";
 import clsx from "clsx";
 
-interface Project {
+export interface CarouselItemData {
   id: number;
   title: string;
   description: string;
-  imageUrl?: string;
-  technologies?: string[];
-  demoUrl?: string;
-  githubUrl?: string;
 }
 
 interface CarouselSlideProps {
-  project: Project;
+  item: CarouselItemData;
   isActive: boolean;
-  onSlideClick: (projectId: number) => void;
+  onSlideClick: (itemId: number) => void;
   position?: "middle" | "lateral";
 }
 
 const CarouselSlide = ({
-  project,
+  item,
   isActive,
   onSlideClick,
   position,
 }: CarouselSlideProps) => {
   const handleClick = () => {
-    onSlideClick(project.id);
+    onSlideClick(item.id);
   };
 
   const slideClass = clsx(
@@ -36,8 +32,8 @@ const CarouselSlide = ({
 
   return (
     <div className={slideClass} onClick={handleClick}>
-      <h4>{project.title}</h4>
-      <p>{project.description}</p>
+      <h4>{item.title}</h4>
+      <p>{item.description}</p>
     </div>
   );
 };

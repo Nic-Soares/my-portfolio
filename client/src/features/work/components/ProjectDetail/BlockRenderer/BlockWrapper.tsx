@@ -20,10 +20,7 @@ export const BlockWrapper = ({
   const handleCopyLink = () => {
     if (id) {
       const url = `${window.location.origin}${window.location.pathname}#${id}`;
-      navigator.clipboard.writeText(url).then(() => {
-        // Opcional: adicionar feedback visual (toast, etc.)
-        console.log("Link copiado:", url);
-      });
+      navigator.clipboard.writeText(url);
     }
   };
 

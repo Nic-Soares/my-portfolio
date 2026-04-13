@@ -1,16 +1,8 @@
 import { useState } from "react";
 import styles from "./ProjectCarousel.module.css";
 import CarouselSlide from "../../../components/ui/Carousel/CarouselSlide";
-import Container from "@/components/layout/container/Container";
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl?: string;
-  technologies?: string[];
-  demoUrl?: string;
-  githubUrl?: string;
-}
+import Container from "@/components/layout/Container/Container";
+import type { Project } from "@/types/project";
 
 interface ProjectCarouselProps {
   className?: string;
@@ -75,10 +67,16 @@ const ProjectCarousel = ({ className }: ProjectCarouselProps) => {
           const isActive = slideIndex === currentIndex;
           const position = isActive ? "middle" : "lateral";
 
+          const itemData = {
+            id: project.id,
+            title: project.title,
+            description: project.description,
+          };
+
           return (
             <CarouselSlide
               key={project.id}
-              project={project}
+              item={itemData}
               isActive={isActive}
               onSlideClick={handleSlideClick}
               position={position}
