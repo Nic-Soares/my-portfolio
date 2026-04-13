@@ -1,5 +1,5 @@
 // Pages
-export { default as HomePage } from './routes/Home.page';
+export { default as HomePage } from './pages/Home.page';
 
 // Components (if needed by other features)
 export { default as HeroSection } from './components/HeroSection';
