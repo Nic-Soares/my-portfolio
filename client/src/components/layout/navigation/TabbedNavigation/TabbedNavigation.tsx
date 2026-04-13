@@ -1,16 +1,11 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import styles from "./TabbedNavigation.module.css";
 import TabItem from "./TabItem";
-
-type TabData = {
-  id: string;
-  label?: string;
-  icon?: string;
-  selectedIcon?: string;
-  disabled?: boolean;
-  toggleable?: boolean;
-  visible?: boolean;
-};
+import {
+  TabData,
+  normalizeTabs,
+  getVisibleTabs,
+} from "./TabbedNavigation.utils";
 
 type Props = {
   tabs?: TabData[];
@@ -21,18 +16,6 @@ type Props = {
   buttonStyle?: "filled" | "tonal" | "outline" | "text" | "elevated";
   buttonWidth?: "narrow" | "default" | "wide";
 };
-
-const MIN_VISIBLE_TABS = 2;
-const MAX_VISIBLE_TABS = 5;
-
-function makePlaceholder(index: number): TabData {
-  return {
-    id: `__placeholder_${Date.now()}_${index}`,
-    label: "",
-    disabled: true,
-    visible: true,
-  };
-}
 
 /**
  * TabbedNavigation
@@ -52,54 +35,11 @@ const TabbedNavigation: React.FC<Props> = ({
   buttonWidth = "default",
 }) => {
   // Normalize tabs to respect visibility bounds (but keep invisible items where provided).
-  const normalizedTabs = useMemo<TabData[]>(() => {
-    const provided = Array.isArray(tabs) ? tabs.slice() : [];
-    const visible = provided.filter((t) => t.visible !== false);
-
-    // Trim if too many visible
-    if (visible.length > MAX_VISIBLE_TABS) {
-      const result: TabData[] = [];
-      let visibleCount = 0;
-      for (const t of provided) {
-        if (t.visible === false) {
-          result.push(t);
-          continue;
-        }
-        if (visibleCount < MAX_VISIBLE_TABS) {
-          result.push(t);
-          visibleCount++;
-        } else {
-          // skip
-        }
-      }
-      const trimmedIds = visible.slice(MAX_VISIBLE_TABS).map((t) => t.id);
-      console.warn(
-        `[TabbedNavigation] More than ${MAX_VISIBLE_TABS} visible tabs provided. Trimming: ${trimmedIds.join(
-          ", ",
-        )}`,
-      );
-      return result;
-    }
-
-    // Append placeholders if too few visible
-    if (visible.length < MIN_VISIBLE_TABS) {
-      const needed = MIN_VISIBLE_TABS - visible.length;
-      const result = provided.slice();
-      for (let i = 0; i < needed; i++) {
-        result.push(makePlaceholder(i));
-      }
-      console.warn(
-        `[TabbedNavigation] Fewer than ${MIN_VISIBLE_TABS} visible tabs provided. Appended ${needed} placeholder(s).`,
-      );
-      return result;
-    }
-
-    return provided;
-  }, [tabs]);
+  const normalizedTabs = useMemo(() => normalizeTabs(tabs), [tabs]);
 
   // Only render tabs that are visible
   const renderTabs = useMemo(
-    () => normalizedTabs.filter((t) => t.visible !== false),
+    () => getVisibleTabs(normalizedTabs),
     [normalizedTabs],
   );
 
