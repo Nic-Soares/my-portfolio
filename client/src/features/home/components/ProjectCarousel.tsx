@@ -67,10 +67,16 @@ const ProjectCarousel = ({ className }: ProjectCarouselProps) => {
           const isActive = slideIndex === currentIndex;
           const position = isActive ? "middle" : "lateral";
 
+          const itemData = {
+            id: project.id,
+            title: project.title,
+            description: project.description,
+          };
+
           return (
             <CarouselSlide
               key={project.id}
-              project={project}
+              item={itemData}
               isActive={isActive}
               onSlideClick={handleSlideClick}
               position={position}
