@@ -1,6 +1,6 @@
 import "./ProjectDetailHero.css";
-import TitleCard from "../../shared/title-card/TitleCard";
-import MediaCard from "../../shared/media-card/MediaCard";
+import TitleCard from "../../shared/TitleCard/TitleCard";
+import MediaCard from "../../shared/MediaCard/MediaCard";
 
 interface ProjectDetailHeroProps {
   title: string;

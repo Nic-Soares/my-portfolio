@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "../styles/global.css";
 import "../styles/normalize.css";
 
-import Sidebar from "@/components/layout/sidebar/Sidebar";
+import Sidebar from "@/components/layout/Sidebar/Sidebar";
 import { HomePage as Home } from "@/features/home";
 import { ProjectListPage, ProjectDetailPage } from "@/features/work";
 import NotFound from "@/app/pages/NotFound/NotFound";

@@ -1,5 +1,5 @@
 import ExpertiseCard from "@/features/home/components/ExpertiseCard/ExpertiseCard";
-import Container from "@/components/layout/container/Container";
+import Container from "@/components/layout/Container/Container";
 import styles from "./ExperienceSection.module.css";
 import CompanyLogo from "@/components/ui/CompanyLogo/CompanyLogo";
 

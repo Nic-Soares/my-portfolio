@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import Container from "@/components/layout/container/Container";
+import Container from "@/components/layout/Container/Container";
 import styles from "./MediaCard.module.css";
 
 type MediaCardProps = {

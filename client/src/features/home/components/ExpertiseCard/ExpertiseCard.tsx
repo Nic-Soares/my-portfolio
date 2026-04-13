@@ -1,5 +1,5 @@
 import styles from "./ExpertiseCard.module.css";
-import Container from "@/components/layout/container/Container";
+import Container from "@/components/layout/Container/Container";
 
 interface Expertise {
   icon: string;

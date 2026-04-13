@@ -1,4 +1,4 @@
-import Container from "@/components/layout/container/Container";
+import Container from "@/components/layout/Container/Container";
 import styles from "./HeroSection.module.css";
 import IconButton from "@/components/ui/IconButton/IconButton";
 import Button from "@/components/ui/Button/Button";
