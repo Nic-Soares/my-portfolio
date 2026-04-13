@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState, useRef } from "react";
 import styles from "./TabbedNavigation.module.css";
 import TabItem from "./TabItem";
 
-type TabItem = {
+type TabData = {
   id: string;
   label?: string;
   icon?: string;
@@ -13,7 +13,7 @@ type TabItem = {
 };
 
 type Props = {
-  tabs?: TabItem[];
+  tabs?: TabData[];
   selectedId?: string;
   onSelect?: (id: string) => void;
   className?: string;
@@ -25,7 +25,7 @@ type Props = {
 const MIN_VISIBLE_TABS = 2;
 const MAX_VISIBLE_TABS = 5;
 
-function makePlaceholder(index: number): TabItem {
+function makePlaceholder(index: number): TabData {
   return {
     id: `__placeholder_${Date.now()}_${index}`,
     label: "",
@@ -52,13 +52,13 @@ const TabbedNavigation: React.FC<Props> = ({
   buttonWidth = "default",
 }) => {
   // Normalize tabs to respect visibility bounds (but keep invisible items where provided).
-  const normalizedTabs = useMemo<TabItem[]>(() => {
+  const normalizedTabs = useMemo<TabData[]>(() => {
     const provided = Array.isArray(tabs) ? tabs.slice() : [];
     const visible = provided.filter((t) => t.visible !== false);
 
     // Trim if too many visible
     if (visible.length > MAX_VISIBLE_TABS) {
-      const result: TabItem[] = [];
+      const result: TabData[] = [];
       let visibleCount = 0;
       for (const t of provided) {
         if (t.visible === false) {
@@ -151,7 +151,7 @@ const TabbedNavigation: React.FC<Props> = ({
     };
   }, []);
 
-  const handleClick = (tab: TabItem) => {
+  const handleClick = (tab: TabData) => {
     if (tab.disabled) return;
 
     // toggleable behavior: in uncontrolled mode, clicking the same selected tab toggles off
