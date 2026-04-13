@@ -10,7 +10,7 @@ import {
   SummaryNav,
 } from "../../components/ProjectDetail";
 import { useProjectDetail } from "./hooks/useProjectDetail";
-import type { ContentBlock } from "../../data/types";
+import type { ContentBlock } from "../../data/project-data.types";
 
 const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();

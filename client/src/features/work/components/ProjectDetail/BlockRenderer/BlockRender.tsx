@@ -1,4 +1,4 @@
-import { ContentBlock } from "../../../data/types";
+import { ContentBlock } from "../../../data/project-data.types";
 import { blockRegistry } from "./blocks/blockRegistry";
 
 export const BlockRenderer = ({ block }: { block: ContentBlock }) => {
