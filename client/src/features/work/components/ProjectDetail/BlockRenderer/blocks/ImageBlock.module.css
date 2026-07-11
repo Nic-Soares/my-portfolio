@@ -1,0 +1,90 @@
+.imageBlock {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+}
+
+.figure {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.imageWrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--md-sys-color-outline-variant, #c7c8b8);
+}
+
+.image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+}
+
+.figcaption {
+    display: flex;
+    flex-direction: column;
+}
+
+.caption {
+    font-family: var(--body-medium-font, inherit);
+    font-size: var(--body-medium-size, 0.875rem);
+    font-weight: var(--body-medium-weight, 400);
+    letter-spacing: var(--body-medium-tracking, normal);
+    line-height: var(--body-medium-line-height, 1.5);
+    margin: 8px 10px 0;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.caption p {
+    font-family: var(--body-large-font, inherit);
+    font-size: var(--body-large-size, 1rem);
+    font-weight: var(--body-large-weight, 400);
+    letter-spacing: var(--body-large-tracking, normal);
+    line-height: var(--body-large-line-height, 1.5);
+    margin: 0 0 8px 0; /* Remove top margin for paragraphs inside the caption */
+}
+
+.caption ol {
+    padding-left: 0;
+    list-style: none;
+    counter-reset: item;
+}
+
+.caption ol > li {
+    margin-top: 4px;
+    margin-bottom: 20px;
+    margin-left: 36px;
+    counter-increment: item;
+}
+
+.caption ol > li::before {
+    font-family: var(--label-large-font, inherit);
+    font-size: var(--label-large-size, 0.875rem);
+    font-weight: var(--label-large-weight, 500);
+    letter-spacing: var(--label-large-tracking, normal);
+    line-height: var(--label-large-line-height, 1.5);
+    display: block;
+    width: 24px;
+    height: 32px;
+    margin-top: -4px;
+    margin-right: 10px;
+    margin-left: -36px;
+    float: left;
+    border-radius: 12px;
+    background: var(--md-sys-color-inverse-surface, #303129);
+    color: var(--md-sys-color-inverse-on-surface, #f2f1e5);
+    line-height: 32px;
+    text-align: center;
+    content: counter(item);
+}
+
+.caption ol:global(.decimal) > li::before {
+    content: counter(item, decimal);
+}

@@ -7,6 +7,7 @@ interface BlockWrapperProps {
   children?: React.ReactNode;
   showCopyButton?: boolean;
   isSnug?: boolean;
+  isNested?: boolean;
   dangerouslySetInnerHTML?: { __html: string };
 }
 
@@ -15,6 +16,7 @@ export const BlockWrapper = ({
   children,
   showCopyButton = true,
   isSnug = false,
+  isNested = false,
   dangerouslySetInnerHTML,
 }: BlockWrapperProps) => {
   const handleCopyLink = () => {
@@ -27,11 +29,11 @@ export const BlockWrapper = ({
   return (
     <div
       role="region"
-      className={`${styles.block} ${isSnug ? styles.snug : ""}`}
+      className={`${isNested ? "" : styles.block} ${isSnug ? styles.snug : ""}`.trim()}
       id={id}
     >
       {/* Botão de Copiar Link */}
-      {showCopyButton && id && (
+      {showCopyButton && id && !isNested && (
         <div className={styles["copy-button-container"]}>
           <IconButton
             type="round"
@@ -47,7 +49,7 @@ export const BlockWrapper = ({
       <div className={styles["scroll-target"]}></div>
 
       {/* Conteúdo principal */}
-      <div className={styles.chunk}>
+      <div className={isNested ? "" : styles.chunk}>
         {dangerouslySetInnerHTML ? (
           <div
             className={styles["text-chunk"]}

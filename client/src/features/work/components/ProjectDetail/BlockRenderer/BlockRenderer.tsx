@@ -1,9 +1,17 @@
+import React from "react";
 import { ContentBlock } from "../../../data/project-data.types";
 import { blockRegistry } from "./blocks/blockRegistry";
 
-export const BlockRenderer = ({ block }: { block: ContentBlock }) => {
-  // Use Option A: Only rely on the optional block.id for deterministic anchors
-  const blockId = block.id;
+export const BlockRenderer = ({
+  block,
+  isNested,
+}: {
+  block: ContentBlock;
+  isNested?: boolean;
+}) => {
+  const generatedId = React.useId();
+  // Ensure every block has an ID so the copy link button is always shown
+  const blockId = block.id || `block-${generatedId.replace(/:/g, "")}`;
 
   const BlockComponent = blockRegistry[block.type];
 
@@ -12,5 +20,5 @@ export const BlockRenderer = ({ block }: { block: ContentBlock }) => {
     return null; // Fallback: return null if the block type is unknown
   }
 
-  return <BlockComponent block={block} blockId={blockId} />;
+  return <BlockComponent block={block} blockId={blockId} isNested={isNested} />;
 };

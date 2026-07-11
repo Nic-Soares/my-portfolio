@@ -1,17 +1,63 @@
 // Define todos os tipos de blocos que nosso sistema aceita
 export type ContentBlock =
-  | { type: "header"; level: 1 | 2 | 3; text: string; id?: string }
-  | { type: "paragraph"; text: string; id?: string }
-  | { type: "image"; src: string; alt: string; id?: string }
+  | {
+      type: "header";
+      level: 1 | 2 | 3;
+      text: string;
+      id?: string;
+      snug?: boolean;
+    }
+  | { type: "paragraph"; text: string; id?: string; snug?: boolean }
+  | {
+      type: "image";
+      src: string;
+      alt: string;
+      id?: string;
+      className?: string;
+      aspectRatio?: string;
+      caption?: string;
+      snug?: boolean;
+    }
   | {
       type: "code";
       code: string;
-      language?: string;
+      language: string;
       title?: string;
       id?: string;
+      snug?: boolean;
     }
-  | { type: "list"; items: string[]; id?: string }
-  | { type: "content-group"; html: string; id?: string };
+  | {
+      type: "list";
+      items: string[];
+      ordered?: boolean;
+      id?: string;
+      snug?: boolean;
+    }
+  | {
+      type: "video";
+      src: string;
+      alt?: string;
+      id?: string;
+      className?: string;
+      aspectRatio?: string;
+      caption?: string;
+      snug?: boolean;
+    }
+  | { type: "content-group"; html: string; id?: string; snug?: boolean }
+  | {
+      type: "table";
+      headers: string[];
+      rows: string[][];
+      id?: string;
+      snug?: boolean;
+    }
+  | {
+      type: "columns";
+      columns: ContentBlock[][];
+      layout?: string;
+      id?: string;
+      snug?: boolean;
+    };
 
 // Define a estrutura do menu lateral
 export interface SidebarItem {

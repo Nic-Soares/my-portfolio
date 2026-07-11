@@ -1,25 +1,29 @@
 import React from "react";
 import { BlockComponentProps } from "./types";
 import { BlockWrapper } from "../BlockWrapper";
-import styles from "./ImageBlock.module.css";
+import styles from "./VideoBlock.module.css";
 
-export const ImageBlock: React.FC<
-  BlockComponentProps<Extract<BlockComponentProps["block"], { type: "image" }>>
+export const VideoBlock: React.FC<
+  BlockComponentProps<Extract<BlockComponentProps["block"], { type: "video" }>>
 > = ({ block, blockId, isNested }) => {
   return (
-    <BlockWrapper id={blockId} isNested={isNested}>
-      <div className={styles.imageBlock}>
+    <BlockWrapper id={blockId} isSnug={block.snug} isNested={isNested}>
+      <div className={styles.videoBlock}>
         <figure className={styles.figure}>
-          <div className={styles.imageWrapper}>
-            <img
+          <div className={styles.videoWrapper}>
+            <video
               src={block.src}
-              alt={block.alt}
-              className={`${styles.image} ${block.className || ""}`.trim()}
+              className={`${styles.video} ${block.className || ""}`.trim()}
+              autoPlay
+              loop
+              muted
+              playsInline
               style={
                 block.aspectRatio
                   ? { aspectRatio: block.aspectRatio }
                   : undefined
               }
+              aria-label={block.alt}
             />
           </div>
           {block.caption && (

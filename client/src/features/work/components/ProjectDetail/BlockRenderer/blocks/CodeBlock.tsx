@@ -5,9 +5,9 @@ import { CodeBlock as UICodeBlock } from "../../../../../../components/ui/CodeBl
 
 export const CodeBlock: React.FC<
   BlockComponentProps<Extract<BlockComponentProps["block"], { type: "code" }>>
-> = ({ block, blockId }) => {
+> = ({ block, blockId, isNested }) => {
   return (
-    <BlockWrapper id={blockId}>
+    <BlockWrapper id={blockId} isNested={isNested}>
       <UICodeBlock code={block.code} title={block.title} />
     </BlockWrapper>
   );

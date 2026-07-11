@@ -1,0 +1,56 @@
+.videoBlock {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+}
+
+.figure {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.videoWrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--md-sys-color-outline-variant, #c7c8b8);
+    position: relative;
+    background-color: var(--md-sys-color-surface-container, #efeee2);
+}
+
+.video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+}
+
+.figcaption {
+    display: flex;
+    flex-direction: column;
+    white-space: break-spaces;
+}
+
+.caption {
+    font-family: var(--body-medium-font, inherit);
+    font-size: var(--body-medium-size, 0.875rem);
+    font-weight: var(--body-medium-weight, 400);
+    letter-spacing: var(--body-medium-tracking, normal);
+    line-height: var(--body-medium-line-height, 1.5);
+    margin: 8px 10px 0;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.caption p {
+    font-family: var(--body-large-font, inherit);
+    font-size: var(--body-large-size, 1rem);
+    font-weight: var(--body-large-weight, 400);
+    letter-spacing: var(--body-large-tracking, normal);
+    line-height: var(--body-large-line-height, 1.5);
+    margin: 0 0 8px 0;
+}

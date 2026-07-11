@@ -6,9 +6,9 @@ export const ParagraphBlock: React.FC<
   BlockComponentProps<
     Extract<BlockComponentProps["block"], { type: "paragraph" }>
   >
-> = ({ block, blockId }) => {
+> = ({ block, blockId, isNested }) => {
   return (
-    <BlockWrapper id={blockId}>
+    <BlockWrapper id={blockId} isSnug={block.snug} isNested={isNested}>
       <p dangerouslySetInnerHTML={{ __html: block.text }} />
     </BlockWrapper>
   );
