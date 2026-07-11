@@ -1,6 +1,5 @@
 // data/projects.ts
 import { ProjectData } from "../project-data.types";
-import demoVideo from "../../assets/video/Google_Mio_Tokens_1080x1080.mp4";
 
 export const projectsData: ProjectData[] = [
   {
@@ -9,7 +8,7 @@ export const projectsData: ProjectData[] = [
     description: "Plataforma fullstack de streaming de música.",
     hero: {
       type: "video",
-      src: demoVideo,
+      src: "https://kstatic.googleusercontent.com/files/e6ea31bb6dd2afb85d0b22d03faaafd95ccea9f5c1cca45028d33c33cc6488c7f770b455d43968d9fdb2ae5123d300663d1471dd050f18f8ed023b1b1a614477",
       alt: "Demonstração do Clone do Spotify",
     },
     tabs: [
