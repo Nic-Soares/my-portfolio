@@ -33,21 +33,13 @@ export function useTabbedNavigation({
   const navRef = useRef<HTMLElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
-  const currentSelectedId = isControlled ? selectedId : internalSelectedId;
+  // Derive a valid selected id during render instead of syncing via an effect
+  // (avoids cascading re-renders from calling setState inside useEffect).
+  const derivedSelectedId = renderTabs.some((t) => t.id === internalSelectedId)
+    ? internalSelectedId
+    : renderTabs[0]?.id;
 
-  // Keep internal selected id valid if renderTabs changes (uncontrolled mode)
-  useEffect(() => {
-    if (isControlled) return;
-    if (!renderTabs.length) {
-      setInternalSelectedId(undefined);
-      return;
-    }
-    const exists = renderTabs.some((t) => t.id === internalSelectedId);
-    if (!exists) {
-      setInternalSelectedId(renderTabs[0].id);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [renderTabs, isControlled]);
+  const currentSelectedId = isControlled ? selectedId : derivedSelectedId;
 
   // Detect sticky state using IntersectionObserver
   useEffect(() => {
@@ -58,7 +50,7 @@ export function useTabbedNavigation({
       ([entry]) => {
         setIsSticky(!entry.isIntersecting);
       },
-      { threshold: [1] },
+      { threshold: 0 },
     );
 
     observer.observe(sentinel);
