@@ -6,7 +6,7 @@ export const referenceData: ProjectData = {
   description: "Elevation is the distance between two surfaces on the z-axis",
   hero: {
     type: "image",
-    src: "https://via.placeholder.com/1200x600/e0e0e0/000000?text=Elevation+Hero",
+    src: "https://kstatic.googleusercontent.com/files/e6ea31bb6dd2afb85d0b22d03faaafd95ccea9f5c1cca45028d33c33cc6488c7f770b455d43968d9fdb2ae5123d300663d1471dd050f18f8ed023b1b1a614477",
     alt: "Elevation",
   },
   tabs: [
@@ -14,7 +14,6 @@ export const referenceData: ProjectData = {
       id: "overview",
       title: "Overview",
       sidebarItems: [
-        { label: "Elevation", anchorId: "elevation" },
         { label: "Availability & resources", anchorId: "availability" },
         { label: "Differences from M2", anchorId: "differences" },
         { label: "All surfaces and components", anchorId: "surfaces" },
@@ -22,15 +21,6 @@ export const referenceData: ProjectData = {
       content: [
         {
           id: "elevation",
-          type: "header",
-          level: 2,
-          text: "Elevation",
-        },
-        {
-          type: "paragraph",
-          text: "Elevation is the distance between two surfaces on the z-axis.",
-        },
-        {
           type: "list",
           items: [
             "Elevation is applied to all surfaces and components",
@@ -44,25 +34,22 @@ export const referenceData: ProjectData = {
         {
           type: "paragraph",
           text: "Elevation is measured as the distance between components along the z-axis in density-independent pixels (dps).",
+          snug: true,
         },
         {
           type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Diagram+1",
+          src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykafum-1.png?alt=media&token=686eda7a-aed0-4d34-a749-0b01f2a50a86",
           alt: "1 diagram shows a light purple square and a darker purple square. A second one shows a side view of the squares in elevation, showing that the light square is lower in elevation than the dark square.",
-        },
-        {
-          type: "paragraph",
-          text: "Elevation represents the distance between elements. The product applies color to represent elevation.",
-        },
-        {
-          type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Diagram+2",
-          alt: "One surface at 1dp elevation and another surface at 8dp elevation, as viewed from the front",
-        },
-        {
-          type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Diagram+3",
-          alt: "The difference in elevation between the two surfaces is 7dp, as viewed from the side",
+          aspectRatio: "3.413333 / 1",
+          caption: `<p>Elevation represents the distance between elements. The product applies color to represent elevation.</p>
+          <ol class="decimal">
+              <li>
+                  <p>One surface at 1dp elevation and another surface at 8dp elevation, as viewed from the front</p>
+              </li>
+              <li>
+                  <p>The difference in elevation between the two surfaces is 7dp, as viewed from the side</p>
+              </li>
+          </ol>`,
         },
         {
           id: "availability",
@@ -71,13 +58,14 @@ export const referenceData: ProjectData = {
           text: "Availability & resources",
         },
         {
-          type: "list",
-          items: [
-            "<strong>Design Kit (Figma):</strong> Available",
-            "<strong>Flutter:</strong> Available",
-            "<strong>Jetpack Compose:</strong> Available",
-            "<strong>MDC - Android:</strong> Available",
-            "<strong>MWC - Web:</strong> Available",
+          type: "table",
+          headers: ["", "Resource", "Status"],
+          rows: [
+            ["Design", "Design Kit (Figma)", "Available"],
+            ["Implementation", "Flutter", "Available"],
+            ["", "Jetpack Compose", "Available"],
+            ["", "MDC - Android", "Available"],
+            ["", "MWC - Web", "Available"],
           ],
         },
         {
@@ -87,22 +75,36 @@ export const referenceData: ProjectData = {
           text: "Differences from M2",
         },
         {
-          type: "list",
-          items: [
-            "<strong>Shadows:</strong> Instead of applying shadows by default to all levels, use shadows only when required to create additional protection against a background or to encourage interaction",
-            "<strong>Color:</strong> New color mappings and compatibility with dynamic color",
-            "<strong>Levels:</strong> Elevation is now described in terms of levels",
+          type: "columns",
+          columns: [
+            [
+              {
+                type: "list",
+                items: [
+                  "<strong>Shadows:</strong> Instead of applying shadows by default to all levels, use shadows only when required to create additional protection against a background or to encourage interaction",
+                  "<strong>Color:</strong> New color mappings and compatibility with dynamic color",
+                  "<strong>Levels:</strong> Elevation is now described in terms of levels",
+                ],
+              },
+            ],
+            [
+              {
+                type: "image",
+                src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykc8yv-2.png?alt=media&token=7c4a4e4e-ff37-47d2-a375-579c3f945893",
+                alt: "Diagram of 2 concentric squares. The inner square is at 12dp and has a larger shadow than the outer square, which is at 3dp. M2: Shadows applied at all levels",
+                caption: "<p>M2: Shadows applied at all levels</p>",
+              },
+            ],
+            [
+              {
+                type: "image",
+                src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykckey-3.png?alt=media&token=fd1c5548-7048-4d2c-9123-17308e339731",
+                alt: "Diagram of 2 concentric squares without shadows. Instead, the inner square is at level and tonally darker than the outer square, which is at level 2. M3: Using color instead of shadows to communicate elevation",
+                caption:
+                  "<p>M3: Using color instead of shadows to communicate elevation</p>",
+              },
+            ],
           ],
-        },
-        {
-          type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=M2+Shadows",
-          alt: "Diagram of 2 concentric squares. The inner square is at 12dp and has a larger shadow than the outer square, which is at 3dp. M2: Shadows applied at all levels",
-        },
-        {
-          type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=M3+Color",
-          alt: "Diagram of 2 concentric squares without shadows. Instead, the inner square is at level and tonally darker than the outer square, which is at level 2. M3: Using color instead of shadows to communicate elevation",
         },
         {
           id: "surfaces",
@@ -111,20 +113,34 @@ export const referenceData: ProjectData = {
           text: "All surfaces and components have elevation values",
         },
         {
-          type: "paragraph",
-          text: "Surfaces at different elevations do the following:",
-        },
-        {
-          type: "list",
-          items: [
-            "Allow surfaces to move in front of and behind other surfaces, such as content scrolling behind app bars",
-            "Reflect spatial relationships, such as how a FAB's shadow indicates it's separate from a card collection",
-            "Focus attention on the highest elevation, such as a dialog temporarily appearing in front of other surfaces",
+          type: "columns",
+          layout: "1-2",
+          columns: [
+            [
+              {
+                type: "paragraph",
+                text: "Surfaces at different elevations do the following:",
+              },
+              {
+                type: "list",
+                ordered: true,
+                items: [
+                  "Allow surfaces to move in front of and behind other surfaces, such as content scrolling behind app bars",
+                  "Reflect spatial relationships, such as how a FAB's shadow indicates it's separate from a card collection",
+                  "Focus attention on the highest elevation, such as a dialog temporarily appearing in front of other surfaces",
+                ],
+              },
+            ],
+            [
+              {
+                type: "video",
+                src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykjf69-GM3-Styles-Elevation-Overview-1-v01.mp4?alt=media&token=6a6f026f-2264-474b-9b2d-cab3cd08393e",
+                aspectRatio: "1.194346 / 1",
+                caption:
+                  "<p>Elevation can be depicted using shadows or other visual cues, such as surface fills with a tone difference</p>",
+              },
+            ],
           ],
-        },
-        {
-          type: "paragraph",
-          text: "Elevation can be depicted using shadows or other visual cues, such as surface fills with a tone difference",
         },
         {
           type: "header",
@@ -132,13 +148,25 @@ export const referenceData: ProjectData = {
           text: "Resting elevation (default)",
         },
         {
-          type: "paragraph",
-          text: "All components have a default resting elevation. Avoid changing the default elevation of Material components.",
-        },
-        {
-          type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Resting+Elevation",
-          alt: "A floating action button with a shadow. All components have a default elevation which should be used",
+          type: "columns",
+          layout: "1-2",
+          columns: [
+            [
+              {
+                type: "paragraph",
+                text: "All components have a default resting elevation. Avoid changing the default elevation of Material components.",
+              },
+            ],
+            [
+              {
+                type: "image",
+                src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykcxkh-5.png?alt=media&token=d0b226cf-0e17-4719-9f5c-8a186936d003",
+                alt: "A floating action button with a shadow. All components have a default elevation which should be used",
+                caption:
+                  "<p>All components have a default elevation which should be used</p>",
+              },
+            ],
+          ],
         },
         {
           type: "header",
@@ -155,7 +183,7 @@ export const referenceData: ProjectData = {
         },
         {
           type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Hovering",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Hovering",
           alt: "Hovering over a button increases its elevation to show user interaction",
         },
       ],
@@ -185,7 +213,7 @@ export const referenceData: ProjectData = {
         },
         {
           type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Diagram+5+elevation+levels",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Diagram+5+elevation+levels",
           alt: "Diagram showing the 5 elevation levels and their respective dp values.",
         },
         {
@@ -216,7 +244,7 @@ export const referenceData: ProjectData = {
         },
         {
           type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Overlapping+surfaces",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Overlapping+surfaces",
           alt: "3 images. The first shows a violet square overlapping a white square. The second shows 2 overlapping squares with the same color, but with shadows beneath the top square. The third shows a violet square overlapping a dark gray square.",
         },
         {
@@ -250,7 +278,7 @@ export const referenceData: ProjectData = {
         },
         {
           type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Separation+methods",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Separation+methods",
           alt: "Elevation, scrim, and tonal differences used to indicate separation.",
         },
         {
@@ -273,7 +301,7 @@ export const referenceData: ProjectData = {
         },
         {
           type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Surface+color+roles",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Surface+color+roles",
           alt: "Diagram of email home screen with 1 indicating the list item background color and 2 indicating the navigation bar background color.",
         },
         {
@@ -292,12 +320,12 @@ export const referenceData: ProjectData = {
         },
         {
           type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Podcast+app+shadows+1",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Podcast+app+shadows+1",
           alt: "Podcast app with each show displayed as a card separated from the background using small dark shadows.",
         },
         {
           type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Podcast+app+shadows+2",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Podcast+app+shadows+2",
           alt: "Podcast app with each show displayed as a card separated from the background using more fuzzy and diffused shadows.",
         },
         {
@@ -316,7 +344,7 @@ export const referenceData: ProjectData = {
         },
         {
           type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Buttons+with+shadows",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Buttons+with+shadows",
           alt: "Buttons with shadows separating them from a background image.",
         },
         {
@@ -339,7 +367,7 @@ export const referenceData: ProjectData = {
         },
         {
           type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=News+app+scrim",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=News+app+scrim",
           alt: "Large screen news app with a navigation rail separated from the body content by a scrim.",
         },
       ],
@@ -365,7 +393,7 @@ export const referenceData: ProjectData = {
         },
         {
           type: "image",
-          src: "https://via.placeholder.com/800x400/e0e0e0/000000?text=Elevation+Tokens",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Elevation+Tokens",
           alt: "Elevation levels 0 to +5 with Surface tint color",
         },
         {
