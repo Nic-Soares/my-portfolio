@@ -1,0 +1,43 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 840px;
+    margin: 0;
+}
+
+.date {
+  margin-bottom: 16px;
+  font-family: var(--body-large-font);
+  opacity: 0.8;
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  margin-top: 16px;
+  font-family: var(--title-large-font);
+  font-size: var(--title-large-size);
+}
+
+/* --- Lógica de Tamanhos (SM, MD, Default) --- */
+/* Mantive a lógica original suas de variações aqui */
+
+/* Exemplo simplificado para MD */
+.sizeMd h1 {
+  font-family: var(--display-large-font);
+  font-size: 88px;
+  line-height: 96px;
+}
+
+@media (max-width: 1294px) {
+  .sizeMd h1 { font-size: 72px; }
+}
+@media (max-width: 600px) {
+  .sizeMd h1 { font-size: 44px; }
+}
+
+/* Adicione as classes .sizeSm e padrão conforme seu arquivo original */

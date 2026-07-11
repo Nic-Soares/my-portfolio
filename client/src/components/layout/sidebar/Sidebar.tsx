@@ -1,47 +1,33 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./Sidebar.module.css";
-import NavRail from "@/components/common/navigation/navigation-rail/NavRail";
-import { NavItem } from "@/components/common/navigation/navigation-rail/NavItem";
-import type { SidebarProps } from "@/types";
-import IconButton from "@/components/common/buttons/icon-button/IconButton";
+import NavigationRail from "../navigation/NavigationRail/NavigationRail";
+import { NavItem } from "../navigation/NavigationRail/NavItem";
+import IconButton from "@/components/ui/IconButton/IconButton";
 
-function Sidebar({ activePage, setActivePage }: SidebarProps) {
+function Sidebar() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const isHome = location.pathname === "/";
+  const isProjects = location.pathname.startsWith("/projects");
+
   return (
     <aside className={styles.sidebar}>
-      <NavRail>
+      <NavigationRail>
         <NavItem
           icon="home"
           label="Home"
-          selected={activePage === "Home"}
-          onClick={() => setActivePage("Home")}
+          selected={isHome}
+          onClick={() => navigate("/")}
         />
         <NavItem
           icon="folder"
           label="Projects"
-          selected={activePage === "Projects"}
-          onClick={() => setActivePage("Projects")}
+          selected={isProjects}
+          onClick={() => navigate("/projects")}
         />
-        <NavItem
-          icon="description"
-          label="Project Detail"
-          selected={activePage === "ProjectDetail"}
-          onClick={() => setActivePage("ProjectDetail")}
-        />
-        <NavItem
-          icon="concierge"
-          label="Services"
-          selected={activePage === "Services"}
-          onClick={() => setActivePage("Services")}
-          disabled={true}
-        />
-        <NavItem
-          icon="account_circle"
-          label="About me"
-          selected={activePage === "About me"}
-          onClick={() => setActivePage("About me")}
-          disabled={true}
-        />
-      </NavRail>
-      <NavRail className={styles["nav-footer"]}>
+      </NavigationRail>
+      <NavigationRail className={styles["nav-footer"]}>
         <IconButton
           type="round"
           size="medium"
@@ -59,7 +45,7 @@ function Sidebar({ activePage, setActivePage }: SidebarProps) {
           icon="dark_mode"
           selectedIcon="light_mode"
         />
-      </NavRail>
+      </NavigationRail>
     </aside>
   );
 }

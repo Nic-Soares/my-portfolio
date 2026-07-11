@@ -1,0 +1,120 @@
+import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup";
+import styles from "./ProjectCard.module.css";
+import type { ReactNode, KeyboardEvent } from "react";
+
+type WorkCategory =
+  | "Frontend"
+  | "Backend"
+  | "Mobile"
+  | "Data"
+  | "DevOps"
+  | "Design";
+type SizeOption = "xsmall" | "small" | "medium" | "large" | "xlarge";
+
+interface ButtonOption {
+  label: string;
+  icon?: string | ReactNode;
+  selectedIcon?: string | ReactNode;
+  disabled?: boolean;
+}
+
+interface ProjectCardProps {
+  // Project-specific props
+  categories?: WorkCategory[];
+  title?: string;
+  company?: string;
+  imageUrl?: string;
+
+  // ConnectedButtonGroup props
+  buttonGroupSize?: SizeOption;
+  buttonGroupOptions?: ButtonOption[];
+  selectedIndex?: number;
+  onSelectionChange?: (index: number) => void;
+  allowDeselect?: boolean;
+  selectable?: boolean;
+  interactive?: boolean;
+
+  // Button-like props
+  onClick?: () => void;
+  disabled?: boolean;
+  tabIndex?: number;
+}
+
+const ProjectCard = ({
+  categories = ["Frontend", "Backend", "Data"],
+  title = "Project Title",
+  company = "Company Name",
+  imageUrl,
+  buttonGroupSize = "small",
+  buttonGroupOptions,
+  selectedIndex,
+  onSelectionChange,
+  allowDeselect = true,
+  selectable = false,
+  interactive = true,
+  onClick,
+  disabled = false,
+  tabIndex = 0,
+}: ProjectCardProps) => {
+  // Use buttonGroupOptions if provided, otherwise convert categories to options
+  const options =
+    buttonGroupOptions ||
+    categories.map((category) => ({
+      label: category,
+    }));
+
+  const handleClick = () => {
+    if (disabled) return;
+    onClick?.();
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (disabled) return;
+    // Ativar com Enter ou Space
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onClick?.();
+    }
+  };
+
+  const className = [
+    styles["project-card"],
+    disabled ? styles["project-card--disabled"] : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <button
+      className={className}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      disabled={disabled}
+      tabIndex={disabled ? -1 : tabIndex}
+      type="button"
+    >
+      <div className={styles["project-card__content"]}>
+        <div className={styles["project-card__preview"]}>
+          {imageUrl && <img src={imageUrl} alt={title} />}
+        </div>
+        <div className={styles["project-card__info"]}>
+          <ConnectedButtonGroup
+            options={options}
+            size={buttonGroupSize}
+            selectedIndex={selectedIndex}
+            onSelectionChange={onSelectionChange}
+            allowDeselect={allowDeselect}
+            selectable={selectable}
+            interactive={interactive}
+          />
+          <div className="project-card__details">
+            <h3 className={styles["project-card__header"]}>{title}</h3>
+            <p className={styles["project-card__subtitle"]}>{company}</p>
+          </div>
+        </div>
+      </div>
+    </button>
+  );
+};
+
+export default ProjectCard;

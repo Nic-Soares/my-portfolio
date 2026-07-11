@@ -1,0 +1,62 @@
+.block {
+    display: grid;
+    position: relative;
+    max-width: 1112px;
+    width: 100%;
+    margin: 0px auto;
+    padding-bottom: 104px;
+    gap: 20px;
+    grid-template-columns: 68px repeat(auto-fit, minmax(calc(25% - 20px), 1fr));
+    overflow-x: visible;
+}
+
+.block.snug {
+    padding-bottom: 56px;
+}
+
+/* Copy button container positioned on the left */
+.copy-button-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    z-index: 5;
+    grid-column: 1;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.block:hover .copy-button-container,
+.copy-button-container:focus-within {
+    opacity: 1;
+}
+
+.scroll-target {
+    position: absolute;
+    top: -120px;
+}
+
+.chunk {
+    display: block;
+    grid-column: 2 / -1;
+}
+
+/* Text chunk styles */
+.text-chunk > :first-child {
+    margin-top: 0;
+}
+
+.text-chunk > :last-child {
+    margin-bottom: 0;
+}
+
+.text-chunk p {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    max-width: 760px;
+}
+
+.text-chunk ul,
+.text-chunk ol {
+    max-width: 760px;
+}

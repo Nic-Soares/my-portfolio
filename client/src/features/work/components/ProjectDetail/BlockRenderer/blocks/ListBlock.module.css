@@ -1,0 +1,60 @@
+.listBlock {
+    margin: 0;
+    padding-left: 0;
+    width: 100%;
+}
+
+.unorderedList {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.orderedList {
+    list-style: none;
+    counter-reset: custom-counter;
+}
+
+.listItem {
+    margin-bottom: 8px;
+    font-family: var(--body-medium-font, inherit);
+    font-size: var(--body-medium-size, 1rem);
+    font-weight: var(--body-medium-weight, 400);
+    letter-spacing: var(--body-medium-tracking, normal);
+    line-height: var(--body-medium-line-height, 1.5);
+    color: var(--md-sys-color-on-surface, #1b1c15);
+}
+
+.orderedList .listItem {
+    position: relative;
+    padding-left: 36px;
+    counter-increment: custom-counter;
+    margin-bottom: 20px;
+}
+
+.orderedList .listItem::before {
+    font-family: var(--label-large-font, inherit);
+    font-size: var(--label-large-size, 0.875rem);
+    font-weight: var(--label-large-weight, 500);
+    letter-spacing: var(--label-large-tracking, normal);
+    line-height: var(--label-large-line-height, 1.5);
+    display: block;
+    width: 24px;
+    height: 32px;
+    position: absolute;
+    left: 0;
+    top: -4px;
+    border-radius: 12px;
+    background: var(--md-sys-color-inverse-surface, #303129);
+    color: var(--md-sys-color-inverse-on-surface, #f2f1e5);
+    line-height: 32px;
+    text-align: center;
+    content: counter(custom-counter);
+}
+
+.listItem > :first-child {
+    margin-top: 0;
+}
+
+.listItem > :last-child {
+    margin-bottom: 0;
+}

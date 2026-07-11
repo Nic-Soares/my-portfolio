@@ -1,0 +1,112 @@
+/* Page layout for Project Detail */
+.page-content {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 64px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.page-content-height {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+}
+
+.content-conteiner {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    width: 100%;
+}
+
+.article-page {
+    display: block;
+    width: 100%;
+    max-width: 1760px;
+    min-height: 100vh;
+    margin: 8px auto;
+    line-height: 1.5;
+    overflow: visible;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Layout com sidebar para conteúdo */
+.contentLayout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 40px;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+
+.contentMain {
+    min-width: 0;
+}
+
+.contentAside {
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+}
+
+/* Summary Navigation (Table of Contents) */
+.summaryNav {
+    padding: 16px;
+    background: var(--md-sys-color-surface-container-low);
+    border-radius: 12px;
+}
+
+.summaryNav h4 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.summaryNav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.summaryNav li {
+    margin: 0;
+    padding: 0;
+}
+
+.summaryNav a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--md-sys-color-on-surface-variant);
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.summaryNav a:hover {
+    background: var(--md-sys-color-surface-container-highest);
+    color: var(--md-sys-color-on-surface);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .contentLayout {
+        grid-template-columns: 1fr;
+        max-width: 720px;
+    }
+
+    .contentAside {
+        display: none;
+    }
+}

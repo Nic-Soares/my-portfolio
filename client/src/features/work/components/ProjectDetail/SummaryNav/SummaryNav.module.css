@@ -1,0 +1,86 @@
+.host {
+    display: block;
+    margin-top: 64px;
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 1295px) {
+    .host {
+        width: 156px;
+        margin: 112px 24px 0;
+    }
+}
+
+.nav {
+    display: block;
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 1295px) {
+    .nav {
+        position: sticky;
+        top: 136px;
+        width: inherit;
+        margin: 0;
+        max-width: 1024px;
+    }
+}
+
+.overline {
+    margin: 0 16px 8px;
+    color: var(--md-sys-color-on-surface-variant, inherit);
+    box-sizing: border-box;
+}
+
+.dynamicTitle {
+    margin: 0 16px 8px;
+    color: var(--md-sys-color-on-surface, inherit);
+    box-sizing: border-box;
+}
+
+.indicator {
+    /* Styling for the active indicator line can go here */
+}
+
+.hide {
+    display: none;
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.listItem {
+    display: block;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.link {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: var(--md-sys-color-on-surface-variant, inherit);
+    font-family: inherit;
+    font-size: 14px;
+    border-radius: 8px;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.link:hover {
+    background-color: var(--md-sys-color-surface-variant, rgba(0, 0, 0, 0.05));
+    color: var(--md-sys-color-on-surface, inherit);
+}
+
+.listItem[aria-current="true"] .link {
+    color: var(--md-sys-color-primary, #000);
+    font-weight: 600;
+}
