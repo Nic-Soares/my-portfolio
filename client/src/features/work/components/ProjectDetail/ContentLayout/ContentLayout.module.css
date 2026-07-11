@@ -14,10 +14,7 @@
 .carbon-component {
     display: block;
     margin-top: 112px;
-    color: var(
-        --mio-theme-color-on-background,
-        var(--md-sys-color-on-background, inherit)
-    );
+    color: var(--md-sys-color-on-background, inherit);
 }
 
 article {
