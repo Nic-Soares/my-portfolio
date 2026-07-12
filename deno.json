@@ -1,9 +1,9 @@
 {
   "nodeModulesDir": "auto",
   "tasks": {
-    "dev": "vite",
-    "build": "deno check client/src/app/main.tsx && vite build",
-    "preview": "vite preview",
+    "dev": "cd client && vite",
+    "build": "deno check client/src/app/main.tsx && cd client && vite build",
+    "preview": "cd client && vite preview",
     "typecheck": "deno check client/src/app/main.tsx",
     "lint": "deno run -A npm:@biomejs/biome@2 lint .",
     "format": "deno run -A npm:@biomejs/biome@2 format --write .",

@@ -8,16 +8,15 @@ const rootDir = import.meta.dirname;
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
-  root: "client",
   publicDir: "public",
   build: {
-    outDir: join(rootDir, "dist/client"),
+    outDir: join(rootDir, "../dist/client"),
     emptyOutDir: true,
   },
   resolve: {
     alias: {
-      "@": join(rootDir, "client/src"),
-      "@assets": join(rootDir, "client/src/assets"),
+      "@": join(rootDir, "src"),
+      "@assets": join(rootDir, "src/assets"),
     },
   },
 });

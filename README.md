@@ -7,71 +7,67 @@ Um portfólio moderno desenvolvido com React, TypeScript e Material Design 3, ap
 ```
 my-portfolio/
 ├── client/                         # Frontend React
-│   ├── assets/                     # Assets estáticos
-│   │   ├── favicon/               # Favicons e manifesto
-│   │   ├── icons/                 # Ícones SVG
-│   │   ├── images/                # Imagens do projeto
-│   │   └── logos/                 # Logos de empresas
-│   ├── public/                    # Arquivos públicos
-│   ├── src/                       # Código fonte React
-│   │   ├── components/            # Componentes React
-
-│   │   │   ├── common/           # Componentes reutilizáveis
-│   │   │   ├── layout/           #
- Componentes de layout
-│   │   │   └── sections/         # Seções específicas
-│   │   ├── style/                # Estilos globais
-│   │   ├── main.tsx              # Entry point
-│   │   └── App.tsx               # Componente principal
-│   ├── index.html                 # Template HTML
-│   ├── tsconfig.json             # Config TypeScript (client)
-│   └── tsconfig.node.json        # Config TypeScript (Node)
+│   ├── index.html                  # Template HTML (raiz do app Vite)
+│   ├── vite.config.ts              # Configuração Vite (local ao client)
+│   ├── public/                     # Assets estáticos servidos como estão
+│   └── src/
+│       ├── app/                    # Bootstrap, App.tsx, rotas, páginas raiz
+│       ├── components/             # Componentes reutilizáveis (layout, ui)
+│       ├── features/               # Módulos por domínio (home, work)
+│       ├── styles/                 # CSS global, temas, tipografia
+│       ├── types/                  # Tipos e module declarations globais
+│       └── main.tsx                # Entry point
 │
-├── server/                        # Backend (futuro)
-│   └── [estrutura do servidor]
+├── docs/adr/                       # Architecture Decision Records
 │
-├── shared/                        # Código compartilhado
-│   └── types/                     # Tipos TypeScript
-│       └── types.ts              # Interfaces e tipos
-│
-├── dist/                          # Build compilado
-│
-├── .gitignore
-├── package.json                   # Dependências principais
-├── tsconfig.json                  # Config TypeScript raiz
-├── vite.config.ts                # Configuração Vite
+├── deno.json                       # Manifesto único: deps, tasks, compilerOptions
+├── deno.lock                       # Lockfile do Deno
+├── biome.json                      # Configuração de lint/format (Biome)
 └── README.md
 ```
 
+> `server/` (backend) ainda não existe neste repositório — vai ser adicionado como um workspace separado quando começar a ser desenvolvido.
+
 ## 🚀 Tecnologias Utilizadas
 
-- **Frontend**: React 18, TypeScript
-- **Build Tool**: Vite
+- **Runtime**: Deno
+- **Frontend**: React 19, TypeScript
+- **Build Tool**: Vite (rodando via `npm:vite` sob Deno, sem Node instalado)
 - **UI Framework**: Material Design 3 (Material Web Components)
 - **Styling**: CSS Modules
-- **Icons**: Material Symbols, SVG Components
-- **Fonts**: Roboto, Material Symbols
+- **Lint/Format**: Biome
+- **Icons**: Material Symbols, SVG Components (via `vite-plugin-svgr`)
 
 ## 📦 Instalação e Execução
 
 ### Pré-requisitos
-- Node.js 18+ 
-- npm ou yarn
+- [Deno](https://deno.com) 2.x
+
+Não é necessário Node.js, npm nem `node_modules` gerenciado manualmente — o Deno resolve as dependências `npm:` declaradas em `deno.json` sob demanda.
 
 ### Comandos
 
 ```bash
-# Instalar dependências
-npm install
-
-# Executar em modo desenvolvimento
-npm run dev
+# Modo desenvolvimento (hot reload)
+deno task dev
 
 # Build para produção
-npm run build
+deno task build
 
-# Preview da build
-npm run preview
+# Preview da build de produção
+deno task preview
+
+# Checagem de tipos (deno check)
+deno task typecheck
+
+# Lint (Biome)
+deno task lint
+
+# Format (Biome)
+deno task format
+
+# Lint + format + organização de imports, com fixes
+deno task check
 ```
 
 ## 🎨 Sistema de Design
@@ -85,60 +81,53 @@ O projeto utiliza Material Design 3 com:
 
 ## 📁 Aliases de Importação
 
-O projeto está configurado com aliases para facilitar imports:
+O projeto está configurado com aliases para facilitar imports, declarados tanto no import map do `deno.json` quanto no `resolve.alias` do `client/vite.config.ts`:
 
 ```typescript
-// Componentes e código fonte
-import Component from '@/components/Component'
+// Componentes e código fonte (client/src/*)
+import Sidebar from "@/components/layout/Sidebar/Sidebar.tsx";
 
 // Assets (logos, ícones, imagens)
-import Logo from '@assets/logos/logo.svg?react'
-
-// Tipos compartilhados
-import type { Company } from '@shared/types/types'
+import Logo from "@assets/logos/logo.svg?react";
 ```
 
-### Vantagens dos Path Aliases:
-- ✅ **Imports mais limpos**: `@shared/types/types` ao invés de `../../../shared/types/types`
-- ✅ **Facilita refatoração**: Não quebra quando você move arquivos
-- ✅ **Melhor organização**: Separa tipos compartilhados em `shared/`
-- ✅ **Autocompletar**: Funciona perfeitamente no VS Code
-- ✅ **Menos erros**: Não precisa contar `../../../`
+Imports relativos e por alias usam **extensão explícita** (`.ts`/`.tsx`/`/index.ts`) — é assim que `deno check` resolve módulos, ao contrário do `moduleResolution: "bundler"` do `tsc`, que infere extensões automaticamente.
 
 ## 🔧 Configuração
 
+### Deno
+- `deno.json` é o único manifesto do projeto: import map (dependências via `npm:`), `compilerOptions` e `tasks`.
+- `nodeModulesDir: "auto"` — o Deno gerencia um `node_modules/` internamente apenas para compatibilidade com o Vite e seus plugins, que ainda esperam esse layout.
+- `deno check` é o único typechecker (não há `tsc`/`typescript` no projeto).
+
 ### Vite
-- **Root**: `client/` - Todo o código frontend
-- **Public**: `client/public/` - Assets estáticos
-- **Build**: `dist/client/` - Build compilado
-- **Plugins**: React, SVGR para importar SVGs como componentes
+- Config em `client/vite.config.ts`, com raiz implícita em `client/` (onde fica o `index.html`).
+- **Public**: `client/public/` — assets estáticos.
+- **Build**: `dist/client/` — build compilado, resolvido relativo ao `client/`.
+- **Plugins**: React, SVGR para importar SVGs como componentes.
+- As tasks do `deno.json` fazem `cd client && vite` via shell nativo do Deno (`deno_task_shell`), não bash/Node.
 
 ### TypeScript
-- Configuração modular com `tsconfig.json` na raiz e específico no client
-- Path mapping configurado para aliases
-- Strict mode habilitado
-- Suporte completo para JSX e React
-
-## 📋 Scripts Disponíveis
-
-- `npm run dev` - Inicia servidor de desenvolvimento
-- `npm run build` - Build para produção
-- `npm run preview` - Preview da build local
-- `npm run lint` - Executa linting (se configurado)
+- `compilerOptions` vive dentro do `deno.json` (não há `tsconfig.json`).
+- `jsx: "react-jsx"` com `jsxImportSource: "react"`.
+- Módulos ambientes (`*.svg?react`, `*.mp4`) declarados em `client/src/types/assets.d.ts` e `client/src/custom.d.ts`, referenciados explicitamente no entry point via `/// <reference path>` — o Deno não inclui `.d.ts` automaticamente como o `tsc` faz.
+- Strict mode habilitado.
 
 ## 🎯 Funcionalidades
 
 - [x] Layout responsivo com sidebar de navegação
-- [x] Sistema de roteamento por estado
+- [x] Roteamento client-side (react-router-dom)
 - [x] Seção Hero com informações pessoais
 - [x] Showcase de empresas parceiras
 - [x] Carousel de projetos
-- [x] Path aliases configurados (@/, @assets, @shared)
+- [x] Listagem e detalhe de projetos com blocos de conteúdo
+- [x] Path aliases configurados (`@/`, `@assets/`)
 - [x] Importação de SVGs como React components
 - [ ] Seção de serviços
 - [ ] Página sobre mim
 - [ ] Sistema de temas (claro/escuro)
 - [ ] Internacionalização (pt/en)
+- [ ] Backend (`server/`)
 
 ## 🤝 Contribuição
 
