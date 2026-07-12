@@ -1,7 +1,9 @@
+/// <reference path="../types/assets.d.ts" />
+/// <reference path="../custom.d.ts" />
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import App from "./App";
+import App from "./App.tsx";
 
 import "@material/web/button/filled-button.js";
 import "@material/web/iconbutton/icon-button.js";

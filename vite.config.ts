@@ -1,7 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { resolve } from "path";
+import { join } from "jsr:@std/path@^1";
 import svgr from "vite-plugin-svgr";
+
+const rootDir = import.meta.dirname;
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -9,13 +11,13 @@ export default defineConfig({
   root: "client",
   publicDir: "public",
   build: {
-    outDir: resolve(__dirname, "dist/client"),
+    outDir: join(rootDir, "dist/client"),
     emptyOutDir: true,
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "client/src"),
-      "@assets": resolve(__dirname, "client/src/assets"),
+      "@": join(rootDir, "client/src"),
+      "@assets": join(rootDir, "client/src/assets"),
     },
   },
 });

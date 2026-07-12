@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+.vite
 
 # Editor directories and files
 .vscode/*
@@ -32,3 +33,4 @@ contexto/
 
 # Working docs (not tracked)
 SETUP-ROADMAP.local.md
+DENO-MIGRATION.local.md
