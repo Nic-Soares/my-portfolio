@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from "./ProjectCarousel.module.css";
-import CarouselSlide from "../../../components/ui/Carousel/CarouselSlide";
-import Container from "@/components/layout/Container/Container";
-import type { Project } from "@/types/project";
+import CarouselSlide from "../../../components/ui/Carousel/CarouselSlide.tsx";
+import Container from "@/components/layout/Container/Container.tsx";
+import type { Project } from "@/types/project.ts";
 
 interface ProjectCarouselProps {
   className?: string;

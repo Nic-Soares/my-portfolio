@@ -1,4 +1,4 @@
-import Container from "@/components/layout/Container/Container";
+import Container from "@/components/layout/Container/Container.tsx";
 import styles from "./TitleCard.module.css";
 
 type TitleCardProps = {

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { projectsData } from "../data/projects";
+import { projectsData } from "../data/projects/index.ts";
 
 export function useProjectData() {
   const getAllProjects = useCallback(() => {

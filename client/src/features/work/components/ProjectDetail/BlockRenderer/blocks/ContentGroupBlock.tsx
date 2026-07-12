@@ -1,6 +1,6 @@
 import React from "react";
-import { BlockComponentProps } from "./types";
-import { BlockWrapper } from "../BlockWrapper";
+import { BlockComponentProps } from "./types.ts";
+import { BlockWrapper } from "../BlockWrapper.tsx";
 
 export const ContentGroupBlock: React.FC<
   BlockComponentProps<

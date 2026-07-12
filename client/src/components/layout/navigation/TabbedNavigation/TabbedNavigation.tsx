@@ -1,12 +1,12 @@
 import React, { useMemo } from "react";
 import styles from "./TabbedNavigation.module.css";
-import TabItem from "./TabItem";
+import TabItem from "./TabItem.tsx";
 import {
   TabData,
   normalizeTabs,
   getVisibleTabs,
-} from "./TabbedNavigation.utils";
-import { useTabbedNavigation } from "./useTabbedNavigation";
+} from "./TabbedNavigation.utils.ts";
+import { useTabbedNavigation } from "./useTabbedNavigation.ts";
 
 type Props = {
   tabs?: TabData[];

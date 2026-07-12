@@ -1,6 +1,6 @@
 import React from "react";
-import { BlockComponentProps } from "./types";
-import { BlockWrapper } from "../BlockWrapper";
+import { BlockComponentProps } from "./types.ts";
+import { BlockWrapper } from "../BlockWrapper.tsx";
 import styles from "./TableBlock.module.css";
 
 export const TableBlock: React.FC<

@@ -1,7 +1,7 @@
 import React from "react";
-import { BlockComponentProps } from "./types";
-import { BlockWrapper } from "../BlockWrapper";
-import { CodeBlock as UICodeBlock } from "../../../../../../components/ui/CodeBlock/CodeBlock";
+import { BlockComponentProps } from "./types.ts";
+import { BlockWrapper } from "../BlockWrapper.tsx";
+import { CodeBlock as UICodeBlock } from "../../../../../../components/ui/CodeBlock/CodeBlock.tsx";
 
 export const CodeBlock: React.FC<
   BlockComponentProps<Extract<BlockComponentProps["block"], { type: "code" }>>

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./BlockWrapper.module.css";
-import IconButton from "../../../../../components/ui/IconButton/IconButton";
+import IconButton from "../../../../../components/ui/IconButton/IconButton.tsx";
 
 interface BlockWrapperProps {
   id?: string;

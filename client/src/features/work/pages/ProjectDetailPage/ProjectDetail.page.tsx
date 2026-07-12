@@ -1,16 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import ProjectDetailHero from "../../components/ProjectDetail/ProjectDetailHero/ProjectDetailHero";
+import ProjectDetailHero from "../../components/ProjectDetail/ProjectDetailHero/ProjectDetailHero.tsx";
 import styles from "./ProjectDetail.page.module.css";
-import NotFound from "@/app/pages/NotFound/NotFound";
-import TabbedNavigation from "@/components/layout/navigation/TabbedNavigation/TabbedNavigation";
+import NotFound from "@/app/pages/NotFound/NotFound.tsx";
+import TabbedNavigation from "@/components/layout/navigation/TabbedNavigation/TabbedNavigation.tsx";
 import {
   BlockRenderer,
   ContentLayout,
   SummaryNav,
-} from "../../components/ProjectDetail";
-import { useProjectDetail } from "./hooks/useProjectDetail";
-import type { ContentBlock } from "../../data/project-data.types";
+} from "../../components/ProjectDetail/index.ts";
+import { useProjectDetail } from "./hooks/useProjectDetail.ts";
+import type { ContentBlock } from "../../data/project-data.types.ts";
 
 const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();

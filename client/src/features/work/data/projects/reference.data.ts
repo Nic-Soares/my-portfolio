@@ -1,4 +1,4 @@
-import { ProjectData } from "../project-data.types";
+import { ProjectData } from "../project-data.types.ts";
 
 export const referenceData: ProjectData = {
   slug: "reference",

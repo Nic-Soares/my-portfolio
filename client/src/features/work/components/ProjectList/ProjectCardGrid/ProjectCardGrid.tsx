@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./ProjectCardGrid.module.css";
-import ProjectCard from "../ProjectCard/ProjectCard";
-import { useProjectData } from "../../../hooks/useProjectData";
+import ProjectCard from "../ProjectCard/ProjectCard.tsx";
+import { useProjectData } from "../../../hooks/useProjectData.ts";
 
 const ProjectCardGrid = () => {
   const navigate = useNavigate();

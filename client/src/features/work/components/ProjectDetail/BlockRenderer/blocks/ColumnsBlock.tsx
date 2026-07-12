@@ -1,7 +1,7 @@
 import React from "react";
-import { BlockComponentProps } from "./types";
-import { BlockWrapper } from "../BlockWrapper";
-import { blockRegistry } from "./blockRegistry";
+import { BlockComponentProps } from "./types.ts";
+import { BlockWrapper } from "../BlockWrapper.tsx";
+import { blockRegistry } from "./blockRegistry.ts";
 import styles from "./ColumnsBlock.module.css";
 
 export const ColumnsBlock: React.FC<

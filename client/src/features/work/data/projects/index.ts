@@ -4,10 +4,10 @@
  * can import a single aggregated source.
  *
  * Example:
- *   import { projectsData } from '@/features/work/data/projects';
+ *   import { projectsData } from '@/features/work/data/projects/index.ts';
  */
 
-import { projectsData as spotifyClone } from "./spotify-clone.data";
-import { referenceData } from "./reference.data";
+import { projectsData as spotifyClone } from "./spotify-clone.data.ts";
+import { referenceData } from "./reference.data.ts";
 
 export const projectsData = [...spotifyClone, referenceData];

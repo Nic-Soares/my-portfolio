@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+import Button from "../Button/Button.tsx";
 import styles from "./ConnectedButtonGroup.module.css";
 import type { ReactNode } from "react";
 import { useState } from "react";

@@ -1,4 +1,4 @@
-import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup";
+import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup.tsx";
 import styles from "./ProjectCard.module.css";
 import type { ReactNode, KeyboardEvent } from "react";
 

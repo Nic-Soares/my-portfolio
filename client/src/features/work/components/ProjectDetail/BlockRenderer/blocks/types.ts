@@ -1,4 +1,4 @@
-import { ContentBlock } from "../../../../data/project-data.types";
+import { ContentBlock } from "../../../../data/project-data.types.ts";
 
 export interface BaseBlockComponentProps {
   block: ContentBlock;

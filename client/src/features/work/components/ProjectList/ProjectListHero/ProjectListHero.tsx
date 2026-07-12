@@ -1,6 +1,6 @@
-import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup";
+import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup.tsx";
 import styles from "./ProjectListHero.module.css";
-import SearchBar from "@/components/ui/SearchBar/SearchBar";
+import SearchBar from "@/components/ui/SearchBar/SearchBar.tsx";
 
 const options = [
   { label: "Todos" },
