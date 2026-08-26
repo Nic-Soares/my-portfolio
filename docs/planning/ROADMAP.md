@@ -1,0 +1,725 @@
+# Development Roadmap — Portfolio
+
+**Design source:** [Figma — Portfólio](https://www.figma.com/design/5Uw1Nxn0DgG9SU3z0Vb4vh/Portf%C3%B3lio)
+**Repository:** `my-portfolio` (Deno 2 + Vite 7 + React 19 + react-router 7 + CSS Modules + Biome)
+**Last updated:** 2026-08-26
+
+---
+
+## 1. Assumptions
+
+1. **No component library.** `@material/web` is out of date for what the frontend needs. Every Material Design 3 component will be implemented in-repo, in React + CSS Modules, consuming the `--md-sys-*` tokens. Figma remains a visual and variant reference — not a runtime dependency.
+2. **Figma is the source of truth for layout and tokens.** Where the repo and Figma diverge, the repo adjusts — except when the divergence is a Figma bug (see `EP-02`).
+3. **All product copy is in English.** Figma has already been normalized. The repo still has Portuguese in **13 files** — screen copy, project data, and comments (see `ST-01.3`).
+4. **Four breakpoints, matching Figma:** 1920 (Extra-large), 1512 (Large), 744 (Medium), 402 (Compact).
+5. **This backlog covers what's missing and what needs fixing.** What's already shipped is listed in §2.4 only to explain its absence from the backlog.
+6. Epic order is execution order — `EP-03` and `EP-04` are prerequisites for every screen.
+
+---
+
+## 2. Figma → Repository mapping
+
+### 2.1 Pages and routes
+
+| Figma | Repo route | Current implementation | Status |
+|---|---|---|---|
+| Home (1920/1512/744/402) | `/` | `features/home` — Hero, ExpertiseCard, ExperienceSection, ProjectCarousel | **Fix** — hero missing decor, breakpoints misaligned |
+| Projects — Index (1920/1512 + 744/402 × Search/Filter/Selector) | `/projects` | `features/work/ProjectList` — Hero, CardGrid, ProjectCard | **Fix** — filters and search don't filter; tablet/mobile views don't exist |
+| Project — Detail (4 bp) | `/projects/:slug` | `features/work/ProjectDetail` — BlockRenderer (9 blocks), ContentLayout, SummaryNav, Hero | **Fix** — content is M3 doc placeholder; no footer |
+| About Me (4 bp) | — | — | **New** — entire feature |
+| System — 404 | `/404` | `app/pages/NotFound` | **Fix** — align with Figma |
+| System — Under Construction | `/coming-soon` | `app/pages/UnderConstruction` | **Fix** — align with Figma |
+| System — Something Went Wrong (500) | — | — | **New** |
+| System — Loading / Skeleton | — | — | **New** |
+| System — No Projects Found (empty) | — | — | **New** |
+
+### 2.2 Components
+
+| Figma | Repo | Status |
+|---|---|---|
+| Navigation Rail (96px, 3 destinations + 2 actions) | `layout/navigation/NavigationRail` + `Sidebar` | **Fix** — 88px, 2 destinations, actions without handlers |
+| TopAppBar (88px, tablet/mobile) | — | **New** |
+| NavigationBar (88px, tablet/mobile) | — | **New** |
+| Tab Bar (component set) | `layout/navigation/TabbedNavigation` | **Check** — exists, verify variant parity |
+| Button (Type × Size × Style × Width) | `ui/Button` | **OK** — variant matrix matches; review focus states |
+| Icon button | `ui/IconButton` | **Check** parity |
+| Input chip | — | **New** — used in filters, skills, and social |
+| Connected button group | `ui/ConnectedButtonGroup` | **OK** |
+| Search bar | `ui/SearchBar` | **OK** — needs wiring to the filter |
+| Card / Card grid | `work/ProjectCard`, `ProjectCardGrid`, `shared/MediaCard`, `shared/TitleCard` | **OK** |
+| Carousel | `ui/Carousel` | **OK** |
+| Linear / Circular progress indicator | — | **New** |
+| Loading indicator (M3 Expressive) | — | **New** |
+| Skeleton | — | **New** |
+| Shape Set (35 M3 shapes) | `assets/images/forms.svg` (partial) | **New** — extract subset as a component |
+| Hero decor (2 glows + clipped shape + ring) | — | **New** |
+| Profile photo (blob) | `assets/images/person-popout.png` | **Check** |
+
+### 2.3 Foundation
+
+| Figma | Repo | Status |
+|---|---|---|
+| `material-theme` collection — Light/Dark + High/Medium contrast | `styles/themes/light.css`, `dark.css` (`body[data-theme=...]`) | **Fix** — no wired toggle; contrast variants missing |
+| `Typescale` collection — Baseline/Expanded/Medium/Compact modes | `styles/typography.css` — `@media` at 1024/768/480 | **Fix** — breakpoints don't match 1512/744/402 |
+| `Shape` collection — Corner/None…Full | scattered across CSS Modules | **New** — extract into tokens |
+| Elevation (5 levels, Light/Dark) | `styles/elevation.css` | **OK** |
+| Font theme (Roboto) | `global.css` uses `system-ui` as the first font | **Fix** — Roboto isn't the effective font |
+
+### 2.4 Out of backlog (already shipped)
+
+Client-side routing · `@/` and `@assets/` aliases · SVG as component (svgr) · migration to Deno as the single manifest · Biome in place of ESLint · BlockRenderer with 9 block types (Code, Columns, ContentGroup, Header, Image, List, Paragraph, Table, Video) · typed project data layer · 3 ADRs · elevation tokens · Carousel · Card grid.
+
+---
+
+## 3. Execution order
+
+```
+EP-01 Baseline ──┬── EP-03 Tokens ── EP-04 Components ──┬── EP-06 Home
+EP-02 Design ────┘                          │            ├── EP-07 About Me
+                                            │            ├── EP-08 Projects Index
+                                   EP-05 App Shell ──────┼── EP-09 Project Detail
+                                                         └── EP-10 System States
+                                                                  │
+                                                    EP-11 i18n ───┴── EP-12 Quality
+```
+
+---
+
+## EP-01 — Baseline and repository hygiene
+
+**Goal:** get a clean tree with a safety net before touching product code.
+**Dependencies:** none. **Size:** S.
+
+### ST-01.0 — Run the dependency upgrade runbook
+
+> **As a** dev, **I want** the toolchain up to date before starting any other work, **so that** the rest of the backlog is built on current dependencies instead of drifting further behind.
+
+Context: this is the first thing to do, before `ST-01.1`. Follow [`docs/runbooks/dependency-upgrades.md`](../runbooks/dependency-upgrades.md) end to end, using Biome as the concrete walkthrough example (it's pinned via `npm:@biomejs/biome@2` in `deno.json`'s tasks, not through the import map, so it needs its own check).
+
+- **TK-01.0.1** — Check and update dependencies
+  - [x] `deno outdated` to see what's behind
+  - [x] `deno outdated --update` for routine in-range bumps
+  - [x] Evaluate `deno outdated --update --latest` for anything with a major available; read changelogs before applying
+- **TK-01.0.2** — Update Biome (runbook §5, as the worked example)
+  - [ ] Confirm the version pinned in the `lint`/`format`/`check` tasks in `deno.json` against the latest on npm
+  - [ ] Bump the `$schema` in `biome.json` to match
+  - [ ] Run `deno task check` and review the diff — new rules enabled by default are expected on a minor bump
+- **TK-01.0.3** — Update Deno itself
+  - [ ] `deno --version` to check the current version
+  - [ ] Upgrade through whichever method installed it (`brew upgrade deno` on this machine — see runbook §4, `deno upgrade` doesn't work on the Homebrew build)
+- **TK-01.0.4** — Validate everything (runbook §6)
+  - [ ] `deno task typecheck`
+  - [ ] `deno task lint`
+  - [ ] `deno task build`
+  - [ ] `deno task dev` — manual smoke test across `/`, `/projects`, `/projects/:slug`
+- **TK-01.0.5** — Commit
+  - [ ] `deno.json` and `deno.lock` together, per runbook §7
+
+### ST-01.1 — Remove the Material Web Components dependency
+
+> **As a** dev, **I want** the repo free of `@material/web`, **so that** we don't ship dead web components in the bundle and can own the component implementation.
+
+Context: `client/src/app/main.tsx` imports 7 `@material/web` modules for their side effects. A search for `<md-*>` across `client/src` returns no matches — the lib is 100% dead weight, only adding to the bundle.
+
+- **TK-01.1.1** — Remove the `@material/web` imports from `main.tsx`
+  - [x] Delete the 7 import lines (`filled-button`, `icon-button`, `filled-icon-button`, `outlined-icon-button`, `outlined-button`, `checkbox`, `icon`)
+  - [x] Remove `"@material/web/"` from the import map in `deno.json`
+  - [x] Run `deno task build` and compare bundle size before/after (record it in the PR)
+- **TK-01.1.2** — Confirm nothing depended on the lib
+  - [ ] `grep -rn "md-" client/src` and review every hit
+  - [ ] Run `deno task typecheck` and `deno task lint`
+  - [ ] Manual smoke test across the 5 existing routes
+
+### ST-01.2 — Clean up stray files and the working tree
+
+- **TK-01.2.1** — Resolve the untracked files at the repo root
+  - [ ] Move `prompt-replicar-breakpoints.md`, `prompt-replicar-1512-para-1920.md`, `prompt_replicar_1512_para_1920.md` to `docs/prompts/` or discard them (two files have identical content, one with `-` and one with `_`)
+  - [ ] Decide the fate of `roadmap_portfolio.xlsx` — this ROADMAP.md replaces it
+  - [ ] Add `*.xlsx` to `.gitignore` if planning now lives in markdown
+- **TK-01.2.2** — Close out pending changes
+  - [ ] Review and commit `client/src/features/work/.../ProjectCard.module.css`
+  - [ ] Review and commit `client/vite.config.ts`
+
+### ST-01.3 — Move the repo's copy to English
+
+> **As a** visitor, **I want** the whole site in a single language, **so that** I don't run into Portuguese in the middle of an English page.
+
+Context: 13 files contain accented characters. It's not just comments — there's screen copy and project content too.
+
+- **TK-01.3.1** — Interface copy
+  - [ ] `NotFound.tsx` — "404 — Página não encontrada", "Oops! A página que você procura não existe.", "Voltar para a página inicial" (the screen gets rebuilt in `EP-10`; translating now avoids shipping PT in production in the meantime)
+  - [ ] `MediaCard.tsx` — "Mídia indisponível", "Não foi possível carregar a mídia."
+  - [ ] `ProjectCarousel.tsx` — placeholder descriptions ("Outro conteúdo para segundo item.")
+- **TK-01.3.2** — Comments and identifiers
+  - [ ] Comments in `Button.tsx`, `TitleCard.tsx`, `MediaCard.tsx`, `SummaryNav.tsx`, `ContentLayout.tsx`, `BlockWrapper.tsx`, `project-data.types.ts`
+  - [ ] Don't rename any exports in this step — renaming is `EP-04`
+- **TK-01.3.3** — Set the standard
+  - [ ] Document in the README: code, copy, and comments in English; conversation and ADRs in Portuguese
+  - [ ] Lint rule for accented characters in string literals, if feasible (otherwise, a code review item)
+
+> The content of `spotify-clone.data.ts` and `reference.data.ts` is entirely in Portuguese, but it's **case study content** — it gets rewritten together with `ST-09.1`, not here.
+
+### ST-01.4 — Safety net: CI and tests
+
+> **As a** dev, **I want** typecheck, lint, and build running on every push, **so that** I don't discover a break 10 commits later.
+
+- **TK-01.4.1** — CI pipeline
+  - [ ] `.github/workflows/ci.yml` with `setup-deno`
+  - [ ] Jobs: `deno task typecheck`, `deno task lint`, `deno task build`
+  - [ ] Run on PRs and on pushes to the main branch
+  - [ ] Cache the Deno dependency directory
+- **TK-01.4.2** — Choose and configure the test runner
+  - [ ] Decide between `deno test` + `@testing-library/react` or Vitest (record as ADR-004)
+  - [ ] Configure the DOM environment
+  - [ ] One smoke test (render `App` with no error) to validate the setup
+  - [ ] `deno task test` task and a CI job
+- **TK-01.4.3** — Define the coverage bar
+  - [ ] Require a test for every new `ui/` component (that's where regressions hurt most)
+  - [ ] Document the bar in the README
+
+---
+
+## EP-02 — Close out design-source pending items
+
+**Goal:** resolve, in Figma, the inconsistencies that would block implementation.
+**Dependencies:** none. **Size:** S. **Owner:** design (Figma), not code.
+
+### ST-02.1 — Normalize theme modes per page
+
+> **As a** dev, **I want** a page's 4 breakpoints to show the same theme, **so that** I know what the default state to implement is.
+
+Context: `Project — Detail` alternates Dark (1920) → Light (1512) → Dark (744) → Light (402). `Projects — Index` pins Dark only at 1920 and lets the other three inherit the collection's default.
+
+- **TK-02.1.1** — Decide each page's default theme
+  - [ ] Define: Home / About Me / System in Light, Projects / Detail in Dark — or everything in Light
+  - [ ] Apply the chosen mode to all 4 frames of each page
+  - [ ] Pin the mode explicitly on every frame (today several inherit the default and would flip if the default changes)
+
+### ST-02.2 — Real content on Project — Detail
+
+- **TK-02.2.1** — Replace the M3 documentation placeholder
+  - [ ] The body today is the M3 "Elevation" article (Availability & resources, Differences from M2, etc.)
+  - [ ] Write a real case study using the blocks `BlockRenderer` already supports
+  - [ ] Validate that every block used in the design has a matching type in the `blockRegistry`
+
+### ST-02.3 — Consolidate the Figma Components page
+
+- **TK-02.3.1** — Move the scattered components
+  - [ ] Today only Navigation Rail, Tab Bar, and Profile photo live there; Card and Card grid live on the Projects page
+  - [ ] Publish as local components whatever the code is going to mirror
+
+---
+
+## EP-03 — Token foundation
+
+**Goal:** a single token vocabulary, aligned with Figma, before writing any component.
+**Dependencies:** `EP-02`. **Size:** M.
+
+### ST-03.1 — Breakpoints aligned with Figma
+
+> **As a** dev, **I want** breakpoints that match Figma's frames, **so that** I can check implementation against design without mental conversion.
+
+Context: the CSS today breaks at 1024/768/480 (plus 640/600/520/1294/1295 scattered around). Figma breaks at 1920/1512/744/402.
+
+- **TK-03.1.1** — Define the canonical scale
+  - [ ] Compact `< 744`, Medium `744–1511`, Large `1512–1919`, Extra-large `≥ 1920`
+  - [ ] Declare as custom media queries in a single file
+  - [ ] Document the scale in the README
+- **TK-03.1.2** — Migrate existing media queries
+  - [ ] Inventory the 12 distinct breakpoints in use today
+  - [ ] Rewrite every CSS Module to the canonical scale
+  - [ ] Check every screen at the 4 breakpoints and log the breakages
+
+### ST-03.2 — Responsive typescale mirroring the Figma collection
+
+> **As a** dev, **I want** font size to change per breakpoint via token, **so that** I don't need to swap typography classes on every screen.
+
+Context: in Figma the scale changes per **mode** of the `Typescale` collection (Expanded/Medium/Compact) — the same text style renders different sizes per frame. `typography.css` already attempts this with `@media` on `:root`, but at the wrong breakpoints.
+
+- **TK-03.2.1** — Rewrite `typography.css` on the canonical scale
+  - [ ] Map the 15 roles (Display/Headline/Title/Label/Body × L/M/S) × 4 modes
+  - [ ] Pull values from Figma's `Typescale` collection — don't estimate
+  - [ ] Include the extra roles the design uses: `Hero Display`, `Body Large Plus`, `Title Small Plus`
+  - [ ] Emphasized/prominent as a separate token (Figma has `-emphasized` on almost every role)
+- **TK-03.2.2** — Fix the effective font family
+  - [ ] `global.css` puts `system-ui` first — Roboto is never applied
+  - [ ] Serve Roboto locally (weights 400/500/600) instead of from a CDN
+  - [ ] `font-display: swap` and preload the above-the-fold weight
+
+### ST-03.3 — Shape tokens
+
+- **TK-03.3.1** — Extract the `Shape` collection into CSS
+  - [ ] `--md-sys-shape-corner-{none,extra-small,small,medium,large,large-increased,extra-large,extra-large-increased,extra-extra-large,full}`
+  - [ ] Replace literal `border-radius` values across CSS Modules
+  - [ ] Check against the collection's values in Figma
+
+### ST-03.4 — Working Light/Dark theme
+
+> **As a** visitor, **I want** to toggle between light and dark, **so that** I can read the site the way I prefer.
+
+Context: `light.css` and `dark.css` exist and match Figma's `material-theme`. The selector is `body[data-theme="Light"]`, but nothing writes that attribute — and the `dark_mode` `IconButton` in `Sidebar` has no `onClick`.
+
+- **TK-03.4.1** — ThemeProvider
+  - [ ] Context with `theme`, `setTheme`, `resolvedTheme`
+  - [ ] Write `data-theme` on `<body>`
+  - [ ] Support `system` via `prefers-color-scheme`
+  - [ ] Persist to `localStorage`
+  - [ ] Avoid a flash of the wrong theme on first paint (inline script in `index.html`)
+- **TK-03.4.2** — Wire up the rail toggle
+  - [ ] Connect the `dark_mode`/`light_mode` `IconButton` to the provider
+  - [ ] Reflect the actual state in the icon
+  - [ ] `aria-pressed` and an accessible label
+- **TK-03.4.3** — Audit both themes
+  - [ ] Walk through the 4 pages in Light and Dark
+  - [ ] Hunt down hardcoded colors that don't switch with the theme
+  - [ ] Check the hero glows in Dark (container tokens change luminance)
+
+---
+
+## EP-04 — In-house component library
+
+**Goal:** implement in React the M3 components the design uses, with no external lib.
+**Dependencies:** `EP-03`. **Size:** L.
+
+### ST-04.1 — Component gallery
+
+> **As a** dev, **I want** an internal route that renders every component in every variant, **so that** I can compare against Figma without opening the whole application.
+
+- **TK-04.1.1** — `/__gallery` route (dev only)
+  - [ ] Grid layout per component
+  - [ ] Theme and breakpoint switcher on the page itself
+  - [ ] Excluded from the production build
+
+### ST-04.2 — Chip
+
+> **As a** visitor, **I want** filter and skill chips, **so that** I can navigate and read the stack quickly.
+
+- **TK-04.2.1** — `Chip` component
+  - [ ] Variants: `assist`, `filter`, `input`, `suggestion`
+  - [ ] States: enabled, hover, focus, pressed, selected, disabled
+  - [ ] Optional left/right icon slots
+  - [ ] `elevated` and `outlined`
+  - [ ] Render test per variant
+- **TK-04.2.2** — `ChipRow` with wrap
+  - [ ] Wrap with token-based gap
+  - [ ] Carousel mode with horizontal scroll for the Projects Index
+  - [ ] Keyboard navigation between chips (roving tabindex)
+
+### ST-04.3 — Progress feedback
+
+- **TK-04.3.1** — `LinearProgress`
+  - [ ] Determinate and indeterminate
+  - [ ] Indeterminate animation in CSS, respecting `prefers-reduced-motion`
+  - [ ] `role="progressbar"` with `aria-valuenow`/`aria-valuetext`
+- **TK-04.3.2** — `CircularProgress`
+  - [ ] Determinate and indeterminate
+  - [ ] Token-based sizes
+- **TK-04.3.3** — `LoadingIndicator` (M3 Expressive)
+  - [ ] Shape morphing between Shape Set shapes
+  - [ ] Fallback to `CircularProgress` under `prefers-reduced-motion`
+
+### ST-04.4 — Skeleton
+
+- **TK-04.4.1** — `Skeleton` primitive
+  - [ ] `text`, `rect`, `circle` shapes
+  - [ ] Shimmer disabled under `prefers-reduced-motion`
+  - [ ] Colors in `surface-container-high`/`highest`, as in Figma
+- **TK-04.4.2** — Skeleton compositions
+  - [ ] `ProjectCardSkeleton` mirroring `ProjectCard`
+  - [ ] `ProjectGridSkeleton` with count per breakpoint (4 col / 3 col / 2 col / 1 col)
+  - [ ] Header skeleton (title + chips + search)
+
+### ST-04.5 — Decorative primitives
+
+> **As a** visitor, **I want** a hero with depth, **so that** the page doesn't feel like a form.
+
+Context: in Figma the decor is an absolutely positioned `HeroDecor` layer with two token-colored ellipses + Layer Blur, one clipped Shape Set shape, and an outline ring. Blur is applied over a solid token instead of a gradient because gradient stops don't accept variables — and a hardcoded gradient would break in dark mode. Worth keeping the same constraint in CSS.
+
+- **TK-04.5.1** — `Shape` component
+  - [ ] Subset of the M3 Shape Set as SVG: Very sunny, Soft boom, Burst, 12-sided cookie, Gem, Diamond, Circle, Pill
+  - [ ] Color via a prop mapped to a token, not hex
+  - [ ] Scale while preserving proportion (the silhouette occupies ~0.842 of the box in Figma)
+- **TK-04.5.2** — `GlowBackdrop`
+  - [ ] Ellipse with `filter: blur()` and a token color
+  - [ ] Props for size, position, and opacity
+  - [ ] `will-change`/`contain` so it doesn't repaint the entire page
+- **TK-04.5.3** — `HeroDecor`
+  - [ ] Compose glows + clipped shape + outline ring
+  - [ ] Per-breakpoint geometry (in Figma it's hand-tuned, not scaled)
+  - [ ] `aria-hidden` and `pointer-events: none`
+  - [ ] Reduce or remove blur under `prefers-reduced-motion`
+
+### ST-04.6 — Parity of existing components
+
+- **TK-04.6.1** — Audit `Button` against Figma
+  - [ ] Check Type × Size × Style × Width against the component set
+  - [ ] Visible focus ring (Figma has `Show focus indicator`)
+  - [ ] Translate the component's Portuguese comments
+- **TK-04.6.2** — Audit `IconButton`
+  - [ ] Variants and the selected state
+  - [ ] Minimum 48px touch target
+- **TK-04.6.3** — Audit `SearchBar` and `ConnectedButtonGroup`
+  - [ ] Focus and filled-value states
+  - [ ] Parity with the design
+
+---
+
+## EP-05 — App shell and responsive navigation
+
+**Goal:** a shell that switches navigation patterns per breakpoint, as in Figma.
+**Dependencies:** `EP-04`. **Size:** M.
+
+### ST-05.1 — Navigation Rail faithful to the design
+
+> **As a** desktop visitor, **I want** the rail with all three destinations, **so that** I can reach any page in one click.
+
+Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About Me, Projects). The `#root` grid reserves `88px`; Figma uses `96px`.
+
+- **TK-05.1.1** — Fix the rail
+  - [ ] `#root` from `88px` to `96px`
+  - [ ] Add the About Me destination with the design's icon
+  - [ ] Active indicator driven by route, including `/about`
+  - [ ] Footer actions: language and theme
+- **TK-05.1.2** — Rail accessibility
+  - [ ] `<nav>` with `aria-label`
+  - [ ] `aria-current="page"` on the active destination
+  - [ ] Focus order and a skip link to the content
+
+### ST-05.2 — TopAppBar and NavigationBar for tablet and mobile
+
+> **As a** mobile visitor, **I want** navigation at the top and bottom, **so that** I can reach everything with my thumb.
+
+- **TK-05.2.1** — `TopAppBar`
+  - [ ] 88px, logo + title + actions, as in Figma
+  - [ ] Contextual title per route
+  - [ ] Scroll behavior (elevation once it leaves the top)
+- **TK-05.2.2** — `NavigationBar`
+  - [ ] 88px, 3 destinations with icon and label
+  - [ ] Active indicator
+  - [ ] iOS gesture-bar safe area
+- **TK-05.2.3** — `AppShell` that picks the pattern
+  - [ ] Rail above 1512; TopAppBar + NavigationBar at 744 and below
+  - [ ] A single source of truth for destinations, consumed by both patterns
+  - [ ] Confirm there's no layout jump when switching
+
+### ST-05.3 — PageContent
+
+- **TK-05.3.1** — Content container
+  - [ ] `surface-container-lowest` background, rounded corners only on the rail side (as in Figma)
+  - [ ] On tablet/mobile the rounding moves to the top
+  - [ ] Token-based padding
+
+---
+
+## EP-06 — Home: fixes
+
+**Goal:** raise Home's fidelity to the current design.
+**Dependencies:** `EP-05`. **Size:** M.
+
+### ST-06.1 — Home hero
+
+- **TK-06.1.1** — Apply `HeroDecor`
+  - [ ] Geometry for all 4 breakpoints per Figma
+  - [ ] Main glow behind the blob; on vertical layouts it moves down with the blob
+- **TK-06.1.2** — Copy and chips
+  - [ ] Chips: `#Python`, `3+ Years in Data`, `Power BI · SQL`, `TypeScript`, `Applied AI`
+  - [ ] Swap for the `EP-04` `Chip`
+  - [ ] Headline with the highlighted portion in a token color (not a `<span>` with hex)
+- **TK-06.1.3** — CTAs
+  - [ ] `See My Projects` (filled) and `Contact me` (tonal), Large size on desktop and Medium on mobile
+
+### ST-06.2 — Overview section
+
+- **TK-06.2.1** — Service cards
+  - [ ] `Systems & Process Automation` and `Data Engineering & Analysis` in English (the supporting text was still in PT in Figma until now — verify the repo)
+  - [ ] Illustration using the `Shape` component
+- **TK-06.2.2** — TrustedCompaniesBar
+  - [ ] Real logos instead of `CoreOS` repeated 4×
+  - [ ] Scrollable row behavior on mobile
+- **TK-06.2.3** — ProjectsCarousel
+  - [ ] Card peek on the sides, as in the design
+  - [ ] Touch drag, arrows on desktop
+  - [ ] Cards sourced from the data layer, not hardcoded
+
+### ST-06.3 — Responsive Home
+
+- **TK-06.3.1** — Check all 4 breakpoints
+  - [ ] 1920 and 1512 side by side; 744 and 402 stacked
+  - [ ] No horizontal overflow on any of them
+
+---
+
+## EP-07 — About Me (new page)
+
+**Goal:** ship the page that exists in Figma and not in code.
+**Dependencies:** `EP-05`. **Size:** L.
+
+### ST-07.1 — Route and data
+
+> **As a** visitor, **I want** a page about Nicolas, **so that** I can understand who's behind the projects.
+
+- **TK-07.1.1** — `/about` route
+  - [ ] Register in `App.tsx`
+  - [ ] Destination in the rail and navigation bar
+  - [ ] Title in the TopAppBar
+- **TK-07.1.2** — Typed data layer
+  - [ ] `about.data.ts`: bio, quick facts, stack by category, education, languages, contact
+  - [ ] Types in `features/about/data/about.types.ts`
+  - [ ] Flag Figma's fictional content as pending (Verde Analytics, Horizonte Tech, USP/Esalq, PUC Minas, `nicolas.soares@email.com`) — needs real data before publishing
+
+### ST-07.2 — Desktop two-column layout
+
+Context: in Figma the 1920 fits **exactly** into 1080px, with no scroll. The height isn't a guessed fixed value: the frame is fixed, the hero and contact strip are `hug`, and the body absorbs the rest. Worth reproducing this with `grid-template-rows: auto 1fr auto` instead of a magic height.
+
+- **TK-07.2.1** — Structure
+  - [ ] `100dvh` with hero + body + contact strip
+  - [ ] Two-column body: fluid main column, 520px sidebar (440px at 1512)
+  - [ ] Columns ending together
+- **TK-07.2.2** — Hero
+  - [ ] Eyebrow, headline, role/location
+  - [ ] 420px photo with `HeroDecor` (330px at 1512)
+  - [ ] No CTA in the hero (those live in the contact strip)
+- **TK-07.2.3** — Main column
+  - [ ] About card
+  - [ ] Work Experience: cards with index, title, supporting text, and period chip
+  - [ ] Professional experience only — education goes in the sidebar
+- **TK-07.2.4** — Sidebar
+  - [ ] Quick facts (tertiary container)
+  - [ ] Stack: chips grouped by work area
+  - [ ] Education: multiple entries with a divider
+  - [ ] Speaks (secondary container)
+  - [ ] Distribution filling the height, without stretching a card and clipping content
+- **TK-07.2.5** — Contact strip
+  - [ ] Primary container, email in Display, social chips + Download CV
+  - [ ] Horizontal on desktop, vertical on mobile
+
+### ST-07.3 — About Me on tablet and mobile
+
+- **TK-07.3.1** — Single column
+  - [ ] Sidebar moves below the main content
+  - [ ] Stacked hero: copy on top, photo below
+  - [ ] Scrollable page (doesn't lock to the viewport)
+- **TK-07.3.2** — 402 adjustments
+  - [ ] Vertical experience cards: index + period on top, title and description below
+  - [ ] Contact email in a smaller scale step to fit on one line
+  - [ ] Photo at 240px
+
+---
+
+## EP-08 — Projects Index: fixes
+
+**Dependencies:** `EP-04`, `EP-05`. **Size:** M.
+
+### ST-08.1 — Working filter and search
+
+> **As a** visitor, **I want** to filter and search projects, **so that** I can find what interests me.
+
+Context: the chips and `SearchBar` are designed and rendered, but filter nothing.
+
+- **TK-08.1.1** — Filter state
+  - [ ] `useProjectFilters` hook with tags and search term
+  - [ ] Reflect in the URL as a query string (shareable, survives reload)
+  - [ ] Multi-select tags
+- **TK-08.1.2** — Wire up the UI
+  - [ ] Selectable chips with counts
+  - [ ] Debounced search
+  - [ ] Clear filters button
+- **TK-08.1.3** — Empty state
+  - [ ] Render `EP-10`'s `EmptyState` when the filter returns nothing
+  - [ ] Actions: `Clear filters` and `View all projects`
+
+### ST-08.2 — Tablet and mobile views
+
+Context: Figma has three variations at 744 and 402 — Search view, Filter view, and Selector.
+
+- **TK-08.2.1** — Search view
+  - [ ] Expanded search filling the bar
+  - [ ] Auto-focus and Esc key to exit
+- **TK-08.2.2** — Filter view
+  - [ ] Filter panel as a bottom sheet
+  - [ ] Apply and clear
+- **TK-08.2.3** — Selector
+  - [ ] Multi-select cards
+  - [ ] Contextual action bar
+
+### ST-08.3 — Responsive grid
+
+- **TK-08.3.1** — Columns per breakpoint
+  - [ ] 4 / 3 / 2 / 1 per Figma
+  - [ ] Token-based gap
+  - [ ] Skeleton with the same column count
+
+---
+
+## EP-09 — Project Detail: fixes
+
+**Dependencies:** `EP-02` (real content), `EP-05`. **Size:** M.
+
+### ST-09.1 — Real content
+
+- **TK-09.1.1** — Replace the placeholder
+  - [ ] Swap the content inherited from the M3 doc for a case study
+  - [ ] Confirm every block in the design exists in the `blockRegistry`
+  - [ ] Implement any missing block types
+
+### ST-09.2 — Footer
+
+- **TK-09.2.1** — Footer component
+  - [ ] Navigation and Resources columns, Social, and the copyright line
+  - [ ] Labels in English (Navigation, About, Work, Contact, Resources, Résumé)
+  - [ ] Reusable across other pages
+
+### ST-09.3 — SummaryNav and project-to-project navigation
+
+- **TK-09.3.1** — Review SummaryNav
+  - [ ] Sticky, with the active item tracking scroll position
+  - [ ] Hide on mobile or turn into a selector
+- **TK-09.3.2** — Previous/next
+  - [ ] Derive from the data layer's ordering
+  - [ ] Edge state at the first and last item
+
+---
+
+## EP-10 — System states
+
+**Goal:** cover the 5 designed states; only 2 exist today.
+**Dependencies:** `EP-04`. **Size:** M.
+
+### ST-10.1 — Base state component
+
+> **As a** dev, **I want** a single state component, **so that** the 5 states don't diverge from each other.
+
+Context: in Figma the 5 states share the same anatomy — shape illustration, headline, supporting text, and up to two actions.
+
+- **TK-10.1.1** — `StateLayout`
+  - [ ] Props: illustration, headline, supporting text, actions
+  - [ ] Centered in `PageContent`, filling the available height
+  - [ ] Illustration scale per breakpoint (340 / 340 / 260 / 200)
+  - [ ] Actions in a column on mobile
+
+### ST-10.2 — The five states
+
+- **TK-10.2.1** — 404 (fix)
+  - [ ] Migrate `NotFound` to `StateLayout`
+  - [ ] "404" numeral over the Very sunny shape
+  - [ ] `Back to home` (filled) and `View projects` (text)
+- **TK-10.2.2** — Under Construction (fix)
+  - [ ] Migrate `UnderConstruction` to `StateLayout`
+  - [ ] Cone over Soft boom
+- **TK-10.2.3** — Something Went Wrong / 500 (new)
+  - [ ] Burst in error-container with "!"
+  - [ ] `Try again` and `Back to home`
+  - [ ] Root `ErrorBoundary` falling into this screen
+  - [ ] `/error` route for visual review
+- **TK-10.2.4** — No Projects Found (new)
+  - [ ] Search icon over 12-sided cookie
+  - [ ] Used inline by Projects Index, not as a route
+- **TK-10.2.5** — Loading / Skeleton (new)
+  - [ ] Projects Index skeleton: header + linear indeterminate + grid
+  - [ ] `Suspense` on routes with the matching skeleton
+  - [ ] Minimum duration floor to avoid flashing on fast connections
+
+### ST-10.3 — Integration
+
+- **TK-10.3.1** — Wire up to real flows
+  - [ ] Nonexistent slug falls to 404
+  - [ ] Data load failure falls to 500
+  - [ ] Loading shows a skeleton, not a blank screen
+  - [ ] Test each path
+
+---
+
+## EP-11 — Internationalization (pt/en)
+
+**Goal:** wire up the rail's language action, which is already designed.
+**Dependencies:** `EP-06`…`EP-10` (no point extracting strings from a screen that's about to change). **Size:** M.
+
+### ST-11.1 — Infrastructure
+
+- **TK-11.1.1** — Choose the approach
+  - [ ] Lightweight custom solution vs. a library (record as an ADR)
+  - [ ] English as the default language (the design is already entirely in English)
+  - [ ] Detect via `navigator.language` and persist the choice
+- **TK-11.1.2** — Catalog structure
+  - [ ] Typed `locales/en.ts` and `locales/pt.ts`
+  - [ ] A missing key breaks the typecheck
+  - [ ] Namespaces per feature
+
+### ST-11.2 — Extraction
+
+- **TK-11.2.1** — Extract UI strings
+  - [ ] One pass per feature: home, work, about, system, layout
+  - [ ] Locale-aware date and number formatting
+  - [ ] `lang` on `<html>` tracking the locale
+- **TK-11.2.2** — Wire up the selector
+  - [ ] Connect the rail's language `IconButton`
+  - [ ] Visible current-language state
+
+---
+
+## EP-12 — Quality, accessibility, performance, and deploy
+
+**Dependencies:** all of the above. **Size:** M.
+
+### ST-12.1 — Accessibility
+
+- **TK-12.1.1** — Audit
+  - [ ] Keyboard-only navigation across the 4 pages
+  - [ ] Visible focus on every interactive element
+  - [ ] Contrast in both themes (watch text over light containers)
+  - [ ] Screen reader across states and navigation
+- **TK-12.1.2** — Motion
+  - [ ] `prefers-reduced-motion` respected by decor, skeleton, progress, and carousel
+
+### ST-12.2 — Performance
+
+- **TK-12.2.1** — Cost of the decor
+  - [ ] Measure the paint impact of the large `filter: blur()` uses
+  - [ ] Consider pre-rendering as an image if the cost is high
+- **TK-12.2.2** — Assets
+  - [ ] Responsive photo and project media, in a modern format
+  - [ ] Lazy load below the fold
+  - [ ] Bundle budget and per-route code splitting
+- **TK-12.2.3** — Lighthouse
+  - [ ] Baseline across the 4 pages
+  - [ ] Target and fixes
+
+### ST-12.3 — SEO and metadata
+
+- **TK-12.3.1** — Per-route meta
+  - [ ] Title and description
+  - [ ] Open Graph and Twitter card
+  - [ ] `sitemap.xml` and `robots.txt`
+  - [ ] `Person` JSON-LD
+
+### ST-12.4 — Deploy
+
+- **TK-12.4.1** — Pipeline
+  - [ ] Choose the host (Deno Deploy is the natural fit for the runtime)
+  - [ ] Automatic deploy on the main branch
+  - [ ] Preview per PR
+  - [ ] SPA fallback for client-side routes
+- **TK-12.4.2** — Domain and observability
+  - [ ] Custom domain and HTTPS
+  - [ ] Privacy-respecting analytics
+  - [ ] `ErrorBoundary` error reporting
+
+---
+
+## 4. Open decisions
+
+| # | Question | Blocks |
+|---|---|---|
+| 1 | Default theme per page — Light everywhere, or Projects/Detail in Dark? | `EP-02`, `EP-03` |
+| 2 | Test runner: `deno test` + Testing Library, or Vitest? | `EP-01` (`ST-01.4`) |
+| 3 | Real content for Project — Detail (currently the M3 doc) | `EP-09` |
+| 4 | Real About Me data — the two postgraduate degrees in Figma are fictional | `EP-07` |
+| 5 | i18n with a library or a custom solution | `EP-11` |
+| 6 | Deploy host | `EP-12` |
+
+## 5. Execution notes
+
+- **`EP-01` and `EP-02` run in parallel** — one is code, the other is Figma.
+- **`EP-03` is the real bottleneck.** Touching tokens after screens are written means revisiting all of them. Not worth getting ahead on `EP-06`+.
+- **`EP-04` can be sliced by consumer:** Chip before `EP-08`, Skeleton and Progress before `EP-10`, decor before `EP-06`. No need to finish the whole library before starting a screen.
+- **`EP-11` is last on purpose.** Extracting strings from a screen that's still going to change is guaranteed rework.
