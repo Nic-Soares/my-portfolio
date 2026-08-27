@@ -1,4 +1,4 @@
-import Container from "@/components/layout/Container/Container.tsx";
+import Container from "@/components/layout/container/Container.tsx";
 import styles from "./ExpertiseCard.module.css";
 
 interface Expertise {

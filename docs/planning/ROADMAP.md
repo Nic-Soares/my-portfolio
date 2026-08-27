@@ -154,10 +154,11 @@ Context: 13 files contain accented characters. It's not just comments — there'
 > **As a** dev, **I want** typecheck, lint, and build running on every push, **so that** I don't discover a break 10 commits later.
 
 - **TK-01.4.1** — CI pipeline
-  - [ ] `.github/workflows/ci.yml` with `setup-deno`
-  - [ ] Jobs: `deno task typecheck`, `deno task lint`, `deno task build`
-  - [ ] Run on PRs and on pushes to the main branch
-  - [ ] Cache the Deno dependency directory
+  - [x] `.github/workflows/ci.yml` with `setup-deno`
+  - [x] Jobs: `deno task typecheck`, `deno task lint`, `deno task build`
+  - [x] Run on PRs and on pushes to `main` and `develop`
+  - [x] Cache the Deno dependency directory
+  - [x] Fix case-sensitive imports for `container` and `sidebar`; macOS resolves PascalCase paths locally, but the Linux CI runner does not
 - **TK-01.4.2** — Choose and configure the test runner
   - [ ] Decide between `deno test` + `@testing-library/react` or Vitest (record as ADR-004)
   - [ ] Configure the DOM environment

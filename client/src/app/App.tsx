@@ -4,7 +4,7 @@ import "../styles/normalize.css";
 
 import NotFound from "@/app/pages/NotFound/NotFound.tsx";
 import UnderConstruction from "@/app/pages/UnderConstruction/UnderConstruction.tsx";
-import Sidebar from "@/components/layout/Sidebar/Sidebar.tsx";
+import Sidebar from "@/components/layout/sidebar/Sidebar.tsx";
 import { HomePage as Home } from "@/features/home/index.ts";
 import { ProjectDetailPage, ProjectListPage } from "@/features/work/index.ts";
 
