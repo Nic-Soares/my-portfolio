@@ -122,13 +122,13 @@ Context: this is the first thing to do, before `ST-01.1`. Follow [`docs/runbooks
 Context: `client/src/app/main.tsx` imports 7 `@material/web` modules for their side effects. A search for `<md-*>` across `client/src` returns no matches — the lib is 100% dead weight, only adding to the bundle.
 
 - **TK-01.1.1** — Remove the `@material/web` imports from `main.tsx`
-  - [ ] Delete the 7 import lines (`filled-button`, `icon-button`, `filled-icon-button`, `outlined-icon-button`, `outlined-button`, `checkbox`, `icon`)
-  - [ ] Remove `"@material/web/"` from the import map in `deno.json`
-  - [ ] Run `deno task build` and compare bundle size before/after (record it in the PR)
+  - [x] Delete the 7 import lines (`filled-button`, `icon-button`, `filled-icon-button`, `outlined-icon-button`, `outlined-button`, `checkbox`, `icon`)
+  - [x] Remove `"@material/web/"` from the import map in `deno.json`
+  - [x] Run `deno task build` and compare bundle size before/after (record it in the commit message)
 - **TK-01.1.2** — Confirm nothing depended on the lib
-  - [ ] `grep -rn "md-" client/src` and review every hit
-  - [ ] Run `deno task typecheck` and `deno task lint`
-  - [ ] Manual smoke test across the 5 existing routes
+  - [x] `grep -rn "md-" client/src` and review every hit
+  - [x] Run `deno task typecheck` and `deno task lint`
+  - [x] Manual smoke test across the 5 existing routes
 
 ### ST-01.2 — Clean up stray files and the working tree
 
