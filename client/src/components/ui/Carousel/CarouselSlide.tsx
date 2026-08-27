@@ -1,5 +1,5 @@
-import styles from "./CarouselSlide.module.css";
 import clsx from "clsx";
+import styles from "./CarouselSlide.module.css";
 
 export interface CarouselItemData {
   id: number;

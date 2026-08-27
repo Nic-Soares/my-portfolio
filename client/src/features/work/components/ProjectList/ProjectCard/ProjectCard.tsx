@@ -1,6 +1,6 @@
+import type { KeyboardEvent, ReactNode } from "react";
 import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup.tsx";
 import styles from "./ProjectCard.module.css";
-import type { ReactNode, KeyboardEvent } from "react";
 
 type WorkCategory =
   | "Frontend"

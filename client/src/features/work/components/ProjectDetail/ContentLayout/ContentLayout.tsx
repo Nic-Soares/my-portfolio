@@ -1,5 +1,5 @@
 // components/layout/ContentLayout.tsx
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import styles from "./ContentLayout.module.css";
 
 interface ContentLayoutProps {

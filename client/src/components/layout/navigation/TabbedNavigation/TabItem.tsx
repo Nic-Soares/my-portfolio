@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
 import styles from "./TabItem.module.css";
 
 type TabSize = "xsmall" | "small" | "medium" | "large" | "xlarge";

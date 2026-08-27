@@ -1,8 +1,8 @@
 import Container from "@/components/layout/Container/Container.tsx";
-import styles from "./HeroSection.module.css";
-import IconButton from "@/components/ui/IconButton/IconButton.tsx";
 import Button from "@/components/ui/Button/Button.tsx";
 import GithubIcon from "@/components/ui/GithubIcon/GithubIcon.tsx";
+import IconButton from "@/components/ui/IconButton/IconButton.tsx";
+import styles from "./HeroSection.module.css";
 
 const HeroSection = () => {
   return (

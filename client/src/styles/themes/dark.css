@@ -48,21 +48,81 @@ body[data-theme="Dark"] {
 
   /* Material Design 3 State Layer Opacity Variables */
   --md-state-layers-dark-on-surface-opacity-08: rgba(228, 227, 215, 0.08);
-  --md-state-layers-dark-on-surface-opacity-10: rgba(228, 227, 215, 0.10);
+  --md-state-layers-dark-on-surface-opacity-10: rgba(228, 227, 215, 0.1);
   --md-state-layers-dark-on-surface-opacity-12: rgba(228, 227, 215, 0.12);
   --md-state-layers-dark-on-surface-opacity-16: rgba(228, 227, 215, 0.16);
-  --md-state-layers-dark-on-surface-variant-opacity-08: rgba(199, 200, 184, 0.08);
-  --md-state-layers-dark-on-surface-variant-opacity-10: rgba(199, 200, 184, 0.10);
-  --md-state-layers-dark-on-surface-variant-opacity-12: rgba(199, 200, 184, 0.12);
-  --md-state-layers-dark-on-surface-variant-opacity-16: rgba(199, 200, 184, 0.16);
-  --md-state-layers-dark-on-secondary-container-opacity-08: rgba(224, 230, 195, 0.08);
-  --md-state-layers-dark-on-secondary-container-opacity-10: rgba(224, 230, 195, 0.10);
-  --md-state-layers-dark-on-secondary-container-opacity-12: rgba(224, 230, 195, 0.12);
-  --md-state-layers-dark-on-secondary-container-opacity-16: rgba(224, 230, 195, 0.16);
-  --md-state-layers-dark-on-primary-container-opacity-08: rgba(217, 235, 153, 0.08);
-  --md-state-layers-dark-on-primary-container-opacity-10: rgba(217, 235, 153, 0.10);
-  --md-state-layers-dark-on-primary-container-opacity-12: rgba(217, 235, 153, 0.12);
-  --md-state-layers-dark-on-primary-container-opacity-16: rgba(217, 235, 153, 0.16);
+  --md-state-layers-dark-on-surface-variant-opacity-08: rgba(
+    199,
+    200,
+    184,
+    0.08
+  );
+  --md-state-layers-dark-on-surface-variant-opacity-10: rgba(
+    199,
+    200,
+    184,
+    0.1
+  );
+  --md-state-layers-dark-on-surface-variant-opacity-12: rgba(
+    199,
+    200,
+    184,
+    0.12
+  );
+  --md-state-layers-dark-on-surface-variant-opacity-16: rgba(
+    199,
+    200,
+    184,
+    0.16
+  );
+  --md-state-layers-dark-on-secondary-container-opacity-08: rgba(
+    224,
+    230,
+    195,
+    0.08
+  );
+  --md-state-layers-dark-on-secondary-container-opacity-10: rgba(
+    224,
+    230,
+    195,
+    0.1
+  );
+  --md-state-layers-dark-on-secondary-container-opacity-12: rgba(
+    224,
+    230,
+    195,
+    0.12
+  );
+  --md-state-layers-dark-on-secondary-container-opacity-16: rgba(
+    224,
+    230,
+    195,
+    0.16
+  );
+  --md-state-layers-dark-on-primary-container-opacity-08: rgba(
+    217,
+    235,
+    153,
+    0.08
+  );
+  --md-state-layers-dark-on-primary-container-opacity-10: rgba(
+    217,
+    235,
+    153,
+    0.1
+  );
+  --md-state-layers-dark-on-primary-container-opacity-12: rgba(
+    217,
+    235,
+    153,
+    0.12
+  );
+  --md-state-layers-dark-on-primary-container-opacity-16: rgba(
+    217,
+    235,
+    153,
+    0.16
+  );
 
   /* Custom/Legacy variables for specific components */
   --add-ons-section-background: rgb(0 0 0);

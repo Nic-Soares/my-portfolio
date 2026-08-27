@@ -1,5 +1,5 @@
-import HeroSection from "../components/HeroSection.tsx";
 import ExperienceSection from "../components/ExperienceSection.tsx";
+import HeroSection from "../components/HeroSection.tsx";
 import ProjectCarousel from "../components/ProjectCarousel.tsx";
 import styles from "./Home.page.module.css";
 

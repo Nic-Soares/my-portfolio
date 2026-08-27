@@ -1,12 +1,12 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "../styles/global.css";
 import "../styles/normalize.css";
 
-import Sidebar from "@/components/layout/Sidebar/Sidebar.tsx";
-import { HomePage as Home } from "@/features/home/index.ts";
-import { ProjectListPage, ProjectDetailPage } from "@/features/work/index.ts";
 import NotFound from "@/app/pages/NotFound/NotFound.tsx";
 import UnderConstruction from "@/app/pages/UnderConstruction/UnderConstruction.tsx";
+import Sidebar from "@/components/layout/Sidebar/Sidebar.tsx";
+import { HomePage as Home } from "@/features/home/index.ts";
+import { ProjectDetailPage, ProjectListPage } from "@/features/work/index.ts";
 
 function App() {
   return (

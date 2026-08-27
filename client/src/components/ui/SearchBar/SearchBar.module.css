@@ -1,60 +1,60 @@
 .searchBar {
-    display: flex;
-    width: 100%;
-    min-width: 360px;
-    max-width: 720px;
-    height: 56px;
-    align-items: center;
-    position: relative;
-    z-index: 1;
+  display: flex;
+  width: 100%;
+  min-width: 360px;
+  max-width: 720px;
+  height: 56px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 
-    /* MD3 Surface Container High */
-    background: var(--md-sys-color-surface-container-high, #eae9dc);
-    border-radius: 28px;
+  /* MD3 Surface Container High */
+  background: var(--md-sys-color-surface-container-high, #eae9dc);
+  border-radius: 28px;
 
-    /* MD3 Elevation Level 0 */
-    box-shadow: var(--elevation-search-bar, var(--m3-elevation-0, none));
+  /* MD3 Elevation Level 0 */
+  box-shadow: var(--elevation-search-bar, var(--m3-elevation-0, none));
 
-    /* Smooth transitions */
-    transition:
-        background-color 200ms cubic-bezier(0.2, 0, 0, 1),
-        box-shadow 200ms cubic-bezier(0.2, 0, 0, 1),
-        z-index 0ms;
+  /* Smooth transitions */
+  transition:
+    background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 200ms cubic-bezier(0.2, 0, 0, 1),
+    z-index 0ms;
 
-    /* Prevent text selection on container */
-    user-select: none;
-    cursor: text;
+  /* Prevent text selection on container */
+  user-select: none;
+  cursor: text;
 }
 
 /* Hover State */
 .searchBar:hover:not(.searchBar--disabled) {
-    background: var(--md-sys-color-surface-container-highest, #e4e3d6);
+  background: var(--md-sys-color-surface-container-highest, #e4e3d6);
 }
 
 /* Focused State - MD3 Elevation Level 1 */
 .searchBar--focused {
-    background: var(--md-sys-color-surface-container-high, #eae9dc);
-    box-shadow: var(
-        --elevation-search-bar-focused,
-        var(
-            --m3-elevation-1,
-            0px 1px 3px rgba(0, 0, 0, 0.15),
-            0px 1px 2px rgba(0, 0, 0, 0.3)
-        )
-    );
-    z-index: 2;
+  background: var(--md-sys-color-surface-container-high, #eae9dc);
+  box-shadow: var(
+    --elevation-search-bar-focused,
+    var(
+      --m3-elevation-1,
+      0px 1px 3px rgba(0, 0, 0, 0.15),
+      0px 1px 2px rgba(0, 0, 0, 0.3)
+    )
+  );
+  z-index: 2;
 }
 
 /* Disabled State */
 .searchBar--disabled {
-    background: var(--md-sys-color-surface-container-high, #eae9dc);
-    opacity: 0.38;
-    cursor: not-allowed;
+  background: var(--md-sys-color-surface-container-high, #eae9dc);
+  opacity: 0.38;
+  cursor: not-allowed;
 }
 
 /* Filled State (quando há conteúdo) */
 .searchBar--filled {
-    background: var(--md-sys-color-surface-container-high, #eae9dc);
+  background: var(--md-sys-color-surface-container-high, #eae9dc);
 }
 
 /* ============================================
@@ -62,13 +62,13 @@
    ============================================ */
 
 .searchBar__container {
-    display: flex;
-    padding: 0 4px;
-    align-items: center;
-    gap: 4px;
-    flex: 1;
-    height: 100%;
-    width: 100%;
+  display: flex;
+  padding: 0 4px;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  height: 100%;
+  width: 100%;
 }
 
 /* ============================================
@@ -76,79 +76,79 @@
    ============================================ */
 
 .searchBar__leadingIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    margin-left: 4px;
-    color: var(--md-sys-color-on-surface, #1b1c15);
-    opacity: 0.64;
-    transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1);
-    pointer-events: none;
-    user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  margin-left: 4px;
+  color: var(--md-sys-color-on-surface, #1b1c15);
+  opacity: 0.64;
+  transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1);
+  pointer-events: none;
+  user-select: none;
 }
 
 .searchBar__leadingIcon .material-symbols-outlined {
-    font-size: 24px;
-    width: 24px;
-    height: 24px;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 .searchBar--focused .searchBar__leadingIcon {
-    opacity: 1;
-    color: var(--md-sys-color-on-surface-variant, #46483c);
+  opacity: 1;
+  color: var(--md-sys-color-on-surface-variant, #46483c);
 }
 
 .searchBar__trailingIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    margin-right: 4px;
-    color: var(--md-sys-color-on-surface-variant, #46483c);
-    opacity: 0.64;
-    cursor: pointer;
-    user-select: none;
-    border-radius: 50%;
-    transition:
-        opacity 200ms cubic-bezier(0.2, 0, 0, 1),
-        background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  margin-right: 4px;
+  color: var(--md-sys-color-on-surface-variant, #46483c);
+  opacity: 0.64;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 50%;
+  transition:
+    opacity 200ms cubic-bezier(0.2, 0, 0, 1),
+    background-color 200ms cubic-bezier(0.2, 0, 0, 1);
 
-    /* Smooth entry animation */
-    animation: fadeInScale 200ms cubic-bezier(0.2, 0, 0, 1);
+  /* Smooth entry animation */
+  animation: fadeInScale 200ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .searchBar__trailingIcon .material-symbols-outlined {
-    font-size: 24px;
-    width: 24px;
-    height: 24px;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 /* Hover no próprio ícone X */
 .searchBar__trailingIcon:hover {
-    opacity: 0.8;
-    background-color: var(--md-sys-color-on-surface, rgba(27, 28, 21, 0.08));
+  opacity: 0.8;
+  background-color: var(--md-sys-color-on-surface, rgba(27, 28, 21, 0.08));
 }
 
 /* Efeito de clique visual sutil */
 .searchBar__trailingIcon:active {
-    opacity: 1;
-    background-color: var(--md-sys-color-on-surface, rgba(27, 28, 21, 0.12));
+  opacity: 1;
+  background-color: var(--md-sys-color-on-surface, rgba(27, 28, 21, 0.12));
 }
 
 /* Estado disabled */
 .searchBar--disabled .searchBar__trailingIcon {
-    cursor: not-allowed;
-    opacity: 0.38;
+  cursor: not-allowed;
+  opacity: 0.38;
 }
 
 /* Remove qualquer foco individual */
 .searchBar__trailingIcon:focus {
-    outline: none;
+  outline: none;
 }
 
 /* ============================================
@@ -156,69 +156,66 @@
    ============================================ */
 
 .searchBar__inputWrapper {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    height: 100%;
-    min-width: 0;
-    position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  min-width: 0;
+  position: relative;
 }
 
 .searchBar__input {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    margin: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
 
-    /* MD3 Typography - Body Large */
-    font-family: var(
-        --body-large-font,
-        var(--font-roboto, "Roboto", sans-serif)
-    );
-    font-size: var(--body-large-size, 16px);
-    font-weight: var(--body-large-weight, 400);
-    line-height: var(--body-large-line-height, 24px);
-    letter-spacing: var(--body-large-tracking, 0.5px);
+  /* MD3 Typography - Body Large */
+  font-family: var(--body-large-font, var(--font-roboto, "Roboto", sans-serif));
+  font-size: var(--body-large-size, 16px);
+  font-weight: var(--body-large-weight, 400);
+  line-height: var(--body-large-line-height, 24px);
+  letter-spacing: var(--body-large-tracking, 0.5px);
 
-    color: var(--md-sys-color-on-surface, #1b1c15);
+  color: var(--md-sys-color-on-surface, #1b1c15);
 
-    /* Allow text selection in input */
-    user-select: text;
-    cursor: text;
+  /* Allow text selection in input */
+  user-select: text;
+  cursor: text;
 
-    /* Remove default input styles */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+  /* Remove default input styles */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 /* Placeholder Styles */
 .searchBar__input::placeholder {
-    color: var(--md-sys-color-on-surface-variant, #46483c);
-    opacity: 0.64;
-    transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1);
+  color: var(--md-sys-color-on-surface-variant, #46483c);
+  opacity: 0.64;
+  transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .searchBar--focused .searchBar__input::placeholder {
-    opacity: 0.48;
+  opacity: 0.48;
 }
 
 .searchBar__input:disabled {
-    cursor: not-allowed;
-    color: var(--md-sys-color-on-surface, #1b1c15);
+  cursor: not-allowed;
+  color: var(--md-sys-color-on-surface, #1b1c15);
 }
 
 /* Remove autofill background */
 .searchBar__input:-webkit-autofill,
 .searchBar__input:-webkit-autofill:hover,
 .searchBar__input:-webkit-autofill:focus {
-    -webkit-text-fill-color: var(--md-sys-color-on-surface, #1b1c15);
-    -webkit-box-shadow: 0 0 0px 1000px
-        var(--md-sys-color-surface-container-high, #eae9dc) inset;
-    transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: var(--md-sys-color-on-surface, #1b1c15);
+  -webkit-box-shadow: 0 0 0px 1000px
+    var(--md-sys-color-surface-container-high, #eae9dc) inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /* ============================================
@@ -226,21 +223,21 @@
    ============================================ */
 
 @keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Focus visible for keyboard navigation */
 .searchBar:focus-within {
-    outline: none;
+  outline: none;
 }
 
 .searchBar__input:focus-visible {
-    outline: none;
+  outline: none;
 }

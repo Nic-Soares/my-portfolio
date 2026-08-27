@@ -1,6 +1,6 @@
 import React from "react";
-import { BlockComponentProps } from "./types.ts";
 import { BlockWrapper } from "../BlockWrapper.tsx";
+import type { BlockComponentProps } from "./types.ts";
 
 export const HeaderBlock: React.FC<
   BlockComponentProps<Extract<BlockComponentProps["block"], { type: "header" }>>

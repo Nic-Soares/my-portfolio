@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import styles from "./Sidebar.module.css";
-import NavigationRail from "../navigation/NavigationRail/NavigationRail.tsx";
-import { NavItem } from "../navigation/NavigationRail/NavItem.tsx";
 import IconButton from "@/components/ui/IconButton/IconButton.tsx";
+import { NavItem } from "../navigation/NavigationRail/NavItem.tsx";
+import NavigationRail from "../navigation/NavigationRail/NavigationRail.tsx";
+import styles from "./Sidebar.module.css";
 
 function Sidebar() {
   const location = useLocation();

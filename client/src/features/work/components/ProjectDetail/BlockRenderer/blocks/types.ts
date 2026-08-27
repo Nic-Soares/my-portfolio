@@ -1,4 +1,4 @@
-import { ContentBlock } from "../../../../data/project-data.types.ts";
+import type { ContentBlock } from "../../../../data/project-data.types.ts";
 
 export interface BaseBlockComponentProps {
   block: ContentBlock;
@@ -6,8 +6,7 @@ export interface BaseBlockComponentProps {
   isNested?: boolean;
 }
 
-export interface BlockComponentProps<
-  T extends ContentBlock = ContentBlock,
-> extends BaseBlockComponentProps {
+export interface BlockComponentProps<T extends ContentBlock = ContentBlock>
+  extends BaseBlockComponentProps {
   block: T;
 }

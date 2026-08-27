@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, RefObject } from "react";
-import { TabData } from "./TabbedNavigation.utils.ts";
+import { type RefObject, useEffect, useRef, useState } from "react";
+import type { TabData } from "./TabbedNavigation.utils.ts";
 
 interface UseTabbedNavigationProps {
   renderTabs: TabData[];

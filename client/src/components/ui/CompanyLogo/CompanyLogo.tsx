@@ -1,8 +1,8 @@
-import styles from "./CompanyLogo.module.css";
-import type { ReactNode } from "react";
-import CoreOsLogoSvg from "@assets/logos/CoreOS.svg?react";
 import AlphaWaveLogoSvg from "@assets/logos/AlphaWave.svg?react";
 import BoltshiftLogoSvg from "@assets/logos/Boltshift.svg?react";
+import CoreOsLogoSvg from "@assets/logos/CoreOS.svg?react";
+import type { ReactNode } from "react";
+import styles from "./CompanyLogo.module.css";
 
 // Logo components mapping
 const logoComponents = {

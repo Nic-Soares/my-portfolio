@@ -3,7 +3,7 @@
   padding: 32px;
 
   background-color: var(--md-sys-color-tertiary-container);
-  background-image: url('../../../assets/images/forms.svg');
+  background-image: url("../../../assets/images/forms.svg");
   background-size: clamp(60px, 8vw, 120px);
   background-repeat: no-repeat;
   background-position: center;

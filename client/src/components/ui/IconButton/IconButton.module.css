@@ -1,169 +1,169 @@
 /* --- 1. Layout Base & Default Variables --- */
 .icon-button {
-    all: unset;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    cursor: pointer;
+  all: unset;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
 
-    /* --- Default Variables (Base: xsmall/filled/round/default) --- */
+  /* --- Default Variables (Base: xsmall/filled/round/default) --- */
 
-    /* Dimensions */
-    --icon-btn-width: 48px;
-    --icon-btn-height: 48px;
-    --icon-btn-content-width: 32px;
-    --icon-btn-content-height: 32px;
-    --icon-btn-radius: 100px; /* Default round */
+  /* Dimensions */
+  --icon-btn-width: 48px;
+  --icon-btn-height: 48px;
+  --icon-btn-content-width: 32px;
+  --icon-btn-content-height: 32px;
+  --icon-btn-radius: 100px; /* Default round */
 
-    /* Colors */
-    --icon-btn-bg: transparent;
-    --icon-btn-border: none;
-    --icon-btn-icon-color: var(--md-sys-color-primary);
+  /* Colors */
+  --icon-btn-bg: transparent;
+  --icon-btn-border: none;
+  --icon-btn-icon-color: var(--md-sys-color-primary);
 
-    /* Icon */
-    --icon-btn-icon-size: 20px;
-    --icon-btn-icon-fill: 0;
-    --icon-btn-icon-weight: 400;
+  /* Icon */
+  --icon-btn-icon-size: 20px;
+  --icon-btn-icon-fill: 0;
+  --icon-btn-icon-weight: 400;
 
-    /* State Layer */
-    --icon-btn-state-layer-bg: transparent;
+  /* State Layer */
+  --icon-btn-state-layer-bg: transparent;
 
-    height: var(--icon-btn-height);
+  height: var(--icon-btn-height);
 }
 
 .icon-button__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    width: var(--icon-btn-content-width);
-    height: var(--icon-btn-content-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: var(--icon-btn-content-width);
+  height: var(--icon-btn-content-height);
 
-    background: var(--icon-btn-bg);
-    border: var(--icon-btn-border);
-    border-radius: var(--icon-btn-radius);
-    box-sizing: border-box;
+  background: var(--icon-btn-bg);
+  border: var(--icon-btn-border);
+  border-radius: var(--icon-btn-radius);
+  box-sizing: border-box;
 }
 
 .icon-button__state-layer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: stretch;
-    height: 100%;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  height: 100%;
+  width: 100%;
 
-    background: var(--icon-btn-state-layer-bg);
+  background: var(--icon-btn-state-layer-bg);
 }
 
 .icon-button__state-layer :global(.material-symbols-outlined) {
-    font-variation-settings:
-        "FILL" var(--icon-btn-icon-fill),
-        "wght" var(--icon-btn-icon-weight);
-    transition: font-variation-settings 0.2s ease;
-    font-size: var(--icon-btn-icon-size);
-    color: var(--icon-btn-icon-color);
-    user-select: none;
+  font-variation-settings:
+    "FILL" var(--icon-btn-icon-fill),
+    "wght" var(--icon-btn-icon-weight);
+  transition: font-variation-settings 0.2s ease;
+  font-size: var(--icon-btn-icon-size);
+  color: var(--icon-btn-icon-color);
+  user-select: none;
 }
 
 /* SVG customizado (children) */
 .icon-button__state-layer svg {
-    width: var(--icon-btn-icon-size);
-    height: var(--icon-btn-icon-size);
-    fill: var(--icon-btn-icon-color);
-    transition: fill 0.2s ease;
-    user-select: none;
+  width: var(--icon-btn-icon-size);
+  height: var(--icon-btn-icon-size);
+  fill: var(--icon-btn-icon-color);
+  transition: fill 0.2s ease;
+  user-select: none;
 }
 
 /* --- 2. Size Variants --- */
 
 .icon-button--xsmall {
-    --icon-btn-width: 48px;
-    --icon-btn-height: 48px;
-    --icon-btn-content-width: 32px;
-    --icon-btn-content-height: 32px;
-    --icon-btn-icon-size: 20px;
+  --icon-btn-width: 48px;
+  --icon-btn-height: 48px;
+  --icon-btn-content-width: 32px;
+  --icon-btn-content-height: 32px;
+  --icon-btn-icon-size: 20px;
 }
 
 .icon-button--small {
-    --icon-btn-width: 48px;
-    --icon-btn-height: 48px;
-    --icon-btn-content-width: 40px;
-    --icon-btn-content-height: 40px;
-    --icon-btn-icon-size: 20px;
+  --icon-btn-width: 48px;
+  --icon-btn-height: 48px;
+  --icon-btn-content-width: 40px;
+  --icon-btn-content-height: 40px;
+  --icon-btn-icon-size: 20px;
 }
 
 .icon-button--medium {
-    --icon-btn-width: 56px;
-    --icon-btn-height: 56px;
-    --icon-btn-content-width: 56px;
-    --icon-btn-content-height: 56px;
-    --icon-btn-icon-size: 20px;
+  --icon-btn-width: 56px;
+  --icon-btn-height: 56px;
+  --icon-btn-content-width: 56px;
+  --icon-btn-content-height: 56px;
+  --icon-btn-icon-size: 20px;
 }
 
 .icon-button--large {
-    --icon-btn-width: 96px;
-    --icon-btn-height: 96px;
-    --icon-btn-content-width: 96px;
-    --icon-btn-content-height: 96px;
-    --icon-btn-icon-size: 26.67px;
+  --icon-btn-width: 96px;
+  --icon-btn-height: 96px;
+  --icon-btn-content-width: 96px;
+  --icon-btn-content-height: 96px;
+  --icon-btn-icon-size: 26.67px;
 }
 
 .icon-button--xlarge {
-    --icon-btn-width: 136px;
-    --icon-btn-height: 136px;
-    --icon-btn-content-width: 136px;
-    --icon-btn-content-height: 136px;
-    --icon-btn-icon-size: 33.333px;
+  --icon-btn-width: 136px;
+  --icon-btn-height: 136px;
+  --icon-btn-content-width: 136px;
+  --icon-btn-content-height: 136px;
+  --icon-btn-icon-size: 33.333px;
 }
 
 /* --- 3. Type Variants (Shape) --- */
 
 .icon-button--round {
-    --icon-btn-radius: 100px;
+  --icon-btn-radius: 100px;
 }
 
 .icon-button--square.icon-button--xsmall,
 .icon-button--square.icon-button--small {
-    --icon-btn-radius: 8px;
+  --icon-btn-radius: 8px;
 }
 
 .icon-button--square.icon-button--medium {
-    --icon-btn-radius: 12px;
+  --icon-btn-radius: 12px;
 }
 
 .icon-button--square.icon-button--large,
 .icon-button--square.icon-button--xlarge {
-    --icon-btn-radius: 16px;
+  --icon-btn-radius: 16px;
 }
 
 /* --- 4. Style Variants (Colors) --- */
 
 /* Filled */
 .icon-button--filled {
-    --icon-btn-bg: var(--md-sys-color-primary);
-    --icon-btn-icon-color: var(--md-sys-color-on-primary);
+  --icon-btn-bg: var(--md-sys-color-primary);
+  --icon-btn-icon-color: var(--md-sys-color-on-primary);
 }
 
 /* Tonal */
 .icon-button--tonal {
-    --icon-btn-bg: var(--md-sys-color-secondary-container);
-    --icon-btn-icon-color: var(--md-sys-color-on-secondary-container);
+  --icon-btn-bg: var(--md-sys-color-secondary-container);
+  --icon-btn-icon-color: var(--md-sys-color-on-secondary-container);
 }
 
 /* Outline */
 .icon-button--outline {
-    --icon-btn-bg: transparent;
-    --icon-btn-border: 1px solid var(--md-sys-color-outline-variant);
-    --icon-btn-icon-color: var(--md-sys-color-on-surface-variant);
+  --icon-btn-bg: transparent;
+  --icon-btn-border: 1px solid var(--md-sys-color-outline-variant);
+  --icon-btn-icon-color: var(--md-sys-color-on-surface-variant);
 }
 
 /* Text (placeholder - replace previous 'standard') */
 .icon-button--text {
-    /* TODO: fill style variables for text icon-button */
-    /* Example:
+  /* TODO: fill style variables for text icon-button */
+  /* Example:
        --icon-btn-bg: transparent;
        --icon-btn-icon-color: var(--md-sys-color-on-surface-variant);
     */
@@ -171,8 +171,8 @@
 
 /* Elevated (placeholder) */
 .icon-button--elevated {
-    /* TODO: fill style variables for elevated icon-button */
-    /* Example:
+  /* TODO: fill style variables for elevated icon-button */
+  /* Example:
        --icon-btn-bg: var(--md-sys-color-surface);
        --icon-btn-icon-color: var(--md-sys-color-on-surface);
        --icon-btn-border: none;
@@ -183,25 +183,25 @@
 /* --- 5. Selected State --- */
 
 .icon-button--selected.icon-button--filled {
-    --icon-btn-bg: var(--md-sys-color-primary-container);
-    --icon-btn-icon-color: var(--md-sys-color-on-primary-container);
+  --icon-btn-bg: var(--md-sys-color-primary-container);
+  --icon-btn-icon-color: var(--md-sys-color-on-primary-container);
 }
 
 .icon-button--selected.icon-button--tonal {
-    --icon-btn-bg: var(--md-sys-color-primary);
-    --icon-btn-icon-color: var(--md-sys-color-on-primary);
+  --icon-btn-bg: var(--md-sys-color-primary);
+  --icon-btn-icon-color: var(--md-sys-color-on-primary);
 }
 
 .icon-button--selected.icon-button--outline {
-    --icon-btn-bg: var(--md-sys-color-inverse-surface);
-    --icon-btn-border: none;
-    --icon-btn-icon-color: var(--md-sys-color-inverse-on-surface);
+  --icon-btn-bg: var(--md-sys-color-inverse-surface);
+  --icon-btn-border: none;
+  --icon-btn-icon-color: var(--md-sys-color-inverse-on-surface);
 }
 
 /* Selected state placeholder for text */
 .icon-button--selected.icon-button--text {
-    /* TODO: define selected variables for text variant */
-    /* Example:
+  /* TODO: define selected variables for text variant */
+  /* Example:
        --icon-btn-bg: transparent;
        --icon-btn-icon-color: var(--md-sys-color-primary);
     */
@@ -209,7 +209,7 @@
 
 /* Selected state placeholder for elevated */
 .icon-button--selected.icon-button--elevated {
-    /* TODO: define selected variables for elevated variant */
+  /* TODO: define selected variables for elevated variant */
 }
 
 /* --- 6. Width Variants --- */
@@ -217,106 +217,106 @@
 /* Narrow = narrower than default, Wide = wider than default */
 
 .icon-button--xsmall.icon-button--narrow {
-    --icon-btn-content-width: 28px;
+  --icon-btn-content-width: 28px;
 }
 
 .icon-button--small.icon-button--narrow {
-    --icon-btn-content-width: 32px;
+  --icon-btn-content-width: 32px;
 }
 
 .icon-button--medium.icon-button--narrow {
-    --icon-btn-content-width: 48px;
+  --icon-btn-content-width: 48px;
 }
 
 .icon-button--large.icon-button--narrow {
-    --icon-btn-content-width: 64px;
+  --icon-btn-content-width: 64px;
 }
 
 .icon-button--xlarge.icon-button--narrow {
-    --icon-btn-content-width: 104px;
+  --icon-btn-content-width: 104px;
 }
 
 .icon-button--xsmall.icon-button--wide {
-    --icon-btn-content-width: 40px;
+  --icon-btn-content-width: 40px;
 }
 
 .icon-button--small.icon-button--wide {
-    --icon-btn-content-width: 52px;
+  --icon-btn-content-width: 52px;
 }
 
 .icon-button--medium.icon-button--wide {
-    --icon-btn-width: 72px;
-    --icon-btn-content-width: 72px;
+  --icon-btn-width: 72px;
+  --icon-btn-content-width: 72px;
 }
 
 .icon-button--large.icon-button--wide {
-    --icon-btn-width: 128px;
-    --icon-btn-content-width: 128px;
+  --icon-btn-width: 128px;
+  --icon-btn-content-width: 128px;
 }
 
 .icon-button--xlarge.icon-button--wide {
-    --icon-btn-width: 184px;
-    --icon-btn-content-width: 184px;
+  --icon-btn-width: 184px;
+  --icon-btn-content-width: 184px;
 }
 
 /* --- 7. States (Hover, Focus, Active, Disabled) --- */
 
 /* Hover */
 .icon-button:hover {
-    --icon-btn-state-layer-bg: rgba(0, 0, 0, 0.08);
+  --icon-btn-state-layer-bg: rgba(0, 0, 0, 0.08);
 }
 
 .icon-button--filled:hover {
-    --icon-btn-state-layer-bg: var(
-        --md-state-layers-light-on-primary-opacity-08,
-        rgba(255, 255, 255, 0.08)
-    );
+  --icon-btn-state-layer-bg: var(
+    --md-state-layers-light-on-primary-opacity-08,
+    rgba(255, 255, 255, 0.08)
+  );
 }
 
 .icon-button--tonal:hover {
-    --icon-btn-state-layer-bg: rgba(29, 25, 43, 0.08);
+  --icon-btn-state-layer-bg: rgba(29, 25, 43, 0.08);
 }
 
 /* Outline, Text and Elevated hover states */
 .icon-button--outline:hover,
 .icon-button--text:hover,
 .icon-button--elevated:hover {
-    --icon-btn-state-layer-bg: rgba(73, 69, 79, 0.08);
+  --icon-btn-state-layer-bg: rgba(73, 69, 79, 0.08);
 }
 
 /* Focus */
 .icon-button:focus-visible {
-    outline: none;
+  outline: none;
 }
 
 .icon-button:focus-visible .icon-button__content {
-    outline: 2px solid var(--md-sys-color-primary);
-    outline-offset: 2px;
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
 }
 
 /* Active */
 .icon-button:active {
-    --icon-btn-state-layer-bg: rgba(0, 0, 0, 0.12);
+  --icon-btn-state-layer-bg: rgba(0, 0, 0, 0.12);
 }
 
 .icon-button--filled:active {
-    --icon-btn-state-layer-bg: rgba(255, 255, 255, 0.12);
+  --icon-btn-state-layer-bg: rgba(255, 255, 255, 0.12);
 }
 
 .icon-button--tonal:active {
-    --icon-btn-state-layer-bg: rgba(29, 25, 43, 0.12);
+  --icon-btn-state-layer-bg: rgba(29, 25, 43, 0.12);
 }
 
 /* Outline, Text and Elevated active states */
 .icon-button--outline:active,
 .icon-button--text:active,
 .icon-button--elevated:active {
-    --icon-btn-state-layer-bg: rgba(73, 69, 79, 0.12);
+  --icon-btn-state-layer-bg: rgba(73, 69, 79, 0.12);
 }
 
 /* Disabled */
 .icon-button:disabled {
-    opacity: 0.38;
-    cursor: not-allowed;
-    --icon-btn-state-layer-bg: none !important;
+  opacity: 0.38;
+  cursor: not-allowed;
+  --icon-btn-state-layer-bg: none !important;
 }

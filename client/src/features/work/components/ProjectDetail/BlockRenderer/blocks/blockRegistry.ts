@@ -1,13 +1,13 @@
-import React from "react";
-import { BaseBlockComponentProps } from "./types.ts";
-import { HeaderBlock } from "./HeaderBlock.tsx";
-import { ParagraphBlock } from "./ParagraphBlock.tsx";
-import { ImageBlock } from "./ImageBlock.tsx";
-import { TableBlock } from "./TableBlock.tsx";
+import type React from "react";
 import { CodeBlock } from "./CodeBlock.tsx";
-import { ListBlock } from "./ListBlock.tsx";
-import { ContentGroupBlock } from "./ContentGroupBlock.tsx";
 import { ColumnsBlock } from "./ColumnsBlock.tsx";
+import { ContentGroupBlock } from "./ContentGroupBlock.tsx";
+import { HeaderBlock } from "./HeaderBlock.tsx";
+import { ImageBlock } from "./ImageBlock.tsx";
+import { ListBlock } from "./ListBlock.tsx";
+import { ParagraphBlock } from "./ParagraphBlock.tsx";
+import { TableBlock } from "./TableBlock.tsx";
+import type { BaseBlockComponentProps } from "./types.ts";
 import { VideoBlock } from "./VideoBlock.tsx";
 
 export const blockRegistry: Record<

@@ -1,6 +1,6 @@
-import styles from "./ProjectList.page.module.css";
 import ProjectCardGrid from "../../components/ProjectList/ProjectCardGrid/ProjectCardGrid.tsx";
 import ProjectListHero from "../../components/ProjectList/ProjectListHero/ProjectListHero.tsx";
+import styles from "./ProjectList.page.module.css";
 
 const ProjectListPage = () => {
   return (

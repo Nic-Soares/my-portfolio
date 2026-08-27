@@ -1,4 +1,4 @@
-import { SidebarItem } from "../../../data/project-data.types.ts";
+import type { SidebarItem } from "../../../data/project-data.types.ts";
 import styles from "./SummaryNav.module.css";
 
 interface SummaryNavProps {

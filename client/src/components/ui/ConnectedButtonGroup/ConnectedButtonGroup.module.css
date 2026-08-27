@@ -1,39 +1,39 @@
 .connected-button-group {
-    display: inline-flex;
-    white-space: nowrap;
-    width: fit-content;
-    align-items: flex-start;
-    gap: 2px;
-    overflow: hidden;
+  display: inline-flex;
+  white-space: nowrap;
+  width: fit-content;
+  align-items: flex-start;
+  gap: 2px;
+  overflow: hidden;
 }
 
 /* Size variants - correspondem às alturas do Button */
 .xsmall {
-    min-height: 40px;
-    height: 40px;
-    border-radius: 20px;
+  min-height: 40px;
+  height: 40px;
+  border-radius: 20px;
 }
 
 .small {
-    min-height: 48px;
-    height: 48px;
-    border-radius: 24px;
+  min-height: 48px;
+  height: 48px;
+  border-radius: 24px;
 }
 
 .medium {
-    min-height: 56px;
-    height: 56px;
-    border-radius: 28px;
+  min-height: 56px;
+  height: 56px;
+  border-radius: 28px;
 }
 
 .large {
-    min-height: 96px;
-    height: 96px;
-    border-radius: 48px;
+  min-height: 96px;
+  height: 96px;
+  border-radius: 48px;
 }
 
 .xlarge {
-    min-height: 136px;
-    height: 136px;
-    border-radius: 68px;
+  min-height: 136px;
+  height: 136px;
+  border-radius: 68px;
 }

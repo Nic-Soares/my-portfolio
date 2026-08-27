@@ -1,7 +1,7 @@
-import ExpertiseCard from "@/features/home/components/ExpertiseCard/ExpertiseCard.tsx";
 import Container from "@/components/layout/Container/Container.tsx";
-import styles from "./ExperienceSection.module.css";
 import CompanyLogo from "@/components/ui/CompanyLogo/CompanyLogo.tsx";
+import ExpertiseCard from "@/features/home/components/ExpertiseCard/ExpertiseCard.tsx";
+import styles from "./ExperienceSection.module.css";
 
 const ExperienceSection = () => {
   return (

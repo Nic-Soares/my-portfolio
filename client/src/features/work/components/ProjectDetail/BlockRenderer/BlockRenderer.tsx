@@ -1,5 +1,5 @@
 import React from "react";
-import { ContentBlock } from "../../../data/project-data.types.ts";
+import type { ContentBlock } from "../../../data/project-data.types.ts";
 import { blockRegistry } from "./blocks/blockRegistry.ts";
 
 export const BlockRenderer = ({

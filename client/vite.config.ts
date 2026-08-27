@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import { join } from "jsr:@std/path@^1";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 import svgr from "vite-plugin-svgr";
 
 const rootDir = import.meta.dirname;
@@ -9,6 +9,11 @@ const rootDir = import.meta.dirname;
 export default defineConfig({
   plugins: [react(), svgr()],
   publicDir: "public",
+  server: {
+    fs: {
+      allow: [join(rootDir, "..")],
+    },
+  },
   build: {
     outDir: join(rootDir, "../dist/client"),
     emptyOutDir: true,

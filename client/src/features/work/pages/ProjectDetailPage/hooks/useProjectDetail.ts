@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useProjectData } from "../../../hooks/useProjectData.ts";
 import type { ProjectTab } from "../../../data/project-data.types.ts";
+import { useProjectData } from "../../../hooks/useProjectData.ts";
 
 /**
  * Hook: useProjectDetail

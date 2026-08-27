@@ -1,7 +1,7 @@
-import Button from "../Button/Button.tsx";
-import styles from "./ConnectedButtonGroup.module.css";
 import type { ReactNode } from "react";
 import { useState } from "react";
+import Button from "../Button/Button.tsx";
+import styles from "./ConnectedButtonGroup.module.css";
 
 type SizeOption = "xsmall" | "small" | "medium" | "large" | "xlarge";
 
@@ -15,7 +15,7 @@ interface ButtonOption {
 interface ConnectedButtonGroupProps {
   className?: string;
   size?: SizeOption;
-  style?: 'filled' | 'tonal' | 'outline' | 'text' | 'elevated';
+  style?: "filled" | "tonal" | "outline" | "text" | "elevated";
   options: ButtonOption[];
   selectedIndex?: number;
   onSelectionChange?: (index: number) => void;
@@ -66,8 +66,9 @@ const ConnectedButtonGroup = ({
     >
       {displayedOptions.map((option, idx) => {
         const isSelected = selectedIndex === idx;
-        const iconToUse = isSelected && option.selectedIcon ? option.selectedIcon : option.icon;
-        
+        const iconToUse =
+          isSelected && option.selectedIcon ? option.selectedIcon : option.icon;
+
         return (
           <Button
             key={idx}

@@ -1,11 +1,12 @@
-import React, { useMemo } from "react";
+import type React from "react";
+import { useMemo } from "react";
 import styles from "./TabbedNavigation.module.css";
-import TabItem from "./TabItem.tsx";
 import {
-  TabData,
-  normalizeTabs,
   getVisibleTabs,
+  normalizeTabs,
+  type TabData,
 } from "./TabbedNavigation.utils.ts";
+import TabItem from "./TabItem.tsx";
 import { useTabbedNavigation } from "./useTabbedNavigation.ts";
 
 type Props = {

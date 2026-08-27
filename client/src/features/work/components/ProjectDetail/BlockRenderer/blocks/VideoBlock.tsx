@@ -1,6 +1,6 @@
-import React from "react";
-import { BlockComponentProps } from "./types.ts";
+import type React from "react";
 import { BlockWrapper } from "../BlockWrapper.tsx";
+import type { BlockComponentProps } from "./types.ts";
 import styles from "./VideoBlock.module.css";
 
 export const VideoBlock: React.FC<

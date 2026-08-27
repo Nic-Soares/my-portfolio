@@ -1,7 +1,7 @@
-import React from "react";
-import { BlockComponentProps } from "./types.ts";
+import type React from "react";
 import { BlockWrapper } from "../BlockWrapper.tsx";
 import styles from "./ListBlock.module.css";
+import type { BlockComponentProps } from "./types.ts";
 
 export const ListBlock: React.FC<
   BlockComponentProps<Extract<BlockComponentProps["block"], { type: "list" }>>

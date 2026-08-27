@@ -1,9 +1,9 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 840px;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 840px;
+  margin: 0;
 }
 
 .date {
@@ -34,10 +34,14 @@
 }
 
 @media (max-width: 1294px) {
-  .sizeMd h1 { font-size: 72px; }
+  .sizeMd h1 {
+    font-size: 72px;
+  }
 }
 @media (max-width: 600px) {
-  .sizeMd h1 { font-size: 44px; }
+  .sizeMd h1 {
+    font-size: 44px;
+  }
 }
 
 /* Adicione as classes .sizeSm e padrão conforme seu arquivo original */
