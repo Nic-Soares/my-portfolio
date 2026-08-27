@@ -101,19 +101,19 @@ Context: this is the first thing to do, before `ST-01.1`. Follow [`docs/runbooks
   - [x] `deno outdated --update` for routine in-range bumps
   - [x] Evaluate `deno outdated --update --latest` for anything with a major available; read changelogs before applying
 - **TK-01.0.2** — Update Biome (runbook §5, as the worked example)
-  - [ ] Confirm the version pinned in the `lint`/`format`/`check` tasks in `deno.json` against the latest on npm
-  - [ ] Bump the `$schema` in `biome.json` to match
-  - [ ] Run `deno task check` and review the diff — new rules enabled by default are expected on a minor bump
+  - [x] Confirm the version pinned in the `lint`/`format`/`check` tasks in `deno.json` against the latest on npm
+  - [x] Bump the `$schema` in `biome.json` to match
+  - [x] Run `deno task check` and review the diff — new rules enabled by default are expected on a minor bump
 - **TK-01.0.3** — Update Deno itself
-  - [ ] `deno --version` to check the current version
-  - [ ] Upgrade through whichever method installed it (`brew upgrade deno` on this machine — see runbook §4, `deno upgrade` doesn't work on the Homebrew build)
+  - [x] `deno --version` to check the current version
+  - [x] Upgrade through whichever method installed it (`brew upgrade deno` on this machine — see runbook §4, `deno upgrade` doesn't work on the Homebrew build)
 - **TK-01.0.4** — Validate everything (runbook §6)
-  - [ ] `deno task typecheck`
-  - [ ] `deno task lint`
-  - [ ] `deno task build`
-  - [ ] `deno task dev` — manual smoke test across `/`, `/projects`, `/projects/:slug`
+  - [x] `deno task typecheck`
+  - [x] `deno task lint`
+  - [x] `deno task build`
+  - [x] `deno task dev` — manual smoke test across `/`, `/projects`, `/projects/:slug`
 - **TK-01.0.5** — Commit
-  - [ ] `deno.json` and `deno.lock` together, per runbook §7
+  - [x] `deno.json` and `deno.lock` together, per runbook §7
 
 ### ST-01.1 — Remove the Material Web Components dependency
 
@@ -122,9 +122,9 @@ Context: this is the first thing to do, before `ST-01.1`. Follow [`docs/runbooks
 Context: `client/src/app/main.tsx` imports 7 `@material/web` modules for their side effects. A search for `<md-*>` across `client/src` returns no matches — the lib is 100% dead weight, only adding to the bundle.
 
 - **TK-01.1.1** — Remove the `@material/web` imports from `main.tsx`
-  - [x] Delete the 7 import lines (`filled-button`, `icon-button`, `filled-icon-button`, `outlined-icon-button`, `outlined-button`, `checkbox`, `icon`)
-  - [x] Remove `"@material/web/"` from the import map in `deno.json`
-  - [x] Run `deno task build` and compare bundle size before/after (record it in the PR)
+  - [ ] Delete the 7 import lines (`filled-button`, `icon-button`, `filled-icon-button`, `outlined-icon-button`, `outlined-button`, `checkbox`, `icon`)
+  - [ ] Remove `"@material/web/"` from the import map in `deno.json`
+  - [ ] Run `deno task build` and compare bundle size before/after (record it in the PR)
 - **TK-01.1.2** — Confirm nothing depended on the lib
   - [ ] `grep -rn "md-" client/src` and review every hit
   - [ ] Run `deno task typecheck` and `deno task lint`
@@ -176,6 +176,16 @@ Context: 13 files contain accented characters. It's not just comments — there'
 - **TK-01.4.3** — Define the coverage bar
   - [ ] Require a test for every new `ui/` component (that's where regressions hurt most)
   - [ ] Document the bar in the README
+
+### ST-01.5 — Loose lint findings with no other home
+
+> **As a** dev, **I want** the handful of orphan Biome findings fixed, **so that** they don't sit in `deno task lint` output indefinitely with nowhere to go.
+
+Context: running `deno task check` (as part of `ST-01.0`) surfaced 31 errors / 12 warnings / 16 infos of pre-existing lint debt — none of it caused by the dependency bump. Most of it isn't worth fixing here: the CSS specificity/`!important` findings in the navigation components are already going to be touched by `EP-04`/`EP-05` (see the note on `ST-04.6`), and the SVG accessibility findings belong to `EP-12`'s accessibility audit (see the note on `ST-12.1`). Fixing them now would mean redoing the same work twice. Only these two are truly standalone — small, one-off, and not touched by any planned epic:
+
+- **TK-01.5.1** — Fix the two orphan findings
+  - [ ] `client/src/app/main.tsx:16` — `lint/style/noNonNullAssertion` on `document.getElementById("root")!`
+  - [ ] `client/src/components/layout/navigation/NavigationRail/NavItem.tsx:19` — `lint/a11y/useButtonType`, missing explicit `type` on `<button>`
 
 ---
 
@@ -361,6 +371,9 @@ Context: in Figma the decor is an absolutely positioned `HeroDecor` layer with t
 - **TK-04.6.3** — Audit `SearchBar` and `ConnectedButtonGroup`
   - [ ] Focus and filled-value states
   - [ ] Parity with the design
+- **TK-04.6.4** — Audit `TabbedNavigation`
+  - [ ] Variant parity against the Tab Bar component set (see §2.2)
+  - [ ] Clean up while touching the CSS: descending-specificity selectors and a duplicate `--btn-state-layer-bg` custom property in `TabbedNavigation.module.css`/`TabItem.module.css`, and the `!important` override in `TabItem.module.css:288` (flagged by `deno task check`, pre-existing, unrelated to `ST-01.0`)
 
 ---
 
@@ -384,6 +397,8 @@ Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About
   - [ ] `<nav>` with `aria-label`
   - [ ] `aria-current="page"` on the active destination
   - [ ] Focus order and a skip link to the content
+- **TK-05.1.3** — Clean up while touching the CSS
+  - [ ] Empty `.nav-item--selected` block and a descending-specificity selector in `NavItem.module.css` (flagged by `deno task check`, pre-existing, unrelated to `ST-01.0`)
 
 ### ST-05.2 — TopAppBar and NavigationBar for tablet and mobile
 
@@ -670,6 +685,8 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
   - [ ] Screen reader across states and navigation
 - **TK-12.1.2** — Motion
   - [ ] `prefers-reduced-motion` respected by decor, skeleton, progress, and carousel
+- **TK-12.1.3** — Decorative and brand SVGs
+  - [ ] Add `<title>` (or `aria-hidden="true"` for purely decorative ones) to every SVG flagged by `deno task check`'s `lint/a11y/noSvgWithoutTitle`: favicon, icons (`dashboard`, `github`, `linkedin`, `telegram`), the M3 shape set (`forms.svg`), and the partner logos (`AlphaWave`, `Boltshift`, `CoreOS`, etc.) — pre-existing, unrelated to `ST-01.0`
 
 ### ST-12.2 — Performance
 
