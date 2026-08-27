@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Container from "@/components/layout/Container/Container.tsx";
+import Container from "@/components/layout/container/Container.tsx";
 import type { Project } from "@/types/project.ts";
 import CarouselSlide from "../../../components/ui/Carousel/CarouselSlide.tsx";
 import styles from "./ProjectCarousel.module.css";

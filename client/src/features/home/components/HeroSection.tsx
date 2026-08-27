@@ -1,4 +1,4 @@
-import Container from "@/components/layout/Container/Container.tsx";
+import Container from "@/components/layout/container/Container.tsx";
 import Button from "@/components/ui/Button/Button.tsx";
 import GithubIcon from "@/components/ui/GithubIcon/GithubIcon.tsx";
 import IconButton from "@/components/ui/IconButton/IconButton.tsx";
