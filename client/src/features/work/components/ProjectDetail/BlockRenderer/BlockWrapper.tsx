@@ -32,7 +32,7 @@ export const BlockWrapper = ({
       className={`${isNested ? "" : styles.block} ${isSnug ? styles.snug : ""}`.trim()}
       id={id}
     >
-      {/* Botão de Copiar Link */}
+      {/* Copy link button */}
       {showCopyButton && id && !isNested && (
         <div className={styles["copy-button-container"]}>
           <IconButton
@@ -45,10 +45,10 @@ export const BlockWrapper = ({
         </div>
       )}
 
-      {/* Área de rolagem/âncora */}
+      {/* Scroll target / anchor */}
       <div className={styles["scroll-target"]}></div>
 
-      {/* Conteúdo principal */}
+      {/* Main content */}
       <div className={isNested ? "" : styles.chunk}>
         {dangerouslySetInnerHTML ? (
           <div

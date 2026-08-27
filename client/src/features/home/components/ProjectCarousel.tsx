@@ -18,12 +18,12 @@ const projects: Project[] = [
   {
     id: 2,
     title: "02",
-    description: "Outro conteúdo para segundo item.",
+    description: "Additional content for the second item.",
   },
   {
     id: 3,
     title: "03",
-    description: "Mais conteúdo para terceiro item.",
+    description: "More content for the third item.",
   },
 ];
 

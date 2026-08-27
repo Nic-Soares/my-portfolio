@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import styles from "./ContentLayout.module.css";
 
 interface ContentLayoutProps {
-  children: ReactNode; // O conteúdo principal (Texto, código, imagens)
-  rightSidebar: ReactNode; // O que vai na coluna da direita (Sumário)
+  children: ReactNode; // Main content: text, code, and images.
+  rightSidebar: ReactNode; // Content displayed in the right-hand summary column.
 }
 
 export const ContentLayout = ({
