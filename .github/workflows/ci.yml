@@ -24,5 +24,6 @@ jobs:
           cache: true
 
       - run: deno task typecheck
+      - run: deno task test
       - run: deno task lint
       - run: deno task build

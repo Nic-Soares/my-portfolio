@@ -160,10 +160,10 @@ Context: 13 files contain accented characters. It's not just comments — there'
   - [x] Cache the Deno dependency directory
   - [x] Fix case-sensitive imports for `container` and `sidebar`; macOS resolves PascalCase paths locally, but the Linux CI runner does not
 - **TK-01.4.2** — Choose and configure the test runner
-  - [ ] Decide between `deno test` + `@testing-library/react` or Vitest (record as ADR-004)
-  - [ ] Configure the DOM environment
-  - [ ] One smoke test (render `App` with no error) to validate the setup
-  - [ ] `deno task test` task and a CI job
+  - [x] Decide between `deno test` + `@testing-library/react` or Vitest (record as ADR-004)
+  - [x] Configure the DOM environment
+  - [x] One smoke test (render `App` with no error) to validate the setup
+  - [x] `deno task test` task and a CI job
 - **TK-01.4.3** — Define the coverage bar
   - [ ] Require a test for every new `ui/` component (that's where regressions hurt most)
   - [ ] Document the bar in the README

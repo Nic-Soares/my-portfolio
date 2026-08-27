@@ -5,11 +5,15 @@
     "build": "deno check client/src/app/main.tsx && cd client && vite build",
     "preview": "cd client && vite preview",
     "typecheck": "deno check client/src/app/main.tsx",
+    "test": "cd client && vitest run",
     "lint": "deno run -A npm:@biomejs/biome@2 lint .",
     "format": "deno run -A npm:@biomejs/biome@2 format --write .",
     "check": "deno run -A npm:@biomejs/biome@2 check --write ."
   },
   "imports": {
+    "@testing-library/jest-dom": "npm:@testing-library/jest-dom@^7.0.1",
+    "@testing-library/react": "npm:@testing-library/react@^16.3.2",
+    "jsdom": "npm:jsdom@^30.0.1",
     "react": "npm:react@^19.2.8",
     "react/": "npm:/react@^19.2.8/",
     "react-dom": "npm:react-dom@^19.2.8",
@@ -23,7 +27,8 @@
     "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^6.1.0",
     "vite-plugin-svgr": "npm:vite-plugin-svgr@^5.2.0",
     "@/": "./client/src/",
-    "@assets/": "./client/src/assets/"
+    "@assets/": "./client/src/assets/",
+    "vitest": "npm:vitest@^4.1.11"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
