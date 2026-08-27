@@ -23,7 +23,7 @@ export default function TitleCard({
 
   return (
     <Container
-      variant="hero" // Nome muito mais coerente com a função do card
+      variant="hero" // Semantically aligned with the card's purpose.
       backgroundColor={backgroundColor}
       borderRadius={borderRadius}
     >

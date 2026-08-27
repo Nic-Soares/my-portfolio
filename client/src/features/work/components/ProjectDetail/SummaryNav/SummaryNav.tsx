@@ -11,7 +11,7 @@ export const SummaryNav = ({ title, items }: SummaryNavProps) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      // Faz a rolagem suave até o título da seção
+      // Smoothly scroll to the section heading.
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };

@@ -36,10 +36,10 @@ const Button = ({
   interactive = true,
   grouped = false,
 }: ButtonProps) => {
-  // Estado interno apenas se toggleable e selected não for controlado externamente
+  // Use internal state only when toggleable and selected is uncontrolled.
   const [internalSelected, setInternalSelected] = useState(false);
 
-  // Se externalSelected foi passado, usa ele. Senão, se toggleable, usa interno. Caso contrário, false.
+  // Prefer an explicit selected value; otherwise use internal state when toggleable.
   const isSelected =
     externalSelected !== undefined
       ? externalSelected
@@ -75,12 +75,12 @@ const Button = ({
     if (!isInteractive) return;
 
     if (toggleable && externalSelected === undefined) {
-      // Modo toggleable com estado interno
+      // Toggleable mode with internal state.
       const newState = !internalSelected;
       setInternalSelected(newState);
       onClick?.(newState);
     } else {
-      // Modo controlado ou não-toggleable
+      // Controlled or non-toggleable mode.
       onClick?.(isSelected);
     }
   };

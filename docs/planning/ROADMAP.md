@@ -130,16 +130,6 @@ Context: `client/src/app/main.tsx` imports 7 `@material/web` modules for their s
   - [x] Run `deno task typecheck` and `deno task lint`
   - [x] Manual smoke test across the 5 existing routes
 
-### ST-01.2 — Clean up stray files and the working tree
-
-- **TK-01.2.1** — Resolve the untracked files at the repo root
-  - [ ] Move `prompt-replicar-breakpoints.md`, `prompt-replicar-1512-para-1920.md`, `prompt_replicar_1512_para_1920.md` to `docs/prompts/` or discard them (two files have identical content, one with `-` and one with `_`)
-  - [ ] Decide the fate of `roadmap_portfolio.xlsx` — this ROADMAP.md replaces it
-  - [ ] Add `*.xlsx` to `.gitignore` if planning now lives in markdown
-- **TK-01.2.2** — Close out pending changes
-  - [ ] Review and commit `client/src/features/work/.../ProjectCard.module.css`
-  - [ ] Review and commit `client/vite.config.ts`
-
 ### ST-01.3 — Move the repo's copy to English
 
 > **As a** visitor, **I want** the whole site in a single language, **so that** I don't run into Portuguese in the middle of an English page.
@@ -147,15 +137,15 @@ Context: `client/src/app/main.tsx` imports 7 `@material/web` modules for their s
 Context: 13 files contain accented characters. It's not just comments — there's screen copy and project content too.
 
 - **TK-01.3.1** — Interface copy
-  - [ ] `NotFound.tsx` — "404 — Página não encontrada", "Oops! A página que você procura não existe.", "Voltar para a página inicial" (the screen gets rebuilt in `EP-10`; translating now avoids shipping PT in production in the meantime)
-  - [ ] `MediaCard.tsx` — "Mídia indisponível", "Não foi possível carregar a mídia."
-  - [ ] `ProjectCarousel.tsx` — placeholder descriptions ("Outro conteúdo para segundo item.")
+  - [x] `NotFound.tsx` — "404 — Página não encontrada", "Oops! A página que você procura não existe.", "Voltar para a página inicial" (the screen gets rebuilt in `EP-10`; translating now avoids shipping PT in production in the meantime)
+  - [x] `MediaCard.tsx` — "Mídia indisponível", "Não foi possível carregar a mídia."
+  - [x] `ProjectCarousel.tsx` — placeholder descriptions ("Outro conteúdo para segundo item.")
 - **TK-01.3.2** — Comments and identifiers
-  - [ ] Comments in `Button.tsx`, `TitleCard.tsx`, `MediaCard.tsx`, `SummaryNav.tsx`, `ContentLayout.tsx`, `BlockWrapper.tsx`, `project-data.types.ts`
-  - [ ] Don't rename any exports in this step — renaming is `EP-04`
+  - [x] Comments in `Button.tsx`, `TitleCard.tsx`, `MediaCard.tsx`, `SummaryNav.tsx`, `ContentLayout.tsx`, `BlockWrapper.tsx`, `project-data.types.ts`
+  - [x] Don't rename any exports in this step — renaming is `EP-04`
 - **TK-01.3.3** — Set the standard
-  - [ ] Document in the README: code, copy, and comments in English; conversation and ADRs in Portuguese
-  - [ ] Lint rule for accented characters in string literals, if feasible (otherwise, a code review item)
+  - [x] Document in the README: code, copy, and comments in English; conversation and ADRs in Portuguese
+  - [x] Add an accented-character review item for string literals (Biome has no scoped built-in rule)
 
 > The content of `spotify-clone.data.ts` and `reference.data.ts` is entirely in Portuguese, but it's **case study content** — it gets rewritten together with `ST-09.1`, not here.
 

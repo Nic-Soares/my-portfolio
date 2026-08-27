@@ -7,7 +7,7 @@ type MediaCardProps = {
   type: "image" | "video";
   alt?: string;
   autoPlay?: boolean;
-  borderRadius?: string; // Permitir customizar borda aqui também
+  borderRadius?: string; // Allow the border radius to be customized here as well.
   minHeight?: string;
   maxHeight?: string;
 };
@@ -29,13 +29,13 @@ export default function MediaCard({
   };
 
   const handleCanPlay = () => {
-    // tenta iniciar o autoplay sem bloquear a UI; evita warning de promise não tratada
+    // Start autoplay without blocking the UI and avoid unhandled promise warnings.
     if (videoRef.current && autoPlay) {
       videoRef.current.muted = true;
       const p = videoRef.current.play();
       if (p && typeof p.then === "function") {
         p.catch(() => {
-          // Autoplay pode ser bloqueado pelo navegador; silenciamos o erro intencionalmente
+          // Browsers may block autoplay; intentionally ignore this error.
         });
       }
     }
@@ -43,7 +43,7 @@ export default function MediaCard({
 
   return (
     <Container
-      padding="0" // Sem padding para a mídia encostar na borda
+      padding="0" // Let the media reach the card edge.
       backgroundColor="transparent"
       borderRadius={borderRadius}
       style={{ minHeight, maxHeight }}
@@ -53,7 +53,7 @@ export default function MediaCard({
           className={styles.mediaFallback}
           role="status"
           aria-live="polite"
-          aria-label={alt || "Mídia indisponível"}
+          aria-label={alt || "Media unavailable"}
           style={{
             display: "flex",
             flexDirection: "column",
@@ -66,14 +66,14 @@ export default function MediaCard({
             padding: "12px",
           }}
         >
-          <p style={{ margin: 0 }}>Não foi possível carregar a mídia.</p>
+          <p style={{ margin: 0 }}>Unable to load media.</p>
           <a
             href={src}
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: "#1ea7fd", textDecoration: "underline" }}
           >
-            Abrir em nova aba
+            Open in a new tab
           </a>
         </div>
       ) : type === "video" ? (

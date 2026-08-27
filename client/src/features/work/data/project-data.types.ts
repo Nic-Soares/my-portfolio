@@ -1,4 +1,4 @@
-// Define todos os tipos de blocos que nosso sistema aceita
+// Defines every content block type supported by the system.
 export type ContentBlock =
   | {
       type: "header";
@@ -59,13 +59,13 @@ export type ContentBlock =
       snug?: boolean;
     };
 
-// Define a estrutura do menu lateral
+// Defines the sidebar navigation structure.
 export interface SidebarItem {
   label: string;
   anchorId: string;
 }
 
-// Define a estrutura de uma Aba (Visão Geral, Arquitetura, etc)
+// Defines a project tab, such as Overview or Architecture.
 export interface ProjectTab {
   id: string;
   title: string;
@@ -73,16 +73,16 @@ export interface ProjectTab {
   content: ContentBlock[];
 }
 
-// Define a estrutura do Projeto completo
+// Defines the complete project structure.
 export interface ProjectData {
-  slug: string; // ex: 'spotify-clone' (usado na URL)
-  name: string; // Nome do projeto
-  description: string; // Descrição curta
+  slug: string; // e.g. "spotify-clone", used in the URL.
+  name: string; // Project name.
+  description: string; // Short description.
   hero?: {
-    // Hero opcional (imagem ou vídeo)
+    // Optional hero image or video.
     type: "image" | "video";
     src: string;
-    alt?: string; // Para imagens
+    alt?: string; // Image alternative text.
   };
-  tabs: ProjectTab[]; // Lista de abas
+  tabs: ProjectTab[]; // Project tabs.
 }
