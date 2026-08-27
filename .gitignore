@@ -31,3 +31,6 @@ contexto/
 # Working docs (not tracked)
 SETUP-ROADMAP.local.md
 DENO-MIGRATION.local.md
+
+# Legacy planning doc, superseded by docs/planning/ROADMAP.md
+*.xlsx
