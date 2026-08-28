@@ -17,6 +17,7 @@ export const NavItem = ({
 }: NavItemProps) => {
   return (
     <button
+      type="button"
       className={`${styles["nav-item"]} ${selected ? styles["nav-item--selected"] : ""}`}
       onClick={onClick}
       disabled={disabled}

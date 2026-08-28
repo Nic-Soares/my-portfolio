@@ -160,13 +160,13 @@ Context: 13 files contain accented characters. It's not just comments — there'
   - [x] Cache the Deno dependency directory
   - [x] Fix case-sensitive imports for `container` and `sidebar`; macOS resolves PascalCase paths locally, but the Linux CI runner does not
 - **TK-01.4.2** — Choose and configure the test runner
-  - [ ] Decide between `deno test` + `@testing-library/react` or Vitest (record as ADR-004)
-  - [ ] Configure the DOM environment
-  - [ ] One smoke test (render `App` with no error) to validate the setup
-  - [ ] `deno task test` task and a CI job
+  - [x] Decide between `deno test` + `@testing-library/react` or Vitest (record as ADR-004)
+  - [x] Configure the DOM environment
+  - [x] One smoke test (render `App` with no error) to validate the setup
+  - [x] `deno task test` task and a CI job
 - **TK-01.4.3** — Define the coverage bar
-  - [ ] Require a test for every new `ui/` component (that's where regressions hurt most)
-  - [ ] Document the bar in the README
+  - [x] Require a test for every new `ui/` component (that's where regressions hurt most)
+  - [x] Document the bar in the README
 
 ### ST-01.5 — Loose lint findings with no other home
 
@@ -175,8 +175,8 @@ Context: 13 files contain accented characters. It's not just comments — there'
 Context: running `deno task check` (as part of `ST-01.0`) surfaced 31 errors / 12 warnings / 16 infos of pre-existing lint debt — none of it caused by the dependency bump. Most of it isn't worth fixing here: the CSS specificity/`!important` findings in the navigation components are already going to be touched by `EP-04`/`EP-05` (see the note on `ST-04.6`), and the SVG accessibility findings belong to `EP-12`'s accessibility audit (see the note on `ST-12.1`). Fixing them now would mean redoing the same work twice. Only these two are truly standalone — small, one-off, and not touched by any planned epic:
 
 - **TK-01.5.1** — Fix the two orphan findings
-  - [ ] `client/src/app/main.tsx:16` — `lint/style/noNonNullAssertion` on `document.getElementById("root")!`
-  - [ ] `client/src/components/layout/navigation/NavigationRail/NavItem.tsx:19` — `lint/a11y/useButtonType`, missing explicit `type` on `<button>`
+  - [x] `client/src/app/main.tsx:16` — `lint/style/noNonNullAssertion` on `document.getElementById("root")!`
+  - [x] `client/src/components/layout/navigation/NavigationRail/NavItem.tsx:19` — `lint/a11y/useButtonType`, missing explicit `type` on `<button>`
 
 ---
 
