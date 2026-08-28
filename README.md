@@ -133,6 +133,16 @@ Relative and alias imports use an **explicit extension** (`.ts`/`.tsx`/`/index.t
 
 This is a personal project, but suggestions and feedback are always welcome!
 
+### Testing
+
+Every new component added under `client/src/components/ui/` must include at least one test covering its primary user-facing behavior. Existing components do not require retroactive tests under this rule.
+
+Run the test suite with:
+
+```bash
+deno task test
+```
+
 ## 📄 License
 
 This project is under a private license. All rights reserved.

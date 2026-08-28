@@ -165,8 +165,8 @@ Context: 13 files contain accented characters. It's not just comments — there'
   - [x] One smoke test (render `App` with no error) to validate the setup
   - [x] `deno task test` task and a CI job
 - **TK-01.4.3** — Define the coverage bar
-  - [ ] Require a test for every new `ui/` component (that's where regressions hurt most)
-  - [ ] Document the bar in the README
+  - [x] Require a test for every new `ui/` component (that's where regressions hurt most)
+  - [x] Document the bar in the README
 
 ### ST-01.5 — Loose lint findings with no other home
 
