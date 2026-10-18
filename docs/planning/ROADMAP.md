@@ -265,14 +265,23 @@ Context: the CSS today breaks at 1024/768/480 (plus 640/600/520/1294/1295 scatte
 
 - **TK-03.1.1** — Define the canonical scale
   - [x] Decide the cut points: M3 window size classes — Compact `< 600`, Medium `600–1199`, Large `1200–1599`, Extra-large `≥ 1600`. The Figma frames (402/744/1512/1920) are the reference width inside each range, not the cut points; cutting at the frame widths would put 1280–1440px laptops on the tablet layout (decided 2026-10-18)
-  - [ ] Declare as `@custom-media` in `client/src/styles/breakpoints.css` (`--compact`, `--medium`, `--large`, `--extra-large`)
-  - [ ] Enable Lightning CSS in `client/vite.config.ts` (`css.transformer: 'lightningcss'`, `drafts.customMedia`) — no new dependency
-  - [ ] Convert one module (`ColumnsBlock.module.css`) as proof and confirm the build output
-  - [ ] Document the scale in the README
+  - [x] Declare as `@custom-media` in `client/src/styles/breakpoints.css` (`--compact`, `--medium`, `--large`, `--extra-large`)
+  - [x] Enable Lightning CSS in `client/vite.config.ts` (`css.transformer: 'lightningcss'`, `drafts.customMedia`) — no new dependency. Biome doesn't know `@custom-media`: `noUnknownAtRules` ignores it and `noUnknownMediaFeatureName` is off
+  - [x] Convert one module (`ColumnsBlock.module.css`) as proof and confirm the build output
+  - [x] Document the scale in the README
 - **TK-03.1.2** — Migrate existing media queries
-  - [ ] Inventory the 12 distinct breakpoints in use today
-  - [ ] Rewrite every CSS Module to the canonical scale
-  - [ ] Check every screen at the 4 breakpoints and log the breakages
+  - [x] Inventory the distinct breakpoints in use today — 8 values (1024, 768, 480, 640, 600, 520, 1294, 1295) across 11 files
+  - [x] Rewrite every CSS Module to the canonical scale — `min-width: 1294/1295` → `(--large), (--extra-large)`; `max-width: 1024` → `(--compact), (--medium)`; `max-width: 480–640` → `--compact`; `max-width: 768` → `(--compact), (--medium)` (it covered the 744 frame, so the rule belongs to Medium too)
+    - [x] Project Detail: `ProjectDetail.page.module.css`, `ContentLayout.module.css`, `SummaryNav.module.css`
+    - [x] Projects Index: `ProjectListHero`, `ProjectCardGrid`, `TitleCard`
+    - [x] Home: `ExperienceSection`, `ProjectCarousel`
+    - [x] Shared: `typography.css` (cut points only — values are `ST-03.2`), `CarouselSlide`
+  - [x] Check every screen at the 4 breakpoints and log the breakages
+    - Project Detail (checked at 402/744/1199/1200/1512 against the pre-migration build): the desktop layout now starts at 1200 instead of 1294; nothing new broke. Already broken before the migration, fixed in `EP-05`/`EP-09`: the summary column is clipped on the right at 1200–1512, and below 1200 the article sits under the Navigation Rail and is cut on the left
+    - Projects Index (checked at 402/700/1199/1512 against the pre-migration build): filters and search now stack below 1200 instead of 1024 — intended. Already broken before, fixed in `EP-05`/`EP-08`: at 402 the page scrolls sideways (the rail stays on mobile and cards/filters overflow)
+    - Home (checked at 402/744/1100/1512 against the pre-migration build): 402, 744 and 1512 unchanged. At 769–1199 Home now uses the tablet layout (scrolling project carousel, smaller logos grid) instead of the desktop one — intended. Already broken before, fixed in `EP-06`: at 402 the hero and carousel overflow sideways, and the hero decor overlaps the CTA buttons at every width
+    - Shared (compiled CSS diffed before/after — only the media queries changed): the 48px display tier (old `max-width: 1024px`) is gone, so at 1024–1199 display/headline text uses the Medium sizes (display-large 40px) instead of the full ones. 402, 744 and 1512 unchanged
+    - Headless Chrome won't go below a 500px viewport; check Compact at a true 402px through an iframe
 
 ### ST-03.2 — Responsive typescale mirroring the Figma collection
 

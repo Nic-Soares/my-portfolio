@@ -79,6 +79,27 @@ The project uses Material Design 3 with:
 - **Colors**: Material 3-based color scheme
 - **Layout**: Flexible, responsive system
 
+### Breakpoints
+
+Four size classes (M3 window size classes), declared once as `@custom-media` in `client/src/styles/breakpoints.css`. Each range is checked against one Figma frame:
+
+| Size class | Width | Figma frame |
+|---|---|---|
+| `--compact` | `< 600px` | 402 |
+| `--medium` | `600px – 1199px` | 744 |
+| `--large` | `1200px – 1599px` | 1512 |
+| `--extra-large` | `≥ 1600px` | 1920 |
+
+```css
+@import "@/styles/breakpoints.css";
+
+@media (--compact), (--medium) {
+  .columns { flex-direction: column; }
+}
+```
+
+Don't write raw pixel media queries — use these names. Lightning CSS resolves them at build time.
+
 ## 📁 Import Aliases
 
 The project is configured with import aliases, declared both in the `deno.json` import map and in `client/vite.config.ts`'s `resolve.alias`:
@@ -105,6 +126,7 @@ Relative and alias imports use an **explicit extension** (`.ts`/`.tsx`/`/index.t
 - **Public**: `client/public/` — static assets.
 - **Build**: `dist/client/` — compiled build, resolved relative to `client/`.
 - **Plugins**: React, SVGR for importing SVGs as components.
+- **CSS**: Lightning CSS (`css.transformer: "lightningcss"`) with the `customMedia` draft enabled, for the breakpoint names above.
 - The `deno.json` tasks run `cd client && vite` via Deno's native shell (`deno_task_shell`), not bash/Node.
 
 ### TypeScript

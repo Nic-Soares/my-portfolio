@@ -1,10 +1,12 @@
+@import "@/styles/breakpoints.css";
+
 .host {
   display: block;
   margin-top: 64px;
   box-sizing: border-box;
 }
 
-@media screen and (min-width: 1295px) {
+@media (--large), (--extra-large) {
   .host {
     width: 156px;
     margin: 112px 24px 0;
@@ -16,7 +18,7 @@
   box-sizing: border-box;
 }
 
-@media screen and (min-width: 1295px) {
+@media (--large), (--extra-large) {
   .nav {
     position: sticky;
     top: 136px;

@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.css";
+
 .projects__header {
   display: flex;
   flex-direction: column;
@@ -43,8 +45,8 @@
   margin-left: auto;
 }
 
-/* Responsividade para telas médias */
-@media (max-width: 1024px) {
+/* Below Large: actions stack */
+@media (--compact), (--medium) {
   .projects__actions {
     flex-direction: column;
     align-items: stretch;
@@ -60,8 +62,7 @@
   }
 }
 
-/* Responsividade para mobile */
-@media (max-width: 768px) {
+@media (--compact), (--medium) {
   .projects__header {
     padding: 12px 16px;
   }
@@ -71,7 +72,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (--compact) {
   .projects__header {
     padding: 8px 12px;
   }

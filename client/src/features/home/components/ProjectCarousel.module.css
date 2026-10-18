@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.css";
+
 .project-carousel {
   height: 100%;
   display: flex;
@@ -73,7 +75,7 @@
 }
 
 /* Responsiveness: stack into a single-column carousel on small screens */
-@media (max-width: 768px) {
+@media (--compact), (--medium) {
   .project-carousel {
     padding: 12px;
     height: auto;

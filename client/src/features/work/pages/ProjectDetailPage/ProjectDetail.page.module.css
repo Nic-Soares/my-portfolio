@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.css";
+
 /* Page layout for Project Detail */
 .page-content {
   display: flex;
@@ -100,7 +102,7 @@
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
+@media (--compact), (--medium) {
   .contentLayout {
     grid-template-columns: 1fr;
     max-width: 720px;

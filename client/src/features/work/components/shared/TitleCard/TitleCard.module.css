@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.css";
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -33,12 +35,12 @@
   line-height: 96px;
 }
 
-@media (max-width: 1294px) {
+@media (--compact), (--medium) {
   .sizeMd h1 {
     font-size: 72px;
   }
 }
-@media (max-width: 600px) {
+@media (--compact) {
   .sizeMd h1 {
     font-size: 44px;
   }
