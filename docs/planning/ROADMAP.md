@@ -410,9 +410,9 @@ Context: in Figma the decor is an absolutely positioned `HeroDecor` layer with t
 ### ST-04.6 — Parity of existing components
 
 - **TK-04.6.1** — Audit `Button` against Figma
-  - [ ] Check Type × Size × Style × Width against the component set
-  - [ ] Visible focus ring (Figma has `Show focus indicator`)
-  - [ ] Translate the component's Portuguese comments
+  - [x] Check Type × Size × Style × Width against the component set — against the M3 Kit, for the combinations the design uses. Standalone buttons now use Kit sizes (XSmall/Small 32/40px in a 48px touch target, padding 12/16/24/48/64px), icon gaps 4/8/8/12/16px, Medium icon 20px, square L/XL press radius 16px (was 20px); Text and Elevated styles filled in; labels don't wrap. Grouped buttons unchanged → `TK-04.6.3`. Selected Button shapes still differ from the Kit (Kit: round→square, square→pill), left as is because the design doesn't use a selected standalone Button. Approved after a side-by-side test (2026-10-18)
+  - [x] Visible focus ring (Figma has `Show focus indicator`) — Kit ring: 3px Secondary, 2px outside; square no longer turns into a pill on focus
+  - [x] Translate the component's Portuguese comments
 - **TK-04.6.2** — Audit `IconButton`
   - [ ] Variants and the selected state — the `style` prop accepts `standard`, but the CSS only styles `text`, so `standard` renders unstyled (found in `TK-04.6.5`)
   - [ ] Minimum 48px touch target
