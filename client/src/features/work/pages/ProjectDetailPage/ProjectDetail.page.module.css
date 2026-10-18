@@ -63,7 +63,7 @@
 .summaryNav {
   padding: 16px;
   background: var(--md-sys-color-surface-container-low);
-  border-radius: 12px;
+  border-radius: var(--md-sys-shape-corner-medium);
 }
 
 .summaryNav h4 {
@@ -92,7 +92,7 @@
   color: var(--md-sys-color-on-surface-variant);
   text-decoration: none;
   font-size: 14px;
-  border-radius: 8px;
+  border-radius: var(--md-sys-shape-corner-small);
   transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
 }
 

@@ -10,7 +10,7 @@
 
   /* MD3 Surface Container High */
   background: var(--md-sys-color-surface-container-high, #eae9dc);
-  border-radius: 28px;
+  border-radius: var(--md-sys-shape-corner-extra-large);
 
   /* MD3 Elevation Level 0 */
   box-shadow: var(--elevation-search-bar, var(--m3-elevation-0, none));
@@ -113,7 +113,7 @@
   opacity: 0.64;
   cursor: pointer;
   user-select: none;
-  border-radius: 50%;
+  border-radius: var(--md-sys-shape-corner-full);
   transition:
     opacity 200ms cubic-bezier(0.2, 0, 0, 1),
     background-color 200ms cubic-bezier(0.2, 0, 0, 1);

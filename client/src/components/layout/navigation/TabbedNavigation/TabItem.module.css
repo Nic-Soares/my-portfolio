@@ -18,7 +18,7 @@
   --btn-height: 40px;
   --btn-padding: 8px 12px;
   --btn-gap: 4px;
-  --btn-radius: 100px; /* Tabs are always rounded */
+  --btn-radius: var(--md-sys-shape-corner-full); /* Tabs are always rounded */
 
   /* Colors */
   --btn-bg: transparent;

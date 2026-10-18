@@ -7,7 +7,7 @@
   height: 100%; /* permite que o card se ajuste ao container pai */
   min-height: 395px; /* garante um tamanho mínimo */
 
-  border-radius: var(--Corner-Large, 16px);
+  border-radius: var(--md-sys-shape-corner-large);
   background: var(--md-sys-color-surface-container-low);
 
   cursor: pointer;
@@ -29,7 +29,7 @@
   width: 100%;
   min-height: 180px; /* altura mínima da imagem */
   flex: 1 1 auto; /* permite que a preview cresça e encolha */
-  border-radius: var(--Corner-Large, 16px);
+  border-radius: var(--md-sys-shape-corner-large);
   overflow: hidden;
 }
 
@@ -56,7 +56,7 @@
   background: var(--md-sys-color-surface-container);
   z-index: 1;
   position: relative;
-  border-radius: var(--Corner-Large, 16px);
+  border-radius: var(--md-sys-shape-corner-large);
 }
 
 .project-card__content::before {
@@ -68,7 +68,7 @@
   bottom: 0;
   background: transparent;
   transition: background-color 0.2s ease;
-  border-radius: var(--Corner-Large, 16px);
+  border-radius: var(--md-sys-shape-corner-large);
   pointer-events: none;
   z-index: 1;
   border-radius: inherit;
@@ -85,16 +85,16 @@
 .project-card:focus-visible {
   outline: 2px solid var(--md-sys-color-primary);
   outline-offset: 2px;
-  border-radius: 48px;
+  border-radius: var(--md-sys-shape-corner-extra-extra-large);
 }
 
 .project-card:focus-visible .project-card__content {
   outline: none;
-  border-radius: 48px;
+  border-radius: var(--md-sys-shape-corner-extra-extra-large);
 }
 
 .project-card:focus-visible .project-card__content::before {
-  border-radius: 48px;
+  border-radius: var(--md-sys-shape-corner-extra-extra-large);
 }
 
 /* Active (Pressed) */

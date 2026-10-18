@@ -43,7 +43,7 @@
   position: absolute;
   left: 0;
   top: -4px;
-  border-radius: 12px;
+  border-radius: var(--md-sys-shape-corner-medium);
   background: var(--md-sys-color-inverse-surface, #303129);
   color: var(--md-sys-color-inverse-on-surface, #f2f1e5);
   line-height: 32px;
