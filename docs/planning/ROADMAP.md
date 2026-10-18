@@ -440,16 +440,16 @@ Context: in Figma the decor is an absolutely positioned `HeroDecor` layer with t
 Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About Me, Projects). The `#root` grid reserves `88px`; Figma uses `96px`.
 
 - **TK-05.1.1** — Fix the rail
-  - [ ] `#root` from `88px` to `96px`
-  - [ ] Add the About Me destination with the design's icon
-  - [ ] Active indicator driven by route, including `/about`
-  - [ ] Footer actions: language and theme
+  - [x] `#root` from `88px` to `96px` — Figma Home frames normalized to the 96px rail too (they used 80px), 2026-10-18
+  - [x] Add the About Me destination with the design's icon — Figma uses a placeholder ⭐ for every destination, so the code keeps `home` / `person` / `folder`. `/about` shows Under Construction until `EP-07`. Destinations live in `layout/navigation/destinations.ts`, shared with the tablet/mobile bars
+  - [x] Active indicator driven by route, including `/about` — `NavLink`, M3 nav item (56×32 Secondary Container pill, Secondary label)
+  - [x] Footer actions: language and theme — language shown disabled ("Language (coming soon)") until `EP-11`; portfolio logo added at the top (theme colors)
 - **TK-05.1.2** — Rail accessibility
-  - [ ] `<nav>` with `aria-label`
-  - [ ] `aria-current="page"` on the active destination
-  - [ ] Focus order and a skip link to the content
+  - [x] `<nav>` with `aria-label`
+  - [x] `aria-current="page"` on the active destination
+  - [x] Focus order and a skip link to the content — "Skip to content" is the first Tab stop and focuses `#main-content`
 - **TK-05.1.3** — Clean up while touching the CSS
-  - [ ] Empty `.nav-item--selected` block and a descending-specificity selector in `NavItem.module.css` (flagged by `deno task check`, pre-existing, unrelated to `ST-01.0`)
+  - [x] Empty `.nav-item--selected` block and a descending-specificity selector in `NavItem.module.css` — `NavItem` rewritten
 
 ### ST-05.2 — TopAppBar and NavigationBar for tablet and mobile
 
@@ -464,16 +464,16 @@ Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About
   - [ ] Active indicator
   - [ ] iOS gesture-bar safe area
 - **TK-05.2.3** — `AppShell` that picks the pattern
-  - [ ] Rail above 1512; TopAppBar + NavigationBar at 744 and below
+  - [ ] Rail at Large and up (≥1200); TopAppBar + NavigationBar below 1200 (size classes from `ST-03.1`)
   - [ ] A single source of truth for destinations, consumed by both patterns
   - [ ] Confirm there's no layout jump when switching
 
 ### ST-05.3 — PageContent
 
 - **TK-05.3.1** — Content container
-  - [ ] `surface-container-lowest` background, rounded corners only on the rail side (as in Figma)
-  - [ ] On tablet/mobile the rounding moves to the top
-  - [ ] Token-based padding
+  - [ ] `surface-container-lowest` background, rounded corners only on the rail side (as in Figma) — 28px (`Corner/Extra-large`); Figma Home normalized to this on 2026-10-18 (it had 20px)
+  - [ ] On tablet/mobile the rounding moves to the top — Figma Projects 402 frames normalized to top corners on 2026-10-18
+  - [ ] Token-based padding — 10px on every page (Figma Home normalized from 20–24px)
 
 ---
 
