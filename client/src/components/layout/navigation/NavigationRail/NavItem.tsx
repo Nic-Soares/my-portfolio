@@ -1,38 +1,30 @@
+import { NavLink } from "react-router-dom";
 import styles from "./NavItem.module.css";
 
 export interface NavItemProps {
   icon: string;
   label: string;
-  selected?: boolean;
-  onClick?: () => void;
-  disabled?: boolean;
+  to: string;
 }
 
-export const NavItem = ({
-  icon,
-  label,
-  selected,
-  onClick,
-  disabled,
-}: NavItemProps) => {
-  return (
-    <button
-      type="button"
-      className={`${styles["nav-item"]} ${selected ? styles["nav-item--selected"] : ""}`}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      <div className={styles["nav-item__icon-container"]}>
-        <div className={styles["nav-item__state-layer"]}>
-          <span
-            className={`material-symbols-outlined ${styles["nav-item__icon"]}`}
-          >
-            {icon}
-          </span>
-        </div>
-      </div>
-
-      <span className={styles["nav-item__label"]}>{label}</span>
-    </button>
-  );
-};
+// M3 "Vertical nav item": a 56x32 indicator pill above a label. NavLink sets
+// aria-current="page" on the active destination.
+export const NavItem = ({ icon, label, to }: NavItemProps) => (
+  <NavLink
+    to={to}
+    end={to === "/"}
+    className={({ isActive }) =>
+      `${styles["nav-item"]} ${isActive ? styles["nav-item--selected"] : ""}`
+    }
+  >
+    <span className={styles["nav-item__indicator"]}>
+      <span
+        className={`material-symbols-outlined ${styles["nav-item__icon"]}`}
+        aria-hidden="true"
+      >
+        {icon}
+      </span>
+    </span>
+    <span className={styles["nav-item__label"]}>{label}</span>
+  </NavLink>
+);

@@ -1,49 +1,45 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTheme } from "@/app/theme/ThemeProvider.tsx";
 import IconButton from "@/components/ui/IconButton/IconButton.tsx";
+import { DESTINATIONS } from "../navigation/destinations.ts";
+import Logo from "../navigation/Logo/Logo.tsx";
 import { NavItem } from "../navigation/NavigationRail/NavItem.tsx";
-import NavigationRail from "../navigation/NavigationRail/NavigationRail.tsx";
 import styles from "./Sidebar.module.css";
 
+// Navigation Rail (Large and up), mirroring the Figma "Navigation Rail".
 function Sidebar() {
-  const location = useLocation();
-  const navigate = useNavigate();
   const { resolvedTheme, setTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
 
-  const isHome = location.pathname === "/";
-  const isProjects = location.pathname.startsWith("/projects");
-
   return (
-    <aside className={styles.sidebar}>
-      <NavigationRail>
-        <NavItem
-          icon="home"
-          label="Home"
-          selected={isHome}
-          onClick={() => navigate("/")}
-        />
-        <NavItem
-          icon="folder"
-          label="Projects"
-          selected={isProjects}
-          onClick={() => navigate("/projects")}
-        />
-      </NavigationRail>
-      <NavigationRail className={styles["nav-footer"]}>
+    <aside className={styles.rail}>
+      <Link to="/" className={styles.logo} aria-label="Home">
+        <Logo />
+      </Link>
+      <nav aria-label="Main" className={styles.destinations}>
+        {DESTINATIONS.map((destination) => (
+          <NavItem
+            key={destination.path}
+            icon={destination.icon}
+            label={destination.label}
+            to={destination.path}
+          />
+        ))}
+      </nav>
+      <div className={styles.actions}>
+        {/* Language switching arrives with i18n (EP-11) */}
         <IconButton
           type="round"
           size="medium"
           style="outline"
-          width="default"
-          toggleable={true}
-          icon="settings"
+          icon="translate"
+          disabled
+          ariaLabel="Language (coming soon)"
         />
         <IconButton
           type="round"
           size="medium"
           style="outline"
-          width="default"
           icon="dark_mode"
           selectedIcon="light_mode"
           selected={isDark}
@@ -51,7 +47,7 @@ function Sidebar() {
           ariaPressed={isDark}
           onClick={() => setTheme(isDark ? "light" : "dark")}
         />
-      </NavigationRail>
+      </div>
     </aside>
   );
 }

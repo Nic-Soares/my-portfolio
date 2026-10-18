@@ -19,15 +19,22 @@ const GalleryPage = import.meta.env.DEV
 function SiteShell() {
   return (
     <>
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
       <Sidebar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<ProjectListPage />} />
-        <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-        <Route path="/coming-soon" element={<UnderConstruction />} />
-        <Route path="/404" element={<NotFound />} />
-        <Route path="*" element={<Navigate to="/404" replace />} />
-      </Routes>
+      <div id="main-content" className="main-content" tabIndex={-1}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* About Me is EP-07; Under Construction until then */}
+          <Route path="/about" element={<UnderConstruction />} />
+          <Route path="/projects" element={<ProjectListPage />} />
+          <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+          <Route path="/coming-soon" element={<UnderConstruction />} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
+        </Routes>
+      </div>
     </>
   );
 }
