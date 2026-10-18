@@ -120,3 +120,36 @@
 .cardWrap {
   max-width: 440px;
 }
+
+/* Temporary side-by-side review blocks */
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border: 2px dashed var(--md-sys-color-tertiary);
+  border-radius: var(--md-sys-shape-corner-large);
+}
+
+.compare {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.compareColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.compareColumn h3 {
+  margin: 0;
+}
+
+.compareGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
