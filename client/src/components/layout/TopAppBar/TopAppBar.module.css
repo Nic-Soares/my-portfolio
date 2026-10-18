@@ -11,7 +11,7 @@
     top: 0;
     z-index: 10;
     display: flex;
-    height: 88px;
+    height: var(--top-app-bar-height);
     padding: 16px 24px;
     align-items: center;
     justify-content: space-between;

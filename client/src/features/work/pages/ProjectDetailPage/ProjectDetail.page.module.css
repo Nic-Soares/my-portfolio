@@ -1,17 +1,9 @@
 @import "@/styles/breakpoints.css";
 
-/* Page layout for Project Detail */
+/* Page layout for Project Detail; the window scrolls, not the page */
 .page-content {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 64px);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.page-content-height {
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
 }
 
 .content-conteiner {
@@ -25,8 +17,7 @@
   display: block;
   width: 100%;
   max-width: 1760px;
-  min-height: 100vh;
-  margin: 8px auto;
+  margin: 0 auto;
   line-height: 1.5;
   overflow: visible;
 }
