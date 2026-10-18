@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.css";
+
 .content-container {
   display: flex;
   flex-direction: row-reverse;
@@ -21,7 +23,7 @@ article {
   display: block;
 }
 
-@media screen and (min-width: 1294px) {
+@media (--large), (--extra-large) {
   .carbon-container {
     margin-left: 116px;
   }

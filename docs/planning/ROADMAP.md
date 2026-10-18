@@ -270,9 +270,14 @@ Context: the CSS today breaks at 1024/768/480 (plus 640/600/520/1294/1295 scatte
   - [x] Convert one module (`ColumnsBlock.module.css`) as proof and confirm the build output
   - [x] Document the scale in the README
 - **TK-03.1.2** — Migrate existing media queries
-  - [ ] Inventory the 12 distinct breakpoints in use today
-  - [ ] Rewrite every CSS Module to the canonical scale
+  - [x] Inventory the distinct breakpoints in use today — 8 values (1024, 768, 480, 640, 600, 520, 1294, 1295) across 11 files
+  - [ ] Rewrite every CSS Module to the canonical scale — `min-width: 1294/1295` → `(--large), (--extra-large)`; `max-width: 1024` → `(--compact), (--medium)`; `max-width: 480–640` → `--compact`; `768` decided per file
+    - [x] Project Detail: `ProjectDetail.page.module.css`, `ContentLayout.module.css`, `SummaryNav.module.css`
+    - [ ] Projects Index: `ProjectListHero`, `ProjectCardGrid`, `TitleCard`
+    - [ ] Home: `ExperienceSection`, `ProjectCarousel`
+    - [ ] Shared: `typography.css` (cut points only — values are `ST-03.2`), `CarouselSlide`
   - [ ] Check every screen at the 4 breakpoints and log the breakages
+    - Project Detail (checked at 402/744/1199/1200/1512 against the pre-migration build): the desktop layout now starts at 1200 instead of 1294; nothing new broke. Already broken before the migration, fixed in `EP-05`/`EP-09`: the summary column is clipped on the right at 1200–1512, and below 1200 the article sits under the Navigation Rail and is cut on the left
 
 ### ST-03.2 — Responsive typescale mirroring the Figma collection
 
