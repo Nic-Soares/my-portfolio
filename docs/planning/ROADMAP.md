@@ -414,8 +414,8 @@ Context: in Figma the decor is an absolutely positioned `HeroDecor` layer with t
   - [x] Visible focus ring (Figma has `Show focus indicator`) — Kit ring: 3px Secondary, 2px outside; square no longer turns into a pill on focus
   - [x] Translate the component's Portuguese comments
 - **TK-04.6.2** — Audit `IconButton`
-  - [ ] Variants and the selected state — the `style` prop accepts `standard`, but the CSS only styles `text`, so `standard` renders unstyled (found in `TK-04.6.5`)
-  - [ ] Minimum 48px touch target
+  - [x] Variants and the selected state — against the M3 Kit (design uses Medium Outline Default in the rail and Medium Outline Wide in the top app bar). Icons 20/24/24/32/40px (Material Symbols font-size = the Kit icon box), square radius 12/12/16/28/28, press radius 8/8/12/16/16, selected toggles morph (round → rounded square, square → pill), 2px outline from Large, `standard` styled (CSS used `text`; `text`/`elevated` placeholders removed), Kit focus ring, comments translated. Same icon-size fix applied to standalone `Button` icons (20/20/24/32/40). Approved after a side-by-side test (2026-10-18)
+  - [x] Minimum 48px touch target
 - **TK-04.6.3** — Audit `SearchBar` and `ConnectedButtonGroup`
   - [ ] Focus and filled-value states
   - [ ] Parity with the design

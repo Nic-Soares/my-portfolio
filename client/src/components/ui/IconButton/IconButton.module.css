@@ -29,6 +29,8 @@
   /* State Layer */
   --icon-btn-state-layer-bg: transparent;
 
+  /* The <button> is the touch target (min 48px); the content is the visible container */
+  width: var(--icon-btn-width);
   height: var(--icon-btn-height);
 }
 
@@ -45,6 +47,7 @@
   border: var(--icon-btn-border);
   border-radius: var(--icon-btn-radius);
   box-sizing: border-box;
+  transition: border-radius 200ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .icon-button__state-layer {
@@ -68,7 +71,7 @@
   user-select: none;
 }
 
-/* SVG customizado (children) */
+/* Custom SVG passed as children */
 .icon-button__state-layer svg {
   width: var(--icon-btn-icon-size);
   height: var(--icon-btn-icon-size);
@@ -92,7 +95,7 @@
   --icon-btn-height: 48px;
   --icon-btn-content-width: 40px;
   --icon-btn-content-height: 40px;
-  --icon-btn-icon-size: 20px;
+  --icon-btn-icon-size: 24px;
 }
 
 .icon-button--medium {
@@ -100,7 +103,7 @@
   --icon-btn-height: 56px;
   --icon-btn-content-width: 56px;
   --icon-btn-content-height: 56px;
-  --icon-btn-icon-size: 20px;
+  --icon-btn-icon-size: 24px;
 }
 
 .icon-button--large {
@@ -108,7 +111,7 @@
   --icon-btn-height: 96px;
   --icon-btn-content-width: 96px;
   --icon-btn-content-height: 96px;
-  --icon-btn-icon-size: 26.67px;
+  --icon-btn-icon-size: 32px;
 }
 
 .icon-button--xlarge {
@@ -116,7 +119,7 @@
   --icon-btn-height: 136px;
   --icon-btn-content-width: 136px;
   --icon-btn-content-height: 136px;
-  --icon-btn-icon-size: 33.333px;
+  --icon-btn-icon-size: 40px;
 }
 
 /* --- 3. Type Variants (Shape) --- */
@@ -125,17 +128,53 @@
   --icon-btn-radius: var(--md-sys-shape-corner-full);
 }
 
+/* Square resting radius (M3 Kit): 12 / 12 / 16 / 28 / 28px */
 .icon-button--square.icon-button--xsmall,
 .icon-button--square.icon-button--small {
-  --icon-btn-radius: var(--md-sys-shape-corner-small);
+  --icon-btn-radius: var(--md-sys-shape-corner-medium);
 }
 
 .icon-button--square.icon-button--medium {
-  --icon-btn-radius: var(--md-sys-shape-corner-medium);
+  --icon-btn-radius: var(--md-sys-shape-corner-large);
 }
 
 .icon-button--square.icon-button--large,
 .icon-button--square.icon-button--xlarge {
+  --icon-btn-radius: var(--md-sys-shape-corner-extra-large);
+}
+
+/* Selected (M3 Kit toggle): round becomes a rounded square (12 / 12 / 16 / 28 / 28px),
+   square becomes a pill */
+.icon-button--round.icon-button--selected.icon-button--xsmall,
+.icon-button--round.icon-button--selected.icon-button--small {
+  --icon-btn-radius: var(--md-sys-shape-corner-medium);
+}
+
+.icon-button--round.icon-button--selected.icon-button--medium {
+  --icon-btn-radius: var(--md-sys-shape-corner-large);
+}
+
+.icon-button--round.icon-button--selected.icon-button--large,
+.icon-button--round.icon-button--selected.icon-button--xlarge {
+  --icon-btn-radius: var(--md-sys-shape-corner-extra-large);
+}
+
+.icon-button--square.icon-button--selected {
+  --icon-btn-radius: var(--md-sys-shape-corner-full);
+}
+
+/* Pressed (M3 Kit): 8 / 8 / 12 / 16 / 16px, for both types */
+.icon-button--xsmall:active,
+.icon-button--small:active {
+  --icon-btn-radius: var(--md-sys-shape-corner-small);
+}
+
+.icon-button--medium:active {
+  --icon-btn-radius: var(--md-sys-shape-corner-medium);
+}
+
+.icon-button--large:active,
+.icon-button--xlarge:active {
   --icon-btn-radius: var(--md-sys-shape-corner-large);
 }
 
@@ -153,31 +192,22 @@
   --icon-btn-icon-color: var(--md-sys-color-on-secondary-container);
 }
 
-/* Outline */
+/* Outline (border is 2px from Large up, as in the M3 Kit) */
 .icon-button--outline {
   --icon-btn-bg: transparent;
   --icon-btn-border: 1px solid var(--md-sys-color-outline-variant);
   --icon-btn-icon-color: var(--md-sys-color-on-surface-variant);
 }
 
-/* Text (placeholder - replace previous 'standard') */
-.icon-button--text {
-  /* TODO: fill style variables for text icon-button */
-  /* Example:
-       --icon-btn-bg: transparent;
-       --icon-btn-icon-color: var(--md-sys-color-on-surface-variant);
-    */
+.icon-button--outline.icon-button--large,
+.icon-button--outline.icon-button--xlarge {
+  --icon-btn-border: 2px solid var(--md-sys-color-outline-variant);
 }
 
-/* Elevated (placeholder) */
-.icon-button--elevated {
-  /* TODO: fill style variables for elevated icon-button */
-  /* Example:
-       --icon-btn-bg: var(--md-sys-color-surface);
-       --icon-btn-icon-color: var(--md-sys-color-on-surface);
-       --icon-btn-border: none;
-       // consider elevation variables if you use them
-    */
+/* Standard (M3 Kit): no container, On Surface Variant icon */
+.icon-button--standard {
+  --icon-btn-bg: transparent;
+  --icon-btn-icon-color: var(--md-sys-color-on-surface-variant);
 }
 
 /* --- 5. Selected State --- */
@@ -198,18 +228,8 @@
   --icon-btn-icon-color: var(--md-sys-color-inverse-on-surface);
 }
 
-/* Selected state placeholder for text */
-.icon-button--selected.icon-button--text {
-  /* TODO: define selected variables for text variant */
-  /* Example:
-       --icon-btn-bg: transparent;
-       --icon-btn-icon-color: var(--md-sys-color-primary);
-    */
-}
-
-/* Selected state placeholder for elevated */
-.icon-button--selected.icon-button--elevated {
-  /* TODO: define selected variables for elevated variant */
+.icon-button--selected.icon-button--standard {
+  --icon-btn-icon-color: var(--md-sys-color-primary);
 }
 
 /* --- 6. Width Variants --- */
@@ -225,14 +245,17 @@
 }
 
 .icon-button--medium.icon-button--narrow {
+  --icon-btn-width: 48px;
   --icon-btn-content-width: 48px;
 }
 
 .icon-button--large.icon-button--narrow {
+  --icon-btn-width: 64px;
   --icon-btn-content-width: 64px;
 }
 
 .icon-button--xlarge.icon-button--narrow {
+  --icon-btn-width: 104px;
   --icon-btn-content-width: 104px;
 }
 
@@ -241,6 +264,7 @@
 }
 
 .icon-button--small.icon-button--wide {
+  --icon-btn-width: 52px;
   --icon-btn-content-width: 52px;
 }
 
@@ -281,8 +305,9 @@
   );
 }
 
+/* Focus indicator (M3 Kit): 3px Secondary ring, 2px outside the container */
 .icon-button:focus-visible .icon-button__content {
-  outline: 2px solid var(--md-sys-color-primary);
+  outline: 3px solid var(--md-sys-color-secondary);
   outline-offset: 2px;
 }
 

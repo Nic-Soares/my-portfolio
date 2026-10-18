@@ -179,6 +179,25 @@
   --btn-padding: 0 64px;
 }
 
+/* Icon size = the Kit icon box (Material Symbols renders the glyph inside it):
+   20 / 20 / 24 / 32 / 40px */
+.button:not(.button--grouped) {
+  --btn-icon-size: 20px;
+  --btn-icon-padding: 0px;
+}
+
+.button--medium:not(.button--grouped) {
+  --btn-icon-size: 24px;
+}
+
+.button--large:not(.button--grouped) {
+  --btn-icon-size: 32px;
+}
+
+.button--xlarge:not(.button--grouped) {
+  --btn-icon-size: 40px;
+}
+
 /* --- 3. Type Variants (Shape) --- */
 
 /* Round */
