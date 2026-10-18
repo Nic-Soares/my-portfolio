@@ -28,3 +28,16 @@ article {
     margin-left: 116px;
   }
 }
+
+/* Below Large the summary stacks above the content, which keeps to the
+   viewport width (no sideways scroll now that the window scrolls) */
+@media (--compact), (--medium) {
+  .content-container {
+    flex-direction: column;
+  }
+
+  .carbon-container {
+    min-width: 0;
+    max-width: 100%;
+  }
+}

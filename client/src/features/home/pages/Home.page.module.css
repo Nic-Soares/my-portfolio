@@ -5,14 +5,9 @@
     "home__experience home__carousel";
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
-  height: 100vh;
-  padding: 20px;
-  gap: 20px;
-
-  border-radius: var(--md-sys-shape-corner-extra-large)
-    var(--md-sys-shape-corner-none) var(--md-sys-shape-corner-none)
-    var(--md-sys-shape-corner-extra-large);
-  background: var(--md-sys-color-surface);
+  /* Fits the viewport: 100vh minus the PageContent padding */
+  height: calc(100vh - 20px);
+  gap: 24px;
 }
 
 .home__hero-section {

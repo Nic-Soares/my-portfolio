@@ -471,9 +471,10 @@ Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About
 ### ST-05.3 — PageContent
 
 - **TK-05.3.1** — Content container
-  - [ ] `surface-container-lowest` background, rounded corners only on the rail side (as in Figma) — 28px (`Corner/Extra-large`); Figma Home normalized to this on 2026-10-18 (it had 20px)
-  - [ ] On tablet/mobile the rounding moves to the top — Figma Projects 402 frames normalized to top corners on 2026-10-18
-  - [ ] Token-based padding — 10px on every page (Figma Home normalized from 20–24px)
+  - [x] `surface-container-lowest` background, rounded corners only on the rail side (as in Figma) — 28px (`Corner/Extra-large`); Figma Home normalized to this on 2026-10-18 (it had 20px). Lives on `.main-content` in `global.css`; pages no longer draw their own background/corners. The shell behind it is Surface Container, as in Figma
+  - [x] On tablet/mobile the rounding moves to the top — Figma Projects 402 frames normalized to top corners on 2026-10-18
+  - [x] Token-based padding — 10px on every page (Figma Home normalized from 20–24px); page sections gap 24px
+  - [x] Found while doing it: Project Detail scrolled inside its own 100vh box, so the top app bar never saw the scroll. Now the window scrolls; the sticky tabs sit under the top app bar (`--top-app-bar-height`) and their backdrop matches PageContent. Below Large the summary stacks above the content (it pushed the page to 792px wide on Compact). Home hero still overflows on Compact — `ST-06.3`
 
 ---
 

@@ -26,30 +26,54 @@ body {
   grid-template-rows: auto;
   min-height: 100vh;
 
-  background: var(--md-sys-color-background);
+  background: var(--md-sys-color-surface-container);
 }
 
-/* Page area next to the rail; also the skip link target */
+/* Figma "PageContent": the page area next to the rail, rounded on the rail
+   side. Pages fill it (flex: 1). Also the skip link target. */
 .main-content {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
+  min-height: 100vh;
+  padding: 10px;
   outline: none;
+  border-radius: var(--md-sys-shape-corner-extra-large)
+    var(--md-sys-shape-corner-none) var(--md-sys-shape-corner-none)
+    var(--md-sys-shape-corner-extra-large);
+  background: var(--md-sys-color-surface-container-lowest);
+}
+
+.main-content > * {
+  flex: 1 0 auto;
 }
 
 /* Below Large: one column (top app bar, content) and a fixed bottom bar */
 :root {
   --navigation-bar-height: 64px;
+  --top-app-bar-height: 0px;
 }
 
 @media (--compact), (--medium) {
+  :root {
+    --top-app-bar-height: 88px;
+  }
+
   #root {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  /* Under the top app bar: rounded on top, clear of the bottom bar */
   .main-content {
+    min-height: calc(100vh - var(--top-app-bar-height));
     padding-bottom: calc(
+      10px +
       var(--navigation-bar-height) +
       env(safe-area-inset-bottom)
     );
+    border-radius: var(--md-sys-shape-corner-extra-large)
+      var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-none)
+      var(--md-sys-shape-corner-none);
   }
 }
 

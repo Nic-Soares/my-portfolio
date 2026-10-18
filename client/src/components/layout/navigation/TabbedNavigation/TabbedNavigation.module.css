@@ -1,6 +1,6 @@
 .nav {
   position: sticky;
-  top: 0;
+  top: var(--top-app-bar-height); /* sticks under the top app bar below Large */
   width: 100%;
   max-width: 1760px;
   margin: 0 auto;
@@ -23,7 +23,7 @@
   transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1);
   border-radius: var(--md-sys-shape-corner-none) var(--md-sys-shape-corner-none)
     var(--md-sys-shape-corner-full) var(--md-sys-shape-corner-full);
-  background: var(--md-sys-color-background);
+  background: var(--md-sys-color-surface-container-lowest); /* PageContent */
   opacity: 1;
 }
 

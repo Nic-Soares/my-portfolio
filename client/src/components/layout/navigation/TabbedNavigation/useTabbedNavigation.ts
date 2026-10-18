@@ -46,11 +46,15 @@ export function useTabbedNavigation({
     const sentinel = sentinelRef.current;
     if (!sentinel) return;
 
+    // The bar sticks under the top app bar, so the sentinel leaves at that line
+    const barHeight = getComputedStyle(document.documentElement)
+      .getPropertyValue("--top-app-bar-height")
+      .trim();
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsSticky(!entry.isIntersecting);
       },
-      { threshold: 0 },
+      { threshold: 0, rootMargin: `-${barHeight || "0px"} 0px 0px 0px` },
     );
 
     observer.observe(sentinel);

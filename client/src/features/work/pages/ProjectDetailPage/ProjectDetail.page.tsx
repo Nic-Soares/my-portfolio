@@ -23,9 +23,7 @@ const ProjectDetailPage: React.FC = () => {
   }
 
   return (
-    <div
-      className={`${styles["page-content"]} ${styles["page-content-height"]}`}
-    >
+    <div className={styles["page-content"]}>
       <div className={styles["content-conteiner"]}>
         <div className={styles["article-page"]}>
           <main className={styles["main-content"]}>
