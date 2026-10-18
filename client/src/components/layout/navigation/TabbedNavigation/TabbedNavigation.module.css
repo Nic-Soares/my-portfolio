@@ -13,38 +13,27 @@
   margin-bottom: 16px;
 }
 
-/* A altura da navigation-container agora acompanha o tamanho do botão.
-   Usamos min-height para garantir espaço mesmo quando a variável não estiver definida.
-   Como os tokens de tamanho dos Tabs usam --btn-height, a nav tentará manter
-   uma altura mínima baseada nesse valor (fallback 40px).
-*/
+/* Wrapper around the bar: 10px vertical / 8px horizontal, as the Figma "Tabs" frame.
+   Height follows the tabs (96 / 56 / 48px by breakpoint; Small while sticky). */
 .navigation-container {
   display: flex;
   justify-content: center;
-  height: 88px;
-  padding-top: 9px;
-  margin-left: 8px;
+  padding: 10px 8px;
   gap: 8px;
-  transition:
-    height 0.3s cubic-bezier(0.2, 0, 0, 1),
-    opacity 0.2s cubic-bezier(0.2, 0, 0, 1);
+  transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1);
   border-radius: var(--md-sys-shape-corner-none) var(--md-sys-shape-corner-none)
     var(--md-sys-shape-corner-full) var(--md-sys-shape-corner-full);
   background: var(--md-sys-color-background);
   opacity: 1;
 }
 
-.navigation-container--compact {
-  height: 72px;
-}
-
+/* Figma Tab Bar container: Surface Variant pill */
 .tabbed-navigation {
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  height: 100%;
   border-radius: var(--md-sys-shape-corner-full);
-  background: var(--md-sys-color-surface-container);
+  background: var(--md-sys-color-surface-variant);
   text-align: center;
   white-space: nowrap;
   overflow: auto;
@@ -52,14 +41,12 @@
   transition: box-shadow 0.3s cubic-bezier(0.2, 0, 0, 1);
 }
 
+/* Sticky (scrolled): project choice — the tabs switch to Small and the bar gets a shadow */
 .navigation-container--compact .tabbed-navigation {
-  box-shadow: var(--elevation-app-bar-scrolled);
+  box-shadow: var(--elevation-app-bar-scrolled, var(--m3-elevation-2));
 }
 
-/* Cada aba envolve o Button e ocupa espaço igual.
-   As tabs devem expandir igualmente horizontalmente e os botões internos
-   devem ocupar todo o espaço disponível.
-*/
+/* Each tab takes an equal share of the bar; its button fills it */
 .tab {
   flex: 1 1 0;
   display: flex;
@@ -67,67 +54,6 @@
   justify-content: center;
 }
 
-/* Faz o botão interno ocupar toda a largura da aba */
 .tab > button {
   width: 100%;
-  height: 100%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* --- Selected appearance for text-style tabs ---
-   Some pages (ex: WorkDetail) use buttonStyle="text". Ensure a selected tab still
-   has a visible selected appearance. We cannot reliably target the TabItem module's
-   hashed classes from here by name, but the DOM will include class fragments.
-   Using attribute/class-substring selectors we apply a visible overlay on the
-   internal content when a text-style tab is selected.
-
-   Selector explanation:
-   - target the button element that's a direct child of this .tab container
-   - match buttons whose generated classnames include the substrings "tab--text" and "tab--selected"
-   - then target the two nested divs (button > div > div) which correspond to the
-     TabItem's `.tab__content` > `.tab__state-layer` structure and apply the overlay.
-*/
-.tab > button[class*="tab--text"][class*="tab--selected"] > div > div {
-  /* use a visible selected overlay similar to filled selected */
-  background: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
-}
-
-/* Ensure icons/labels inside selected text tabs inherit the color */
-.tab > button[class*="tab--text"][class*="tab--selected"]
-  .material-symbols-outlined,
-.tab > button[class*="tab--text"][class*="tab--selected"] p {
-  color: var(--md-sys-color-on-primary-container);
-}
-
-/* Also ensure keyboard-focus and hover for text tabs show a subtle overlay */
-.tab > button[class*="tab--text"]:hover > div > div,
-.tab > button[class*="tab--text"]:focus-visible > div > div {
-  background: color-mix(
-    in srgb,
-    var(--md-sys-color-on-surface) 4%,
-    transparent
-  );
-}
-
-/* If the text tab is both selected and uses tonal/outline variants, broaden support:
-   (match either substring for safety) */
-.tab > button[class*="tab--selected"][class*="tab--tonal"] > div > div,
-.tab > button[class*="tab--selected"][class*="tab--outline"] > div > div {
-  background: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
-}
-
-/* Keep explicit rule: ensure the inner state-layer element (first child div > div)
-   expands to full width so overlay always covers the button area. This helps when
-   the TabItem internal classes are hashed but DOM structure is consistent. */
-.tab > button > div {
-  width: 100%;
-}
-.tab > button > div > div {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
 }

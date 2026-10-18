@@ -14,7 +14,14 @@ type Props = {
   selectedId?: string;
   onSelect?: (id: string) => void;
   className?: string;
-  buttonSize?: "xsmall" | "small" | "medium" | "large" | "xlarge";
+  // "responsive" follows the Figma Tab Bar: Small / Medium / Large by breakpoint
+  buttonSize?:
+    | "xsmall"
+    | "small"
+    | "medium"
+    | "large"
+    | "xlarge"
+    | "responsive";
   buttonStyle?: "filled" | "tonal" | "outline" | "text" | "elevated";
   buttonWidth?: "narrow" | "default" | "wide";
 };
@@ -32,7 +39,7 @@ const TabbedNavigation: React.FC<Props> = ({
   selectedId,
   onSelect,
   className = "",
-  buttonSize = "xsmall",
+  buttonSize = "responsive",
   buttonStyle = "filled",
   buttonWidth = "default",
 }) => {
@@ -81,7 +88,11 @@ const TabbedNavigation: React.FC<Props> = ({
                     disabled={tab.disabled}
                     selected={isSelected}
                     toggleable={!!tab.toggleable}
-                    size={buttonSize}
+                    size={
+                      isSticky && buttonSize === "responsive"
+                        ? "small"
+                        : buttonSize
+                    }
                     style={buttonStyle}
                     width={buttonWidth}
                     onClick={() => handleClick(tab)}

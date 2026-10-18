@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.css";
+
 /* TabItem.module.css
    Aligned with Button.module.css variable names and behavior.
    - Uses the same --btn-* variables so Tabs and Buttons share tokens/behavior.
@@ -41,6 +43,17 @@
   --btn-state-layer-bg: transparent;
 
   height: var(--btn-height);
+}
+
+/* Content and state layer fill the whole tab (tabs share the bar width equally) */
+.tab__content {
+  width: 100%;
+}
+
+.tab__state-layer {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .tab__content {
@@ -103,12 +116,12 @@
 .tab--small {
   --btn-height: 48px;
   --btn-padding: 10px 16px;
-  --btn-gap: 6px;
+  --btn-gap: 8px;
 }
 
 .tab--medium {
   --btn-height: 56px;
-  --btn-padding: 12px 20px;
+  --btn-padding: 16px 24px;
   --btn-gap: 8px;
 
   /* Typography: Title Medium */
@@ -121,8 +134,8 @@
 
 .tab--large {
   --btn-height: 96px;
-  --btn-padding: 16px 24px;
-  --btn-gap: 8px;
+  --btn-padding: 32px 48px;
+  --btn-gap: 12px;
   --btn-icon-size: 26.667px;
   --btn-icon-padding: 0px;
 
@@ -147,6 +160,38 @@
   --btn-font-size: var(--headline-large-size);
   --btn-line-height: var(--headline-large-line-height);
   --btn-tracking: var(--headline-large-tracking);
+}
+
+/* Responsive (Figma Tab Bar): Small below 600px, Medium 600–1199px, Large from 1200px */
+.tab--responsive {
+  --btn-height: 48px;
+  --btn-padding: 10px 16px;
+  --btn-gap: 8px;
+}
+
+@media (--medium) {
+  .tab--responsive {
+    --btn-height: 56px;
+    --btn-padding: 16px 24px;
+    --btn-font-family: var(--title-medium-font);
+    --btn-font-weight: var(--title-medium-weight);
+    --btn-font-size: var(--title-medium-size);
+    --btn-line-height: var(--title-medium-line-height);
+    --btn-tracking: var(--title-medium-tracking);
+  }
+}
+
+@media (--large), (--extra-large) {
+  .tab--responsive {
+    --btn-height: 96px;
+    --btn-padding: 32px 48px;
+    --btn-gap: 12px;
+    --btn-font-family: var(--headline-small-font);
+    --btn-font-weight: var(--headline-small-weight);
+    --btn-font-size: var(--headline-small-size);
+    --btn-line-height: var(--headline-small-line-height);
+    --btn-tracking: var(--headline-small-tracking);
+  }
 }
 
 /* --- Shape: tabs are always rounded (no square variant) --- */
@@ -176,11 +221,11 @@
   --btn-icon-color: var(--md-sys-color-on-surface-variant);
 }
 
-/* Text */
+/* Text (the Figma Tab Bar style): Primary label, no container */
 .tab--text {
   --btn-bg: transparent;
-  --btn-label-color: var(--md-sys-color-on-surface-variant);
-  --btn-icon-color: var(--md-sys-color-on-surface-variant);
+  --btn-label-color: var(--md-sys-color-primary);
+  --btn-icon-color: var(--md-sys-color-primary);
 }
 
 /* Elevated (placeholder) */
@@ -208,8 +253,14 @@
   --btn-state-layer-bg: rgba(29, 25, 43, 0.12);
 }
 
+/* Text selected (Figma Tab Bar): Primary pill, On Primary label */
+.tab--selected.tab--text {
+  --btn-bg: var(--md-sys-color-primary);
+  --btn-label-color: var(--md-sys-color-on-primary);
+  --btn-icon-color: var(--md-sys-color-on-primary);
+}
+
 .tab--selected.tab--outline {
-  --btn-state-layer-bg: var(--md-sys-color-inverse-surface);
   --btn-border: none;
   --btn-label-color: var(--md-sys-color-inverse-on-surface);
   --btn-icon-color: var(--md-sys-color-inverse-on-surface);
@@ -253,8 +304,8 @@
 
 /* For accessibility, show a visible outline on the content — still does not change shape */
 .tab:focus-visible .tab__content {
-  outline: 2px solid var(--md-sys-color-primary);
-  outline-offset: 2px;
+  outline: 3px solid var(--md-sys-color-secondary);
+  outline-offset: -3px; /* inside: tabs touch the bar edges */
 }
 
 /* Active: only change the state-layer background (press effect). No radius or size changes. */
@@ -270,7 +321,7 @@
 .tab:disabled {
   opacity: 0.38;
   cursor: not-allowed;
-  --btn-state-layer-bg: none !important;
+  --btn-state-layer-bg: transparent; /* pointer-events: none, so hover never applies */
   pointer-events: none;
 }
 
@@ -286,8 +337,4 @@
   transition: background-color 220ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Ensure state-layer uses the btn var so overlays actually display */
-.tab__state-layer {
-  background: var(--btn-state-layer-bg);
-}
 /* --- End of Tab styles --- */
