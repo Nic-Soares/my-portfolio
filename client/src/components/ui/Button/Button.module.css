@@ -359,9 +359,14 @@
 
 /* --- 8. States (Hover, Focus, Active, Disabled) --- */
 
-/* Hover */
+/* State layers (M3 Kit): the label color at 8% hover, 10% focus, 8% pressed.
+   Each style sets --btn-label-color, so this follows the style and the theme. */
 .button:hover {
-  --btn-state-layer-bg: rgba(0, 0, 0, 0.08);
+  --btn-state-layer-bg: color-mix(
+    in srgb,
+    var(--btn-label-color) 8%,
+    transparent
+  );
 }
 
 /* Hover border-radius - APENAS para square e grouped, nunca round */
@@ -373,26 +378,14 @@
   transition: border-radius 200ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.button--filled:hover {
-  --btn-state-layer-bg: var(
-    --md-state-layers-light-on-primary-opacity-08,
-    rgba(255, 255, 255, 0.08)
-  );
-}
-
-.button--tonal:hover {
-  --btn-state-layer-bg: rgba(29, 25, 43, 0.08);
-}
-
-/* Outline and Text hover states (text replaces previous "standard") */
-.button--outline:hover,
-.button--text:hover {
-  --btn-state-layer-bg: rgba(73, 69, 79, 0.08);
-}
-
 /* Focus */
 .button:focus-visible {
   outline: none;
+  --btn-state-layer-bg: color-mix(
+    in srgb,
+    var(--btn-label-color) 10%,
+    transparent
+  );
 }
 
 /* Focus border-radius - APENAS para square e grouped, nunca round */
@@ -412,21 +405,11 @@
 
 /* Active */
 .button:active {
-  --btn-state-layer-bg: rgba(0, 0, 0, 0.12);
-}
-
-.button--filled:active {
-  --btn-state-layer-bg: rgba(255, 255, 255, 0.12);
-}
-
-.button--tonal:active {
-  --btn-state-layer-bg: rgba(29, 25, 43, 0.12);
-}
-
-/* Outline and Text active states (text replaces previous "standard") */
-.button--outline:active,
-.button--text:active {
-  --btn-state-layer-bg: rgba(73, 69, 79, 0.12);
+  --btn-state-layer-bg: color-mix(
+    in srgb,
+    var(--btn-label-color) 8%,
+    transparent
+  );
 }
 
 /* Disabled */

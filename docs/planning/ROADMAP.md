@@ -414,7 +414,7 @@ Context: in Figma the decor is an absolutely positioned `HeroDecor` layer with t
   - [ ] Visible focus ring (Figma has `Show focus indicator`)
   - [ ] Translate the component's Portuguese comments
 - **TK-04.6.2** — Audit `IconButton`
-  - [ ] Variants and the selected state
+  - [ ] Variants and the selected state — the `style` prop accepts `standard`, but the CSS only styles `text`, so `standard` renders unstyled (found in `TK-04.6.5`)
   - [ ] Minimum 48px touch target
 - **TK-04.6.3** — Audit `SearchBar` and `ConnectedButtonGroup`
   - [ ] Focus and filled-value states
@@ -423,8 +423,8 @@ Context: in Figma the decor is an absolutely positioned `HeroDecor` layer with t
   - [ ] Variant parity against the Tab Bar component set (see §2.2)
   - [ ] Clean up while touching the CSS: descending-specificity selectors and a duplicate `--btn-state-layer-bg` custom property in `TabbedNavigation.module.css`/`TabItem.module.css`, and the `!important` override in `TabItem.module.css:288` (flagged by `deno task check`, pre-existing, unrelated to `ST-01.0`)
 - **TK-04.6.5** — Theme-aware state layers (found in `TK-03.4.3`)
-  - [ ] `Button`, `IconButton` and `TabItem` hard-code `--*-state-layer-bg` as `rgba(0,0,0,…)`, `rgba(255,255,255,…)` and M3 baseline purples (`29,25,43` / `73,69,79`), so hover/press feedback is wrong or invisible in Dark
-  - [ ] Derive each from the content color at M3 opacities (hover 8%, focus/press 12%), e.g. `color-mix(in srgb, currentColor 8%, transparent)`
+  - [x] `Button`, `IconButton` and `TabItem` hard-code `--*-state-layer-bg` as `rgba(0,0,0,…)`, `rgba(255,255,255,…)` and M3 baseline purples (`29,25,43` / `73,69,79`), so hover/press feedback is wrong or invisible in Dark
+  - [x] Derive each from the content color at the M3 Kit opacities — hover 8%, focus 10%, pressed 8% (Kit `State Layers/*/Opacity-*`; pressed was 12%, aligned to the Kit 2026-10-18). Focus also gets the layer, not just the outline. Selected-tab fills left for `TK-04.6.4`. Approved after a side-by-side test in the gallery
 
 ---
 

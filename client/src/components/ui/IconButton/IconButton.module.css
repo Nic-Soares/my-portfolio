@@ -261,32 +261,24 @@
 
 /* --- 7. States (Hover, Focus, Active, Disabled) --- */
 
-/* Hover */
+/* State layers (M3 Kit): the icon color at 8% hover, 10% focus, 8% pressed.
+   Each style sets --icon-btn-icon-color, so this follows the style and the theme. */
 .icon-button:hover {
-  --icon-btn-state-layer-bg: rgba(0, 0, 0, 0.08);
-}
-
-.icon-button--filled:hover {
-  --icon-btn-state-layer-bg: var(
-    --md-state-layers-light-on-primary-opacity-08,
-    rgba(255, 255, 255, 0.08)
+  --icon-btn-state-layer-bg: color-mix(
+    in srgb,
+    var(--icon-btn-icon-color) 8%,
+    transparent
   );
-}
-
-.icon-button--tonal:hover {
-  --icon-btn-state-layer-bg: rgba(29, 25, 43, 0.08);
-}
-
-/* Outline, Text and Elevated hover states */
-.icon-button--outline:hover,
-.icon-button--text:hover,
-.icon-button--elevated:hover {
-  --icon-btn-state-layer-bg: rgba(73, 69, 79, 0.08);
 }
 
 /* Focus */
 .icon-button:focus-visible {
   outline: none;
+  --icon-btn-state-layer-bg: color-mix(
+    in srgb,
+    var(--icon-btn-icon-color) 10%,
+    transparent
+  );
 }
 
 .icon-button:focus-visible .icon-button__content {
@@ -296,22 +288,11 @@
 
 /* Active */
 .icon-button:active {
-  --icon-btn-state-layer-bg: rgba(0, 0, 0, 0.12);
-}
-
-.icon-button--filled:active {
-  --icon-btn-state-layer-bg: rgba(255, 255, 255, 0.12);
-}
-
-.icon-button--tonal:active {
-  --icon-btn-state-layer-bg: rgba(29, 25, 43, 0.12);
-}
-
-/* Outline, Text and Elevated active states */
-.icon-button--outline:active,
-.icon-button--text:active,
-.icon-button--elevated:active {
-  --icon-btn-state-layer-bg: rgba(73, 69, 79, 0.12);
+  --icon-btn-state-layer-bg: color-mix(
+    in srgb,
+    var(--icon-btn-icon-color) 8%,
+    transparent
+  );
 }
 
 /* Disabled */

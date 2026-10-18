@@ -231,30 +231,24 @@
 
 /* --- States (Hover, Focus, Active, Disabled) --- */
 
-/* Hover: only affect state-layer background (visual layer), do not change radius */
+/* Hover: only affect state-layer background (visual layer), do not change radius.
+   State layers (M3 Kit): the label color at 8% hover, 10% focus, 8% pressed. */
 .tab:hover {
-  --btn-state-layer-bg: rgba(0, 0, 0, 0.08);
-}
-
-.tab--filled:hover {
-  --btn-state-layer-bg: var(
-    --md-state-layers-light-on-primary-opacity-08,
-    rgba(255, 255, 255, 0.08)
+  --btn-state-layer-bg: color-mix(
+    in srgb,
+    var(--btn-label-color) 8%,
+    transparent
   );
-}
-
-.tab--tonal:hover {
-  --btn-state-layer-bg: rgba(29, 25, 43, 0.08);
-}
-
-.tab--outline:hover,
-.tab--text:hover {
-  --btn-state-layer-bg: rgba(73, 69, 79, 0.08);
 }
 
 /* Focus */
 .tab:focus-visible {
   outline: none;
+  --btn-state-layer-bg: color-mix(
+    in srgb,
+    var(--btn-label-color) 10%,
+    transparent
+  );
 }
 
 /* For accessibility, show a visible outline on the content — still does not change shape */
@@ -265,20 +259,11 @@
 
 /* Active: only change the state-layer background (press effect). No radius or size changes. */
 .tab:active {
-  --btn-state-layer-bg: rgba(0, 0, 0, 0.12);
-}
-
-.tab--filled:active {
-  --btn-state-layer-bg: rgba(255, 255, 255, 0.12);
-}
-
-.tab--tonal:active {
-  --btn-state-layer-bg: rgba(29, 25, 43, 0.12);
-}
-
-.tab--outline:active,
-.tab--text:active {
-  --btn-state-layer-bg: rgba(73, 69, 79, 0.12);
+  --btn-state-layer-bg: color-mix(
+    in srgb,
+    var(--btn-label-color) 8%,
+    transparent
+  );
 }
 
 /* Disabled */
