@@ -319,9 +319,9 @@ Context: `light.css` and `dark.css` exist and match Figma's `material-theme`. Th
   - [x] Persist to `localStorage` (key `theme`; `system` clears it)
   - [x] Avoid a flash of the wrong theme on first paint (inline script in `index.html`) — verified it sets the theme with the app bundle removed
 - **TK-03.4.2** — Wire up the rail toggle
-  - [ ] Connect the `dark_mode`/`light_mode` `IconButton` to the provider
-  - [ ] Reflect the actual state in the icon
-  - [ ] `aria-pressed` and an accessible label
+  - [x] Connect the `dark_mode`/`light_mode` `IconButton` to the provider — the rail button is now controlled by `useTheme` instead of its own internal toggle state
+  - [x] Reflect the actual state in the icon (moon in Light, sun in Dark, also on a system-driven first visit)
+  - [x] `aria-pressed` and an accessible label — `IconButton` gained `ariaLabel`/`ariaPressed` props and `type="button"`; toggle labelled "Dark theme". Sidebar test covers the round trip
 - **TK-03.4.3** — Audit both themes
   - [ ] Walk through the 4 pages in Light and Dark
   - [ ] Hunt down hardcoded colors that don't switch with the theme
