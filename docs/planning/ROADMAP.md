@@ -340,8 +340,10 @@ Context: `light.css` and `dark.css` exist and match Figma's `material-theme`. Th
 
 > **As a** dev, **I want** an internal route that renders every component in every variant, **so that** I can compare against Figma without opening the whole application.
 
+Rule (2026-10-18): every component in the gallery must exist in Figma — as a local component, or as the M3 library component the screens use. If it isn't in Figma, design it there first.
+
 - **TK-04.1.1** — `/__gallery` route (dev only)
-  - [ ] Grid layout per component
+  - [ ] Grid layout per component, each labeled with its Figma component name
   - [ ] Theme and breakpoint switcher on the page itself
   - [ ] Excluded from the production build
 
@@ -350,7 +352,7 @@ Context: `light.css` and `dark.css` exist and match Figma's `material-theme`. Th
 > **As a** visitor, **I want** filter and skill chips, **so that** I can navigate and read the stack quickly.
 
 - **TK-04.2.1** — `Chip` component
-  - [ ] Variants: `assist`, `filter`, `input`, `suggestion`
+  - [ ] Variants: `input` only — it's the only chip the design uses (Home skills, 20 instances of the M3 library `Input chip`); the Projects filters are a `Connected button group`. `assist`/`filter`/`suggestion` dropped 2026-10-18 — design them in Figma first if needed
   - [ ] States: enabled, hover, focus, pressed, selected, disabled
   - [ ] Optional left/right icon slots
   - [ ] `elevated` and `outlined`
@@ -362,27 +364,27 @@ Context: `light.css` and `dark.css` exist and match Figma's `material-theme`. Th
 
 ### ST-04.3 — Progress feedback
 
+Figma: `Linear Progress` (Type = Indeterminate / Determinate) on the Components page, section `Feedback` (created 2026-10-18 from the Loading screens). Circular progress and the M3 Expressive loading indicator are not in the design.
+
 - **TK-04.3.1** — `LinearProgress`
   - [ ] Determinate and indeterminate
   - [ ] Indeterminate animation in CSS, respecting `prefers-reduced-motion`
   - [ ] `role="progressbar"` with `aria-valuenow`/`aria-valuetext`
-- **TK-04.3.2** — `CircularProgress`
-  - [ ] Determinate and indeterminate
-  - [ ] Token-based sizes
-- **TK-04.3.3** — `LoadingIndicator` (M3 Expressive)
-  - [ ] Shape morphing between Shape Set shapes
-  - [ ] Fallback to `CircularProgress` under `prefers-reduced-motion`
+- ~~**TK-04.3.2** — `CircularProgress`~~ — dropped 2026-10-18: not in the design
+- ~~**TK-04.3.3** — `LoadingIndicator` (M3 Expressive)~~ — dropped 2026-10-18: not in the design. Design it in Figma first if wanted
 
 ### ST-04.4 — Skeleton
 
+Figma (Components page, section `Feedback`, created 2026-10-18): `Skeleton` (Shape = Pill / Rect × Tone = High / Highest), `Card Skeleton` and `Header Skeleton` (Size = Large / Medium / Compact). The 4 Loading screens now use these instances instead of loose rectangles.
+
 - **TK-04.4.1** — `Skeleton` primitive
-  - [ ] `text`, `rect`, `circle` shapes
+  - [ ] `pill` and `rect` shapes (Figma `Shape`; a pill on a square box is a circle) and `high`/`highest` tones (Figma `Tone`)
   - [ ] Shimmer disabled under `prefers-reduced-motion`
   - [ ] Colors in `surface-container-high`/`highest`, as in Figma
 - **TK-04.4.2** — Skeleton compositions
-  - [ ] `ProjectCardSkeleton` mirroring `ProjectCard`
+  - [ ] `ProjectCardSkeleton` mirroring Figma `Card Skeleton`
   - [ ] `ProjectGridSkeleton` with count per breakpoint (4 col / 3 col / 2 col / 1 col)
-  - [ ] Header skeleton (title + chips + search)
+  - [ ] `ProjectsHeaderSkeleton` mirroring Figma `Header Skeleton` (title + chips + search)
 
 ### ST-04.5 — Decorative primitives
 
