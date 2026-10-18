@@ -6,7 +6,9 @@ import "../styles/normalize.css";
 import NotFound from "@/app/pages/NotFound/NotFound.tsx";
 import UnderConstruction from "@/app/pages/UnderConstruction/UnderConstruction.tsx";
 import { ThemeProvider } from "@/app/theme/ThemeProvider.tsx";
+import NavigationBar from "@/components/layout/NavigationBar/NavigationBar.tsx";
 import Sidebar from "@/components/layout/sidebar/Sidebar.tsx";
+import TopAppBar from "@/components/layout/TopAppBar/TopAppBar.tsx";
 import { HomePage as Home } from "@/features/home/index.ts";
 import { ProjectDetailPage, ProjectListPage } from "@/features/work/index.ts";
 
@@ -22,6 +24,8 @@ function SiteShell() {
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
+      {/* Rail at Large and up; top app bar + navigation bar below (CSS) */}
+      <TopAppBar />
       <Sidebar />
       <div id="main-content" className="main-content" tabIndex={-1}>
         <Routes>
@@ -35,6 +39,7 @@ function SiteShell() {
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
       </div>
+      <NavigationBar />
     </>
   );
 }
