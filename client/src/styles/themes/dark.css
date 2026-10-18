@@ -17,6 +17,7 @@ body[data-theme="Dark"] {
   --md-sys-color-on-secondary-fixed-variant: rgb(68 73 48);
   --md-sys-color-on-surface: rgb(228 227 215);
   --md-sys-color-on-surface-variant: rgb(199 200 184);
+  --md-sys-color-surface-variant: rgb(70 72 60);
   --md-sys-color-on-tertiary: rgb(4 55 48);
   --md-sys-color-on-tertiary-container: rgb(189 236 225);
   --md-sys-color-on-tertiary-fixed: rgb(0 32 27);

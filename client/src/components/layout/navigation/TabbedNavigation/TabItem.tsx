@@ -1,7 +1,13 @@
 import { type ReactNode, useState } from "react";
 import styles from "./TabItem.module.css";
 
-type TabSize = "xsmall" | "small" | "medium" | "large" | "xlarge";
+type TabSize =
+  | "xsmall"
+  | "small"
+  | "medium"
+  | "large"
+  | "xlarge"
+  | "responsive";
 type TabStyle = "filled" | "tonal" | "outline" | "text" | "elevated";
 type TabWidth = "narrow" | "default" | "wide";
 
