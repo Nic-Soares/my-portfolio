@@ -12,6 +12,8 @@ interface IconButtonProps {
   disabled?: boolean;
   selected?: boolean;
   toggleable?: boolean;
+  ariaLabel?: string; // required when the button only shows an icon
+  ariaPressed?: boolean; // for toggle buttons whose state is controlled by the parent
   children?: ReactNode; // fallback para SVG ou conteúdo customizado
 }
 
@@ -26,6 +28,8 @@ const IconButton = ({
   disabled = false,
   selected: initialSelected = false,
   toggleable = false,
+  ariaLabel,
+  ariaPressed,
   children,
 }: IconButtonProps) => {
   const [internalSelected, setInternalSelected] = useState(initialSelected);
@@ -55,7 +59,10 @@ const IconButton = ({
 
   return (
     <button
+      type="button"
       className={className}
+      aria-label={ariaLabel}
+      aria-pressed={ariaPressed ?? (toggleable ? internalSelected : undefined)}
       onClick={() => {
         if (disabled) return;
 

@@ -313,19 +313,20 @@ Context: in Figma the scale changes per **mode** of the `Typescale` collection (
 Context: `light.css` and `dark.css` exist and match Figma's `material-theme`. The selector is `body[data-theme="Light"]`, but nothing writes that attribute — and the `dark_mode` `IconButton` in `Sidebar` has no `onClick`.
 
 - **TK-03.4.1** — ThemeProvider
-  - [ ] Context with `theme`, `setTheme`, `resolvedTheme`
-  - [ ] Write `data-theme` on `<body>`
-  - [ ] Support `system` via `prefers-color-scheme`
-  - [ ] Persist to `localStorage`
-  - [ ] Avoid a flash of the wrong theme on first paint (inline script in `index.html`)
+  - [x] Context with `theme`, `setTheme`, `resolvedTheme` — `app/theme/ThemeProvider.tsx` + `useTheme`, logic in `app/theme/theme.ts`, 4 tests
+  - [x] Write `data-theme` on `<body>`
+  - [x] Support `system` via `prefers-color-scheme` — the default until the visitor picks a theme (decision 1); follows live OS changes while no choice is saved
+  - [x] Persist to `localStorage` (key `theme`; `system` clears it)
+  - [x] Avoid a flash of the wrong theme on first paint (inline script in `index.html`) — verified it sets the theme with the app bundle removed
 - **TK-03.4.2** — Wire up the rail toggle
-  - [ ] Connect the `dark_mode`/`light_mode` `IconButton` to the provider
-  - [ ] Reflect the actual state in the icon
-  - [ ] `aria-pressed` and an accessible label
+  - [x] Connect the `dark_mode`/`light_mode` `IconButton` to the provider — the rail button is now controlled by `useTheme` instead of its own internal toggle state
+  - [x] Reflect the actual state in the icon (moon in Light, sun in Dark, also on a system-driven first visit)
+  - [x] `aria-pressed` and an accessible label — `IconButton` gained `ariaLabel`/`ariaPressed` props and `type="button"`; toggle labelled "Dark theme". Sidebar test covers the round trip
 - **TK-03.4.3** — Audit both themes
-  - [ ] Walk through the 4 pages in Light and Dark
-  - [ ] Hunt down hardcoded colors that don't switch with the theme
-  - [ ] Check the hero glows in Dark (container tokens change luminance)
+  - [x] Walk through the 4 pages in Light and Dark — Home, Projects, Detail and 404 at 1512, before/after in both themes
+  - [x] Hunt down hardcoded colors that don't switch with the theme — fixed: `body` had no text color (Detail article text was black on dark); `--M3-sys-light-*` names that don't exist, so their light fallbacks always won (Projects title, card title/subtitle); hero corner cover `#efeee2`; carousel slide `#333`/`#666`; logo wordmarks `#0A0D12` (now `currentColor`); black overlays on card press and tab hover (now `on-surface` via `color-mix`); carousel focus outline. Left as is: elevation shadows (black is correct in both themes) and `var(--md-sys-*, #fallback)` fallbacks (the token always exists). State layers in `Button`/`IconButton`/`TabItem` → `TK-04.6.5`
+  - [x] Check the hero glows in Dark (container tokens change luminance) — the glows don't exist in code yet; check them when the hero decor is built (`ST-04.5`/`EP-06`)
+  - [x] `dark.css` was missing `--md-sys-color-background` (page background transparent in Dark) — added Figma's `Schemes/Background` Dark, `rgb(19 20 13)`
 
 ---
 
@@ -417,6 +418,9 @@ Context: in Figma the decor is an absolutely positioned `HeroDecor` layer with t
 - **TK-04.6.4** — Audit `TabbedNavigation`
   - [ ] Variant parity against the Tab Bar component set (see §2.2)
   - [ ] Clean up while touching the CSS: descending-specificity selectors and a duplicate `--btn-state-layer-bg` custom property in `TabbedNavigation.module.css`/`TabItem.module.css`, and the `!important` override in `TabItem.module.css:288` (flagged by `deno task check`, pre-existing, unrelated to `ST-01.0`)
+- **TK-04.6.5** — Theme-aware state layers (found in `TK-03.4.3`)
+  - [ ] `Button`, `IconButton` and `TabItem` hard-code `--*-state-layer-bg` as `rgba(0,0,0,…)`, `rgba(255,255,255,…)` and M3 baseline purples (`29,25,43` / `73,69,79`), so hover/press feedback is wrong or invisible in Dark
+  - [ ] Derive each from the content color at M3 opacities (hover 8%, focus/press 12%), e.g. `color-mix(in srgb, currentColor 8%, transparent)`
 
 ---
 
@@ -801,7 +805,7 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 
 | # | Question | Blocks |
 |---|---|---|
-| 1 | ~~Default theme per page~~ — **resolved 2026-10-13:** Light everywhere; Dark via toggle | ~~`EP-02`~~, `EP-03` |
+| 1 | ~~Default theme per page~~ — **resolved 2026-10-13:** Light in every Figma frame. **Updated 2026-10-18:** on the site, the first visit follows the OS (`prefers-color-scheme`); the rail toggle overrides it and the choice is saved | ~~`EP-02`~~, `EP-03` |
 | 2 | ~~Test runner~~ — **resolved:** Vitest (ADR-004) | ~~`EP-01`~~ |
 | 3 | ~~Real content for Project — Detail~~ — **resolved:** Spotify Web case study in Figma | ~~`EP-09`~~ |
 | 4 | Real About Me data — the two postgraduate degrees in Figma are fictional | `EP-07` |

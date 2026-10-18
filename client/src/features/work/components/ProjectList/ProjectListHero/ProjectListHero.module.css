@@ -9,7 +9,7 @@
 }
 
 .projects__title {
-  color: var(--M3-sys-light-on-surface, #171c22);
+  color: var(--md-sys-color-on-surface);
 
   /* M3/headline/large-emphasized */
   font-family: var(--Static-Headline-Large-Font, Roboto);

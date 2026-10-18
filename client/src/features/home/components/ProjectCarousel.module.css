@@ -108,7 +108,7 @@
 
 /* Minor accessibility focus outline for keyboard navigation */
 .project-carousel__slide:focus {
-  outline: 3px solid rgba(99, 102, 241, 0.15);
+  outline: 3px solid var(--md-sys-color-secondary);
   outline-offset: 4px;
 }
 

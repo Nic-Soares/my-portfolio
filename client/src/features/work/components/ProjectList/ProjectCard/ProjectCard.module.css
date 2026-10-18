@@ -99,7 +99,11 @@
 
 /* Active (Pressed) */
 .project-card:active .project-card__content::before {
-  background-color: rgba(0, 0, 0, 0.12);
+  background-color: color-mix(
+    in srgb,
+    var(--md-sys-color-on-surface) 12%,
+    transparent
+  );
 }
 
 /* Disabled */
@@ -146,7 +150,7 @@
 
 .project-card__title {
   overflow: hidden;
-  color: var(--M3-sys-light-on-surface, #171c22);
+  color: var(--md-sys-color-on-surface);
   text-overflow: ellipsis;
   margin: 0;
 
@@ -160,7 +164,7 @@
 
 .project-card__subtitle {
   overflow: hidden;
-  color: var(--M3-sys-light-on-surface-variant, #3f4752);
+  color: var(--md-sys-color-on-surface-variant);
   text-overflow: ellipsis;
   white-space: nowrap;
   margin: 0;

@@ -65,13 +65,13 @@
 .carousel-slide h4 {
   font-size: 2rem;
   font-weight: 700;
-  color: #333;
+  color: var(--md-sys-color-on-tertiary-container);
 }
 
 .carousel-slide p {
   font-size: 1rem;
   line-height: 1.5;
-  color: #666;
+  color: var(--md-sys-color-on-tertiary-container);
 }
 
 /* Responsiveness */

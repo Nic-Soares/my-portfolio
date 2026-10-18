@@ -12,6 +12,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: var(--font-roboto);
+  color: var(--md-sys-color-on-surface);
 }
 
 * {
