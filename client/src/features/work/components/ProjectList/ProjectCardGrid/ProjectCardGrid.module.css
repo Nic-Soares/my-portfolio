@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.css";
+
 .cards {
   /* Usar grid com auto-fit/minmax. Alinhado ao novo min-width do ProjectCard (~431px)
        para que o card controle sua largura e não fique "espremido". */
@@ -23,7 +25,7 @@
   align-self: start;
 }
 
-@media (max-width: 520px) {
+@media (--compact) {
   .cards {
     grid-template-columns: 1fr;
     padding: 0 16px;
