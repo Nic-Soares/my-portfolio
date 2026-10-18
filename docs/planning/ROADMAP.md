@@ -60,7 +60,7 @@
 | Navigation Rail (96px, 3 destinations + 2 actions) | `layout/navigation/NavigationRail` + `Sidebar` | **Fix** — 88px, 2 destinations, actions without handlers |
 | TopAppBar (88px, tablet/mobile) | — | **New** |
 | NavigationBar (88px, tablet/mobile) | — | **New** |
-| Tab Bar (component set) | `layout/navigation/TabbedNavigation` | **Check** — exists, verify variant parity |
+| Tab Bar (component set) | `layout/navigation/TabbedNavigation` | **OK** — parity done in `TK-04.6.4` |
 | Button (Type × Size × Style × Width) | `ui/Button` | **OK** — variant matrix matches; review focus states |
 | Icon button | `ui/IconButton` | **Check** parity |
 | Input chip | — | **New** — used in filters, skills, and social |
@@ -420,8 +420,8 @@ Context: in Figma the decor is an absolutely positioned `HeroDecor` layer with t
   - [x] Focus and filled-value states — SearchBar: hover as an 8% layer, clear-icon hover fixed (was a solid fill), focus keeps the elevation-1 shadow (project choice; the Kit has no focused state). Group: hover/press/focus 12/16px, selected = Secondary pill, Kit focus ring
   - [x] Parity with the design — against the M3 Kit (design: Round Small tags/mobile filters, Round Medium desktop filters, Search bar 56px). Group: no default star icon (icons stay optional per option, with `selectedIcon`), inner corners 8px, Small 40px in a 48px touch target, Medium padding 24px, outer corners drawn per segment. SearchBar: no 360px minimum (was overflowing Compact), 48px icon slots, full-color placeholder, comments translated. Approved after a side-by-side test (2026-10-18)
 - **TK-04.6.4** — Audit `TabbedNavigation`
-  - [ ] Variant parity against the Tab Bar component set (see §2.2)
-  - [ ] Clean up while touching the CSS: descending-specificity selectors and a duplicate `--btn-state-layer-bg` custom property in `TabbedNavigation.module.css`/`TabItem.module.css`, and the `!important` override in `TabItem.module.css:288` (flagged by `deno task check`, pre-existing, unrelated to `ST-01.0`)
+  - [x] Variant parity against the Tab Bar component set (see §2.2) — Surface Variant bar, Primary labels, selected = Primary pill with On Primary label; tabs 96/56/48px by breakpoint (`buttonSize="responsive"`, the new default) with the matching typescale and 10px around the bar; while sticky, tabs switch to Small with a shadow (project choice; the shadow variable was undefined before). Added the missing `--md-sys-color-surface-variant` (Figma Light `227 228 211`, Dark `70 72 60`). Approved after a side-by-side test (2026-10-18)
+  - [x] Clean up while touching the CSS: descending-specificity selectors and a duplicate `--btn-state-layer-bg` custom property in `TabbedNavigation.module.css`/`TabItem.module.css`, and the `!important` override in `TabItem.module.css:288` — removed with the class-substring selector hack
 - **TK-04.6.5** — Theme-aware state layers (found in `TK-03.4.3`)
   - [x] `Button`, `IconButton` and `TabItem` hard-code `--*-state-layer-bg` as `rgba(0,0,0,…)`, `rgba(255,255,255,…)` and M3 baseline purples (`29,25,43` / `73,69,79`), so hover/press feedback is wrong or invisible in Dark
   - [x] Derive each from the content color at the M3 Kit opacities — hover 8%, focus 10%, pressed 8% (Kit `State Layers/*/Opacity-*`; pressed was 12%, aligned to the Kit 2026-10-18). Focus also gets the layer, not just the outline. Selected-tab fills left for `TK-04.6.4`. Approved after a side-by-side test in the gallery
