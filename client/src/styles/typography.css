@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.css";
+
 /* Typography - Material Design 3 */
 /* Based on Material 3 Design Kit (Community) */
 
@@ -466,7 +468,7 @@ figcaption {
    Responsive Typography
    ======================================== */
 
-@media (max-width: 1024px) {
+@media (--compact), (--medium) {
   :root {
     --display-large-size: 48px;
     --display-large-line-height: 56px;
@@ -475,7 +477,7 @@ figcaption {
   }
 }
 
-@media (max-width: 768px) {
+@media (--compact), (--medium) {
   :root {
     --display-large-size: 40px;
     --display-large-line-height: 48px;
@@ -490,7 +492,7 @@ figcaption {
   }
 }
 
-@media (max-width: 480px) {
+@media (--compact) {
   :root {
     --display-large-size: 32px;
     --display-large-line-height: 40px;
