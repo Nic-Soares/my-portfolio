@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "../styles/global.css";
 import "../styles/normalize.css";
@@ -9,18 +10,44 @@ import Sidebar from "@/components/layout/sidebar/Sidebar.tsx";
 import { HomePage as Home } from "@/features/home/index.ts";
 import { ProjectDetailPage, ProjectListPage } from "@/features/work/index.ts";
 
+// Dev-only component gallery. `import.meta.env.DEV` is false in production
+// builds, so the import is dropped and the route never exists there.
+const GalleryPage = import.meta.env.DEV
+  ? lazy(() => import("@/app/gallery/GalleryPage.tsx"))
+  : null;
+
+function SiteShell() {
+  return (
+    <>
+      <Sidebar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<ProjectListPage />} />
+        <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+        <Route path="/coming-soon" element={<UnderConstruction />} />
+        <Route path="/404" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/404" replace />} />
+      </Routes>
+    </>
+  );
+}
+
 function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
-        <Sidebar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<ProjectListPage />} />
-          <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-          <Route path="/coming-soon" element={<UnderConstruction />} />
-          <Route path="/404" element={<NotFound />} />
-          <Route path="*" element={<Navigate to="/404" replace />} />
+          {GalleryPage && (
+            <Route
+              path="/__gallery"
+              element={
+                <Suspense fallback={null}>
+                  <GalleryPage />
+                </Suspense>
+              }
+            />
+          )}
+          <Route path="*" element={<SiteShell />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -343,9 +343,10 @@ Context: `light.css` and `dark.css` exist and match Figma's `material-theme`. Th
 Rule (2026-10-18): every component in the gallery must exist in Figma — as a local component, or as the M3 library component the screens use. If it isn't in Figma, design it there first.
 
 - **TK-04.1.1** — `/__gallery` route (dev only)
-  - [ ] Grid layout per component, each labeled with its Figma component name
-  - [ ] Theme and breakpoint switcher on the page itself
-  - [ ] Excluded from the production build
+  - [x] Grid layout per component, each labeled with its Figma component name — `app/gallery/`; v1 covers Button, IconButton, ConnectedButtonGroup, SearchBar, TabbedNavigation (Tab Bar), ProjectCard, CompanyLogo
+  - [x] Theme and breakpoint switcher on the page itself — components render in an iframe at exactly 1920/1512/744/402 so media queries apply; theme syncs to the iframe through a `storage` listener in `ThemeProvider` (also syncs across tabs)
+  - [x] Excluded from the production build — lazy route behind `import.meta.env.DEV`; verified no gallery code in `dist/`
+  - First things the gallery shows, to check in `ST-04.6`: in Dark, the Tab Bar's selected tab is darker than the unselected ones; `ProjectCard` has an empty band below its content
 
 ### ST-04.2 — Chip
 

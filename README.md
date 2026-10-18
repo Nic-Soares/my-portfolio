@@ -70,6 +70,8 @@ deno task format
 deno task check
 ```
 
+With `deno task dev` running, open `/__gallery` to see every component next to its Figma name, in Light/Dark and at the four Figma widths. The gallery only exists in development.
+
 ## 🎨 Design System
 
 The project uses Material Design 3 with:

@@ -82,6 +82,20 @@ describe("ThemeProvider", () => {
     expect(document.body.dataset.theme).toBe("Light");
   });
 
+  it("follows a choice saved by another tab or frame", () => {
+    renderProvider();
+
+    act(() => {
+      localStorage.setItem(THEME_STORAGE_KEY, "dark");
+      window.dispatchEvent(
+        new StorageEvent("storage", { key: THEME_STORAGE_KEY }),
+      );
+    });
+
+    expect(screen.getByRole("status")).toHaveTextContent("dark/dark");
+    expect(document.body.dataset.theme).toBe("Dark");
+  });
+
   it("saves an explicit choice and clears it when going back to system", () => {
     renderProvider();
 

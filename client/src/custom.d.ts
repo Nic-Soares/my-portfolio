@@ -4,3 +4,12 @@ declare module "*.mp4" {
   const src: string;
   export default src;
 }
+
+// Vite's compile-time env flags (statically replaced at build time)
+interface ImportMeta {
+  readonly env: {
+    readonly DEV: boolean;
+    readonly PROD: boolean;
+    readonly MODE: string;
+  };
+}
