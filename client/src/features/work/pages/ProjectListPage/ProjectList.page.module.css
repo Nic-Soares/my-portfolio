@@ -5,7 +5,8 @@
   padding: 20px;
   gap: 20px;
 
-  border-radius: var(--Corner-Extra-large, 28px) 0px 0px
-    var(--Corner-Extra-large, 28px);
+  border-radius: var(--md-sys-shape-corner-extra-large)
+    var(--md-sys-shape-corner-none) var(--md-sys-shape-corner-none)
+    var(--md-sys-shape-corner-extra-large);
   background: var(--md-sys-color-surface);
 }

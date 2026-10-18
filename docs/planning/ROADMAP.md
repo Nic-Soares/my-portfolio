@@ -302,9 +302,9 @@ Context: in Figma the scale changes per **mode** of the `Typescale` collection (
 ### ST-03.3 — Shape tokens
 
 - **TK-03.3.1** — Extract the `Shape` collection into CSS
-  - [ ] `--md-sys-shape-corner-{none,extra-small,small,medium,large,large-increased,extra-large,extra-large-increased,extra-extra-large,full}`
-  - [ ] Replace literal `border-radius` values across CSS Modules
-  - [ ] Check against the collection's values in Figma
+  - [x] `--md-sys-shape-corner-{none,extra-small,small,medium,large,large-increased,extra-large,extra-large-increased,extra-extra-large,full}` — in `styles/shape.css`: 0 / 4 / 8 / 12 / 16 / 20 / 28 / 32 / 48 / 1000px
+  - [x] Replace literal `border-radius` values across CSS Modules — 22 modules, including `--btn-radius*`/`--icon-btn-radius` and the broken `var(--Corner-*, …)` fallbacks. `ConnectedButtonGroup` radii were half the height, so they became `full`. Off-scale values rounded to the nearest token (decided 2026-10-18): `Container` 24→28, carousel slide 10→12, tab bar 40→full, grouped button hover 10→12 and selected 24→28
+  - [x] Check against the collection's values in Figma — read 2026-10-18; Home, Projects, Detail and 404 compared before/after at 744/1512, no visible change
 
 ### ST-03.4 — Working Light/Dark theme
 

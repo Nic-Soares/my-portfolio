@@ -1,7 +1,7 @@
 .tableContainer {
   width: 100%;
   overflow-x: auto;
-  border-radius: 8px;
+  border-radius: var(--md-sys-shape-corner-small);
   border: 1px solid var(--md-sys-color-outline-variant, #c7c8b8);
   margin-bottom: 24px;
 }

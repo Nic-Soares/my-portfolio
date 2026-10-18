@@ -15,7 +15,7 @@
 .videoWrapper {
   display: flex;
   flex-direction: column;
-  border-radius: 16px;
+  border-radius: var(--md-sys-shape-corner-large);
   overflow: hidden;
   border: 1px solid var(--md-sys-color-outline-variant, #c7c8b8);
   position: relative;

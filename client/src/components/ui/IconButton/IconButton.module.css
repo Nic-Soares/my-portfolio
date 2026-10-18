@@ -14,7 +14,7 @@
   --icon-btn-height: 48px;
   --icon-btn-content-width: 32px;
   --icon-btn-content-height: 32px;
-  --icon-btn-radius: 100px; /* Default round */
+  --icon-btn-radius: var(--md-sys-shape-corner-full); /* Default round */
 
   /* Colors */
   --icon-btn-bg: transparent;
@@ -122,21 +122,21 @@
 /* --- 3. Type Variants (Shape) --- */
 
 .icon-button--round {
-  --icon-btn-radius: 100px;
+  --icon-btn-radius: var(--md-sys-shape-corner-full);
 }
 
 .icon-button--square.icon-button--xsmall,
 .icon-button--square.icon-button--small {
-  --icon-btn-radius: 8px;
+  --icon-btn-radius: var(--md-sys-shape-corner-small);
 }
 
 .icon-button--square.icon-button--medium {
-  --icon-btn-radius: 12px;
+  --icon-btn-radius: var(--md-sys-shape-corner-medium);
 }
 
 .icon-button--square.icon-button--large,
 .icon-button--square.icon-button--xlarge {
-  --icon-btn-radius: 16px;
+  --icon-btn-radius: var(--md-sys-shape-corner-large);
 }
 
 /* --- 4. Style Variants (Colors) --- */

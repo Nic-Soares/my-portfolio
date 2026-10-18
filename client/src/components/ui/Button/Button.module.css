@@ -12,7 +12,7 @@
   --btn-height: 40px;
   --btn-padding: 8px 12px;
   --btn-gap: 4px;
-  --btn-radius: 100px; /* Default round */
+  --btn-radius: var(--md-sys-shape-corner-full); /* Default round */
 
   /* Colors */
   --btn-bg: transparent;
@@ -36,7 +36,7 @@
 
   /* Border Radius para estados (opcional) */
   --btn-radius-hover: var(--btn-radius);
-  --btn-radius-focus: 100px;
+  --btn-radius-focus: var(--md-sys-shape-corner-full);
   --btn-radius-selected: var(--btn-radius);
 
   height: var(--btn-height);
@@ -151,7 +151,7 @@
 
 /* Round */
 .button--round {
-  --btn-radius: 100px;
+  --btn-radius: var(--md-sys-shape-corner-full);
 }
 
 /* Tamanhos Pequenos (XSmall e Small) -> Viram 12px */
@@ -159,13 +159,13 @@
 .button--round.button--xsmall.button--selected,
 .button--round.button--small:active,
 .button--round.button--small.button--selected {
-  --btn-radius: 8px;
+  --btn-radius: var(--md-sys-shape-corner-small);
 }
 
 /* Tamanho Médio (Medium) -> Vira 16px */
 .button--round.button--medium:active,
 .button--round.button--medium.button--selected {
-  --btn-radius: 12px;
+  --btn-radius: var(--md-sys-shape-corner-medium);
 }
 
 /* Tamanhos Grandes (Large e XLarge) -> Viram 20px (ou 16px se preferir manter igual ao médio) */
@@ -173,7 +173,7 @@
 .button--round.button--large.button--selected,
 .button--round.button--xlarge:active,
 .button--round.button--xlarge.button--selected {
-  --btn-radius: 16px;
+  --btn-radius: var(--md-sys-shape-corner-large);
 }
 
 /* --- Lógica para Botões Quadrados (Square) --- */
@@ -181,16 +181,16 @@
 /* 1. Estado Normal (Definição Base) */
 .button--square.button--xsmall,
 .button--square.button--small {
-  --btn-radius: 12px;
+  --btn-radius: var(--md-sys-shape-corner-medium);
 }
 
 .button--square.button--medium {
-  --btn-radius: 16px;
+  --btn-radius: var(--md-sys-shape-corner-large);
 }
 
 .button--square.button--large,
 .button--square.button--xlarge {
-  --btn-radius: 28px;
+  --btn-radius: var(--md-sys-shape-corner-extra-large);
 }
 
 /* 2. Estado Active (Clicando) E Selected (Selecionado) 
@@ -200,19 +200,21 @@
 .button--square.button--small:active,
 .button--square.button--xsmall.button--selected,
 .button--square.button--small.button--selected {
-  --btn-radius: 8px;
+  --btn-radius: var(--md-sys-shape-corner-small);
 }
 
 .button--square.button--medium:active,
 .button--square.button--medium.button--selected {
-  --btn-radius: 12px;
+  --btn-radius: var(--md-sys-shape-corner-medium);
 }
 
 .button--square.button--large:active,
 .button--square.button--xlarge:active,
 .button--square.button--large.button--selected,
 .button--square.button--xlarge.button--selected {
-  --btn-radius: 20px; /* Ajustei levemente para proporção, ou use 16px se preferir muito quadrado */
+  --btn-radius: var(
+    --md-sys-shape-corner-large-increased
+  ); /* Ajustei levemente para proporção, ou use 16px se preferir muito quadrado */
 }
 
 /* --- 4. Style Variants (Colors) --- */
@@ -313,46 +315,46 @@
 
 .button--grouped.button--xsmall,
 .button--grouped.button--small {
-  --btn-radius: 4px;
+  --btn-radius: var(--md-sys-shape-corner-extra-small);
 }
 
 .button--grouped.button--medium {
-  --btn-radius: 4px;
+  --btn-radius: var(--md-sys-shape-corner-extra-small);
 }
 
 .button--grouped.button--large,
 .button--grouped.button--xlarge {
-  --btn-radius: 4px;
+  --btn-radius: var(--md-sys-shape-corner-extra-small);
 }
 
 /* Grouped hover - aumenta border-radius */
 .button--grouped.button--xsmall:hover,
 .button--grouped.button--small:hover {
-  --btn-radius: 8px;
+  --btn-radius: var(--md-sys-shape-corner-small);
 }
 
 .button--grouped.button--medium:hover {
-  --btn-radius: 10px;
+  --btn-radius: var(--md-sys-shape-corner-medium);
 }
 
 .button--grouped.button--large:hover,
 .button--grouped.button--xlarge:hover {
-  --btn-radius: 12px;
+  --btn-radius: var(--md-sys-shape-corner-medium);
 }
 
 /* Grouped selected - border-radius maior */
 .button--grouped.button--xsmall.button--selected,
 .button--grouped.button--small.button--selected {
-  --btn-radius: 20px;
+  --btn-radius: var(--md-sys-shape-corner-large-increased);
 }
 
 .button--grouped.button--medium.button--selected {
-  --btn-radius: 24px;
+  --btn-radius: var(--md-sys-shape-corner-extra-large);
 }
 
 .button--grouped.button--large.button--selected,
 .button--grouped.button--xlarge.button--selected {
-  --btn-radius: 32px;
+  --btn-radius: var(--md-sys-shape-corner-extra-large-increased);
 }
 
 /* --- 8. States (Hover, Focus, Active, Disabled) --- */
