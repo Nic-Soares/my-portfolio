@@ -2,7 +2,26 @@
 
 **Design source:** [Figma — Portfólio](https://www.figma.com/design/5Uw1Nxn0DgG9SU3z0Vb4vh/Portf%C3%B3lio)
 **Repository:** `my-portfolio` (Deno 2 + Vite 7 + React 19 + react-router 7 + CSS Modules + Biome)
-**Last updated:** 2026-08-26
+**Last updated:** 2026-10-13
+
+---
+
+## 0. Status board
+
+| Epic | Status | Where the work lives |
+|---|---|---|
+| `EP-01` Baseline | ✅ Done — merged into `develop` (`4eca4d3`) | code |
+| `EP-02` Design source | ✅ Done in Figma — code follow-ups moved to `EP-08`/`EP-09` | Figma (`Portfólio`) + this file |
+| `EP-03` Tokens | ⏭️ **Next** | code |
+| `EP-04`…`EP-12` | Not started | code |
+| `EP-13` Backend | 🟡 Built, not merged — branch `feat/server-express-api` | code (`server/`) |
+
+### Git workflow
+
+- `main` = released code. `develop` = integration; every epic or story is merged into it with a `merge(<scope>): …` commit.
+- One branch per epic/story, cut from `develop`: `<type>/ep-XX-<slug>` or `<type>/st-XX.Y-<slug>`, where `<type>` is the conventional-commit type (`feat`, `fix`, `chore`, `docs`, `test`, `ci`).
+- Commits follow Conventional Commits (`feat(server): …`, `docs(roadmap): …`).
+- Figma-only work (like `EP-02`) has no code to commit — the branch only carries the checklist updates in this file.
 
 ---
 
@@ -10,8 +29,8 @@
 
 1. **No component library.** `@material/web` is out of date for what the frontend needs. Every Material Design 3 component will be implemented in-repo, in React + CSS Modules, consuming the `--md-sys-*` tokens. Figma remains a visual and variant reference — not a runtime dependency.
 2. **Figma is the source of truth for layout and tokens.** Where the repo and Figma diverge, the repo adjusts — except when the divergence is a Figma bug (see `EP-02`).
-3. **All product copy is in English.** Figma has already been normalized. The repo still has Portuguese in **13 files** — screen copy, project data, and comments (see `ST-01.3`).
-4. **Four breakpoints, matching Figma:** 1920 (Extra-large), 1512 (Large), 744 (Medium), 402 (Compact).
+3. **All product copy is in English.** Figma and the repo's UI copy and comments are normalized (`ST-01.3`). Only the case-study data files (`spotify-clone.data.ts`, `reference.data.ts`) are still in Portuguese — rewritten in `ST-09.1`.
+4. **Four size classes, matching Figma:** Compact `< 600` (frame 402), Medium `600–1199` (frame 744), Large `1200–1599` (frame 1512), Extra-large `≥ 1600` (frame 1920). Frames are the reference width of each range; cut points follow M3 window size classes (`TK-03.1.1`).
 5. **This backlog covers what's missing and what needs fixing.** What's already shipped is listed in §2.4 only to explain its absence from the backlog.
 6. Epic order is execution order — `EP-03` and `EP-04` are prerequisites for every screen.
 
@@ -24,8 +43,8 @@
 | Figma | Repo route | Current implementation | Status |
 |---|---|---|---|
 | Home (1920/1512/744/402) | `/` | `features/home` — Hero, ExpertiseCard, ExperienceSection, ProjectCarousel | **Fix** — hero missing decor, breakpoints misaligned |
-| Projects — Index (1920/1512 + 744/402 × Search/Filter/Selector) | `/projects` | `features/work/ProjectList` — Hero, CardGrid, ProjectCard | **Fix** — filters and search don't filter; tablet/mobile views don't exist |
-| Project — Detail (4 bp) | `/projects/:slug` | `features/work/ProjectDetail` — BlockRenderer (9 blocks), ContentLayout, SummaryNav, Hero | **Fix** — content is M3 doc placeholder; no footer |
+| Projects — Index (1920/1512 + 744/402 × Search/Filter/Selector) | `/projects` | `features/work/ProjectList` — Hero, CardGrid, ProjectCard | **Fix** — filters and search don't filter; tablet/mobile views don't exist; tags clip on narrow cards |
+| Project — Reference (4 bp, block template) + Project — Spotify W (3 tabs × 4 bp) | `/projects/:slug` | `features/work/ProjectDetail` — BlockRenderer (9 blocks), ContentLayout, SummaryNav, Hero | **Fix** — repo still renders the M3 doc placeholder; no facts, pager, or footer |
 | About Me (4 bp) | — | — | **New** — entire feature |
 | System — 404 | `/404` | `app/pages/NotFound` | **Fix** — align with Figma |
 | System — Under Construction | `/coming-soon` | `app/pages/UnderConstruction` | **Fix** — align with Figma |
@@ -46,7 +65,13 @@
 | Input chip | — | **New** — used in filters, skills, and social |
 | Connected button group | `ui/ConnectedButtonGroup` | **OK** |
 | Search bar | `ui/SearchBar` | **OK** — needs wiring to the filter |
-| Card / Card grid | `work/ProjectCard`, `ProjectCardGrid`, `shared/MediaCard`, `shared/TitleCard` | **OK** |
+| Project Card (Size L/M/C) / Card grid | `work/ProjectCard`, `ProjectCardGrid`, `shared/MediaCard`, `shared/TitleCard` | **Fix** — tags must wrap on Medium/Compact (`EP-08`) |
+| Summary + Summary Link | `ProjectDetail/SummaryNav` | **Check** parity (`EP-09`) |
+| Project Hero (Size L/M/C) | `ProjectDetail` Hero | **Check** parity (`EP-09`) |
+| Project Intro + Project Facts + Fact Row | — | **New** (`EP-09`) |
+| Block / Header, Paragraph, List Item, Code, Table, Image, Video, Media Columns | `BlockRenderer/blocks/*` | **Fix** — list typography and image aspect ratio (`EP-09`) |
+| Project Pager + Pager Card | — | **New** (`EP-09`) |
+| Footer (Size L/M/C) + Footer Link Column | — | **New** (`EP-09`) |
 | Carousel | `ui/Carousel` | **OK** |
 | Linear / Circular progress indicator | — | **New** |
 | Loading indicator (M3 Expressive) | — | **New** |
@@ -67,7 +92,7 @@
 
 ### 2.4 Out of backlog (already shipped)
 
-Client-side routing · `@/` and `@assets/` aliases · SVG as component (svgr) · migration to Deno as the single manifest · Biome in place of ESLint · BlockRenderer with 9 block types (Code, Columns, ContentGroup, Header, Image, List, Paragraph, Table, Video) · typed project data layer · 3 ADRs · elevation tokens · Carousel · Card grid.
+Client-side routing · `@/` and `@assets/` aliases · Vitest component testing (ADR-004) · CI on `main`/`develop` · SVG as component (svgr) · migration to Deno as the single manifest · Biome in place of ESLint · BlockRenderer with 9 block types (Code, Columns, ContentGroup, Header, Image, List, Paragraph, Table, Video) · typed project data layer · 3 ADRs · elevation tokens · Carousel · Card grid.
 
 ---
 
@@ -81,6 +106,8 @@ EP-02 Design ────┘                          │            ├── E
                                                          └── EP-10 System States
                                                                   │
                                                     EP-11 i18n ───┴── EP-12 Quality
+
+EP-13 Backend runs on its own track (no screen depends on it yet).
 ```
 
 ---
@@ -183,31 +210,45 @@ Context: running `deno task check` (as part of `ST-01.0`) surfaced 31 errors / 1
 ## EP-02 — Close out design-source pending items
 
 **Goal:** resolve, in Figma, the inconsistencies that would block implementation.
-**Dependencies:** none. **Size:** S. **Owner:** design (Figma), not code.
+**Dependencies:** none. **Size:** S. **Owner:** design (Figma), not code. **Status:** ✅ done 2026-10-13.
 
 ### ST-02.1 — Normalize theme modes per page
 
 > **As a** dev, **I want** a page's 4 breakpoints to show the same theme, **so that** I know what the default state to implement is.
 
-Context: `Project — Detail` alternates Dark (1920) → Light (1512) → Dark (744) → Light (402). `Projects — Index` pins Dark only at 1920 and lets the other three inherit the collection's default.
-
 - **TK-02.1.1** — Decide each page's default theme
-  - [ ] Define: Home / About Me / System in Light, Projects / Detail in Dark — or everything in Light
-  - [ ] Apply the chosen mode to all 4 frames of each page
-  - [ ] Pin the mode explicitly on every frame (today several inherit the default and would flip if the default changes)
+  - [x] Define: everything in Light; Dark is a user choice through the theme toggle (`ST-03.4`) — decision 1 in §4
+  - [x] Apply the chosen mode to all 4 frames of each page (`Projects — Index` 1920 was Dark)
+  - [x] Pin the mode explicitly on every frame — 10 frames inherited the default (Home 744/402, all Projects — Index frames)
 
 ### ST-02.2 — Real content on Project — Detail
 
 - **TK-02.2.1** — Replace the M3 documentation placeholder
-  - [ ] The body today is the M3 "Elevation" article (Availability & resources, Differences from M2, etc.)
-  - [ ] Write a real case study using the blocks `BlockRenderer` already supports
-  - [ ] Validate that every block used in the design has a matching type in the `blockRegistry`
+  - [x] The body today is the M3 "Elevation" article (Availability & resources, Differences from M2, etc.)
+  - [x] Write a real case study using the blocks `BlockRenderer` already supports
+  - [x] Validate that every block used in the design has a matching type in the `blockRegistry` — Spotify (12 frames) uses header, paragraph, image, table, code, list; Reference adds columns (`Block / Media Columns`) and video; all registered. `Project Intro`/`Project Facts` are page-level, not blocks (see facts follow-up)
+- **TK-02.2.2** — Tablet and mobile frames for the Spotify Web case study (Figma page `Project — Spotify W`, node `1407:1658`)
+  - [x] Today only 1920 and 1512 exist, for each of the 3 tabs (Overview, Architecture, Repository)
+  - [x] Create 744 (Medium) frames for the 3 tabs (section `Tablet`, built from the `Project — Reference` 744 shell)
+  - [x] Create 402 (Compact) frames for the 3 tabs (section `Mobile`, built from the `Project — Reference` 402 shell)
+  - [x] Design review: the request-flow diagram in the Architecture code block wraps awkwardly at 402 (rewritten vertically for 402)
+
+> Code follow-ups found during this epic live where the code is built: tag wrapping in `TK-08.3.2`, facts/pager/footer/block parity in `ST-09.1`–`ST-09.4`.
 
 ### ST-02.3 — Consolidate the Figma Components page
 
 - **TK-02.3.1** — Move the scattered components
-  - [ ] Today only Navigation Rail, Tab Bar, and Profile photo live there; Card and Card grid live on the Projects page
-  - [ ] Publish as local components whatever the code is going to mirror
+  - [x] Today only Navigation Rail, Tab Bar, and Profile photo live there; Card and Card grid live on the Projects page — the 8 per-frame `Card` mains merged into one `Project Card` set on Components (Size=Large/Medium/Compact; Title + Subtitle props; Typescale mode per size), 109 instances migrated (Projects — Index + Backup), titles/tags preserved
+  - [x] Publish as local components whatever the code is going to mirror — `Project Card` mirrors `ProjectCard`; `Card grid` stays a GRID layout frame per breakpoint (it is layout, like `ProjectCardGrid`'s CSS grid, not a reusable component)
+- **TK-02.3.2** — Componentize the project page from `Project — Reference`
+  - [x] `Summary` + `Summary Link` (State: Enabled/Hovered/Selected) — mirrors `SummaryNav`; swapped into Reference and Spotify (16 frames)
+  - [x] `Project Hero` (Size: Large/Medium/Compact; Title + Description props; image overridden per project) — swapped into 16 frames
+  - [x] `Project Pager` (Layout: Horizontal/Vertical) + `Pager Card` (Direction: Previous/Next) — swapped into 16 frames
+  - [x] Content blocks mirroring `blockRegistry`: `Block / Header` (Level 1/2/3 = display-large / headline-large / headline-medium, as `typography.css`), `Block / Paragraph` (Large/Medium), `Block / List Item` (Bullet/Number × Large/Medium), `Block / Code`, `Block / Table` + `Block / Table Row` (2/3 columns), `Block / Image` (Ratio 16:9 / 3:2 / 4:3 / 1:1, aspect locked) — Spotify fully converted (12 frames); Reference headings, paragraph, list and table converted (4 frames)
+  - [x] `Project Facts` + `Fact Row` (Role / Stack / Year / Type; label min 120px, value fills) — Spotify Overview intro, 4 breakpoints; intro paragraph now `Block / Paragraph`
+  - [x] `Block / Media Columns` (Size=Large/Medium/Compact × Media=Single/Pair; text column + images) mirrors the `columns` block; `Block / Video` (Clip variants, aspect locked); `Block / Paragraph` Size=Small; `Block / Image` Ratio=5:2 — Reference has 0 loose texts left in its sections (4 frames)
+  - [x] `Footer` rebuilt: one layer structure at every size (Divider / Content → Main: Brand + Links, Bottom Bar), Size=Large/Medium/Compact, links via `Footer Link Column` — 16 instances migrated, old set removed
+  - [x] `Project Intro` (Size=Large side by side / Medium, Compact stacked) wraps `Project Facts` + `Block / Paragraph` — replaces the loose "Intro Table" frame in the 4 Overview frames
 
 ---
 
@@ -223,8 +264,10 @@ Context: `Project — Detail` alternates Dark (1920) → Light (1512) → Dark (
 Context: the CSS today breaks at 1024/768/480 (plus 640/600/520/1294/1295 scattered around). Figma breaks at 1920/1512/744/402.
 
 - **TK-03.1.1** — Define the canonical scale
-  - [ ] Compact `< 744`, Medium `744–1511`, Large `1512–1919`, Extra-large `≥ 1920`
-  - [ ] Declare as custom media queries in a single file
+  - [x] Decide the cut points: M3 window size classes — Compact `< 600`, Medium `600–1199`, Large `1200–1599`, Extra-large `≥ 1600`. The Figma frames (402/744/1512/1920) are the reference width inside each range, not the cut points; cutting at the frame widths would put 1280–1440px laptops on the tablet layout (decided 2026-10-18)
+  - [ ] Declare as `@custom-media` in `client/src/styles/breakpoints.css` (`--compact`, `--medium`, `--large`, `--extra-large`)
+  - [ ] Enable Lightning CSS in `client/vite.config.ts` (`css.transformer: 'lightningcss'`, `drafts.customMedia`) — no new dependency
+  - [ ] Convert one module (`ColumnsBlock.module.css`) as proof and confirm the build output
   - [ ] Document the scale in the README
 - **TK-03.1.2** — Migrate existing media queries
   - [ ] Inventory the 12 distinct breakpoints in use today
@@ -554,23 +597,33 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
   - [ ] 4 / 3 / 2 / 1 per Figma
   - [ ] Token-based gap
   - [ ] Skeleton with the same column count
+- **TK-08.3.2** — `ProjectCard` parity with Figma `Project Card` (Size L/M/C)
+  - [ ] Tags: `ConnectedButtonGroup` is `nowrap` + `overflow: hidden`, so 4 tags clip on 744/402 cards; Figma wraps them (Small size, 2px gap) — allow `flex-wrap` below 1512
+  - [ ] Title `title-large`, subtitle `body-large`, sized by the responsive typescale (`ST-03.2`) — no per-breakpoint classes
 
 ---
 
 ## EP-09 — Project Detail: fixes
 
-**Dependencies:** `EP-02` (real content), `EP-05`. **Size:** M.
+**Dependencies:** `EP-02` (real content — done), `EP-05`. **Size:** M.
+**Design source:** Figma `Project — Spotify W` (content, 3 tabs × 4 breakpoints) and `Project — Reference` (every block type); components on the `Components` page.
 
 ### ST-09.1 — Real content
 
 - **TK-09.1.1** — Replace the placeholder
-  - [ ] Swap the content inherited from the M3 doc for a case study
-  - [ ] Confirm every block in the design exists in the `blockRegistry`
-  - [ ] Implement any missing block types
+  - [ ] Port the Spotify Web case study from Figma into `spotify-clone.data.ts` (Overview, Architecture, Repository tabs), in English
+  - [x] Confirm every block in the design exists in the `blockRegistry` (done in `TK-02.2.1` — no missing block types)
+- **TK-09.1.2** — Project facts and intro
+  - [ ] `ProjectData` has no facts field — add `facts: { label: string; value: string }[]` (Role / Stack / Year / Type)
+  - [ ] `ProjectIntro` mirroring Figma `Project Intro`: facts beside the intro paragraph at Large, stacked at Medium/Compact
+- **TK-09.1.3** — Block parity with the Figma `Block / *` components
+  - [ ] List items: `ListBlock.module.css` uses `body-medium`, Figma uses `body/large-plus`
+  - [ ] Image block: lock a default aspect ratio (Figma ratios 16:9 / 3:2 / 4:3 / 1:1 / 5:2)
+  - [ ] `columns` block matches `Block / Media Columns` (side by side at Large, stacked below)
 
 ### ST-09.2 — Footer
 
-- **TK-09.2.1** — Footer component
+- **TK-09.2.1** — Footer component (Figma `Footer`, Size L/M/C + `Footer Link Column`)
   - [ ] Navigation and Resources columns, Social, and the copyright line
   - [ ] Labels in English (Navigation, About, Work, Contact, Resources, Résumé)
   - [ ] Reusable across other pages
@@ -580,7 +633,7 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
 - **TK-09.3.1** — Review SummaryNav
   - [ ] Sticky, with the active item tracking scroll position
   - [ ] Hide on mobile or turn into a selector
-- **TK-09.3.2** — Previous/next
+- **TK-09.3.2** — Previous/next (Figma `Project Pager`: Horizontal on desktop, Vertical on mobile)
   - [ ] Derive from the data layer's ordering
   - [ ] Edge state at the first and last item
 
@@ -714,20 +767,41 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 
 ---
 
+## EP-13 — Backend API
+
+**Goal:** the portfolio's own backend (`server/`, Express + MongoDB Atlas), kept healthy alongside the client.
+**Dependencies:** none (independent track). **Size:** S. **Branch:** `feat/server-express-api`.
+
+### ST-13.1 — Express API and static hosting
+
+- **TK-13.1.1** — First version (built, waiting for merge)
+  - [x] `GET /api/artists` and `GET /api/songs` from the `artists`/`songs` collections
+  - [x] Serve the React build with an SPA refresh fallback
+  - [x] `start`, `typecheck`, and `test` tasks cover `server/`; 2 `deno test` cases pass
+  - [x] `.env.example` documented; local `.env*` ignored
+  - [x] Biome now checks `server/**` (it was outside `files.includes`)
+  - [ ] Commit on `feat/server-express-api` and merge into `develop`
+- **TK-13.1.2** — Run it in CI
+  - [ ] CI already runs `deno task typecheck`/`test`, which now include `server/` — confirm the job passes without MongoDB credentials
+- **TK-13.1.3** — Fit with the deploy plan
+  - [ ] Decide how the Express server relates to the `EP-12` host choice (decision 6)
+
+---
+
 ## 4. Open decisions
 
 | # | Question | Blocks |
 |---|---|---|
-| 1 | Default theme per page — Light everywhere, or Projects/Detail in Dark? | `EP-02`, `EP-03` |
-| 2 | Test runner: `deno test` + Testing Library, or Vitest? | `EP-01` (`ST-01.4`) |
-| 3 | Real content for Project — Detail (currently the M3 doc) | `EP-09` |
+| 1 | ~~Default theme per page~~ — **resolved 2026-10-13:** Light everywhere; Dark via toggle | ~~`EP-02`~~, `EP-03` |
+| 2 | ~~Test runner~~ — **resolved:** Vitest (ADR-004) | ~~`EP-01`~~ |
+| 3 | ~~Real content for Project — Detail~~ — **resolved:** Spotify Web case study in Figma | ~~`EP-09`~~ |
 | 4 | Real About Me data — the two postgraduate degrees in Figma are fictional | `EP-07` |
 | 5 | i18n with a library or a custom solution | `EP-11` |
-| 6 | Deploy host | `EP-12` |
+| 6 | Deploy host — must also run the Express server (`EP-13`) | `EP-12`, `EP-13` |
 
 ## 5. Execution notes
 
-- **`EP-01` and `EP-02` run in parallel** — one is code, the other is Figma.
+- **`EP-01` and `EP-02` are done.** Start `EP-03` from a fresh branch off `develop`.
 - **`EP-03` is the real bottleneck.** Touching tokens after screens are written means revisiting all of them. Not worth getting ahead on `EP-06`+.
 - **`EP-04` can be sliced by consumer:** Chip before `EP-08`, Skeleton and Progress before `EP-10`, decor before `EP-06`. No need to finish the whole library before starting a screen.
 - **`EP-11` is last on purpose.** Extracting strings from a screen that's still going to change is guaranteed rework.
