@@ -87,6 +87,7 @@ const Button = ({
 
   return (
     <button
+      type="button"
       className={className}
       onClick={handleClick}
       disabled={disabled}

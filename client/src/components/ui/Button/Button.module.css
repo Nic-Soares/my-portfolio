@@ -53,7 +53,11 @@
 
   background: var(--btn-bg);
   border: var(--btn-border);
-  border-radius: var(--btn-radius);
+  /* Grouped segments override the outer (start/end) corners */
+  border-radius: var(--btn-radius-start, var(--btn-radius))
+    var(--btn-radius-end, var(--btn-radius))
+    var(--btn-radius-end, var(--btn-radius))
+    var(--btn-radius-start, var(--btn-radius));
   box-sizing: border-box;
   transition: border-radius 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -355,51 +359,55 @@
   padding-right: 32px;
 }
 
-/* --- 7. Grouped Variant (for ConnectedButtonGroup) --- */
-/* Define border-radius base e sobrescreve em hover/selected */
+/* --- 7. Grouped Variant (ConnectedButtonGroup segments, M3 Kit) --- */
 
-.button--grouped.button--xsmall,
+/* Small segments show a 40px container inside a 48px touch target;
+   Medium uses 24px side padding */
 .button--grouped.button--small {
-  --btn-radius: var(--md-sys-shape-corner-extra-small);
+  --btn-height: 40px;
+  --btn-touch-height: 48px;
 }
 
 .button--grouped.button--medium {
-  --btn-radius: var(--md-sys-shape-corner-extra-small);
+  --btn-padding: 12px 24px;
 }
 
-.button--grouped.button--large,
-.button--grouped.button--xlarge {
-  --btn-radius: var(--md-sys-shape-corner-extra-small);
-}
-
-/* Grouped hover: larger radius */
-.button--grouped.button--xsmall:hover,
-.button--grouped.button--small:hover {
+/* Inner corners rest at 8px; the group's outer corners are always full.
+   `.button.` raises specificity above the square-type rules (segments are square). */
+.button.button--grouped {
   --btn-radius: var(--md-sys-shape-corner-small);
 }
 
-.button--grouped.button--medium:hover {
+.button--grouped:first-child {
+  --btn-radius-start: var(--md-sys-shape-corner-full);
+}
+
+.button--grouped:last-child {
+  --btn-radius-end: var(--md-sys-shape-corner-full);
+}
+
+/* Hover, pressed and focused: 12px (XSmall/Small), 16px (Medium and up) */
+.button--grouped.button--xsmall:is(:hover, :active, :focus-visible),
+.button--grouped.button--small:is(:hover, :active, :focus-visible) {
   --btn-radius: var(--md-sys-shape-corner-medium);
 }
 
-.button--grouped.button--large:hover,
-.button--grouped.button--xlarge:hover {
-  --btn-radius: var(--md-sys-shape-corner-medium);
+.button--grouped.button--medium:is(:hover, :active, :focus-visible),
+.button--grouped.button--large:is(:hover, :active, :focus-visible),
+.button--grouped.button--xlarge:is(:hover, :active, :focus-visible) {
+  --btn-radius: var(--md-sys-shape-corner-large);
 }
 
-/* Grouped selected: largest radius */
-.button--grouped.button--xsmall.button--selected,
-.button--grouped.button--small.button--selected {
-  --btn-radius: var(--md-sys-shape-corner-large-increased);
+/* Selected: the whole segment becomes a pill, in Secondary */
+.button.button--grouped.button--selected,
+.button.button--grouped.button--selected:is(:hover, :active, :focus-visible) {
+  --btn-radius: var(--md-sys-shape-corner-full);
 }
 
-.button--grouped.button--medium.button--selected {
-  --btn-radius: var(--md-sys-shape-corner-extra-large);
-}
-
-.button--grouped.button--large.button--selected,
-.button--grouped.button--xlarge.button--selected {
-  --btn-radius: var(--md-sys-shape-corner-extra-large-increased);
+.button--grouped.button--selected.button--tonal {
+  --btn-bg: var(--md-sys-color-secondary);
+  --btn-label-color: var(--md-sys-color-on-secondary);
+  --btn-icon-color: var(--md-sys-color-on-secondary);
 }
 
 /* --- 8. States (Hover, Focus, Active, Disabled) --- */
@@ -414,11 +422,6 @@
   );
 }
 
-/* Hover radius: grouped buttons only, never round */
-.button--grouped:hover {
-  --btn-radius: var(--btn-radius-hover);
-}
-
 .button:hover .button__content {
   transition: border-radius 200ms cubic-bezier(0.2, 0, 0, 1);
 }
@@ -431,11 +434,6 @@
     var(--btn-label-color) 10%,
     transparent
   );
-}
-
-/* Focus radius: grouped buttons only. Square keeps its shape on focus (M3 Kit). */
-.button--grouped:focus-visible {
-  --btn-radius: var(--btn-radius-focus);
 }
 
 /* Focus indicator (M3 Kit): 3px Secondary ring, 2px outside the container */
@@ -472,9 +470,8 @@
 
 /* --- Selected State Border Radius --- */
 
-/* Selected radius: square and grouped buttons only, never round */
-.button--square.button--selected,
-.button--grouped.button--selected {
+/* Selected radius: square buttons only, never round (grouped: see section 7) */
+.button--square.button--selected {
   --btn-radius: var(--btn-radius-selected);
 }
 
