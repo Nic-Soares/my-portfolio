@@ -313,11 +313,11 @@ Context: in Figma the scale changes per **mode** of the `Typescale` collection (
 Context: `light.css` and `dark.css` exist and match Figma's `material-theme`. The selector is `body[data-theme="Light"]`, but nothing writes that attribute — and the `dark_mode` `IconButton` in `Sidebar` has no `onClick`.
 
 - **TK-03.4.1** — ThemeProvider
-  - [ ] Context with `theme`, `setTheme`, `resolvedTheme`
-  - [ ] Write `data-theme` on `<body>`
-  - [ ] Support `system` via `prefers-color-scheme`
-  - [ ] Persist to `localStorage`
-  - [ ] Avoid a flash of the wrong theme on first paint (inline script in `index.html`)
+  - [x] Context with `theme`, `setTheme`, `resolvedTheme` — `app/theme/ThemeProvider.tsx` + `useTheme`, logic in `app/theme/theme.ts`, 4 tests
+  - [x] Write `data-theme` on `<body>`
+  - [x] Support `system` via `prefers-color-scheme` — the default until the visitor picks a theme (decision 1); follows live OS changes while no choice is saved
+  - [x] Persist to `localStorage` (key `theme`; `system` clears it)
+  - [x] Avoid a flash of the wrong theme on first paint (inline script in `index.html`) — verified it sets the theme with the app bundle removed
 - **TK-03.4.2** — Wire up the rail toggle
   - [ ] Connect the `dark_mode`/`light_mode` `IconButton` to the provider
   - [ ] Reflect the actual state in the icon
@@ -326,6 +326,7 @@ Context: `light.css` and `dark.css` exist and match Figma's `material-theme`. Th
   - [ ] Walk through the 4 pages in Light and Dark
   - [ ] Hunt down hardcoded colors that don't switch with the theme
   - [ ] Check the hero glows in Dark (container tokens change luminance)
+  - [x] `dark.css` was missing `--md-sys-color-background` (page background transparent in Dark) — added Figma's `Schemes/Background` Dark, `rgb(19 20 13)`
 
 ---
 
@@ -801,7 +802,7 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 
 | # | Question | Blocks |
 |---|---|---|
-| 1 | ~~Default theme per page~~ — **resolved 2026-10-13:** Light everywhere; Dark via toggle | ~~`EP-02`~~, `EP-03` |
+| 1 | ~~Default theme per page~~ — **resolved 2026-10-13:** Light in every Figma frame. **Updated 2026-10-18:** on the site, the first visit follows the OS (`prefers-color-scheme`); the rail toggle overrides it and the choice is saved | ~~`EP-02`~~, `EP-03` |
 | 2 | ~~Test runner~~ — **resolved:** Vitest (ADR-004) | ~~`EP-01`~~ |
 | 3 | ~~Real content for Project — Detail~~ — **resolved:** Spotify Web case study in Figma | ~~`EP-09`~~ |
 | 4 | Real About Me data — the two postgraduate degrees in Figma are fictional | `EP-07` |

@@ -18,6 +18,19 @@
     <title>Portfolio Nicolas</title>
   </head>
   <body id="root" data-theme="Light">
+    <!-- Apply the saved or system theme before first paint. Mirrors src/app/theme/theme.ts. -->
+    <script>
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem("theme");
+        } catch (e) {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.body.dataset.theme = theme === "dark" ? "Dark" : "Light";
+      })();
+    </script>
     <script type="module" src="/src/app/main.tsx"></script>
   </body>
 </html>
