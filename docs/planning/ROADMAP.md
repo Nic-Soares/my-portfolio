@@ -417,8 +417,8 @@ Context: in Figma the decor is an absolutely positioned `HeroDecor` layer with t
   - [x] Variants and the selected state — against the M3 Kit (design uses Medium Outline Default in the rail and Medium Outline Wide in the top app bar). Icons 20/24/24/32/40px (Material Symbols font-size = the Kit icon box), square radius 12/12/16/28/28, press radius 8/8/12/16/16, selected toggles morph (round → rounded square, square → pill), 2px outline from Large, `standard` styled (CSS used `text`; `text`/`elevated` placeholders removed), Kit focus ring, comments translated. Same icon-size fix applied to standalone `Button` icons (20/20/24/32/40). Approved after a side-by-side test (2026-10-18)
   - [x] Minimum 48px touch target
 - **TK-04.6.3** — Audit `SearchBar` and `ConnectedButtonGroup`
-  - [ ] Focus and filled-value states
-  - [ ] Parity with the design
+  - [x] Focus and filled-value states — SearchBar: hover as an 8% layer, clear-icon hover fixed (was a solid fill), focus keeps the elevation-1 shadow (project choice; the Kit has no focused state). Group: hover/press/focus 12/16px, selected = Secondary pill, Kit focus ring
+  - [x] Parity with the design — against the M3 Kit (design: Round Small tags/mobile filters, Round Medium desktop filters, Search bar 56px). Group: no default star icon (icons stay optional per option, with `selectedIcon`), inner corners 8px, Small 40px in a 48px touch target, Medium padding 24px, outer corners drawn per segment. SearchBar: no 360px minimum (was overflowing Compact), 48px icon slots, full-color placeholder, comments translated. Approved after a side-by-side test (2026-10-18)
 - **TK-04.6.4** — Audit `TabbedNavigation`
   - [ ] Variant parity against the Tab Bar component set (see §2.2)
   - [ ] Clean up while touching the CSS: descending-specificity selectors and a duplicate `--btn-state-layer-bg` custom property in `TabbedNavigation.module.css`/`TabItem.module.css`, and the `!important` override in `TabItem.module.css:288` (flagged by `deno task check`, pre-existing, unrelated to `ST-01.0`)
