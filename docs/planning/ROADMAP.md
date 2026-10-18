@@ -290,10 +290,10 @@ Context: the CSS today breaks at 1024/768/480 (plus 640/600/520/1294/1295 scatte
 Context: in Figma the scale changes per **mode** of the `Typescale` collection (Expanded/Medium/Compact) — the same text style renders different sizes per frame. `typography.css` already attempts this with `@media` on `:root`, but at the wrong breakpoints.
 
 - **TK-03.2.1** — Rewrite `typography.css` on the canonical scale
-  - [ ] Map the 15 roles (Display/Headline/Title/Label/Body × L/M/S) × 4 modes
-  - [ ] Pull values from Figma's `Typescale` collection — don't estimate
-  - [ ] Include the extra roles the design uses: `Hero Display`, `Body Large Plus`, `Title Small Plus`
-  - [ ] Emphasized/prominent as a separate token (Figma has `-emphasized` on almost every role)
+  - [x] Map the 15 roles (Display/Headline/Title/Label/Body × L/M/S) × 4 modes — Baseline and Expanded are identical; frames pin Expanded at 1920/1512, Medium at 744, Compact at 402. So Large/XL = the `:root` defaults and only `--medium`/`--compact` override
+  - [x] Pull values from Figma's `Typescale` collection — don't estimate (read 2026-10-18; the Expanded values already matched, the Medium/Compact tiers were estimates and are now replaced)
+  - [x] Include the extra roles the design uses: `Hero Display`, `Body Large Plus`, `Title Small Plus` — tokens plus `.hero-display`, `.body-large-plus(-emphasized)`, `.title-small-plus`; no component uses them yet
+  - [x] Emphasized/prominent as a separate token (Figma has `-emphasized` on almost every role) — already `--*-emphasized-weight`; values match Figma (Bold = SemiBold 600)
 - **TK-03.2.2** — Fix the effective font family
   - [ ] `global.css` puts `system-ui` first — Roboto is never applied
   - [ ] Serve Roboto locally (weights 400/500/600) instead of from a CDN
