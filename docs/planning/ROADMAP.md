@@ -295,9 +295,9 @@ Context: in Figma the scale changes per **mode** of the `Typescale` collection (
   - [x] Include the extra roles the design uses: `Hero Display`, `Body Large Plus`, `Title Small Plus` — tokens plus `.hero-display`, `.body-large-plus(-emphasized)`, `.title-small-plus`; no component uses them yet
   - [x] Emphasized/prominent as a separate token (Figma has `-emphasized` on almost every role) — already `--*-emphasized-weight`; values match Figma (Bold = SemiBold 600)
 - **TK-03.2.2** — Fix the effective font family
-  - [ ] `global.css` puts `system-ui` first — Roboto is never applied
-  - [ ] Serve Roboto locally (weights 400/500/600) instead of from a CDN
-  - [ ] `font-display: swap` and preload the above-the-fold weight
+  - [x] `global.css` puts `system-ui` first — Roboto is never applied (body now uses `var(--font-roboto)`)
+  - [x] Serve Roboto locally (weights 400/500/600) instead of from a CDN — one variable woff2 (Latin subset, weights 100–900, 43 KB) from `@fontsource-variable/roboto` 5.3.0 in `client/public/fonts/roboto/`, `@font-face` in `styles/fonts.css`. The Google Fonts link for Roboto and the unused Roboto Flex is gone; Material Symbols still comes from Google Fonts
+  - [x] `font-display: swap` and preload the above-the-fold weight — the single variable file is preloaded in `index.html`
 
 ### ST-03.3 — Shape tokens
 
