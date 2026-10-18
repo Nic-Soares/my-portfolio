@@ -43,7 +43,7 @@ const ConnectedButtonGroup = ({
       ? controlledSelectedIndex
       : internalSelectedIndex;
 
-  // Garante que o número de botões esteja entre 2 e 5
+  // Keep between 2 and 5 segments
   const count = Math.max(2, Math.min(options.length, 5));
   const displayedOptions = options.slice(0, count);
 
@@ -61,9 +61,7 @@ const ConnectedButtonGroup = ({
   };
 
   return (
-    <div
-      className={`${styles["connected-button-group"]} ${styles[size]} ${className}`}
-    >
+    <div className={`${styles["connected-button-group"]} ${className}`}>
       {displayedOptions.map((option, idx) => {
         const isSelected = selectedIndex === idx;
         const iconToUse =
@@ -73,7 +71,7 @@ const ConnectedButtonGroup = ({
           <Button
             key={idx}
             label={option.label}
-            icon={iconToUse}
+            icon={iconToUse ?? null}
             selected={isSelected}
             disabled={option.disabled}
             onClick={() => handleButtonClick(idx)}
