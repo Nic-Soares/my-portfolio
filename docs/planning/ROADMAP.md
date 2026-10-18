@@ -456,17 +456,17 @@ Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About
 > **As a** mobile visitor, **I want** navigation at the top and bottom, **so that** I can reach everything with my thumb.
 
 - **TK-05.2.1** — `TopAppBar`
-  - [ ] 88px, logo + title + actions, as in Figma
-  - [ ] Contextual title per route
-  - [ ] Scroll behavior (elevation once it leaves the top)
+  - [x] 88px, logo + title + actions, as in Figma — Figma hides the title layer, so there is no title; language and theme as wide outline icon buttons
+  - [x] Contextual title per route — dropped: no title in Figma (see above)
+  - [x] Scroll behavior (elevation once it leaves the top) — `Elevation 2` shadow while `window.scrollY > 0`; the bar is already Surface Container, as in Figma
 - **TK-05.2.2** — `NavigationBar`
-  - [ ] 88px, 3 destinations with icon and label
-  - [ ] Active indicator
-  - [ ] iOS gesture-bar safe area
+  - [x] 88px, 3 destinations with icon and label — M3 nav items, same destinations as the rail
+  - [x] Active indicator
+  - [x] iOS gesture-bar safe area — `env(safe-area-inset-bottom)` with `viewport-fit=cover` instead of a drawn gesture bar
 - **TK-05.2.3** — `AppShell` that picks the pattern
-  - [ ] Rail at Large and up (≥1200); TopAppBar + NavigationBar below 1200 (size classes from `ST-03.1`)
-  - [ ] A single source of truth for destinations, consumed by both patterns
-  - [ ] Confirm there's no layout jump when switching
+  - [x] Rail at Large and up (≥1200); TopAppBar + NavigationBar below 1200 (size classes from `ST-03.1`)
+  - [x] A single source of truth for destinations, consumed by both patterns — `layout/navigation/destinations.ts`; rail actions moved to `NavActions.tsx`
+  - [x] Confirm there's no layout jump when switching — the switch is CSS-only; also fixes the sideways scroll on Compact
 
 ### ST-05.3 — PageContent
 

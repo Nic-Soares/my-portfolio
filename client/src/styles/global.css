@@ -1,3 +1,4 @@
+@import "./breakpoints.css";
 @import "./fonts.css";
 @import "./typography.css";
 @import "./shape.css";
@@ -32,6 +33,24 @@ body {
 .main-content {
   min-width: 0;
   outline: none;
+}
+
+/* Below Large: one column (top app bar, content) and a fixed bottom bar */
+:root {
+  --navigation-bar-height: 64px;
+}
+
+@media (--compact), (--medium) {
+  #root {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .main-content {
+    padding-bottom: calc(
+      var(--navigation-bar-height) +
+      env(safe-area-inset-bottom)
+    );
+  }
 }
 
 /* Visible only when focused with the keyboard */

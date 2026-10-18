@@ -1,0 +1,44 @@
+@import "@/styles/breakpoints.css";
+
+/* Figma "TopAppBar": 88px, Surface Container, 16px 24px padding */
+.bar {
+  display: none;
+}
+
+@media (--compact), (--medium) {
+  .bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    height: 88px;
+    padding: 16px 24px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    box-sizing: border-box;
+    background: var(--md-sys-color-surface-container);
+    transition: box-shadow 200ms ease;
+  }
+
+  /* M3 on scroll: elevation once the page leaves the top */
+  .bar[data-scrolled] {
+    box-shadow: var(--m3-elevation-2);
+  }
+}
+
+.logo {
+  display: flex;
+  border-radius: 10px;
+}
+
+.logo:focus-visible {
+  outline: 3px solid var(--md-sys-color-secondary);
+  outline-offset: 2px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

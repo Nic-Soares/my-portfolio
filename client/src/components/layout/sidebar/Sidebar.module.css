@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.css";
+
 /* Figma "Navigation Rail": 96px, Surface Container, logo / destinations / actions */
 .rail {
   display: flex;
@@ -11,6 +13,12 @@
   position: sticky;
   top: 0;
   background: var(--md-sys-color-surface-container);
+}
+
+@media (--compact), (--medium) {
+  .rail {
+    display: none;
+  }
 }
 
 .logo {
