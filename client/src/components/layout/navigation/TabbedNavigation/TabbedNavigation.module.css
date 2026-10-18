@@ -105,7 +105,11 @@
 /* Also ensure keyboard-focus and hover for text tabs show a subtle overlay */
 .tab > button[class*="tab--text"]:hover > div > div,
 .tab > button[class*="tab--text"]:focus-visible > div > div {
-  background: rgba(0, 0, 0, 0.04);
+  background: color-mix(
+    in srgb,
+    var(--md-sys-color-on-surface) 4%,
+    transparent
+  );
 }
 
 /* If the text tab is both selected and uses tonal/outline variants, broaden support:

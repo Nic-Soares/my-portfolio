@@ -7,10 +7,15 @@
 .company-logo__svg {
   width: 60px;
   height: 60px;
+  /* Logo wordmarks use fill="currentColor"; brand-colored marks keep their own fill. */
+  color: var(--md-sys-color-on-surface);
   fill: var(--md-sys-color-on-surface);
-  transition: fill 0.2s ease;
+  transition:
+    color 0.2s ease,
+    fill 0.2s ease;
 }
 
 .company-logo__svg:hover {
+  color: var(--md-sys-color-primary);
   fill: var(--md-sys-color-primary);
 }

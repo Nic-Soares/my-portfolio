@@ -141,14 +141,14 @@
 
   /* A MÁGICA: Um círculo invertido.
      - O centro é TRANSPARENTE (mostra a pessoa e o trevo).
-     - As bordas são BEGE (#E8E7DC) (cobrem os cantos quadrados da foto).
+     - As bordas usam a cor do card (cobrem os cantos quadrados da foto).
 
      Ajuste o valor '65%' se o buraco estiver muito grande ou muito pequeno.
   */
   background: radial-gradient(
     ellipse at center top,
     transparent 0%,
-    #efeee2 65.5%
+    var(--md-sys-color-surface-container) 65.5%
   );
 
   /* Garante que o mouse não interaja com essa camada de correção */

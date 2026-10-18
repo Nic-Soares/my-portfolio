@@ -323,9 +323,9 @@ Context: `light.css` and `dark.css` exist and match Figma's `material-theme`. Th
   - [x] Reflect the actual state in the icon (moon in Light, sun in Dark, also on a system-driven first visit)
   - [x] `aria-pressed` and an accessible label — `IconButton` gained `ariaLabel`/`ariaPressed` props and `type="button"`; toggle labelled "Dark theme". Sidebar test covers the round trip
 - **TK-03.4.3** — Audit both themes
-  - [ ] Walk through the 4 pages in Light and Dark
-  - [ ] Hunt down hardcoded colors that don't switch with the theme
-  - [ ] Check the hero glows in Dark (container tokens change luminance)
+  - [x] Walk through the 4 pages in Light and Dark — Home, Projects, Detail and 404 at 1512, before/after in both themes
+  - [x] Hunt down hardcoded colors that don't switch with the theme — fixed: `body` had no text color (Detail article text was black on dark); `--M3-sys-light-*` names that don't exist, so their light fallbacks always won (Projects title, card title/subtitle); hero corner cover `#efeee2`; carousel slide `#333`/`#666`; logo wordmarks `#0A0D12` (now `currentColor`); black overlays on card press and tab hover (now `on-surface` via `color-mix`); carousel focus outline. Left as is: elevation shadows (black is correct in both themes) and `var(--md-sys-*, #fallback)` fallbacks (the token always exists). State layers in `Button`/`IconButton`/`TabItem` → `TK-04.6.5`
+  - [x] Check the hero glows in Dark (container tokens change luminance) — the glows don't exist in code yet; check them when the hero decor is built (`ST-04.5`/`EP-06`)
   - [x] `dark.css` was missing `--md-sys-color-background` (page background transparent in Dark) — added Figma's `Schemes/Background` Dark, `rgb(19 20 13)`
 
 ---
@@ -418,6 +418,9 @@ Context: in Figma the decor is an absolutely positioned `HeroDecor` layer with t
 - **TK-04.6.4** — Audit `TabbedNavigation`
   - [ ] Variant parity against the Tab Bar component set (see §2.2)
   - [ ] Clean up while touching the CSS: descending-specificity selectors and a duplicate `--btn-state-layer-bg` custom property in `TabbedNavigation.module.css`/`TabItem.module.css`, and the `!important` override in `TabItem.module.css:288` (flagged by `deno task check`, pre-existing, unrelated to `ST-01.0`)
+- **TK-04.6.5** — Theme-aware state layers (found in `TK-03.4.3`)
+  - [ ] `Button`, `IconButton` and `TabItem` hard-code `--*-state-layer-bg` as `rgba(0,0,0,…)`, `rgba(255,255,255,…)` and M3 baseline purples (`29,25,43` / `73,69,79`), so hover/press feedback is wrong or invisible in Dark
+  - [ ] Derive each from the content color at M3 opacities (hover 8%, focus/press 12%), e.g. `color-mix(in srgb, currentColor 8%, transparent)`
 
 ---
 
