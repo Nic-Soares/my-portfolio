@@ -265,10 +265,10 @@ Context: the CSS today breaks at 1024/768/480 (plus 640/600/520/1294/1295 scatte
 
 - **TK-03.1.1** — Define the canonical scale
   - [x] Decide the cut points: M3 window size classes — Compact `< 600`, Medium `600–1199`, Large `1200–1599`, Extra-large `≥ 1600`. The Figma frames (402/744/1512/1920) are the reference width inside each range, not the cut points; cutting at the frame widths would put 1280–1440px laptops on the tablet layout (decided 2026-10-18)
-  - [ ] Declare as `@custom-media` in `client/src/styles/breakpoints.css` (`--compact`, `--medium`, `--large`, `--extra-large`)
-  - [ ] Enable Lightning CSS in `client/vite.config.ts` (`css.transformer: 'lightningcss'`, `drafts.customMedia`) — no new dependency
-  - [ ] Convert one module (`ColumnsBlock.module.css`) as proof and confirm the build output
-  - [ ] Document the scale in the README
+  - [x] Declare as `@custom-media` in `client/src/styles/breakpoints.css` (`--compact`, `--medium`, `--large`, `--extra-large`)
+  - [x] Enable Lightning CSS in `client/vite.config.ts` (`css.transformer: 'lightningcss'`, `drafts.customMedia`) — no new dependency. Biome doesn't know `@custom-media`: `noUnknownAtRules` ignores it and `noUnknownMediaFeatureName` is off
+  - [x] Convert one module (`ColumnsBlock.module.css`) as proof and confirm the build output
+  - [x] Document the scale in the README
 - **TK-03.1.2** — Migrate existing media queries
   - [ ] Inventory the 12 distinct breakpoints in use today
   - [ ] Rewrite every CSS Module to the canonical scale

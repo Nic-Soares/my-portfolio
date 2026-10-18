@@ -1,0 +1,18 @@
+/*
+ * Canonical size classes (M3 window size classes).
+ * Each range is checked against one Figma frame width:
+ *   Compact      < 600        → frame 402
+ *   Medium       600 – 1199   → frame 744
+ *   Large        1200 – 1599  → frame 1512
+ *   Extra-large  ≥ 1600       → frame 1920
+ *
+ * Import this file at the top of any CSS Module that needs a media query:
+ *   @import "@/styles/breakpoints.css";
+ *   @media (--compact), (--medium) { … }
+ * Lightning CSS resolves these at build time; nothing is emitted for them.
+ */
+
+@custom-media --compact (width < 600px);
+@custom-media --medium (600px <= width < 1200px);
+@custom-media --large (1200px <= width < 1600px);
+@custom-media --extra-large (width >= 1600px);

@@ -18,7 +18,16 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "preset": "recommended"
+      "preset": "recommended",
+      "suspicious": {
+        "noUnknownAtRules": {
+          "level": "error",
+          "options": { "ignore": ["custom-media"] }
+        }
+      },
+      "correctness": {
+        "noUnknownMediaFeatureName": "off"
+      }
     }
   },
   "javascript": {

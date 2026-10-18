@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.css";
+
 .columnsContainer {
   display: flex;
   flex-direction: row;
@@ -12,8 +14,8 @@
   gap: 20px;
 }
 
-/* Ensure columns stack vertically on smaller screens */
-@media (max-width: 768px) {
+/* Side by side at Large and up, stacked below (Figma `Block / Media Columns`) */
+@media (--compact), (--medium) {
   .columnsContainer {
     flex-direction: column;
   }

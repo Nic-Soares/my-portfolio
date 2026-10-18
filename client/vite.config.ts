@@ -8,6 +8,12 @@ const rootDir = import.meta.dirname;
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
+  css: {
+    transformer: "lightningcss",
+    lightningcss: {
+      drafts: { customMedia: true },
+    },
+  },
   publicDir: "public",
   server: {
     fs: {
