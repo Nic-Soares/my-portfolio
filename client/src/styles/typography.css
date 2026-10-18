@@ -116,6 +116,26 @@
   --body-small-line-height: 16px;
   --body-small-tracking: 0.4px;
   --body-small-emphasized-weight: 500;
+
+  /* Extra roles (Figma Typescale, not in base M3) */
+  --hero-display-font: var(--font-roboto);
+  --hero-display-weight: 500;
+  --hero-display-size: 96px;
+  --hero-display-line-height: 104px;
+  --hero-display-tracking: -0.25px;
+
+  --body-large-plus-font: var(--font-roboto);
+  --body-large-plus-weight: 400;
+  --body-large-plus-size: 20px;
+  --body-large-plus-line-height: 28px;
+  --body-large-plus-tracking: 0.5px;
+  --body-large-plus-emphasized-weight: 500;
+
+  --title-small-plus-font: var(--font-roboto);
+  --title-small-plus-weight: 600;
+  --title-small-plus-size: 18px;
+  --title-small-plus-line-height: 24px;
+  --title-small-plus-tracking: 0.1px;
 }
 
 /* ========================================
@@ -379,6 +399,42 @@
 }
 
 /* ========================================
+   Extra Roles (Figma Typescale)
+   ======================================== */
+
+.hero-display {
+  font-family: var(--hero-display-font);
+  font-weight: var(--hero-display-weight);
+  font-size: var(--hero-display-size);
+  line-height: var(--hero-display-line-height);
+  letter-spacing: var(--hero-display-tracking);
+}
+
+.body-large-plus {
+  font-family: var(--body-large-plus-font);
+  font-weight: var(--body-large-plus-weight);
+  font-size: var(--body-large-plus-size);
+  line-height: var(--body-large-plus-line-height);
+  letter-spacing: var(--body-large-plus-tracking);
+}
+
+.body-large-plus-emphasized {
+  font-family: var(--body-large-plus-font);
+  font-weight: var(--body-large-plus-emphasized-weight);
+  font-size: var(--body-large-plus-size);
+  line-height: var(--body-large-plus-line-height);
+  letter-spacing: var(--body-large-plus-tracking);
+}
+
+.title-small-plus {
+  font-family: var(--title-small-plus-font);
+  font-weight: var(--title-small-plus-weight);
+  font-size: var(--title-small-plus-size);
+  line-height: var(--title-small-plus-line-height);
+  letter-spacing: var(--title-small-plus-tracking);
+}
+
+/* ========================================
    Semantic HTML Tag Mapping
    ======================================== */
 
@@ -466,21 +522,32 @@ figcaption {
 
 /* ========================================
    Responsive Typography
+   Values from Figma's Typescale collection: Large and Extra-large use the
+   Expanded mode (the :root defaults above); Medium and Compact override
+   only the roles that change.
    ======================================== */
 
-@media (--compact), (--medium) {
+@media (--medium) {
   :root {
-    --display-large-size: 48px;
-    --display-large-line-height: 56px;
-    --display-medium-size: 38px;
-    --display-medium-line-height: 46px;
+    --display-large-size: 45px;
+    --display-large-line-height: 52px;
+    --display-medium-size: 36px;
+    --display-medium-line-height: 44px;
+    --display-small-size: 32px;
+    --display-small-line-height: 40px;
+    --hero-display-size: 57px;
+    --hero-display-line-height: 64px;
+    --body-large-plus-size: 18px;
+    --body-large-plus-line-height: 26px;
+    --title-small-plus-size: 16px;
+    --title-small-plus-line-height: 22px;
   }
 }
 
-@media (--compact), (--medium) {
+@media (--compact) {
   :root {
-    --display-large-size: 40px;
-    --display-large-line-height: 48px;
+    --display-large-size: 36px;
+    --display-large-line-height: 44px;
     --display-medium-size: 32px;
     --display-medium-line-height: 40px;
     --display-small-size: 28px;
@@ -489,23 +556,26 @@ figcaption {
     --headline-large-line-height: 36px;
     --headline-medium-size: 24px;
     --headline-medium-line-height: 32px;
-  }
-}
-
-@media (--compact) {
-  :root {
-    --display-large-size: 32px;
-    --display-large-line-height: 40px;
-    --display-medium-size: 28px;
-    --display-medium-line-height: 36px;
-    --display-small-size: 24px;
-    --display-small-line-height: 32px;
-    --headline-large-size: 24px;
-    --headline-large-line-height: 32px;
-    --headline-medium-size: 22px;
-    --headline-medium-line-height: 28px;
-    --headline-small-size: 20px;
+    --headline-small-size: 22px;
     --headline-small-line-height: 28px;
+    --title-large-size: 20px;
+    --title-large-line-height: 26px;
+    --title-medium-size: 14px;
+    --title-medium-line-height: 20px;
+    --title-small-size: 12px;
+    --title-small-line-height: 16px;
+    --label-large-size: 12px;
+    --label-large-line-height: 16px;
+    --body-large-size: 14px;
+    --body-large-line-height: 20px;
+    --body-medium-size: 12px;
+    --body-medium-line-height: 16px;
+    --hero-display-size: 45px;
+    --hero-display-line-height: 52px;
+    --body-large-plus-size: 16px;
+    --body-large-plus-line-height: 24px;
+    --title-small-plus-size: 16px;
+    --title-small-plus-line-height: 22px;
   }
 }
 
