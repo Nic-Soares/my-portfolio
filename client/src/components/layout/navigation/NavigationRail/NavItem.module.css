@@ -1,54 +1,26 @@
+/* M3 Kit "Vertical nav item" (Navigation rail / Navigation bar) */
 .nav-item {
   display: flex;
-  width: 104px;
-  padding: 6px 0px;
+  width: 100%;
+  padding: 6px 0;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 4px;
   box-sizing: border-box;
-
-  background: none;
-  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
 }
 
-.nav-item--selected {
-}
-
-.nav-item__icon-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: var(--md-sys-shape-corner-full);
-  overflow: hidden;
-}
-
-.nav-item__state-layer {
+.nav-item__indicator {
   display: flex;
   width: 56px;
   height: 32px;
-  padding: 4px 0px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  box-sizing: border-box;
-}
-
-.nav-item:hover .nav-item__state-layer {
-  background: var(--md-state-layers-light-on-surface-opacity-08);
-}
-
-.nav-item__state-layer:focus {
-  background: var(--md-state-layers-light-on-secondary-container-opacity-12);
-}
-
-.nav-item--selected .nav-item__state-layer {
-  background: var(--md-state-layers-light-on-surface-opacity-10);
-}
-
-.nav-item--selected .nav-item__icon {
-  font-variation-settings: "FILL" 1;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--nav-item-indicator-bg, transparent);
+  transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .nav-item__icon {
@@ -59,31 +31,53 @@
 .nav-item__label {
   color: var(--md-sys-color-on-surface-variant);
   text-align: center;
-
-  /* M3/label/medium */
-  font-family: var(--Static-Label-Medium-Font, Roboto);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px; /* 133.333% */
-  letter-spacing: 0.5px;
+  font-family: var(--label-medium-font);
+  font-size: var(--label-medium-size);
+  font-weight: var(--label-medium-weight);
+  line-height: var(--label-medium-line-height);
+  letter-spacing: var(--label-medium-tracking);
 }
 
-.nav-item:hover .nav-item__label {
-  font-weight: 600;
+/* State layers on the indicator: On Surface Variant 8% hover / 10% focus / 8% pressed */
+.nav-item:hover {
+  --nav-item-indicator-bg: color-mix(
+    in srgb,
+    var(--md-sys-color-on-surface-variant) 8%,
+    transparent
+  );
 }
 
-/* Styles for disabled state */
-.nav-item:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.nav-item:focus-visible {
+  --nav-item-indicator-bg: color-mix(
+    in srgb,
+    var(--md-sys-color-on-surface-variant) 10%,
+    transparent
+  );
 }
 
-/* Prevent hover effects when disabled */
-.nav-item:disabled:hover .nav-item__state-layer {
-  background: none;
+.nav-item:focus-visible .nav-item__indicator {
+  outline: 3px solid var(--md-sys-color-secondary);
+  outline-offset: 2px;
 }
 
-.nav-item:disabled .nav-item__label {
-  color: var(--md-sys-color-on-surface-variant);
+/* Selected: Secondary Container pill, filled icon, Secondary label */
+.nav-item--selected {
+  --nav-item-indicator-bg: var(--md-sys-color-secondary-container);
+}
+
+.nav-item--selected:is(:hover, :focus-visible) {
+  --nav-item-indicator-bg: color-mix(
+    in srgb,
+    var(--md-sys-color-on-secondary-container) 8%,
+    var(--md-sys-color-secondary-container)
+  );
+}
+
+.nav-item--selected .nav-item__icon {
+  color: var(--md-sys-color-on-secondary-container);
+  font-variation-settings: "FILL" 1;
+}
+
+.nav-item--selected .nav-item__label {
+  color: var(--md-sys-color-secondary);
 }

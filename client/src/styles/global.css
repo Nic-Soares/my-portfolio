@@ -21,11 +21,40 @@ body {
 
 #root {
   display: grid;
-  grid-template-columns: 88px 1fr;
+  grid-template-columns: 96px 1fr; /* Navigation Rail width (Figma) */
   grid-template-rows: auto;
   min-height: 100vh;
 
   background: var(--md-sys-color-background);
+}
+
+/* Page area next to the rail; also the skip link target */
+.main-content {
+  min-width: 0;
+  outline: none;
+}
+
+/* Visible only when focused with the keyboard */
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 12px 16px;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  font-family: var(--label-large-font);
+  font-size: var(--label-large-size);
+  font-weight: var(--label-large-weight);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+  outline: 3px solid var(--md-sys-color-secondary);
+  outline-offset: 2px;
 }
 
 .material-symbols-outlined {
