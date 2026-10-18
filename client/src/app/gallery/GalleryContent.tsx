@@ -7,6 +7,7 @@ import IconButton from "@/components/ui/IconButton/IconButton.tsx";
 import SearchBar from "@/components/ui/SearchBar/SearchBar.tsx";
 import ProjectCard from "@/features/work/components/ProjectList/ProjectCard/ProjectCard.tsx";
 import styles from "./Gallery.module.css";
+import ReviewIconButton from "./ReviewIconButton.tsx";
 
 const SIZES = ["xsmall", "small", "medium", "large", "xlarge"] as const;
 const BUTTON_STYLES = [
@@ -58,6 +59,7 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
 export default function GalleryContent() {
   return (
     <div className={styles.content}>
+      <ReviewIconButton />
       <Specimen name="Button" figma="Button" source="M3 library">
         <Row label="Style (small)">
           {BUTTON_STYLES.map((style) => (
