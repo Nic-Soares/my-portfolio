@@ -11,6 +11,11 @@ import LegacySearchBar from "./legacy/SearchBar/SearchBar.tsx";
 const FILTERS = ["All", "Favorites", "Recent", "Archived", "Drafts"].map(
   (label) => ({ label }),
 );
+const FILTERS_WITH_ICONS = [
+  { label: "All", icon: "apps" },
+  { label: "Favorites", icon: "star", selectedIcon: "check" },
+  { label: "Recent", icon: "schedule" },
+];
 const TAGS = ["Frontend", "Backend", "Data", "Design"].map((label) => ({
   label,
 }));
@@ -38,6 +43,10 @@ function Column({
       <h3 className="title-medium">{title}</h3>
       <Group label="Filters, desktop (Medium) — click to select">
         <G size="medium" options={FILTERS} />
+      </Group>
+      <Group label="Filters with icons (optional) — selected swaps to ✓">
+        <G size="medium" options={FILTERS_WITH_ICONS} selectedIndex={1} />
+        <G size="small" options={FILTERS_WITH_ICONS} />
       </Group>
       <Group label="Filters, mobile (Small)">
         <G size="small" options={FILTERS.slice(0, 2)} />
