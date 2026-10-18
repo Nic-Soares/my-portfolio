@@ -271,14 +271,15 @@ Context: the CSS today breaks at 1024/768/480 (plus 640/600/520/1294/1295 scatte
   - [x] Document the scale in the README
 - **TK-03.1.2** — Migrate existing media queries
   - [x] Inventory the distinct breakpoints in use today — 8 values (1024, 768, 480, 640, 600, 520, 1294, 1295) across 11 files
-  - [ ] Rewrite every CSS Module to the canonical scale — `min-width: 1294/1295` → `(--large), (--extra-large)`; `max-width: 1024` → `(--compact), (--medium)`; `max-width: 480–640` → `--compact`; `768` decided per file
+  - [ ] Rewrite every CSS Module to the canonical scale — `min-width: 1294/1295` → `(--large), (--extra-large)`; `max-width: 1024` → `(--compact), (--medium)`; `max-width: 480–640` → `--compact`; `max-width: 768` → `(--compact), (--medium)` (it covered the 744 frame, so the rule belongs to Medium too)
     - [x] Project Detail: `ProjectDetail.page.module.css`, `ContentLayout.module.css`, `SummaryNav.module.css`
-    - [x] Projects Index: `ProjectListHero`, `ProjectCardGrid`, `TitleCard` (`ProjectListHero`'s 768/480 rules merged into one `--compact` block)
-    - [ ] Home: `ExperienceSection`, `ProjectCarousel`
+    - [x] Projects Index: `ProjectListHero`, `ProjectCardGrid`, `TitleCard`
+    - [x] Home: `ExperienceSection`, `ProjectCarousel`
     - [ ] Shared: `typography.css` (cut points only — values are `ST-03.2`), `CarouselSlide`
   - [ ] Check every screen at the 4 breakpoints and log the breakages
     - Project Detail (checked at 402/744/1199/1200/1512 against the pre-migration build): the desktop layout now starts at 1200 instead of 1294; nothing new broke. Already broken before the migration, fixed in `EP-05`/`EP-09`: the summary column is clipped on the right at 1200–1512, and below 1200 the article sits under the Navigation Rail and is cut on the left
     - Projects Index (checked at 402/700/1199/1512 against the pre-migration build): filters and search now stack below 1200 instead of 1024 — intended. Already broken before, fixed in `EP-05`/`EP-08`: at 402 the page scrolls sideways (the rail stays on mobile and cards/filters overflow)
+    - Home (checked at 402/744/1100/1512 against the pre-migration build): 402, 744 and 1512 unchanged. At 769–1199 Home now uses the tablet layout (scrolling project carousel, smaller logos grid) instead of the desktop one — intended. Already broken before, fixed in `EP-06`: at 402 the hero and carousel overflow sideways, and the hero decor overlaps the CTA buttons at every width
 
 ### ST-03.2 — Responsive typescale mirroring the Figma collection
 
