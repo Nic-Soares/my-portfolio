@@ -6,15 +6,15 @@ interface IconButtonProps {
   size?: "xsmall" | "small" | "medium" | "large" | "xlarge";
   style?: "filled" | "tonal" | "outline" | "standard";
   width?: "narrow" | "default" | "wide";
-  icon?: string; // nome do ícone Material Symbols
-  selectedIcon?: string; // nome do ícone quando selecionado (opcional)
+  icon?: string; // Material Symbols icon name
+  selectedIcon?: string; // icon shown when selected (optional)
   onClick?: (selected?: boolean) => void;
   disabled?: boolean;
   selected?: boolean;
   toggleable?: boolean;
   ariaLabel?: string; // required when the button only shows an icon
   ariaPressed?: boolean; // for toggle buttons whose state is controlled by the parent
-  children?: ReactNode; // fallback para SVG ou conteúdo customizado
+  children?: ReactNode; // fallback: custom SVG or content
 }
 
 const IconButton = ({
@@ -34,7 +34,7 @@ const IconButton = ({
 }: IconButtonProps) => {
   const [internalSelected, setInternalSelected] = useState(initialSelected);
 
-  // Se for toggleable, usa estado interno; senão usa a prop diretamente
+  // Toggleable buttons keep their own state; otherwise the prop drives it
   const isSelected = toggleable ? internalSelected : initialSelected;
 
   const className = [
@@ -46,7 +46,7 @@ const IconButton = ({
     isSelected ? styles["icon-button--selected"] : "",
   ].join(" ");
 
-  // Renderiza o ícone Material Symbols se fornecido, senão children (SVG)
+  // Render the Material Symbols icon when given, otherwise children (SVG)
   const renderIcon = () => {
     const iconName = isSelected && selectedIcon ? selectedIcon : icon;
 
