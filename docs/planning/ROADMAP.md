@@ -2,7 +2,7 @@
 
 **Design source:** [Figma — Portfólio](https://www.figma.com/design/5Uw1Nxn0DgG9SU3z0Vb4vh/Portf%C3%B3lio)
 **Repository:** `my-portfolio` (Deno 2 + Vite 7 + React 19 + react-router 7 + CSS Modules + Biome)
-**Last updated:** 2026-10-13
+**Last updated:** 2026-10-18
 
 ---
 
@@ -12,8 +12,9 @@
 |---|---|---|
 | `EP-01` Baseline | ✅ Done — merged into `develop` (`4eca4d3`) | code |
 | `EP-02` Design source | ✅ Done in Figma — code follow-ups moved to `EP-08`/`EP-09` | Figma (`Portfólio`) + this file |
-| `EP-03` Tokens | ⏭️ **Next** | code |
-| `EP-04`…`EP-12` | Not started | code |
+| `EP-03` Tokens | ✅ Done — merged into `develop` 2026-10-18 | code |
+| `EP-04` Components | ⏭️ **Next** | code |
+| `EP-05`…`EP-12` | Not started | code |
 | `EP-13` Backend | 🟡 Built, not merged — branch `feat/server-express-api` | code (`server/`) |
 
 ### Git workflow
@@ -814,7 +815,7 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 
 ## 5. Execution notes
 
-- **`EP-01` and `EP-02` are done.** Start `EP-03` from a fresh branch off `develop`.
+- **`EP-01`, `EP-02` and `EP-03` are done.** Start `EP-04` from a fresh branch off `develop`.
 - **`EP-03` is the real bottleneck.** Touching tokens after screens are written means revisiting all of them. Not worth getting ahead on `EP-06`+.
 - **`EP-04` can be sliced by consumer:** Chip before `EP-08`, Skeleton and Progress before `EP-10`, decor before `EP-06`. No need to finish the whole library before starting a screen.
 - **`EP-11` is last on purpose.** Extracting strings from a screen that's still going to change is guaranteed rework.
