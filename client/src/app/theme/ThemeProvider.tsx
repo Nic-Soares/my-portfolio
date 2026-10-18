@@ -14,6 +14,7 @@ import {
   readStoredPreference,
   storePreference,
   type ThemePreference,
+  watchStoredPreference,
   watchSystemTheme,
 } from "./theme.ts";
 
@@ -30,6 +31,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [systemTheme, setSystemTheme] = useState(getSystemTheme);
 
   useEffect(() => watchSystemTheme(setSystemTheme), []);
+  useEffect(() => watchStoredPreference(setThemeState), []);
 
   const resolvedTheme = theme === "system" ? systemTheme : theme;
 

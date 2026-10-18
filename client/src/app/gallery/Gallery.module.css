@@ -1,0 +1,122 @@
+/* The app's #root is a two-column grid (rail + content); span both. */
+.page,
+.frame {
+  grid-column: 1 / -1;
+  min-height: 100vh;
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+  padding: 16px 24px;
+  background: var(--md-sys-color-surface-container);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.toolbar h1 {
+  margin: 0;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.group legend {
+  float: left;
+  margin-right: 8px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.toggle {
+  padding: 6px 12px;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: var(--md-sys-shape-corner-full);
+  background: transparent;
+  color: var(--md-sys-color-on-surface);
+  cursor: pointer;
+}
+
+.toggle[aria-pressed="true"] {
+  border-color: var(--md-sys-color-secondary-container);
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.viewport {
+  flex: 1;
+  overflow-x: auto;
+  padding: 24px;
+}
+
+.preview {
+  display: block;
+  /* The border sits outside the width, so the viewport is exactly 402/744/… */
+  box-sizing: content-box;
+  height: calc(100vh - 140px);
+  margin: 0 auto;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-sys-color-surface);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 24px;
+}
+
+.specimen {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.specimenHeader h2,
+.specimenHeader p {
+  margin: 0;
+}
+
+.specimenHeader p {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.rowLabel {
+  width: 200px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.rowItems {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.cardWrap {
+  max-width: 440px;
+}

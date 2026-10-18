@@ -46,6 +46,19 @@ export function watchSystemTheme(
   return () => query.removeEventListener("change", listener);
 }
 
+// Picks up a choice saved in another tab or frame (e.g. the gallery preview).
+export function watchStoredPreference(
+  onChange: (preference: ThemePreference) => void,
+): () => void {
+  const listener = (event: StorageEvent) => {
+    if (event.key === null || event.key === THEME_STORAGE_KEY) {
+      onChange(readStoredPreference());
+    }
+  };
+  window.addEventListener("storage", listener);
+  return () => window.removeEventListener("storage", listener);
+}
+
 // The palettes in styles/themes/*.css are scoped to body[data-theme="Light|Dark"].
 export function applyTheme(theme: ResolvedTheme): void {
   document.body.dataset.theme = theme === "dark" ? "Dark" : "Light";
