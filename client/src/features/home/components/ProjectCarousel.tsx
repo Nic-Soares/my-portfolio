@@ -9,7 +9,8 @@ const SWIPE_THRESHOLD = 48; // px a finger must travel to change card
 
 // Figma "ProjectsCarousel" (M3 Hero carousel): the current project is the
 // large card; its neighbours are compressed to 56px and act as the
-// navigation — pressing one brings it to the middle. Swipe works on touch.
+// navigation — pressing one brings it to the middle. At either end the
+// large card also takes the missing neighbour's room. Swipe works on touch.
 const ProjectCarousel = () => {
   const navigate = useNavigate();
   const [current, setCurrent] = useState(0);
@@ -34,9 +35,6 @@ const ProjectCarousel = () => {
         if (distance >= SWIPE_THRESHOLD) go(current - 1);
       }}
     >
-      {/* Keeps the large card in place when there is no previous project */}
-      {current === 0 && <div className={styles.spacer} />}
-
       {projectsData.map((project, index) => {
         const offset = index - current;
         if (Math.abs(offset) > 1) return null;
@@ -87,8 +85,6 @@ const ProjectCarousel = () => {
           </div>
         );
       })}
-
-      {current === last && <div className={styles.spacer} />}
     </section>
   );
 };

@@ -12,10 +12,6 @@
   touch-action: pan-y; /* vertical scroll stays native; we read sideways swipes */
 }
 
-.spacer {
-  flex: 0 0 var(--peek);
-}
-
 .card {
   position: relative;
   min-width: 0;

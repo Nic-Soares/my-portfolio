@@ -506,7 +506,7 @@ Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About
   - [x] Scrollable row behavior on mobile — changed on request (2026-10-19): the logos drift slowly to the left in a loop on every size (~30px/s, pauses on hover, faded edges). Under `prefers-reduced-motion` they stand still in a wrapped, centered row. Not in Figma yet
 
 - **TK-06.2.3** — ProjectsCarousel
-  - [x] Card peek on the sides, as in the design — M3 Hero carousel as Figma: the current project is the large card, its neighbours are compressed to 56px (8px gaps, 28px corners). Sizes match the frames (1512: 56/558/56, 1920: 56/762/56). With no previous/next project that side keeps an empty 56px slot, so the large card doesn't move
+  - [x] Card peek on the sides, as in the design — M3 Hero carousel as Figma: the current project is the large card, its neighbours are compressed to 56px (8px gaps, 28px corners). Sizes match the frames (1512: 56/558/56, 1920: 56/762/56). At either end the large card takes the missing neighbour's room (1512: 622/56), no empty slot
   - [x] Touch drag, arrows on desktop — revised 2026-10-19: no arrows; the compressed cards are the navigation (each is a button, "Show project NN"), and pressing one grows it to the middle (400ms, off under reduced motion). A sideways swipe also changes card on touch. A first version with scroll-snap and separate arrows misread the design and was replaced
   - [x] Cards sourced from the data layer, not hardcoded — `projectsData` (index, name and description, More → `/projects/:slug`). Card art is Shape Set placeholders, as the Figma image placeholder. Old `CarouselSlide` and `types/project.ts` removed
 
