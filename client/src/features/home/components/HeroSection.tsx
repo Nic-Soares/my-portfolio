@@ -4,7 +4,7 @@ import Shape from "@/components/decor/Shape/Shape.tsx";
 import Button from "@/components/ui/Button/Button.tsx";
 import Chip from "@/components/ui/Chip/Chip.tsx";
 import ChipRow from "@/components/ui/Chip/ChipRow.tsx";
-import { useSizeClass } from "../hooks/useSizeClass.ts";
+import { useSizeClass } from "@/hooks/useSizeClass.ts";
 import styles from "./HeroSection.module.css";
 
 const SKILLS = [

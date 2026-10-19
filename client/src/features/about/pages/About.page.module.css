@@ -1,0 +1,360 @@
+@import "@/styles/breakpoints.css";
+
+/* Figma "Sections": body over the contact strip. On desktop the page fits
+   the viewport: the strip hugs its content and the body takes the rest. */
+.page {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 16px;
+  /* Fits the viewport (minus the PageContent padding) like Figma; a
+     shorter window grows the page instead of overlapping the strip */
+  min-height: calc(100vh - 20px);
+  padding: 12px 14px;
+}
+
+/* Figma "BodyGrid": fluid main column + 520px sidebar (440px on Large) */
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 520px;
+  gap: 24px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ---- Hero ---- */
+.hero {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px 32px 32px 40px;
+  overflow: hidden;
+  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-sys-color-surface-container-low);
+}
+
+.heroCopy,
+.heroMedia {
+  position: relative; /* above HeroDecor */
+  z-index: 1;
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 478px;
+}
+
+.eyebrow,
+.name,
+.role,
+.title,
+.label,
+.jobTitle,
+.jobSummary,
+.degreeTitle,
+.degreeMeta {
+  margin: 0;
+}
+
+.eyebrow {
+  color: var(--md-sys-color-on-surface-variant);
+  text-transform: uppercase;
+}
+
+.name {
+  color: var(--md-sys-color-on-surface);
+}
+
+.role {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.heroMedia {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 420px photo (330 on Large); the Kit box is 1.19× the silhouette */
+.photo {
+  --photo: 420px;
+  width: calc(var(--photo) * 1.1875);
+  height: calc(var(--photo) * 1.1875);
+  margin: calc(var(--photo) * -0.09375);
+}
+
+/* ---- Section headers and cards ---- */
+.title {
+  padding-left: 8px;
+  margin-bottom: 10px;
+  color: var(--md-sys-color-on-surface);
+}
+
+.card {
+  margin: 0;
+  padding: 20px 24px;
+  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-on-surface);
+}
+
+/* Figma "Experience / NN": index, copy, period chip */
+.experience {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.job {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 24px;
+  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-sys-color-surface-container-low);
+}
+
+.jobIndex {
+  flex: 0 0 76px;
+  color: var(--md-sys-color-primary);
+}
+
+.jobCopy {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.jobTitle {
+  color: var(--md-sys-color-on-surface);
+}
+
+.jobSummary {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.period {
+  flex: 0 0 auto;
+  padding: 8px 18px;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  white-space: nowrap;
+}
+
+/* ---- Sidebar ---- */
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sideCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 20px;
+  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.sideCard--tertiary {
+  background: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+.sideCard--secondary {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/* Education takes the height the other cards leave (Figma: Fill) */
+.sideCard--fill {
+  flex: 1 1 auto;
+}
+
+.label {
+  text-transform: uppercase;
+}
+
+.lines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stackGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* Figma "Card / Education" spreads label, degrees and dividers over its
+   height (space-between), so the list lends its items to the card */
+.sideCard--fill {
+  justify-content: space-between;
+}
+
+.degrees {
+  display: contents;
+}
+
+.degrees > li {
+  list-style: none;
+}
+
+/* Divider above every degree but the first (Figma: 1px Outline Variant) */
+.divided {
+  padding-top: 10px;
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.degreeTitle {
+  color: var(--md-sys-color-on-surface);
+}
+
+/* ---- Contact strip (Figma "ContactSection") ---- */
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 40px;
+  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.contactCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.contactLabel {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.email {
+  color: inherit;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.email:hover {
+  text-decoration: underline;
+}
+
+.contactActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Large (Figma 1512): 440px sidebar, 330px photo */
+@media (--large) {
+  .body {
+    grid-template-columns: minmax(0, 1fr) 440px;
+  }
+
+  .photo {
+    --photo: 330px;
+  }
+}
+
+/* Below Large: one scrolling column, sidebar under the main content,
+   hero stacked (copy on top, photo below) */
+@media (--medium), (--compact) {
+  .page {
+    min-height: 0;
+  }
+
+  .body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 32px;
+  }
+
+  .heroMedia {
+    justify-content: center;
+  }
+
+  .photo {
+    --photo: 320px;
+  }
+
+  .contact {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 24px 32px;
+  }
+
+  .contactActions {
+    flex-wrap: wrap;
+  }
+}
+
+/* Compact (Figma 402) */
+@media (--compact) {
+  .page {
+    gap: 12px;
+    padding: 12px 10px;
+  }
+
+  .body {
+    gap: 12px;
+  }
+
+  .hero {
+    padding: 24px 20px;
+  }
+
+  .photo {
+    --photo: 240px;
+  }
+
+  /* Index and period on top, title and description below */
+  .job {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 16px 18px;
+  }
+
+  /* Figma "Meta": index and period side by side */
+  .jobIndex {
+    flex: 0 0 auto;
+  }
+
+  .jobCopy {
+    order: 1;
+    flex-basis: 100%;
+  }
+
+  .contact {
+    padding: 20px;
+  }
+}

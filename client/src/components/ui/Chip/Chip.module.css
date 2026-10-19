@@ -41,8 +41,10 @@
 }
 
 button.chip__action,
+a.chip__action,
 .chip__remove {
   cursor: pointer;
+  text-decoration: none;
 }
 
 .chip--icon .chip__action {
@@ -83,6 +85,7 @@ button.chip__action,
 
 /* State layers (M3 Kit): the label color at 8% hover, 10% focus, 8% pressed */
 button.chip__action:hover,
+a.chip__action:hover,
 .chip__remove:hover {
   --chip-state-layer-bg: color-mix(
     in srgb,
@@ -92,6 +95,7 @@ button.chip__action:hover,
 }
 
 button.chip__action:focus-visible,
+a.chip__action:focus-visible,
 .chip__remove:focus-visible {
   outline: none;
   --chip-state-layer-bg: color-mix(
@@ -102,6 +106,7 @@ button.chip__action:focus-visible,
 }
 
 button.chip__action:active,
+a.chip__action:active,
 .chip__remove:active {
   --chip-state-layer-bg: color-mix(
     in srgb,
