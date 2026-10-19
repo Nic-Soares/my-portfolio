@@ -506,9 +506,9 @@ Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About
   - [x] Scrollable row behavior on mobile — changed on request (2026-10-19): the logos drift slowly to the left in a loop on every size (~30px/s, pauses on hover, faded edges). Under `prefers-reduced-motion` they stand still in a wrapped, centered row. Not in Figma yet
 
 - **TK-06.2.3** — ProjectsCarousel
-  - [ ] Card peek on the sides, as in the design
-  - [ ] Touch drag, arrows on desktop
-  - [ ] Cards sourced from the data layer, not hardcoded
+  - [x] Card peek on the sides, as in the design — 56px peeks, 8px gaps, 28px corners; card sizes match the frames (1512: 558px, 1920: 762px). The first card has no left neighbour, so that peek is empty
+  - [x] Touch drag, arrows on desktop — native horizontal scroll with snapping (swipe, trackpad); tonal chevron buttons over the peeks on Large and up, disabled at the ends. Smooth scroll off under reduced motion
+  - [x] Cards sourced from the data layer, not hardcoded — `projectsData` (index, name and description, More → `/projects/:slug`). Card art is Shape Set placeholders, as the Figma image placeholder. Old `CarouselSlide` and `types/project.ts` removed
 
 ### ST-06.3 — Responsive Home
 
