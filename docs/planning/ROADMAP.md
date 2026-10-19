@@ -499,15 +499,16 @@ Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About
 ### ST-06.2 — Overview section
 
 - **TK-06.2.1** — Service cards
-  - [ ] `Systems & Process Automation` and `Data Engineering & Analysis` in English (the supporting text was still in PT in Figma until now — verify the repo)
-  - [ ] Illustration using the `Shape` component
+  - [x] `Systems & Process Automation` and `Data Engineering & Analysis` in English (the supporting text was still in PT in Figma until now — verify the repo) — the repo had four old expertise cards (`ExperienceSection`/`ExpertiseCard`, removed); now `ServicesStack` + `ServiceCard` as Figma, sizes match the frames (1512: 686×172/172/93). Figma mixes hand-typed sizes here (18.5px, Regular vs Medium titles across frames); the code follows the 1512 frame on desktop (Body Large Plus title, Body Large text, 48px shapes) and uses Title Large Emphasized / Body Large below, which match Medium and Compact
+  - [x] Illustration using the `Shape` component — three Shape Set shapes in the card's color role on a 6% tint, in place of the Figma placeholder image
 - **TK-06.2.2** — TrustedCompaniesBar
-  - [ ] Real logos instead of `CoreOS` repeated 4×
-  - [ ] Scrollable row behavior on mobile
+  - [ ] Real logos instead of `CoreOS` repeated 4× — Pluxee plus Figma `Company logo` placeholders (Galileo, CoreOS, Lightspeed, AlphaWave, Boltshift; wordmarks now `currentColor`, so they follow Dark). Pluxee shows its name until its SVG is in `assets/logos/`. More real companies to come from Nicolas
+  - [x] Scrollable row behavior on mobile — changed on request (2026-10-19): the logos drift slowly to the left in a loop on every size (~30px/s, pauses on hover, faded edges). Under `prefers-reduced-motion` they stand still in a wrapped, centered row. Not in Figma yet
+
 - **TK-06.2.3** — ProjectsCarousel
-  - [ ] Card peek on the sides, as in the design
-  - [ ] Touch drag, arrows on desktop
-  - [ ] Cards sourced from the data layer, not hardcoded
+  - [x] Card peek on the sides, as in the design — M3 Hero carousel as Figma: the current project is the large card, its neighbours are compressed to 56px (8px gaps, 28px corners). Sizes match the frames (1512: 56/558/56, 1920: 56/762/56). At either end the large card takes the missing neighbour's room (1512: 622/56), no empty slot
+  - [x] Touch drag, arrows on desktop — revised 2026-10-19: no arrows; the compressed cards are the navigation (each is a button, "Show project NN"), and pressing one grows it to the middle (400ms, off under reduced motion). A sideways swipe also changes card on touch. A first version with scroll-snap and separate arrows misread the design and was replaced
+  - [x] Cards sourced from the data layer, not hardcoded — `projectsData` (index, name and description, More → `/projects/:slug`). Card art is Shape Set placeholders, as the Figma image placeholder. Old `CarouselSlide` and `types/project.ts` removed
 
 ### ST-06.3 — Responsive Home
 

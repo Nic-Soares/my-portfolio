@@ -1,90 +1,91 @@
-import { useState } from "react";
-import Container from "@/components/layout/container/Container.tsx";
-import type { Project } from "@/types/project.ts";
-import CarouselSlide from "../../../components/ui/Carousel/CarouselSlide.tsx";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Shape from "@/components/decor/Shape/Shape.tsx";
+import Button from "@/components/ui/Button/Button.tsx";
+import { projectsData } from "@/features/work/data/projects/index.ts";
 import styles from "./ProjectCarousel.module.css";
 
-interface ProjectCarouselProps {
-  className?: string;
-}
+const SWIPE_THRESHOLD = 48; // px a finger must travel to change card
 
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "01",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magnam.",
-  },
-  {
-    id: 2,
-    title: "02",
-    description: "Additional content for the second item.",
-  },
-  {
-    id: 3,
-    title: "03",
-    description: "More content for the third item.",
-  },
-];
+// Figma "ProjectsCarousel" (M3 Hero carousel): the current project is the
+// large card; its neighbours are compressed to 56px and act as the
+// navigation — pressing one brings it to the middle. At either end the
+// large card also takes the missing neighbour's room. Swipe works on touch.
+const ProjectCarousel = () => {
+  const navigate = useNavigate();
+  const [current, setCurrent] = useState(0);
+  const swipeStart = useRef<number | null>(null);
 
-const ProjectCarousel = ({ className }: ProjectCarouselProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handleSlideClick = (projectId: number) => {
-    const index = projects.findIndex((project) => project.id === projectId);
-    if (index >= 0) setCurrentIndex(index);
-  };
-
-  const getVisibleSlides = () => {
-    if (projects.length === 0) return [];
-    if (currentIndex === 0) {
-      return [0, Math.min(1, projects.length - 1)];
-    } else if (currentIndex === projects.length - 1) {
-      return [Math.max(0, currentIndex - 1), currentIndex];
-    } else {
-      return [currentIndex - 1, currentIndex, currentIndex + 1];
-    }
-  };
-
-  const getLayoutClass = () => {
-    if (currentIndex === 0)
-      return styles["project-carousel__slides-container--first-active"];
-    if (currentIndex === projects.length - 1)
-      return styles["project-carousel__slides-container--last-active"];
-    return styles["project-carousel__slides-container--middle-active"];
-  };
+  const last = projectsData.length - 1;
+  const go = (index: number) => setCurrent(Math.max(0, Math.min(last, index)));
 
   return (
-    <Container
-      className={`${styles["project-carousel"]} ${className || ""}`}
-      backgroundColor="transparent"
+    <section
+      className={styles.carousel}
+      aria-label="Projects"
+      aria-roledescription="carousel"
+      onPointerDown={(event) => {
+        if (event.pointerType === "touch") swipeStart.current = event.clientX;
+      }}
+      onPointerUp={(event) => {
+        if (swipeStart.current === null) return;
+        const distance = event.clientX - swipeStart.current;
+        swipeStart.current = null;
+        if (distance <= -SWIPE_THRESHOLD) go(current + 1);
+        if (distance >= SWIPE_THRESHOLD) go(current - 1);
+      }}
     >
-      <div
-        className={`${styles["project-carousel__slides-container"]} ${getLayoutClass()}`}
-      >
-        {getVisibleSlides().map((slideIndex) => {
-          const project = projects[slideIndex];
-          const isActive = slideIndex === currentIndex;
-          const position = isActive ? "middle" : "lateral";
+      {projectsData.map((project, index) => {
+        const offset = index - current;
+        if (Math.abs(offset) > 1) return null;
+        const number = String(index + 1).padStart(2, "0");
+        const isCurrent = offset === 0;
 
-          const itemData = {
-            id: project.id,
-            title: project.title,
-            description: project.description,
-          };
+        return (
+          <div
+            key={project.slug}
+            className={`${styles.card} ${isCurrent ? styles["card--current"] : styles["card--peek"]}`}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${number} of ${String(projectsData.length).padStart(2, "0")}`}
+          >
+            {/* Placeholder art, as the Figma card image */}
+            <div className={styles.media} aria-hidden="true">
+              <Shape shape="gem" color="tertiary" className={styles.shape1} />
+              <Shape shape="burst" color="tertiary" className={styles.shape2} />
+              <Shape shape="pill" color="tertiary" className={styles.shape3} />
+            </div>
 
-          return (
-            <CarouselSlide
-              key={project.id}
-              item={itemData}
-              isActive={isActive}
-              onSlideClick={handleSlideClick}
-              position={position}
-            />
-          );
-        })}
-      </div>
-    </Container>
+            {isCurrent ? (
+              <div className={styles.content}>
+                <p className={`title-large-emphasized ${styles.index}`}>
+                  {number}
+                </p>
+                <p className={`body-large ${styles.description}`}>
+                  {project.name} — {project.description}
+                </p>
+                <Button
+                  type="square"
+                  size="medium"
+                  style="filled"
+                  icon={null}
+                  label="More"
+                  onClick={() => navigate(`/projects/${project.slug}`)}
+                />
+              </div>
+            ) : (
+              // The compressed card is the navigation control
+              <button
+                type="button"
+                className={styles.peekButton}
+                aria-label={`Show project ${number}: ${project.name}`}
+                onClick={() => go(index)}
+              />
+            )}
+          </div>
+        );
+      })}
+    </section>
   );
 };
 

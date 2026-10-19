@@ -1,6 +1,6 @@
-import ExperienceSection from "../components/ExperienceSection.tsx";
 import HeroSection from "../components/HeroSection.tsx";
 import ProjectCarousel from "../components/ProjectCarousel.tsx";
+import ServicesStack from "../components/ServicesStack.tsx";
 import styles from "./Home.page.module.css";
 
 function HomePage() {
@@ -10,7 +10,7 @@ function HomePage() {
         <HeroSection />
       </div>
       <div className={styles["home__experience"]}>
-        <ExperienceSection />
+        <ServicesStack />
       </div>
       <div className={styles["home__carousel"]}>
         <ProjectCarousel />

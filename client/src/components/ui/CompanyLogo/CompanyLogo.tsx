@@ -1,6 +1,8 @@
 import AlphaWaveLogoSvg from "@assets/logos/AlphaWave.svg?react";
 import BoltshiftLogoSvg from "@assets/logos/Boltshift.svg?react";
 import CoreOsLogoSvg from "@assets/logos/CoreOS.svg?react";
+import GalileoLogoSvg from "@assets/logos/Galileo.svg?react";
+import LightspeedLogoSvg from "@assets/logos/Lightspeed.svg?react";
 import type { ReactNode } from "react";
 import styles from "./CompanyLogo.module.css";
 
@@ -9,6 +11,8 @@ const logoComponents = {
   coreos: CoreOsLogoSvg,
   alphawave: AlphaWaveLogoSvg,
   boltshift: BoltshiftLogoSvg,
+  galileo: GalileoLogoSvg,
+  lightspeed: LightspeedLogoSvg,
 };
 
 // Exported logo components
@@ -37,8 +41,21 @@ const CompanyLogo = ({ company }: CompanyLogoProps) => {
     logoComponents[company.logo as keyof typeof logoComponents];
 
   return (
-    <div className={styles["company-logo"]}>
-      {LogoComponent ? <LogoComponent /> : <span>Logo not found</span>}
+    <div
+      className={styles["company-logo"]}
+      role="img"
+      aria-label={company.alt ?? company.name}
+    >
+      {LogoComponent ? (
+        <LogoComponent aria-hidden="true" />
+      ) : (
+        // No SVG yet: the company name stands in as a wordmark
+        <span
+          className={`headline-medium-emphasized ${styles["company-logo__name"]}`}
+        >
+          {company.name}
+        </span>
+      )}
     </div>
   );
 };
