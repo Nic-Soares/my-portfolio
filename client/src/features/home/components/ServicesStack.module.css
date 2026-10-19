@@ -18,12 +18,37 @@
 }
 
 .viewport {
+  position: relative;
   overflow: hidden;
-  mask-image: linear-gradient(
+}
+
+/* Faded edges drawn over the logos in the bar's color (a mask-image here
+   blanks the animated logos in Safari) */
+.viewport::before,
+.viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 48px;
+  pointer-events: none;
+}
+
+.viewport::before {
+  left: 0;
+  background: linear-gradient(
     to right,
-    transparent,
-    black 48px,
-    black calc(100% - 48px),
+    var(--md-sys-color-surface-container),
+    transparent
+  );
+}
+
+.viewport::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    var(--md-sys-color-surface-container),
     transparent
   );
 }
@@ -41,6 +66,7 @@
 
 .logos {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   gap: 56px;
   margin: 0;
@@ -48,7 +74,12 @@
   list-style: none;
 }
 
+.logos > li {
+  flex-shrink: 0;
+}
+
 .logos svg {
+  display: block;
   height: 48px;
   width: auto;
 }
@@ -76,8 +107,9 @@
     display: none;
   }
 
-  .viewport {
-    mask-image: none;
+  .viewport::before,
+  .viewport::after {
+    display: none;
   }
 }
 
