@@ -513,8 +513,8 @@ Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About
 ### ST-06.3 — Responsive Home
 
 - **TK-06.3.1** — Check all 4 breakpoints
-  - [ ] 1920 and 1512 side by side; 744 and 402 stacked
-  - [ ] No horizontal overflow on any of them
+  - [x] 1920 and 1512 side by side; 744 and 402 stacked — checked 2026-10-19 against the Figma frames: 1920 and 1512 match to the pixel (hero 1804×518 / 1396×469, overview columns 890 / 686). Known, accepted differences below Large: the Medium hero is 12px taller (Kit Large buttons vs Figma's hand-typed 20px label), the first Medium service card is 156px (Figma clips its 3-line text at 141), the Compact hero is 604px (Figma 631 from a stretched frame), and the Compact logo bar is one drifting row (80px) instead of Figma's 2×2 grid
+  - [x] No horizontal overflow on any of them — page width equals the viewport at 402/744/1512/1920
 
 ---
 
