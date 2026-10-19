@@ -4,35 +4,81 @@
 .stack {
   display: grid;
   grid-template-rows: 1fr 1fr auto;
+  grid-template-columns: minmax(0, 1fr); /* the logo track never widens it */
   gap: 16px;
   height: 100%;
 }
 
-/* Figma "TrustedCompaniesBar": Surface Container, 24px padding, logos
-   spread out; wraps and centers on Compact */
+/* Figma "TrustedCompaniesBar": Surface Container, 24px padding. The logos
+   drift sideways; the edges fade so they enter and leave softly */
 .companies {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin: 0;
-  padding: 24px;
-  list-style: none;
+  padding: 24px 0;
   border-radius: var(--md-sys-shape-corner-large);
   background: var(--md-sys-color-surface-container);
 }
 
-/* Figma logo cells are 145×48; wider wordmarks scale down to fit */
-.companies > li {
-  display: flex;
-  flex: 0 1 auto;
-  min-width: 0;
+.viewport {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 48px,
+    black calc(100% - 48px),
+    transparent
+  );
 }
 
-.companies svg {
-  max-width: 100%;
-  height: auto;
-  max-height: 48px;
+/* Two copies side by side; sliding one copy's width loops seamlessly */
+.track {
+  display: flex;
+  width: max-content;
+  animation: drift 40s linear infinite;
+}
+
+.companies:hover .track {
+  animation-play-state: paused;
+}
+
+.logos {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  margin: 0;
+  padding: 0 28px;
+  list-style: none;
+}
+
+.logos svg {
+  height: 48px;
+  width: auto;
+}
+
+@keyframes drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* No motion: one still, wrapped row */
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    width: auto;
+    animation: none;
+  }
+
+  .logos {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 16px;
+  }
+
+  .logos[aria-hidden="true"] {
+    display: none;
+  }
+
+  .viewport {
+    mask-image: none;
+  }
 }
 
 @media (--medium), (--compact) {
@@ -53,8 +99,15 @@
   }
 
   .companies {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 16px;
+    padding: 16px 0;
+  }
+
+  .logos {
+    gap: 40px;
+    padding: 0 20px;
+  }
+
+  .logos svg {
+    height: 40px;
   }
 }

@@ -1,7 +1,13 @@
 .company-logo {
   display: flex;
+  height: 48px;
   align-items: center;
   justify-content: center;
+  color: var(--md-sys-color-on-surface);
+}
+
+.company-logo__name {
+  white-space: nowrap;
 }
 
 .company-logo__svg {

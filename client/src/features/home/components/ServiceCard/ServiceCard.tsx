@@ -21,10 +21,10 @@ const ServiceCard = ({
   shapes,
 }: ServiceCardProps) => {
   const sizeClass = useSizeClass();
-  const descriptionStyle =
-    sizeClass === "large" || sizeClass === "extra-large"
-      ? "body-large-plus"
-      : "body-large";
+  // Figma 1512 frame: Body Large Plus title on desktop; Title Large
+  // Emphasized below. The description is Body Large everywhere.
+  const desktop = sizeClass === "large" || sizeClass === "extra-large";
+  const titleStyle = desktop ? "body-large-plus" : "title-large-emphasized";
 
   return (
     <article
@@ -48,10 +48,8 @@ const ServiceCard = ({
         ))}
       </div>
       <div className={styles.content}>
-        <h2 className={`title-large-emphasized ${styles.title}`}>{title}</h2>
-        <p className={`${descriptionStyle} ${styles.description}`}>
-          {description}
-        </p>
+        <h2 className={`${titleStyle} ${styles.title}`}>{title}</h2>
+        <p className={`body-large ${styles.description}`}>{description}</p>
       </div>
     </article>
   );

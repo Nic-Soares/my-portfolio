@@ -499,11 +499,11 @@ Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About
 ### ST-06.2 — Overview section
 
 - **TK-06.2.1** — Service cards
-  - [x] `Systems & Process Automation` and `Data Engineering & Analysis` in English (the supporting text was still in PT in Figma until now — verify the repo) — the repo had four old expertise cards (`ExperienceSection`/`ExpertiseCard`, removed); now `ServicesStack` + `ServiceCard` as Figma, sizes match the frames (1512: 686×172/172/93). Figma mixes hand-typed sizes here (18.5px, Regular vs Medium titles across frames); the code uses Title Large Emphasized and Body Large Plus (desktop) / Body Large, which match Medium and Compact exactly
+  - [x] `Systems & Process Automation` and `Data Engineering & Analysis` in English (the supporting text was still in PT in Figma until now — verify the repo) — the repo had four old expertise cards (`ExperienceSection`/`ExpertiseCard`, removed); now `ServicesStack` + `ServiceCard` as Figma, sizes match the frames (1512: 686×172/172/93). Figma mixes hand-typed sizes here (18.5px, Regular vs Medium titles across frames); the code follows the 1512 frame on desktop (Body Large Plus title, Body Large text, 48px shapes) and uses Title Large Emphasized / Body Large below, which match Medium and Compact
   - [x] Illustration using the `Shape` component — three Shape Set shapes in the card's color role on a 6% tint, in place of the Figma placeholder image
 - **TK-06.2.2** — TrustedCompaniesBar
-  - [ ] Real logos instead of `CoreOS` repeated 4× — bar built as Figma (Surface Container, 24px padding, logos spread out); it shows the three placeholder logos the repo has until the real ones arrive. Wide wordmarks scale down instead of overflowing (Medium was 729px wide)
-  - [x] Scrollable row behavior on mobile — Figma wraps 2×2 and centers on Compact instead of scrolling; done that way
+  - [ ] Real logos instead of `CoreOS` repeated 4× — Pluxee plus Figma `Company logo` placeholders (Galileo, CoreOS, Lightspeed, AlphaWave, Boltshift; wordmarks now `currentColor`, so they follow Dark). Pluxee shows its name until its SVG is in `assets/logos/`. More real companies to come from Nicolas
+  - [x] Scrollable row behavior on mobile — changed on request (2026-10-19): the logos drift slowly to the left in a loop on every size (~30px/s, pauses on hover, faded edges). Under `prefers-reduced-motion` they stand still in a wrapped, centered row. Not in Figma yet
 
 - **TK-06.2.3** — ProjectsCarousel
   - [ ] Card peek on the sides, as in the design
