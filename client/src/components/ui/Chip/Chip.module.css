@@ -1,0 +1,155 @@
+/* M3 Input chip (Kit): 32px high, 8px corners, 1px Outline Variant border
+   inside, 6px 12px padding, 8px gap, Label Large. 18px icons, 24px avatar. */
+.chip {
+  --chip-label-color: var(--md-sys-color-on-surface-variant);
+  --chip-icon-color: var(--md-sys-color-primary);
+  --chip-state-layer-bg: transparent;
+
+  position: relative;
+  display: inline-flex;
+  height: 32px;
+  border-radius: var(--md-sys-shape-corner-small);
+  box-shadow: inset 0 0 0 1px var(--md-sys-color-outline-variant);
+  background: transparent;
+  color: var(--chip-label-color);
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.chip--selected {
+  --chip-label-color: var(--md-sys-color-on-secondary-container);
+  --chip-icon-color: var(--md-sys-color-on-secondary-container);
+
+  box-shadow: none;
+  background: var(--md-sys-color-secondary-container);
+}
+
+.chip__action,
+.chip__remove {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  border: 0;
+  background: var(--chip-state-layer-bg);
+  color: inherit;
+  font: inherit;
+}
+
+.chip__action {
+  padding: 6px 12px;
+  gap: 8px;
+}
+
+button.chip__action,
+.chip__remove {
+  cursor: pointer;
+}
+
+.chip--icon .chip__action {
+  padding-left: 8px;
+}
+
+.chip--avatar .chip__action {
+  padding-left: 4px;
+}
+
+.chip--removable .chip__action {
+  padding-right: 0;
+}
+
+.chip__remove {
+  padding: 0 8px;
+}
+
+.chip__label {
+  white-space: nowrap;
+}
+
+.chip__icon {
+  font-size: 18px;
+  color: var(--chip-icon-color);
+}
+
+.chip__remove .chip__icon {
+  color: var(--chip-label-color);
+}
+
+.chip__avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--md-sys-shape-corner-full);
+  object-fit: cover;
+}
+
+/* State layers (M3 Kit): the label color at 8% hover, 10% focus, 8% pressed */
+button.chip__action:hover,
+.chip__remove:hover {
+  --chip-state-layer-bg: color-mix(
+    in srgb,
+    var(--chip-label-color) 8%,
+    transparent
+  );
+}
+
+button.chip__action:focus-visible,
+.chip__remove:focus-visible {
+  outline: none;
+  --chip-state-layer-bg: color-mix(
+    in srgb,
+    var(--chip-label-color) 10%,
+    transparent
+  );
+}
+
+button.chip__action:active,
+.chip__remove:active {
+  --chip-state-layer-bg: color-mix(
+    in srgb,
+    var(--chip-label-color) 8%,
+    transparent
+  );
+}
+
+/* Focus indicator (M3 Kit): 3px Secondary ring, 2px outside the chip */
+.chip:has(:focus-visible) {
+  overflow: visible;
+  outline: 3px solid var(--md-sys-color-secondary);
+  outline-offset: 2px;
+}
+
+/* Disabled (M3): On Surface at 38% for the label, 12% for border/container */
+.chip--disabled {
+  --chip-label-color: color-mix(
+    in srgb,
+    var(--md-sys-color-on-surface) 38%,
+    transparent
+  );
+  --chip-icon-color: var(--chip-label-color);
+
+  box-shadow: inset 0 0 0 1px
+    color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+}
+
+.chip--disabled.chip--selected {
+  box-shadow: none;
+  background: color-mix(
+    in srgb,
+    var(--md-sys-color-on-surface) 12%,
+    transparent
+  );
+}
+
+.chip--disabled button {
+  cursor: not-allowed;
+  --chip-state-layer-bg: transparent;
+}
+
+/* Kit "ChipRow": chips in a row with an 8px gap, wrapping when out of room */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

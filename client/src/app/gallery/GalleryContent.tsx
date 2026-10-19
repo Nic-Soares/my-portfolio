@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import TabbedNavigation from "@/components/layout/navigation/TabbedNavigation/TabbedNavigation.tsx";
 import Button from "@/components/ui/Button/Button.tsx";
+import Chip from "@/components/ui/Chip/Chip.tsx";
+import ChipRow from "@/components/ui/Chip/ChipRow.tsx";
 import CompanyLogo from "@/components/ui/CompanyLogo/CompanyLogo.tsx";
 import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup.tsx";
 import IconButton from "@/components/ui/IconButton/IconButton.tsx";
@@ -128,6 +130,40 @@ export default function GalleryContent() {
             />
           </Row>
         ))}
+      </Specimen>
+
+      <Specimen name="Chip" figma="Input chip" source="M3 library">
+        <Row label="Home skills (static, ChipRow)">
+          <ChipRow ariaLabel="Skills">
+            <Chip label="#Python" />
+            <Chip label="3+ Years in Data" />
+            <Chip label="Power BI · SQL" />
+            <Chip label="TypeScript" />
+            <Chip label="Applied AI" />
+          </ChipRow>
+        </Row>
+        <Row label="Interactive · selected · disabled">
+          <Chip label="Enabled" onClick={() => {}} />
+          <Chip label="Selected" selected onClick={() => {}} />
+          <Chip label="Disabled" disabled onClick={() => {}} />
+          <Chip label="Selected disabled" selected disabled />
+        </Row>
+        <Row label="Leading icon · avatar · closing icon">
+          <Chip
+            label="Leading icon"
+            leadingIcon="database"
+            onClick={() => {}}
+          />
+          <Chip label="Avatar" avatar="/favicon.svg" onClick={() => {}} />
+          <Chip label="Closing icon" onRemove={() => {}} />
+          <Chip
+            label="All slots"
+            leadingIcon="database"
+            selected
+            onClick={() => {}}
+            onRemove={() => {}}
+          />
+        </Row>
       </Specimen>
 
       <Specimen name="SearchBar" figma="Search bar" source="M3 library">

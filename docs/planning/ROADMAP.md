@@ -353,15 +353,15 @@ Rule (2026-10-18): every component in the gallery must exist in Figma — as a l
 > **As a** visitor, **I want** filter and skill chips, **so that** I can navigate and read the stack quickly.
 
 - **TK-04.2.1** — `Chip` component
-  - [ ] Variants: `input` only — it's the only chip the design uses (Home skills, 20 instances of the M3 library `Input chip`); the Projects filters are a `Connected button group`. `assist`/`filter`/`suggestion` dropped 2026-10-18 — design them in Figma first if needed
-  - [ ] States: enabled, hover, focus, pressed, selected, disabled
-  - [ ] Optional left/right icon slots
-  - [ ] `elevated` and `outlined`
-  - [ ] Render test per variant
+  - [x] Variants: `input` only — it's the only chip the design uses (Home skills, 20 instances of the M3 library `Input chip`); the Projects filters are a `Connected button group`. `assist`/`filter`/`suggestion` dropped 2026-10-18 — design them in Figma first if needed. `components/ui/Chip/`; static by default (Home skills), a toggle button with `onClick`
+  - [x] States: enabled, hover, focus, pressed, selected, disabled — Kit opacities (8/10/8%), Kit focus ring, M3 disabled (On Surface 38% label, 12% border/container). The Kit's Dragged state is left out: nothing is draggable
+  - [x] Optional left/right icon slots — Kit configurations: leading icon (18px, Primary), avatar (24px), closing icon as its own button (`onRemove`)
+  - [x] `elevated` and `outlined` — dropped: the M3 Input chip has no elevated style; unselected is outlined, selected is filled
+  - [x] Render test per variant — `Chip.test.tsx`; gallery specimen (light/dark checked against the Figma `SkillChipRow`)
 - **TK-04.2.2** — `ChipRow` with wrap
-  - [ ] Wrap with token-based gap
-  - [ ] Carousel mode with horizontal scroll for the Projects Index
-  - [ ] Keyboard navigation between chips (roving tabindex)
+  - [x] Wrap with token-based gap — 8px, as Figma `SkillChipRow`; a `<ul>` of chips
+  - [ ] Carousel mode with horizontal scroll for the Projects Index — not needed yet: the Projects filters are a `Connected button group`
+  - [ ] Keyboard navigation between chips (roving tabindex) — only matters once a row of interactive chips exists
 
 ### ST-04.3 — Progress feedback
 
