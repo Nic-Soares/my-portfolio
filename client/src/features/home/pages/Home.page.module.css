@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints.css";
+
 .home {
   display: grid;
   grid-template-areas:
@@ -27,4 +29,18 @@
 .home__carousel {
   min-height: 0;
   /* Opcional: overflow-y: auto; para scroll interno se necessário */
+}
+
+/* Below Large the sections stack at their own height (the full responsive
+   Home is ST-06.3) */
+@media (--medium), (--compact) {
+  .home {
+    grid-template-areas:
+      "home__hero-section"
+      "home__experience"
+      "home__carousel";
+    grid-template-rows: auto;
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+  }
 }

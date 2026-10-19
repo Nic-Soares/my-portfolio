@@ -486,14 +486,15 @@ Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About
 ### ST-06.1 — Home hero
 
 - **TK-06.1.1** — Apply `HeroDecor`
-  - [ ] Geometry for all 4 breakpoints per Figma
-  - [ ] Main glow behind the blob; on vertical layouts it moves down with the blob
+  - [x] Geometry for all 4 breakpoints per Figma — hero matches Figma at 1920 (1804×518) and 1512 (1396×469); Compact 604 vs 603
+  - [x] Main glow behind the blob; on vertical layouts it moves down with the blob
 - **TK-06.1.2** — Copy and chips
-  - [ ] Chips: `#Python`, `3+ Years in Data`, `Power BI · SQL`, `TypeScript`, `Applied AI`
-  - [ ] Swap for the `EP-04` `Chip`
-  - [ ] Headline with the highlighted portion in a token color (not a `<span>` with hex)
+  - [x] Chips: `#Python`, `3+ Years in Data`, `Power BI · SQL`, `TypeScript`, `Applied AI`
+  - [x] Swap for the `EP-04` `Chip` — static chips in a `ChipRow`; wrap and center on Compact
+  - [x] Headline with the highlighted portion in a token color (not a `<span>` with hex) — Tertiary; Figma text styles per frame (Display Large/Medium Emphasized, Headline Large/Small Emphasized), eyebrow Title Medium / Title Small Emphasized
 - **TK-06.1.3** — CTAs
-  - [ ] `See My Projects` (filled) and `Contact me` (tonal), Large size on desktop and Medium on mobile
+  - [x] `See My Projects` (filled) and `Contact me` (tonal), Large size on desktop and Medium on mobile — as Figma: Round Large on desktop, Square Large on Medium, Square Small sharing the row on Compact. `Contact me` opens `/about` until the contact band exists (`EP-07`). Figma's Medium buttons override the label to a hardcoded 20px (84px tall); the code keeps the Kit Large (96px), so the Medium hero is 12px taller than the frame
+  - Also: the old clover photo and the social icon buttons (not in Figma) are gone; the photo is the Figma `Profile photo` placeholder (Primary 12-sided cookie) until the real photo. Below Large the Home sections now stack at their own height — the rest of the responsive Home is `ST-06.3`
 
 ### ST-06.2 — Overview section
 
