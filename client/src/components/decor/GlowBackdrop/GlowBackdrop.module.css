@@ -1,0 +1,9 @@
+/* Figma Layer Blur N ≈ CSS blur(N / 2). Set --glow-blur in px.
+   Own compositor layer, so the blur isn't repainted with the page. */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(var(--glow-blur, 80px));
+  will-change: transform;
+  pointer-events: none;
+}

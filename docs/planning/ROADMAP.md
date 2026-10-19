@@ -394,18 +394,18 @@ Figma (Components page, section `Feedback`, created 2026-10-18): `Skeleton` (Sha
 Context: in Figma the decor is an absolutely positioned `HeroDecor` layer with two token-colored ellipses + Layer Blur, one clipped Shape Set shape, and an outline ring. Blur is applied over a solid token instead of a gradient because gradient stops don't accept variables — and a hardcoded gradient would break in dark mode. Worth keeping the same constraint in CSS.
 
 - **TK-04.5.1** — `Shape` component
-  - [ ] Subset of the M3 Shape Set as SVG: Very sunny, Soft boom, Burst, 12-sided cookie, Gem, Diamond, Circle, Pill
-  - [ ] Color via a prop mapped to a token, not hex
-  - [ ] Scale while preserving proportion (the silhouette occupies ~0.842 of the box in Figma)
+  - [x] Subset of the M3 Shape Set as SVG: Very sunny, Soft boom, Burst, 12-sided cookie, Gem, Diamond, Circle, Pill — paths exported from the Kit (`components/decor/Shape/shapePaths.ts`)
+  - [x] Color via a prop mapped to a token, not hex — `color` takes a scheme role (`primary-container`, `tertiary`…) → `var(--md-sys-color-*)`
+  - [x] Scale while preserving proportion (the silhouette occupies ~0.842 of the box in Figma) — the Kit's 380 viewBox is kept, so any `size` keeps it
 - **TK-04.5.2** — `GlowBackdrop`
-  - [ ] Ellipse with `filter: blur()` and a token color
-  - [ ] Props for size, position, and opacity
-  - [ ] `will-change`/`contain` so it doesn't repaint the entire page
+  - [x] Ellipse with `filter: blur()` and a token color — Figma Layer Blur N ≈ CSS `blur(N/2)`
+  - [x] Props for size, position, and opacity — position and size come from the parent's class (`--size`, `--glow-blur`); color and opacity are props
+  - [x] `will-change`/`contain` so it doesn't repaint the entire page — `will-change: transform` (own layer). `contain: paint` would clip the blur, so it isn't used
 - **TK-04.5.3** — `HeroDecor`
-  - [ ] Compose glows + clipped shape + outline ring
-  - [ ] Per-breakpoint geometry (in Figma it's hand-tuned, not scaled)
-  - [ ] `aria-hidden` and `pointer-events: none`
-  - [ ] Reduce or remove blur under `prefers-reduced-motion`
+  - [x] Compose glows + clipped shape + outline ring — Primary Container glow 80%, Tertiary Container glow 45%, Very sunny at 40%, 1.5px Outline Variant ring. The hero clips it
+  - [x] Per-breakpoint geometry (in Figma it's hand-tuned, not scaled) — values from the four Home frames; left pieces keep their left offset, the primary glow and ring follow the middle, and on Medium/Compact they sit at the bottom with the photo. Compared against Figma at 1512/744/402
+  - [x] `aria-hidden` and `pointer-events: none`
+  - [x] Reduce or remove blur under `prefers-reduced-motion` — dropped: nothing in the decor moves, so reduced motion doesn't apply. Revisit if it gets animated
 
 ### ST-04.6 — Parity of existing components
 
