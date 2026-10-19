@@ -1,38 +1,38 @@
 @import "@/styles/breakpoints.css";
 
-/* Figma "Sections": body over the contact strip. On desktop the page fits
-   the viewport: the strip hugs its content and the body takes the rest. */
+/* M3 supporting-pane layout: main pane (hero, About, Work Experience,
+   contact) and a full-height supporting pane (520px, 440 on Large). It
+   fits the viewport (minus the PageContent padding); a shorter window
+   grows the page rather than overlapping. */
 .page {
   display: grid;
+  grid-template-areas:
+    "main side"
+    "contact side";
+  grid-template-columns: minmax(0, 1fr) 520px;
   grid-template-rows: 1fr auto;
-  gap: 16px;
-  /* Fits the viewport (minus the PageContent padding) like Figma; a
-     shorter window grows the page instead of overlapping the strip */
+  gap: 12px 24px;
   min-height: calc(100vh - 20px);
   padding: 12px 14px;
 }
 
-/* Figma "BodyGrid": fluid main column + 520px sidebar (440px on Large) */
-.body {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 520px;
-  gap: 24px;
-}
-
 .main {
+  grid-area: main;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 /* ---- Hero ---- */
 .hero {
   position: relative;
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 1 0;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  min-height: 188px; /* the copy plus padding; the photo shrinks first */
+  --photo: 420px;
   padding: 32px 32px 32px 40px;
   overflow: hidden;
   border-radius: var(--md-sys-shape-corner-large);
@@ -78,30 +78,32 @@
 }
 
 .heroMedia {
-  display: flex;
+  position: relative;
   flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
+  align-self: stretch;
+  aspect-ratio: 1;
+  max-height: var(--photo);
 }
 
-/* 420px photo (330 on Large); the Kit box is 1.19× the silhouette */
+/* Up to 420px (330 on Large), else the hero's height: the photo gives way
+   so the page fits the viewport. The Kit box is 1.1875× the silhouette. */
 .photo {
-  --photo: 420px;
-  width: calc(var(--photo) * 1.1875);
-  height: calc(var(--photo) * 1.1875);
-  margin: calc(var(--photo) * -0.09375);
+  position: absolute;
+  inset: -9.375%;
+  width: 118.75%;
+  height: 118.75%;
 }
 
 /* ---- Section headers and cards ---- */
 .title {
   padding-left: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: var(--md-sys-color-on-surface);
 }
 
 .card {
   margin: 0;
-  padding: 20px 24px;
+  padding: 16px 24px;
   border-radius: var(--md-sys-shape-corner-large);
   background: var(--md-sys-color-surface-container-low);
   color: var(--md-sys-color-on-surface);
@@ -111,7 +113,7 @@
 .experience {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -121,7 +123,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 18px 24px;
+  padding: 14px 24px;
   border-radius: var(--md-sys-shape-corner-large);
   background: var(--md-sys-color-surface-container-low);
 }
@@ -158,16 +160,17 @@
 
 /* ---- Sidebar ---- */
 .side {
+  grid-area: side;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
 }
 
 .sideCard {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 18px 20px;
+  gap: 8px;
+  padding: 16px 20px;
   border-radius: var(--md-sys-shape-corner-large);
   background: var(--md-sys-color-surface-container-low);
   color: var(--md-sys-color-on-surface-variant);
@@ -202,7 +205,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 /* Figma "Card / Education" spreads label, degrees and dividers over its
@@ -221,7 +224,7 @@
 
 /* Divider above every degree but the first (Figma: 1px Outline Variant) */
 .divided {
-  padding-top: 10px;
+  padding-top: 8px;
   border-top: 1px solid var(--md-sys-color-outline-variant);
 }
 
@@ -231,11 +234,13 @@
 
 /* ---- Contact strip (Figma "ContactSection") ---- */
 .contact {
+  grid-area: contact;
   display: flex;
+  flex-wrap: wrap; /* actions drop under the email when the pane is narrow */
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 24px 40px;
+  padding: 16px 32px;
   border-radius: var(--md-sys-shape-corner-large);
   background: var(--md-sys-color-primary-container);
   color: var(--md-sys-color-on-primary-container);
@@ -265,17 +270,18 @@
 
 .contactActions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
 }
 
 /* Large (Figma 1512): 440px sidebar, 330px photo */
 @media (--large) {
-  .body {
+  .page {
     grid-template-columns: minmax(0, 1fr) 440px;
   }
 
-  .photo {
+  .hero {
     --photo: 330px;
   }
 }
@@ -284,17 +290,21 @@
    hero stacked (copy on top, photo below) */
 @media (--medium), (--compact) {
   .page {
+    grid-template-areas:
+      "main"
+      "side"
+      "contact";
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    gap: 16px;
     min-height: 0;
   }
 
-  .body {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
-  }
-
   .hero {
+    flex: none;
     flex-direction: column;
     align-items: stretch;
+    min-height: 0;
     padding: 32px;
   }
 
@@ -302,7 +312,13 @@
     justify-content: center;
   }
 
-  .photo {
+  .heroMedia {
+    align-self: center;
+    width: var(--photo);
+    max-height: none;
+  }
+
+  .hero {
     --photo: 320px;
   }
 
@@ -325,15 +341,11 @@
     padding: 12px 10px;
   }
 
-  .body {
-    gap: 12px;
-  }
-
   .hero {
     padding: 24px 20px;
   }
 
-  .photo {
+  .hero {
     --photo: 240px;
   }
 
