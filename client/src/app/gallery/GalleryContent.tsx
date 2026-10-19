@@ -1,4 +1,9 @@
 import type { ReactNode } from "react";
+import Shape from "@/components/decor/Shape/Shape.tsx";
+import {
+  SHAPE_PATHS,
+  type ShapeName,
+} from "@/components/decor/Shape/shapePaths.ts";
 import TabbedNavigation from "@/components/layout/navigation/TabbedNavigation/TabbedNavigation.tsx";
 import Button from "@/components/ui/Button/Button.tsx";
 import Chip from "@/components/ui/Chip/Chip.tsx";
@@ -163,6 +168,34 @@ export default function GalleryContent() {
             onClick={() => {}}
             onRemove={() => {}}
           />
+        </Row>
+      </Specimen>
+
+      <Specimen name="Shape" figma="Shape Set" source="M3 library">
+        <Row label="Shapes (Primary Container, 96px)">
+          {(Object.keys(SHAPE_PATHS) as ShapeName[]).map((shape) => (
+            <Shape key={shape} shape={shape} size={96} title={shape} />
+          ))}
+        </Row>
+        <Row label="Colors (Very sunny)">
+          {(
+            [
+              "primary",
+              "primary-container",
+              "secondary",
+              "secondary-container",
+              "tertiary",
+              "tertiary-container",
+            ] as const
+          ).map((color) => (
+            <Shape
+              key={color}
+              shape="very-sunny"
+              color={color}
+              size={64}
+              title={color}
+            />
+          ))}
         </Row>
       </Specimen>
 

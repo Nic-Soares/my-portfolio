@@ -1,0 +1,149 @@
+@import "@/styles/breakpoints.css";
+
+/* Geometry from the Figma Home frames, hand-tuned per size class (not
+   scaled). Left-side pieces keep their offset from the left edge; the primary
+   glow and the ring follow the middle (Figma "Center" constraint). On the
+   vertical layouts they sit at the bottom, with the photo. */
+.decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.glowPrimary,
+.glowTertiary,
+.accent,
+.ring {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+}
+
+.accent {
+  opacity: 0.4;
+}
+
+.ring {
+  box-sizing: border-box;
+  border: 1.5px solid var(--md-sys-color-outline-variant);
+  border-radius: 50%;
+}
+
+/* Extra-large (Figma 1920) */
+.glowPrimary {
+  --size: 640px;
+  --glow-blur: 95px;
+  top: -140px;
+  left: calc(50% + 38px);
+}
+
+.glowTertiary {
+  --size: 440px;
+  --glow-blur: 85px;
+  top: 180px;
+  left: -170px;
+}
+
+.accent {
+  --size: 300px;
+  top: -150px;
+  left: -150px;
+}
+
+.ring {
+  --size: 360px;
+  top: 330px;
+  left: calc(50% - 202px);
+}
+
+/* Large (Figma 1512) */
+@media (--large) {
+  .glowPrimary {
+    --size: 520px;
+    --glow-blur: 82px;
+    top: -110px;
+    left: calc(50% + 22px);
+  }
+
+  .glowTertiary {
+    --size: 360px;
+    --glow-blur: 75px;
+    top: 160px;
+    left: -150px;
+  }
+
+  .accent {
+    --size: 250px;
+    top: -120px;
+    left: -120px;
+  }
+
+  .ring {
+    --size: 290px;
+    top: 300px;
+    left: calc(50% - 178px);
+  }
+}
+
+/* Medium (Figma 744) */
+@media (--medium) {
+  .glowPrimary {
+    --size: 520px;
+    --glow-blur: 85px;
+    top: auto;
+    bottom: -66px;
+    left: calc(50% - 272px);
+  }
+
+  .glowTertiary {
+    --size: 340px;
+    --glow-blur: 70px;
+    top: 120px;
+    left: -140px;
+  }
+
+  .accent {
+    --size: 240px;
+    top: -110px;
+    left: -110px;
+  }
+
+  .ring {
+    --size: 260px;
+    top: auto;
+    bottom: -86px;
+    left: calc(50% + 138px);
+  }
+}
+
+/* Compact (Figma 402) */
+@media (--compact) {
+  .glowPrimary {
+    --size: 340px;
+    --glow-blur: 65px;
+    top: auto;
+    bottom: -39px;
+    left: calc(50% - 175px);
+  }
+
+  .glowTertiary {
+    --size: 220px;
+    --glow-blur: 55px;
+    top: 90px;
+    left: -100px;
+  }
+
+  .accent {
+    --size: 160px;
+    top: -70px;
+    left: -70px;
+  }
+
+  .ring {
+    --size: 170px;
+    top: auto;
+    bottom: -39px;
+    left: calc(50% + 59px);
+  }
+}
