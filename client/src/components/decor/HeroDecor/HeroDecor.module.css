@@ -3,7 +3,8 @@
 /* Geometry from the Figma Home frames, hand-tuned per size class (not
    scaled). Left-side pieces keep their offset from the left edge; the primary
    glow and the ring follow the middle (Figma "Center" constraint). On the
-   vertical layouts they sit at the bottom, with the photo. */
+   vertical layouts both sit at the bottom, with the photo, and the ring keeps
+   its offset from the right edge so narrow phones crop it as Figma does. */
 .decor {
   position: absolute;
   inset: 0;
@@ -112,8 +113,9 @@
   .ring {
     --size: 260px;
     top: auto;
+    right: -36px;
     bottom: -86px;
-    left: calc(50% + 138px);
+    left: auto;
   }
 }
 
@@ -143,7 +145,8 @@
   .ring {
     --size: 170px;
     top: auto;
+    right: -38px;
     bottom: -39px;
-    left: calc(50% + 59px);
+    left: auto;
   }
 }

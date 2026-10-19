@@ -1,14 +1,13 @@
 import type { ReactNode } from "react";
-import TabbedNavigation from "@/components/layout/navigation/TabbedNavigation/TabbedNavigation.tsx";
-import Button from "@/components/ui/Button/Button.tsx";
-import Chip from "@/components/ui/Chip/Chip.tsx";
-import ChipRow from "@/components/ui/Chip/ChipRow.tsx";
-import HeroDecor from "@/components/decor/HeroDecor/HeroDecor.tsx";
 import Shape from "@/components/decor/Shape/Shape.tsx";
 import {
   SHAPE_PATHS,
   type ShapeName,
 } from "@/components/decor/Shape/shapePaths.ts";
+import TabbedNavigation from "@/components/layout/navigation/TabbedNavigation/TabbedNavigation.tsx";
+import Button from "@/components/ui/Button/Button.tsx";
+import Chip from "@/components/ui/Chip/Chip.tsx";
+import ChipRow from "@/components/ui/Chip/ChipRow.tsx";
 import CompanyLogo from "@/components/ui/CompanyLogo/CompanyLogo.tsx";
 import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup.tsx";
 import IconButton from "@/components/ui/IconButton/IconButton.tsx";
@@ -199,22 +198,6 @@ export default function GalleryContent() {
           ))}
         </Row>
       </Specimen>
-
-      {/* TEMP-HERODECOR-REVIEW */}
-      <div
-        id="hero-decor-review"
-        style={{
-          position: "relative",
-          overflow: "hidden",
-          borderRadius: 16,
-          background: "var(--md-sys-color-surface-container-low)",
-          width: "var(--w)",
-          height: "var(--h)",
-        }}
-      >
-        <HeroDecor />
-      </div>
-      <style>{`#hero-decor-review{--w:1804px;--h:518px}@media (width < 1600px){#hero-decor-review{--w:1396px;--h:469px}}@media (width < 1200px){#hero-decor-review{--w:724px;--h:874px;background:var(--md-sys-color-surface-container)!important}}@media (width < 600px){#hero-decor-review{--w:382px;--h:631px;background:var(--md-sys-color-surface-container-low)!important}}`}</style>
 
       <Specimen name="SearchBar" figma="Search bar" source="M3 library">
         <Row label="Empty · filled · disabled">
