@@ -1,14 +1,15 @@
 @import "@/styles/breakpoints.css";
 
-/* M3 supporting-pane layout: main pane (hero, About, Work Experience,
-   contact) and a full-height supporting pane (520px, 440 on Large). It
-   fits the viewport (minus the PageContent padding); a shorter window
-   grows the page rather than overlapping. */
+/* Two stacked containers: on top the main pane (hero, About, Work
+   Experience) beside the supporting pane (520px, 440 on Large); below, the
+   full-width contact strip that closes the page. It fits the viewport
+   (minus the PageContent padding); a shorter window grows the page rather
+   than overlapping. */
 .page {
   display: grid;
   grid-template-areas:
     "main side"
-    "contact side";
+    "contact contact";
   grid-template-columns: minmax(0, 1fr) 520px;
   grid-template-rows: 1fr auto;
   gap: 12px 24px;
@@ -163,13 +164,13 @@
   grid-area: side;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .sideCard {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   padding: 16px 20px;
   border-radius: var(--md-sys-shape-corner-large);
   background: var(--md-sys-color-surface-container-low);
@@ -204,8 +205,8 @@
 .stackGroup {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 2px;
+  gap: 6px;
+  margin-top: 4px;
 }
 
 /* Figma "Card / Education" spreads label, degrees and dividers over its
@@ -224,7 +225,7 @@
 
 /* Divider above every degree but the first (Figma: 1px Outline Variant) */
 .divided {
-  padding-top: 8px;
+  padding-top: 6px;
   border-top: 1px solid var(--md-sys-color-outline-variant);
 }
 

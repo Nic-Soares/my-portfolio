@@ -7,10 +7,10 @@ import { useSizeClass } from "@/hooks/useSizeClass.ts";
 import { aboutData as about } from "../data/about.data.ts";
 import styles from "./About.page.module.css";
 
-// Figma "About Me" as an M3 supporting-pane layout: hero, About, Work
-// Experience and the contact strip in the main pane; Quick facts / Stack /
-// Education / Speaks in a full-height supporting pane. Desktop fits the
-// viewport; below Large it is one scrolling column.
+// Figma "About Me": on top, the main pane (hero, About, Work Experience)
+// beside the supporting pane (Quick facts / Stack / Education / Speaks);
+// below, the full-width contact strip. Desktop fits the viewport; below
+// Large it is one scrolling column.
 const AboutPage = () => {
   const compact = useSizeClass() === "compact";
 
