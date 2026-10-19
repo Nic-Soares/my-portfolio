@@ -5,9 +5,11 @@
   grid-template-areas:
     "home__hero-section home__hero-section"
     "home__experience home__carousel";
-  grid-template-rows: 1fr 1fr;
+  /* Figma: two equal rows that fill the viewport (100vh minus the
+     PageContent padding). In a shorter window the hero row keeps its
+     content height and the overview row takes what is left. */
+  grid-template-rows: minmax(min-content, 1fr) minmax(0, 1fr);
   grid-template-columns: 1fr 1fr;
-  /* Fits the viewport: 100vh minus the PageContent padding */
   height: calc(100vh - 20px);
   gap: 24px;
 }
@@ -24,11 +26,9 @@
   grid-area: home__carousel;
 }
 
-.home__hero-section,
 .home__experience,
 .home__carousel {
   min-height: 0;
-  /* Opcional: overflow-y: auto; para scroll interno se necessário */
 }
 
 /* Below Large the sections stack at their own height (the full responsive
@@ -42,5 +42,12 @@
     grid-template-rows: auto;
     grid-template-columns: minmax(0, 1fr);
     height: auto;
+  }
+}
+
+/* Figma Compact: 16px between sections */
+@media (--compact) {
+  .home {
+    gap: 16px;
   }
 }
