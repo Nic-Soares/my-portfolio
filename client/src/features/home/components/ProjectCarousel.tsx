@@ -2,61 +2,54 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Shape from "@/components/decor/Shape/Shape.tsx";
 import Button from "@/components/ui/Button/Button.tsx";
-import IconButton from "@/components/ui/IconButton/IconButton.tsx";
 import { projectsData } from "@/features/work/data/projects/index.ts";
-import { useSizeClass } from "../hooks/useSizeClass.ts";
 import styles from "./ProjectCarousel.module.css";
 
-// Figma "ProjectsCarousel": one large card with its neighbours peeking 56px
-// on each side. Swipes snap card by card; arrows move it on desktop.
+const SWIPE_THRESHOLD = 48; // px a finger must travel to change card
+
+// Figma "ProjectsCarousel" (M3 Hero carousel): the current project is the
+// large card; its neighbours are compressed to 56px and act as the
+// navigation — pressing one brings it to the middle. Swipe works on touch.
 const ProjectCarousel = () => {
   const navigate = useNavigate();
-  const sizeClass = useSizeClass();
-  const desktop = sizeClass === "large" || sizeClass === "extra-large";
-  const trackRef = useRef<HTMLUListElement>(null);
   const [current, setCurrent] = useState(0);
+  const swipeStart = useRef<number | null>(null);
 
-  const scrollTo = (index: number) => {
-    const track = trackRef.current;
-    const card = track?.children[index] as HTMLElement | undefined;
-    if (!track || !card) return;
-    track.scrollTo({
-      left: card.offsetLeft - (track.clientWidth - card.clientWidth) / 2,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
-    });
-  };
-
-  // The card closest to the middle is the current one
-  const onScroll = () => {
-    const track = trackRef.current;
-    if (!track) return;
-    const middle = track.scrollLeft + track.clientWidth / 2;
-    let closest = 0;
-    Array.from(track.children).forEach((child, index) => {
-      const card = child as HTMLElement;
-      const best = track.children[closest] as HTMLElement;
-      const distance = Math.abs(
-        card.offsetLeft + card.clientWidth / 2 - middle,
-      );
-      const bestDistance = Math.abs(
-        best.offsetLeft + best.clientWidth / 2 - middle,
-      );
-      if (distance < bestDistance) closest = index;
-    });
-    setCurrent(closest);
-  };
+  const last = projectsData.length - 1;
+  const go = (index: number) => setCurrent(Math.max(0, Math.min(last, index)));
 
   return (
-    <section className={styles.carousel} aria-label="Projects">
-      <ul ref={trackRef} className={styles.track} onScroll={onScroll}>
-        {projectsData.map((project, index) => (
-          <li
+    <section
+      className={styles.carousel}
+      aria-label="Projects"
+      aria-roledescription="carousel"
+      onPointerDown={(event) => {
+        if (event.pointerType === "touch") swipeStart.current = event.clientX;
+      }}
+      onPointerUp={(event) => {
+        if (swipeStart.current === null) return;
+        const distance = event.clientX - swipeStart.current;
+        swipeStart.current = null;
+        if (distance <= -SWIPE_THRESHOLD) go(current + 1);
+        if (distance >= SWIPE_THRESHOLD) go(current - 1);
+      }}
+    >
+      {/* Keeps the large card in place when there is no previous project */}
+      {current === 0 && <div className={styles.spacer} />}
+
+      {projectsData.map((project, index) => {
+        const offset = index - current;
+        if (Math.abs(offset) > 1) return null;
+        const number = String(index + 1).padStart(2, "0");
+        const isCurrent = offset === 0;
+
+        return (
+          <div
             key={project.slug}
-            className={styles.card}
+            className={`${styles.card} ${isCurrent ? styles["card--current"] : styles["card--peek"]}`}
+            role="group"
             aria-roledescription="slide"
-            aria-label={`${index + 1} of ${projectsData.length}`}
+            aria-label={`${number} of ${String(projectsData.length).padStart(2, "0")}`}
           >
             {/* Placeholder art, as the Figma card image */}
             <div className={styles.media} aria-hidden="true">
@@ -64,50 +57,38 @@ const ProjectCarousel = () => {
               <Shape shape="burst" color="tertiary" className={styles.shape2} />
               <Shape shape="pill" color="tertiary" className={styles.shape3} />
             </div>
-            <div className={styles.content}>
-              <p className={`title-large-emphasized ${styles.index}`}>
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <h3 className={`body-large ${styles.description}`}>
-                {project.name} — {project.description}
-              </h3>
-              <Button
-                type="square"
-                size="medium"
-                style="filled"
-                icon={null}
-                label="More"
-                onClick={() => navigate(`/projects/${project.slug}`)}
-              />
-            </div>
-          </li>
-        ))}
-      </ul>
 
-      {desktop && (
-        <>
-          <div className={`${styles.arrow} ${styles["arrow--prev"]}`}>
-            <IconButton
-              size="small"
-              style="tonal"
-              icon="chevron_left"
-              ariaLabel="Previous project"
-              disabled={current === 0}
-              onClick={() => scrollTo(current - 1)}
-            />
+            {isCurrent ? (
+              <div className={styles.content}>
+                <p className={`title-large-emphasized ${styles.index}`}>
+                  {number}
+                </p>
+                <p className={`body-large ${styles.description}`}>
+                  {project.name} — {project.description}
+                </p>
+                <Button
+                  type="square"
+                  size="medium"
+                  style="filled"
+                  icon={null}
+                  label="More"
+                  onClick={() => navigate(`/projects/${project.slug}`)}
+                />
+              </div>
+            ) : (
+              // The compressed card is the navigation control
+              <button
+                type="button"
+                className={styles.peekButton}
+                aria-label={`Show project ${number}: ${project.name}`}
+                onClick={() => go(index)}
+              />
+            )}
           </div>
-          <div className={`${styles.arrow} ${styles["arrow--next"]}`}>
-            <IconButton
-              size="small"
-              style="tonal"
-              icon="chevron_right"
-              ariaLabel="Next project"
-              disabled={current === projectsData.length - 1}
-              onClick={() => scrollTo(current + 1)}
-            />
-          </div>
-        </>
-      )}
+        );
+      })}
+
+      {current === last && <div className={styles.spacer} />}
     </section>
   );
 };

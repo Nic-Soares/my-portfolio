@@ -1,45 +1,41 @@
 @import "@/styles/breakpoints.css";
 
-/* Figma "ProjectsCarousel": 56px peeks, 8px gaps, 28px corners */
+/* Figma "ProjectsCarousel": 56px compressed cards on each side of the
+   large one, 8px gaps, 28px corners */
 .carousel {
   --peek: 56px;
-  --gap: 8px;
 
-  position: relative;
+  display: flex;
+  gap: 8px;
   height: 100%;
   min-width: 0;
+  touch-action: pan-y; /* vertical scroll stays native; we read sideways swipes */
 }
 
-/* Native horizontal scroll with snapping: touch drag on phones, trackpad
-   and arrows on desktop. Side padding leaves room for the peeks. */
-.track {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 100%; /* the padding already leaves the peeks */
-  gap: var(--gap);
-  height: 100%;
-  margin: 0;
-  padding: 0 calc(var(--peek) + var(--gap));
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: calc(var(--peek) + var(--gap));
-  scrollbar-width: none;
-  list-style: none;
+.spacer {
+  flex: 0 0 var(--peek);
 }
 
-.track::-webkit-scrollbar {
-  display: none;
-}
-
-/* Figma "ProjectCardLarge": Tertiary Container, copy at the bottom */
 .card {
   position: relative;
-  display: flex;
-  min-height: 0;
+  min-width: 0;
   overflow: hidden;
-  scroll-snap-align: center;
   border-radius: var(--md-sys-shape-corner-extra-large);
   background: var(--md-sys-color-tertiary-container);
+  transition:
+    flex-grow 400ms cubic-bezier(0.2, 0, 0, 1),
+    flex-basis 400ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Figma "ProjectCardLarge": takes the room the peeks leave */
+.card--current {
+  display: flex;
+  flex: 1 1 0;
+}
+
+/* Figma "ProjectCardPeekStart/End" */
+.card--peek {
+  flex: 0 0 var(--peek);
 }
 
 .media {
@@ -69,6 +65,12 @@
   transform: translate(-5%, -10%);
 }
 
+/* In a compressed card the art shrinks to a small cluster, as in Figma */
+.card--peek .media svg {
+  top: 50%;
+  --shape-size: 16px;
+}
+
 .content {
   position: relative;
   display: flex;
@@ -79,6 +81,13 @@
   width: 100%;
   padding: 24px;
   color: var(--md-sys-color-on-tertiary-container);
+  animation: content-in 300ms 150ms both;
+}
+
+@keyframes content-in {
+  from {
+    opacity: 0;
+  }
 }
 
 .index,
@@ -91,23 +100,34 @@
   margin-top: 8px;
 }
 
-/* Desktop arrows, centered over the peeks */
-.arrow {
+/* The whole compressed card is the control */
+.peekButton {
   position: absolute;
-  top: 50%;
-  z-index: 1;
-  display: flex;
-  width: var(--peek);
-  justify-content: center;
-  transform: translateY(-50%);
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
 }
 
-.arrow--prev {
-  left: 0;
+.peekButton:hover {
+  background: color-mix(
+    in srgb,
+    var(--md-sys-color-on-tertiary-container) 8%,
+    transparent
+  );
 }
 
-.arrow--next {
-  right: 0;
+.peekButton:focus-visible {
+  outline: 3px solid var(--md-sys-color-secondary);
+  outline-offset: -3px;
+  background: color-mix(
+    in srgb,
+    var(--md-sys-color-on-tertiary-container) 10%,
+    transparent
+  );
 }
 
 @media (--medium) {
@@ -122,14 +142,16 @@
   }
 
   /* Smaller art, kept above the copy */
-  .media svg {
+  .card--current .media svg {
     top: 24%;
     --shape-size: 48px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .track {
-    scroll-behavior: auto;
+  .card,
+  .content {
+    transition: none;
+    animation: none;
   }
 }
