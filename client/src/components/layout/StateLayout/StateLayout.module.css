@@ -1,0 +1,70 @@
+@import "@/styles/breakpoints.css";
+
+/* Figma "EmptyState": fills PageContent and centers its three blocks.
+   Illustration 340 / 340 / 260 / 200 per size class. */
+.state {
+  --state-illustration-size: 340px;
+  --state-copy-width: 640px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 64px;
+  text-align: center;
+}
+
+.state__illustration {
+  width: var(--state-illustration-size);
+  height: var(--state-illustration-size);
+  flex-shrink: 0;
+}
+
+.state__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(var(--state-copy-width), 100%);
+  color: var(--md-sys-color-on-surface);
+}
+
+.state__supporting-text {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.state__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.state--inline {
+  padding-block: 24px;
+}
+
+@media (--medium) {
+  .state {
+    --state-illustration-size: 260px;
+    --state-copy-width: 560px;
+
+    gap: 32px;
+    padding: 40px 32px;
+  }
+}
+
+/* Compact: actions stack in a column */
+@media (--compact) {
+  .state {
+    --state-illustration-size: 200px;
+    --state-copy-width: 340px;
+
+    gap: 24px;
+    padding: 24px 20px;
+  }
+
+  .state__actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

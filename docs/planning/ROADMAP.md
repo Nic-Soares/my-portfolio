@@ -368,9 +368,9 @@ Rule (2026-10-18): every component in the gallery must exist in Figma — as a l
 Figma: `Linear Progress` (Type = Indeterminate / Determinate) on the Components page, section `Feedback` (created 2026-10-18 from the Loading screens). Circular progress and the M3 Expressive loading indicator are not in the design.
 
 - **TK-04.3.1** — `LinearProgress`
-  - [ ] Determinate and indeterminate
-  - [ ] Indeterminate animation in CSS, respecting `prefers-reduced-motion`
-  - [ ] `role="progressbar"` with `aria-valuenow`/`aria-valuetext`
+  - [x] Determinate and indeterminate — `value` 0–100, omitted = indeterminate (as the Figma description says); 4px track in surface-container-highest, primary indicator, full corners; gallery specimen at the Figma 400px width
+  - [x] Indeterminate animation in CSS, respecting `prefers-reduced-motion` — the Figma bar (38.7% of the track) sweeps across in 1.6s with the standard easing; under reduced motion it stands where Figma draws it (12.9%)
+  - [x] `role="progressbar"` with `aria-valuenow`/`aria-valuetext` — only when determinate (clamped to 0–100); `aria-label` defaults to "Loading"
 - ~~**TK-04.3.2** — `CircularProgress`~~ — dropped 2026-10-18: not in the design
 - ~~**TK-04.3.3** — `LoadingIndicator` (M3 Expressive)~~ — dropped 2026-10-18: not in the design. Design it in Figma first if wanted
 
@@ -379,13 +379,13 @@ Figma: `Linear Progress` (Type = Indeterminate / Determinate) on the Components 
 Figma (Components page, section `Feedback`, created 2026-10-18): `Skeleton` (Shape = Pill / Rect × Tone = High / Highest), `Card Skeleton` and `Header Skeleton` (Size = Large / Medium / Compact). The 4 Loading screens now use these instances instead of loose rectangles.
 
 - **TK-04.4.1** — `Skeleton` primitive
-  - [ ] `pill` and `rect` shapes (Figma `Shape`; a pill on a square box is a circle) and `high`/`highest` tones (Figma `Tone`)
-  - [ ] Shimmer disabled under `prefers-reduced-motion`
-  - [ ] Colors in `surface-container-high`/`highest`, as in Figma
+  - [x] `pill` and `rect` shapes (Figma `Shape`; a pill on a square box is a circle) and `high`/`highest` tones (Figma `Tone`) — pill = corner full, rect = corner large (16); `width`/`height` props; `aria-hidden` (the LinearProgress announces the loading); gallery specimen at the Figma sizes
+  - [ ] Shimmer disabled under `prefers-reduced-motion` — not built: the Figma Skeleton is static and the Loading screens already show motion through the LinearProgress. Design a shimmer in Figma first if wanted (could go with the TK-12.1.2 motion pass)
+  - [x] Colors in `surface-container-high`/`highest`, as in Figma
 - **TK-04.4.2** — Skeleton compositions
-  - [ ] `ProjectCardSkeleton` mirroring Figma `Card Skeleton`
-  - [ ] `ProjectGridSkeleton` with count per breakpoint (4 col / 3 col / 2 col / 1 col)
-  - [ ] `ProjectsHeaderSkeleton` mirroring Figma `Header Skeleton` (title + chips + search)
+  - [x] `ProjectCardSkeleton` mirroring Figma `Card Skeleton` — sizes by breakpoint in CSS (390 / 386 / 330 tall, checked against Figma); fills its grid column like the real card instead of the Figma fixed width
+  - [x] `ProjectGridSkeleton` with count per breakpoint (4 col / 3 col / 2 col / 1 col) — reuses the card grid styles; 8 / 8 / 6 / 3 placeholders, as the Figma Loading screens. Not in the gallery (no Figma component; it's the Loading frame's grid)
+  - [x] `ProjectsHeaderSkeleton` mirroring Figma `Header Skeleton` (title + chips + search) — 5 chips + search at Large, 3 chips at Medium, 2 smaller chips at Compact (88 / 72 / 64 tall)
 
 ### ST-04.5 — Decorative primitives
 
@@ -594,7 +594,7 @@ Context: the chips and `SearchBar` are designed and rendered, but filter nothing
   - [x] Debounced search — 250ms, then the URL updates
   - [x] Clear filters button — in the empty state
 - **TK-08.1.3** — Empty state
-  - [ ] Render `EP-10`'s `EmptyState` when the filter returns nothing — interim message + Clear filters until `EP-10`
+  - [x] Render `EP-10`'s `EmptyState` when the filter returns nothing — `NoProjectsFound` (TK-10.2.4) replaced the interim message
   - [ ] Actions: `Clear filters` and `View all projects`
 
 ### ST-08.2 — Tablet and mobile views
@@ -616,7 +616,7 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
 - **TK-08.3.1** — Columns per breakpoint
   - [x] 4 / 3 / 2 / 1 per Figma — card widths 421 / 427 / 326 / 334 (Figma 420 / 433 / 326 / 334), every card 395px tall; rows no longer stretch to the page height
   - [x] Token-based gap — 24px (Figma uses 25)
-  - [ ] Skeleton with the same column count — no loading state yet (projects are static data); goes with `EP-10`'s skeleton
+  - [x] Skeleton with the same column count — `ProjectGridSkeleton` reuses the card grid (EP-10)
 - **TK-08.3.2** — `ProjectCard` parity with Figma `Project Card` (Size L/M/C)
   - [x] Tags: `ConnectedButtonGroup` is `nowrap` + `overflow: hidden`, so 4 tags clip on 744/402 cards; Figma wraps them (Small size, 2px gap) — allow `flex-wrap` below 1512 — wraps below Large; rows are 48px apart (touch targets) vs Figma's 42
   - [x] Title `title-large`, subtitle `body-large`, sized by the responsive typescale (`ST-03.2`) — no per-breakpoint classes. The title was an unstyled `<h3>` (wrong class) and the subtitle hardcoded 16px. Also fixed the empty band below the card content noted in `ST-04.1`
@@ -671,40 +671,42 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
 Context: in Figma the 5 states share the same anatomy — shape illustration, headline, supporting text, and up to two actions.
 
 - **TK-10.1.1** — `StateLayout`
-  - [ ] Props: illustration, headline, supporting text, actions
-  - [ ] Centered in `PageContent`, filling the available height
-  - [ ] Illustration scale per breakpoint (340 / 340 / 260 / 200)
-  - [ ] Actions in a column on mobile
+  - [x] Props: illustration, headline, supporting text, actions — at most two actions (tuple type), the first filled and the second text; each one runs `onClick` or navigates with `to`; `headingLevel` h1/h2 (h2 when inline in a page that already has an h1)
+  - [x] Centered in `PageContent`, filling the available height — fits the 1492×889 viewport without scrolling (content 756px)
+  - [x] Illustration scale per breakpoint (340 / 340 / 260 / 200) — `StateIllustration` takes the decor in Figma px on the 340 box and positions it in %, so it scales with the box; the mark uses `hero-display`, whose token already scales 96 / 57 / 45
+  - [x] Actions in a column on mobile — Button Large on Medium and up, Medium on Compact (`useSizeClass`)
+  - Not in the gallery: it has no Figma component, only the `EmptyState / …` frames; it is reviewed on the state routes
 
 ### ST-10.2 — The five states
 
 - **TK-10.2.1** — 404 (fix)
-  - [ ] Migrate `NotFound` to `StateLayout`
-  - [ ] "404" numeral over the Very sunny shape
-  - [ ] `Back to home` (filled) and `View projects` (text)
+  - [x] Migrate `NotFound` to `StateLayout` — `NotFound.module.css` deleted (hand-typed sizes); unknown paths still redirect to `/404`, covered by `NotFound.test.tsx`
+  - [x] "404" numeral over the Very sunny shape — Gem and Pill around it as in Figma; the illustration is `aria-hidden`, screen readers get "Page not found"
+  - [x] `Back to home` (filled) and `View projects` (text)
 - **TK-10.2.2** — Under Construction (fix)
-  - [ ] Migrate `UnderConstruction` to `StateLayout`
-  - [ ] Cone over Soft boom
+  - [x] Migrate `UnderConstruction` to `StateLayout` — old CSS and 🚧 emoji removed; copy and actions (`Back to home`, `View projects`) from Figma
+  - [x] Cone over Soft boom — Triangle added to `shapePaths.ts` (exported from the Kit Shape Set, shows in the gallery Shape row); `StateIllustration` `decor` now takes any number of shapes in Figma layer order, so the off-center cone (81,87 / 178) uses the same geometry as the corner shapes
+  - [ ] Revisit the illustration (approved 2026-10-19 with a caveat): the cone over Soft boom doesn't blend well — redesign in Figma first, then update the `decor` numbers
 - **TK-10.2.3** — Something Went Wrong / 500 (new)
-  - [ ] Burst in error-container with "!"
-  - [ ] `Try again` and `Back to home`
-  - [ ] Root `ErrorBoundary` falling into this screen
-  - [ ] `/error` route for visual review
+  - [x] Burst in error-container with "!" — Diamond (error) and Circle (secondary-container) around it; `Shape` gained the `error` and `error-container` colors (also in the gallery Colors row)
+  - [x] `Try again` and `Back to home` — `Try again` reloads the page by default; inside the boundary it re-renders instead
+  - [x] Root `ErrorBoundary` falling into this screen — wraps the routes inside `PageContent`, so the rail and navigation bar stay usable; cleared by Try again or any navigation (`location.key`, so it also resets when the failing page is `/`)
+  - [x] `/error` route for visual review — dev-only, like `/__gallery`
 - **TK-10.2.4** — No Projects Found (new)
-  - [ ] Search icon over 12-sided cookie
-  - [ ] Used inline by Projects Index, not as a route
+  - [x] Search icon over 12-sided cookie — surface-container-high, with 4-sided cookie (new in the Shape Set paths) and Circle; `Shape` gained `surface-container-high`; the Material Symbols icon scales with the illustration (132 / 101 / 78)
+  - [x] Used inline by Projects Index, not as a route — decided 2026-10-19 and drawn in Figma first ("Projects — No results" 1512 / 744 / 402): the header stays, the state replaces the grid with an h2, one action (`Clear filters`; `View all projects` did the same thing), and `StateLayout inline` drops the vertical padding to 24px at Large and up so it fits under the header at 1492×889 without scrolling
 - **TK-10.2.5** — Loading / Skeleton (new)
-  - [ ] Projects Index skeleton: header + linear indeterminate + grid
-  - [ ] `Suspense` on routes with the matching skeleton
-  - [ ] Minimum duration floor to avoid flashing on fast connections
+  - [x] Projects Index skeleton: header + linear indeterminate + grid — `ProjectListSkeleton`, spacing from the Figma Loading frames (10px stack, 16px above the grid; grid heights 1218 / 1206 / 1038 as in Figma)
+  - [x] `Suspense` on routes with the matching skeleton — decided 2026-10-19: only `/projects` is code-split (`lazyWithFloor`), the only page with a designed loading state; the rest stays in the main bundle. `App` now imports `ProjectDetailPage` from its file so the barrel doesn't pull the list page back in
+  - [x] Minimum duration floor to avoid flashing on fast connections — the skeleton appears only after 150ms (`DelayedFallback`) and, once shown, stays at least 400ms (`withFloor`); checked in the browser with the chunk delayed
 
 ### ST-10.3 — Integration
 
 - **TK-10.3.1** — Wire up to real flows
-  - [ ] Nonexistent slug falls to 404
-  - [ ] Data load failure falls to 500
-  - [ ] Loading shows a skeleton, not a blank screen
-  - [ ] Test each path
+  - [x] Nonexistent slug falls to 404 — `ProjectDetailPage` already rendered `NotFound`; now tested through `App`
+  - [x] Data load failure falls to 500 — project data is static, so the failure that can happen is the code-split chunk failing; the root `ErrorBoundary` catches it (tested)
+  - [x] Loading shows a skeleton, not a blank screen — blank only for the first 150ms, by design
+  - [x] Test each path — `SystemStates.test.tsx` and `lazyRoute.test.tsx`
 
 ---
 
@@ -749,6 +751,7 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
   - [ ] Screen reader across states and navigation
 - **TK-12.1.2** — Motion
   - [ ] `prefers-reduced-motion` respected by decor, skeleton, progress, and carousel
+  - [ ] Idea (2026-10-19, design in Figma first): animate the decor shapes site-wide — small shapes float a few px (~6s, staggered), main shape rotates very slowly; still under reduced motion. Goes into `StateIllustration` (all 4 states) and `HeroDecor` together
 - **TK-12.1.3** — Decorative and brand SVGs
   - [ ] Add `<title>` (or `aria-hidden="true"` for purely decorative ones) to every SVG flagged by `deno task check`'s `lint/a11y/noSvgWithoutTitle`: favicon, icons (`dashboard`, `github`, `linkedin`, `telegram`), the M3 shape set (`forms.svg`), and the partner logos (`AlphaWave`, `Boltshift`, `CoreOS`, etc.) — pre-existing, unrelated to `ST-01.0`
 

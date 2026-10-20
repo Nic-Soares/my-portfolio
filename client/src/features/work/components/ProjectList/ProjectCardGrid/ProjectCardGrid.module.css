@@ -29,14 +29,3 @@
     --columns: 1;
   }
 }
-
-/* Interim empty state (EP-10 brings the designed one) */
-.empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  padding: 64px 24px;
-  color: var(--md-sys-color-on-surface-variant);
-  text-align: center;
-}
