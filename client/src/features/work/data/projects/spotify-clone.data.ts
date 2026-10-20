@@ -39,7 +39,7 @@ export const projectsData: ProjectData[] = [
         ],
         content: [
           {
-            type: "paragraph",
+            type: "intro",
             id: "role-stack",
             text: "Spotify Web is a full-stack music catalog and player built end-to-end: a curated library of 20 Brazilian artists and 200 songs, browsable by artist or track, with a custom audio player for playback. What started as a front-end-only clone was rebuilt around a real Express and MongoDB API to practice shipping one complete slice — UI, API, database, and deployment — as a single working product.",
           },

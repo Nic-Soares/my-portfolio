@@ -637,7 +637,8 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
   - [x] Confirm every block in the design exists in the `blockRegistry` (done in `TK-02.2.1` — no missing block types)
 - **TK-09.1.2** — Project facts and intro
   - [x] `ProjectData` has no facts field — add `facts: { label: string; value: string }[]` (Role / Stack / Year / Type) — `ProjectFact[]`, optional; filled for Spotify Web (rendered by `ProjectIntro`, next task)
-  - [ ] `ProjectIntro` mirroring Figma `Project Intro`: facts beside the intro paragraph at Large, stacked at Medium/Compact
+  - [x] `ProjectIntro` mirroring Figma `Project Intro`: facts beside the intro paragraph at Large, stacked at Medium/Compact — new `intro` content block (the page renders it with the project's `facts`); facts as a `<dl>`; labels `headline-large-emphasized` in Roboto Condensed Medium Italic (decided 2026-10-19: self-hosted Roboto Italic with the width axis, +70 KB, not preloaded), values `headline-small`, paragraph `body-large-plus`. The Figma section "Icon Rail" is the existing copy-link button of `BlockWrapper`
+  - Note for TK-09.1.3: the content column is narrower than Figma below Large (294px vs 370 at 402, 636 vs 664 at 744) because of the `BlockWrapper` 68px copy-button column
 - **TK-09.1.3** — Block parity with the Figma `Block / *` components
   - [ ] List items: `ListBlock.module.css` uses `body-medium`, Figma uses `body/large-plus`
   - [ ] Image block: lock a default aspect ratio (Figma ratios 16:9 / 3:2 / 4:3 / 1:1 / 5:2)

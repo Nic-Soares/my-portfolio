@@ -8,6 +8,8 @@ export type ContentBlock =
       snug?: boolean;
     }
   | { type: "paragraph"; text: string; id?: string; snug?: boolean }
+  // Overview intro: the project facts beside this lead paragraph
+  | { type: "intro"; text: string; id?: string }
   | {
       type: "image";
       src: string;

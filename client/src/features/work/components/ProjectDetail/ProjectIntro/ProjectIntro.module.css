@@ -1,0 +1,51 @@
+@import "@/styles/breakpoints.css";
+
+/* Large: facts column 368px, 60px gap; Medium/Compact: stacked, 24px gap */
+.intro {
+  display: grid;
+  grid-template-columns: 368px minmax(0, 1fr);
+  align-items: start;
+  gap: 60px;
+  color: var(--md-sys-color-on-surface);
+}
+
+@media (--medium), (--compact) {
+  .intro {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Figma "Project Facts" / "Fact Row": 20px between rows; label at least
+   120px, value fills the rest and wraps; baseline aligned */
+.intro__facts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+}
+
+.intro__fact {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+/* Roboto Condensed Medium Italic, as in Figma */
+.intro__fact-label {
+  flex-shrink: 0;
+  min-width: 120px;
+  font-style: italic;
+  font-stretch: 75%;
+}
+
+.intro__fact-value {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+/* Beats the BlockWrapper ".text-chunk p" margins: both columns top-align */
+.intro > .intro__text {
+  margin: 0;
+}
