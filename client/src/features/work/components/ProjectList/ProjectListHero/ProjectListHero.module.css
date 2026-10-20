@@ -87,3 +87,49 @@
     margin: -2px;
   }
 }
+
+/* ---- Below Large: one tool at a time (Figma "Selector" / "Search view" /
+   "Filter view") ---- */
+.projects__header--bar {
+  gap: 12px;
+}
+
+.projects__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+}
+
+.projects__row > .projects__title {
+  flex: 1 0 auto;
+  margin: 0;
+}
+
+.projects__selector {
+  flex: 0 0 auto;
+}
+
+.projects__tool {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.projects__grow {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.projects__carousel {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.projects__carousel::-webkit-scrollbar {
+  display: none;
+}

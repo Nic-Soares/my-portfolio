@@ -3,12 +3,25 @@ import { MemoryRouter } from "react-router-dom";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import ProjectListPage from "./ProjectList.page.tsx";
 
-const renderAt = (url: string) =>
-  render(
+// Desktop by default; `compact` makes the (width < 600px) query match
+const stubViewport = (compact = false) =>
+  vi.stubGlobal(
+    "matchMedia",
+    vi.fn((query: string) => ({
+      matches: compact && query === "(width < 600px)",
+      addEventListener: () => {},
+      removeEventListener: () => {},
+    })),
+  );
+
+const renderAt = (url: string, compact = false) => {
+  stubViewport(compact);
+  return render(
     <MemoryRouter initialEntries={[url]}>
       <ProjectListPage />
     </MemoryRouter>,
   );
+};
 
 const titles = () =>
   screen.queryAllByRole("heading", { level: 3 }).map((h) => h.textContent);
@@ -51,5 +64,22 @@ describe("ProjectListPage filters", () => {
     expect(titles()).toEqual([]);
     fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
     expect(titles()).toEqual(["Clone do Spotify", "Reference"]);
+  });
+
+  it("shows one tool at a time below Large", () => {
+    renderAt("/projects", true);
+    expect(screen.queryByPlaceholderText("Search projects")).toBeNull();
+
+    fireEvent.click(screen.getByRole("button", { name: /Search/ }));
+    const input = screen.getByPlaceholderText("Search projects");
+    expect(input).toHaveFocus();
+
+    fireEvent.keyDown(input, { key: "Escape" });
+    expect(screen.queryByPlaceholderText("Search projects")).toBeNull();
+
+    fireEvent.click(screen.getByRole("button", { name: /Filter/ }));
+    expect(screen.getByRole("button", { name: "All · 2" })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Close filter" }));
+    expect(screen.getByRole("button", { name: /Filter/ })).toBeInTheDocument();
   });
 });

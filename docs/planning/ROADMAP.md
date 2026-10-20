@@ -599,17 +599,17 @@ Context: the chips and `SearchBar` are designed and rendered, but filter nothing
 
 ### ST-08.2 — Tablet and mobile views
 
-Context: Figma has three variations at 744 and 402 — Search view, Filter view, and Selector.
+Context: Figma has three variations at 744 and 402 — Search view, Filter view, and Selector. Read 2026-10-19: they are three states of the header, not separate screens. "Selector" shows the title with a Filter / Search button pair; each opens its tool in place with a back button. There is no bottom sheet or card selection in Figma — the earlier tasks below were rewritten to match it.
 
 - **TK-08.2.1** — Search view
-  - [ ] Expanded search filling the bar
-  - [ ] Auto-focus and Esc key to exit
+  - [x] Expanded search filling the bar — back button + search bar beside the title on Medium; on Compact the title row keeps the back button and the bar takes its own row (as Figma)
+  - [x] Auto-focus and Esc key to exit
 - **TK-08.2.2** — Filter view
-  - [ ] Filter panel as a bottom sheet
-  - [ ] Apply and clear
+  - [x] The area filter beside a back button, scrolling sideways when it doesn't fit (Figma "Filter chips carousel")
+  - [x] Back returns to the selector; the selector shows the active filter/search count ("Filter · 2", "Search · 1")
 - **TK-08.2.3** — Selector
-  - [ ] Multi-select cards
-  - [ ] Contextual action bar
+  - [x] Filter / Search button pair (Figma connected group with icons) beside the title
+  - Back buttons follow Figma: tonal on Medium, outline on Compact. Desktop keeps filter and search side by side
 
 ### ST-08.3 — Responsive grid
 
