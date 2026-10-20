@@ -631,10 +631,12 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
 ### ST-09.1 — Real content
 
 - **TK-09.1.1** — Replace the placeholder
-  - [ ] Port the Spotify Web case study from Figma into `spotify-clone.data.ts` (Overview, Architecture, Repository tabs), in English
+  - [x] Port the Spotify Web case study from Figma into `spotify-clone.data.ts` (Overview, Architecture, Repository tabs), in English — copy verbatim from Figma; renamed "Clone do Spotify" → "Spotify Web" everywhere (slug kept); images exported from Figma as webp in `assets/images/projects/spotify-web/` (hero illustration, architecture diagram, and the 3 real screenshots that sat beside the frames fill the empty Screens slots — decided 2026-10-19); the Overview "Section 3" placeholder link dropped
+  - [ ] PENDING (Nicolas): GitHub repository URL for "Source — GitHub repository" (the old data had `#`)
+  - [ ] PENDING (Nicolas): the architecture diagram in Figma is titled "MY PORTFOLIO — ARCHITECTURE", not Spotify Web — confirm or replace
   - [x] Confirm every block in the design exists in the `blockRegistry` (done in `TK-02.2.1` — no missing block types)
 - **TK-09.1.2** — Project facts and intro
-  - [ ] `ProjectData` has no facts field — add `facts: { label: string; value: string }[]` (Role / Stack / Year / Type)
+  - [x] `ProjectData` has no facts field — add `facts: { label: string; value: string }[]` (Role / Stack / Year / Type) — `ProjectFact[]`, optional; filled for Spotify Web (rendered by `ProjectIntro`, next task)
   - [ ] `ProjectIntro` mirroring Figma `Project Intro`: facts beside the intro paragraph at Large, stacked at Medium/Compact
 - **TK-09.1.3** — Block parity with the Figma `Block / *` components
   - [ ] List items: `ListBlock.module.css` uses `body-medium`, Figma uses `body/large-plus`
@@ -654,6 +656,7 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
   - [ ] Sticky, with the active item tracking scroll position
   - [ ] Hide on mobile or turn into a selector
 - **TK-09.3.2** — Previous/next (Figma `Project Pager`: Horizontal on desktop, Vertical on mobile)
+  - Decided 2026-10-19: the pager goes to other **projects** (the Figma frames walk the tabs — update Figma first, then code)
   - [ ] Derive from the data layer's ordering
   - [ ] Edge state at the first and last item
 
