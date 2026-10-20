@@ -150,3 +150,193 @@
     left: auto;
   }
 }
+
+/* ---- About Me hero (Figma About Me frames) ----
+   Same rules as Home; the circle and pill sit by the bottom-left of the
+   copy. */
+.decor--about .accent {
+  opacity: 0.45;
+}
+
+.dot,
+.pill {
+  position: absolute;
+  left: var(--x);
+  bottom: var(--bottom);
+  width: var(--size);
+  height: var(--size);
+}
+
+.dot {
+  border-radius: 50%;
+  background: var(--md-sys-color-primary);
+  opacity: 0.9;
+}
+
+/* Extra-large (Figma 1920, hero 1232×484) */
+.decor--about .glowPrimary {
+  --size: 620px;
+  --glow-blur: 90px;
+  top: -130px;
+  left: calc(50% + 84px);
+}
+
+.decor--about .glowTertiary {
+  --size: 420px;
+  --glow-blur: 80px;
+  top: 200px;
+  left: -170px;
+}
+
+.decor--about .accent {
+  --size: 300px;
+  top: -130px;
+  left: -140px;
+}
+
+.decor--about .ring {
+  --size: 320px;
+  top: 340px;
+  left: calc(50% - 146px);
+}
+
+.decor--about .dot {
+  --size: 26px;
+  --x: 80px;
+  --bottom: 38px;
+}
+
+.decor--about .pill {
+  --size: 44px;
+  --x: 118px;
+  --bottom: 28px;
+}
+
+/* Large (Figma 1512, hero 904×394) */
+@media (--large) {
+  .decor--about .glowPrimary {
+    --size: 500px;
+    --glow-blur: 75px;
+    top: -110px;
+    left: calc(50% + 48px);
+  }
+
+  .decor--about .glowTertiary {
+    --size: 340px;
+    --glow-blur: 65px;
+    top: 150px;
+    left: -140px;
+  }
+
+  .decor--about .accent {
+    --size: 240px;
+    top: -105px;
+    left: -110px;
+  }
+
+  .decor--about .ring {
+    --size: 250px;
+    top: 275px;
+    left: calc(50% - 122px);
+  }
+
+  .decor--about .dot {
+    --size: 22px;
+    --x: 64px;
+    --bottom: 30px;
+  }
+
+  .decor--about .pill {
+    --size: 36px;
+    --x: 96px;
+    --bottom: 23px;
+  }
+}
+
+/* Medium (Figma 744, hero 696×526) */
+@media (--medium) {
+  .decor--about .glowPrimary {
+    --size: 440px;
+    --glow-blur: 75px;
+    top: auto;
+    bottom: -44px;
+    left: calc(50% - 218px);
+  }
+
+  .decor--about .glowTertiary {
+    --size: 300px;
+    --glow-blur: 65px;
+    top: 300px;
+    left: -130px;
+  }
+
+  .decor--about .accent {
+    --size: 220px;
+    top: -100px;
+    left: -100px;
+  }
+
+  .decor--about .ring {
+    --size: 220px;
+    top: auto;
+    right: -44px;
+    bottom: -94px;
+    left: auto;
+  }
+
+  .decor--about .dot {
+    --size: 22px;
+    --x: 44px;
+    --bottom: 32px;
+  }
+
+  .decor--about .pill {
+    --size: 36px;
+    --x: 76px;
+    --bottom: 25px;
+  }
+}
+
+/* Compact (Figma 402, hero 362×440) */
+@media (--compact) {
+  .decor--about .glowPrimary {
+    --size: 320px;
+    --glow-blur: 60px;
+    top: auto;
+    bottom: -20px;
+    left: calc(50% - 151px);
+  }
+
+  .decor--about .glowTertiary {
+    --size: 200px;
+    --glow-blur: 55px;
+    top: 250px;
+    left: -90px;
+  }
+
+  .decor--about .accent {
+    --size: 150px;
+    top: -70px;
+    left: -70px;
+  }
+
+  .decor--about .ring {
+    --size: 150px;
+    top: auto;
+    right: -58px;
+    bottom: -60px;
+    left: auto;
+  }
+
+  .decor--about .dot {
+    --size: 18px;
+    --x: 26px;
+    --bottom: 26px;
+  }
+
+  .decor--about .pill {
+    --size: 28px;
+    --x: 52px;
+    --bottom: 21px;
+  }
+}

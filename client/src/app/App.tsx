@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/app/theme/ThemeProvider.tsx";
 import NavigationBar from "@/components/layout/NavigationBar/NavigationBar.tsx";
 import Sidebar from "@/components/layout/sidebar/Sidebar.tsx";
 import TopAppBar from "@/components/layout/TopAppBar/TopAppBar.tsx";
+import { AboutPage } from "@/features/about/index.ts";
 import { HomePage as Home } from "@/features/home/index.ts";
 import { ProjectDetailPage, ProjectListPage } from "@/features/work/index.ts";
 
@@ -30,8 +31,7 @@ function SiteShell() {
       <div id="main-content" className="main-content" tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* About Me is EP-07; Under Construction until then */}
-          <Route path="/about" element={<UnderConstruction />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/projects" element={<ProjectListPage />} />
           <Route path="/projects/:slug" element={<ProjectDetailPage />} />
           <Route path="/coming-soon" element={<UnderConstruction />} />

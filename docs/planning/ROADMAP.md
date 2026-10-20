@@ -528,50 +528,50 @@ Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About
 > **As a** visitor, **I want** a page about Nicolas, **so that** I can understand who's behind the projects.
 
 - **TK-07.1.1** — `/about` route
-  - [ ] Register in `App.tsx`
-  - [ ] Destination in the rail and navigation bar
-  - [ ] Title in the TopAppBar
+  - [x] Register in `App.tsx` — `AboutPage` replaces Under Construction
+  - [x] Destination in the rail and navigation bar — already there since `ST-05.1`
+  - [x] Title in the TopAppBar — dropped: Figma's top app bar has no title (`ST-05.2`)
 - **TK-07.1.2** — Typed data layer
-  - [ ] `about.data.ts`: bio, quick facts, stack by category, education, languages, contact
-  - [ ] Types in `features/about/data/about.types.ts`
-  - [ ] Flag Figma's fictional content as pending (Verde Analytics, Horizonte Tech, USP/Esalq, PUC Minas, `nicolas.soares@email.com`) — needs real data before publishing
+  - [x] `about.data.ts`: bio, quick facts, stack by category, education, languages, contact
+  - [x] Types in `features/about/data/about.types.ts`
+  - [ ] Flag Figma's fictional content as pending (Verde Analytics, Horizonte Tech, USP/Esalq, PUC Minas, `nicolas.soares@email.com`) — needs real data before publishing. Flagged in `aboutData.pending` (experience, education, email, social links, CV); waiting for Nicolas's real data
 
 ### ST-07.2 — Desktop two-column layout
 
 Context: in Figma the 1920 fits **exactly** into 1080px, with no scroll. The height isn't a guessed fixed value: the frame is fixed, the hero and contact strip are `hug`, and the body absorbs the rest. Worth reproducing this with `grid-template-rows: auto 1fr auto` instead of a magic height.
 
 - **TK-07.2.1** — Structure
-  - [ ] `100dvh` with hero + body + contact strip
-  - [ ] Two-column body: fluid main column, 520px sidebar (440px at 1512)
-  - [ ] Columns ending together
+  - [x] `100dvh` with hero + body + contact strip — no scroll on desktop (2026-10-19): the page needed 974px at 1512 (sidebar alone 804px), more than a MacBook browser shows. Reworked in Figma and code following M3: two stacked containers (on top, main pane beside the supporting pane; below, the full-width contact strip that closes the page — Nicolas's structure), tighter sidebar spacing (8px between cards, 4px label-to-text), Body Large (16/24) instead of the custom Body Large Plus (20/28) for body copy, Headline Small section titles, 16px card padding, Headline Medium email, and a hero photo that gives way (up to 420/330px) so the hero absorbs the height. Figma updated to the same structure and spacing. Measured Nicolas's real browser viewport (Arc 1492×889, Safari similar): the 1512 Figma frame now uses that 889px height instead of the full 982px screen, and Large gets a 520px sidebar and tighter vertical spacing to fit it. Job titles are Title Medium Emphasized (same as the degrees) and the certifications sit at the bottom of Education. Code and Figma match card for card; fits without scrolling at 1492×889 and 1920×1080 (minimum 882px at 1512)
+  - [x] Two-column body: fluid main column, 520px sidebar (440px at 1512)
+  - [x] Columns ending together — the hero (main) and Education (sidebar) absorb the height
 - **TK-07.2.2** — Hero
-  - [ ] Eyebrow, headline, role/location
-  - [ ] 420px photo with `HeroDecor` (330px at 1512)
-  - [ ] No CTA in the hero (those live in the contact strip)
+  - [x] Eyebrow, headline, role/location
+  - [x] 420px photo with `HeroDecor` (330px at 1512) — `HeroDecor variant="about"` with the About geometry plus its circle and pill; photo is the Profile photo placeholder until the real one
+  - [x] No CTA in the hero (those live in the contact strip)
 - **TK-07.2.3** — Main column
-  - [ ] About card
-  - [ ] Work Experience: cards with index, title, supporting text, and period chip
-  - [ ] Professional experience only — education goes in the sidebar
+  - [x] About card
+  - [x] Work Experience: cards with index, title, supporting text, and period chip
+  - [x] Professional experience only — education goes in the sidebar
 - **TK-07.2.4** — Sidebar
-  - [ ] Quick facts (tertiary container)
-  - [ ] Stack: chips grouped by work area
-  - [ ] Education: multiple entries with a divider
-  - [ ] Speaks (secondary container)
-  - [ ] Distribution filling the height, without stretching a card and clipping content
+  - [x] Quick facts (tertiary container)
+  - [x] Stack: chips grouped by work area
+  - [x] Education: multiple entries with a divider — reworked 2026-10-19 (Figma first, then code): M3 list with a 40px leading school icon and inset dividers, rows packed at the top, plus a Certifications chip row (chosen over three other options reviewed in Figma). Certifications are placeholders (`aboutData.pending`). Sidebar spacing per frame: compact on Large, roomier on Extra-large (Body Large Plus lists, 20px padding)
+  - [x] Speaks (secondary container)
+  - [x] Distribution filling the height, without stretching a card and clipping content
 - **TK-07.2.5** — Contact strip
-  - [ ] Primary container, email in Display, social chips + Download CV
-  - [ ] Horizontal on desktop, vertical on mobile
+  - [x] Primary container, email in Display, social chips + Download CV — email is a `mailto:` link; chips are links (`Chip` gained `href`)
+  - [x] Horizontal on desktop, vertical on mobile
 
 ### ST-07.3 — About Me on tablet and mobile
 
 - **TK-07.3.1** — Single column
-  - [ ] Sidebar moves below the main content
-  - [ ] Stacked hero: copy on top, photo below
-  - [ ] Scrollable page (doesn't lock to the viewport)
+  - [x] Sidebar moves below the main content
+  - [x] Stacked hero: copy on top, photo below
+  - [x] Scrollable page (doesn't lock to the viewport)
 - **TK-07.3.2** — 402 adjustments
-  - [ ] Vertical experience cards: index + period on top, title and description below
-  - [ ] Contact email in a smaller scale step to fit on one line
-  - [ ] Photo at 240px
+  - [x] Vertical experience cards: index + period on top, title and description below
+  - [x] Contact email in a smaller scale step to fit on one line — Headline Small Emphasized
+  - [x] Photo at 240px
 
 ---
 

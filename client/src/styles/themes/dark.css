@@ -47,6 +47,7 @@ body[data-theme="Dark"] {
   --md-sys-color-tertiary-fixed: rgb(189 236 225);
   --md-sys-color-tertiary-fixed-dim: rgb(161 208 197);
   --md-sys-color-background: rgb(19 20 13);
+  --md-sys-color-on-background: rgb(228 227 215);
 
   /* Material Design 3 State Layer Opacity Variables */
   --md-state-layers-dark-on-surface-opacity-08: rgba(228, 227, 215, 0.08);

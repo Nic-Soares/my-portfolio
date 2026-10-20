@@ -7,6 +7,7 @@ interface ChipProps {
   selected?: boolean;
   disabled?: boolean;
   onClick?: () => void; // makes the chip a button; without it the chip is static
+  href?: string; // makes the chip a link instead
   onRemove?: () => void; // shows the closing icon as its own button
   removeLabel?: string; // accessible name for the closing icon
 }
@@ -21,6 +22,7 @@ const Chip = ({
   selected = false,
   disabled = false,
   onClick,
+  href,
   onRemove,
   removeLabel = `Remove ${label}`,
 }: ChipProps) => {
@@ -50,7 +52,11 @@ const Chip = ({
 
   return (
     <span className={className}>
-      {onClick ? (
+      {href ? (
+        <a className={styles.chip__action} href={href}>
+          {content}
+        </a>
+      ) : onClick ? (
         <button
           type="button"
           className={styles.chip__action}

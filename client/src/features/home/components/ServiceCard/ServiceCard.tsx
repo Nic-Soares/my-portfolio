@@ -1,6 +1,6 @@
 import Shape from "@/components/decor/Shape/Shape.tsx";
 import type { ShapeName } from "@/components/decor/Shape/shapePaths.ts";
-import { useSizeClass } from "../../hooks/useSizeClass.ts";
+import { useSizeClass } from "@/hooks/useSizeClass.ts";
 import styles from "./ServiceCard.module.css";
 
 interface ServiceCardProps {
