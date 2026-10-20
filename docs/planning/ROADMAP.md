@@ -586,9 +586,9 @@ Context: in Figma the 1920 fits **exactly** into 1080px, with no scroll. The hei
 Context: the chips and `SearchBar` are designed and rendered, but filter nothing.
 
 - **TK-08.1.1** — Filter state
-  - [x] `useProjectFilters` hook with tags and search term — filters by work area (`ProjectData.areas`, new; plus `context` for the card subtitle) and searches name, description and areas
-  - [x] Reflect in the URL as a query string (shareable, survives reload) — `?area=data&q=spotify`
-  - [ ] Multi-select tags — single area at a time for now: the `ConnectedButtonGroup` is single-select, and changing the component needs a side-by-side review. Revisit when there are more projects
+  - [x] `useProjectFilters` hook with tags and search term — filters by work areas (`ProjectData.areas`, new; plus `context` for the card subtitle) and searches name, description and areas
+  - [x] Reflect in the URL as a query string (shareable, survives reload) — `?area=data,frontend&q=spotify`
+  - [x] Multi-select tags — `ConnectedButtonGroup` gained a configurable `selectionMode` (`"single"` default, `"multiple"` with `selectedIndices`), approved by Nicolas; grouped buttons now expose `aria-pressed`. The filter uses `multiple`: a project shows if it has any selected area (`?area=data,frontend`), and "All" clears the selection. Gallery specimen added
 - **TK-08.1.2** — Wire up the UI
   - [x] Selectable chips with counts — "All · N" plus up to four areas with their counts, in the connected button group (Figma)
   - [x] Debounced search — 250ms, then the URL updates

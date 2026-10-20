@@ -12,8 +12,8 @@ const ProjectListPage = () => {
       <ProjectListHero
         total={projectsData.length}
         areas={filters.areas}
-        area={filters.area}
-        onAreaChange={filters.setArea}
+        selectedAreas={filters.selectedAreas}
+        onAreasChange={filters.setAreas}
         query={filters.query}
         onQueryChange={filters.setQuery}
       />

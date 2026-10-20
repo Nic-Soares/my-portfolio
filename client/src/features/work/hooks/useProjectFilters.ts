@@ -4,11 +4,12 @@ import type { ProjectData, WorkArea } from "../data/project-data.types.ts";
 
 const SEARCH_DELAY = 250; // ms the search waits for typing to pause
 
-// Projects filter state, kept in the URL (?area=data&q=spotify) so a
-// filtered list can be shared and survives a reload.
+// Projects filter state, kept in the URL (?area=data,frontend&q=spotify)
+// so a filtered list can be shared and survives a reload. Several areas can
+// be selected; a project shows if it has any of them.
 export function useProjectFilters(projects: ProjectData[]) {
   const [params, setParams] = useSearchParams();
-  const areaParam = params.get("area");
+  const areaParam = (params.get("area") ?? "").split(",").filter(Boolean);
   const queryParam = params.get("q") ?? "";
 
   // Areas that have projects, in a stable order, with their counts
@@ -24,8 +25,9 @@ export function useProjectFilters(projects: ProjectData[]) {
       .map(([area, count]) => ({ area, count }));
   }, [projects]);
 
-  const area =
-    areas.find((entry) => entry.area.toLowerCase() === areaParam)?.area ?? null;
+  const selectedAreas = areas
+    .map((entry) => entry.area)
+    .filter((area) => areaParam.includes(area.toLowerCase()));
 
   // The input follows keystrokes; the URL (and the list) after a pause
   const [query, setQuery] = useState(queryParam);
@@ -46,12 +48,13 @@ export function useProjectFilters(projects: ProjectData[]) {
     return () => clearTimeout(timer);
   }, [query, queryParam, setParams]);
 
-  const setArea = (next: WorkArea | null) =>
+  const setAreas = (next: WorkArea[]) =>
     setParams(
       (current) => {
         const params = new URLSearchParams(current);
-        if (next) params.set("area", next.toLowerCase());
-        else params.delete("area");
+        if (next.length) {
+          params.set("area", next.map((area) => area.toLowerCase()).join(","));
+        } else params.delete("area");
         return params;
       },
       { replace: true },
@@ -65,7 +68,8 @@ export function useProjectFilters(projects: ProjectData[]) {
   const term = queryParam.trim().toLowerCase();
   const filtered = projects.filter(
     (project) =>
-      (!area || project.areas.includes(area)) &&
+      (selectedAreas.length === 0 ||
+        project.areas.some((area) => selectedAreas.includes(area))) &&
       (!term ||
         `${project.name} ${project.description} ${project.areas.join(" ")}`
           .toLowerCase()
@@ -74,12 +78,12 @@ export function useProjectFilters(projects: ProjectData[]) {
 
   return {
     areas,
-    area,
-    setArea,
+    selectedAreas,
+    setAreas,
     query,
     setQuery,
     clear,
     filtered,
-    isFiltered: Boolean(area || term),
+    isFiltered: Boolean(selectedAreas.length || term),
   };
 }

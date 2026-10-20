@@ -6,19 +6,20 @@ import styles from "./ProjectListHero.module.css";
 interface ProjectListHeroProps {
   total: number;
   areas: { area: WorkArea; count: number }[];
-  area: WorkArea | null;
-  onAreaChange: (area: WorkArea | null) => void;
+  selectedAreas: WorkArea[];
+  onAreasChange: (areas: WorkArea[]) => void;
   query: string;
   onQueryChange: (query: string) => void;
 }
 
 // Projects header: title, the area filter ("All" + areas with their
-// counts; the group shows up to 5 segments) and the search
+// counts; the group shows up to 5 segments; several areas can be on, and
+// "All" clears them) and the search
 const ProjectListHero = ({
   total,
   areas,
-  area,
-  onAreaChange,
+  selectedAreas,
+  onAreasChange,
   query,
   onQueryChange,
 }: ProjectListHeroProps) => {
@@ -27,9 +28,18 @@ const ProjectListHero = ({
     { label: `All · ${total}` },
     ...shown.map((entry) => ({ label: `${entry.area} · ${entry.count}` })),
   ];
-  const selectedIndex = area
-    ? shown.findIndex((entry) => entry.area === area) + 1
-    : 0;
+  const selectedIndices = selectedAreas.length
+    ? shown
+        .map((entry, i) => (selectedAreas.includes(entry.area) ? i + 1 : -1))
+        .filter((i) => i > 0)
+    : [0];
+
+  const handleChange = (indices: number[]) => {
+    // Turning "All" on (or everything off) clears the areas
+    const allTurnedOn = indices.includes(0) && !selectedIndices.includes(0);
+    const areas = indices.filter((i) => i > 0).map((i) => shown[i - 1].area);
+    onAreasChange(allTurnedOn ? [] : areas);
+  };
 
   return (
     <header className={styles["projects__header"]}>
@@ -38,11 +48,9 @@ const ProjectListHero = ({
         <div className={styles["projects__button-group"]}>
           <ConnectedButtonGroup
             options={options}
-            selectedIndex={selectedIndex}
-            allowDeselect={false}
-            onSelectionChange={(index) =>
-              onAreaChange(index <= 0 ? null : shown[index - 1].area)
-            }
+            selectionMode="multiple"
+            selectedIndices={selectedIndices}
+            onSelectedIndicesChange={handleChange}
           />
         </div>
         <div className={styles["projects__search-bar"]}>

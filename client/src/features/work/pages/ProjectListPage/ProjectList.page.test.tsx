@@ -22,11 +22,21 @@ describe("ProjectListPage filters", () => {
     expect(screen.getByRole("button", { name: "All · 2" })).toBeInTheDocument();
   });
 
-  it("filters by the area in the URL and by clicking an area", () => {
+  it("filters by the areas in the URL and toggles several at once", () => {
     renderAt("/projects?area=design");
     expect(titles()).toEqual(["Reference"]);
-    fireEvent.click(screen.getByRole("button", { name: /^Backend · 1$/ }));
+
+    const backend = screen.getByRole("button", { name: "Backend · 1" });
+    fireEvent.click(backend); // Design + Backend: either area matches
+    expect(titles()).toEqual(["Clone do Spotify", "Reference"]);
+    expect(backend).toHaveAttribute("aria-pressed", "true");
+
+    fireEvent.click(screen.getByRole("button", { name: "Design · 1" }));
     expect(titles()).toEqual(["Clone do Spotify"]);
+
+    fireEvent.click(screen.getByRole("button", { name: "All · 2" }));
+    expect(titles()).toEqual(["Clone do Spotify", "Reference"]);
+    expect(backend).toHaveAttribute("aria-pressed", "false");
   });
 
   it("searches after typing pauses and clears", () => {
