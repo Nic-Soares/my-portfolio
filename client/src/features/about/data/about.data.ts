@@ -55,11 +55,7 @@ export const aboutData: AboutData = {
     "dbt Fundamentals",
     "Google Data Analytics",
   ],
-  languages: [
-    "Portuguese — native",
-    "English — professional",
-    "SQL — fluent (obviously)",
-  ],
+  languages: ["Portuguese — native", "English — professional"],
   contact: {
     email: "nicolas.soares@email.com",
     social: [
