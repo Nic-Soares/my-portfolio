@@ -93,6 +93,7 @@ const ProjectCard = ({
         </div>
         <div className={styles["project-card__info"]}>
           <ConnectedButtonGroup
+            className={styles["project-card__tags"]}
             options={options}
             size={buttonGroupSize}
             selectedIndex={selectedIndex}
@@ -101,9 +102,13 @@ const ProjectCard = ({
             selectable={selectable}
             interactive={interactive}
           />
-          <div className="project-card__details">
-            <h3 className={styles["project-card__header"]}>{title}</h3>
-            <p className={styles["project-card__subtitle"]}>{company}</p>
+          <div>
+            <h3 className={`title-large ${styles["project-card__title"]}`}>
+              {title}
+            </h3>
+            <p className={`body-large ${styles["project-card__subtitle"]}`}>
+              {company}
+            </p>
           </div>
         </div>
       </div>

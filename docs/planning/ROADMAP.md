@@ -614,12 +614,12 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
 ### ST-08.3 — Responsive grid
 
 - **TK-08.3.1** — Columns per breakpoint
-  - [ ] 4 / 3 / 2 / 1 per Figma
-  - [ ] Token-based gap
-  - [ ] Skeleton with the same column count
+  - [x] 4 / 3 / 2 / 1 per Figma — card widths 421 / 427 / 326 / 334 (Figma 420 / 433 / 326 / 334), every card 395px tall; rows no longer stretch to the page height
+  - [x] Token-based gap — 24px (Figma uses 25)
+  - [ ] Skeleton with the same column count — no loading state yet (projects are static data); goes with `EP-10`'s skeleton
 - **TK-08.3.2** — `ProjectCard` parity with Figma `Project Card` (Size L/M/C)
-  - [ ] Tags: `ConnectedButtonGroup` is `nowrap` + `overflow: hidden`, so 4 tags clip on 744/402 cards; Figma wraps them (Small size, 2px gap) — allow `flex-wrap` below 1512
-  - [ ] Title `title-large`, subtitle `body-large`, sized by the responsive typescale (`ST-03.2`) — no per-breakpoint classes
+  - [x] Tags: `ConnectedButtonGroup` is `nowrap` + `overflow: hidden`, so 4 tags clip on 744/402 cards; Figma wraps them (Small size, 2px gap) — allow `flex-wrap` below 1512 — wraps below Large; rows are 48px apart (touch targets) vs Figma's 42
+  - [x] Title `title-large`, subtitle `body-large`, sized by the responsive typescale (`ST-03.2`) — no per-breakpoint classes. The title was an unstyled `<h3>` (wrong class) and the subtitle hardcoded 16px. Also fixed the empty band below the card content noted in `ST-04.1`
 
 ---
 

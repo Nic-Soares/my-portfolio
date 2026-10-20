@@ -242,7 +242,7 @@ export default function GalleryContent() {
           <ProjectCard
             title="Spotify Clone"
             company="Personal Project"
-            categories={["Frontend", "Backend"]}
+            categories={["Design", "Frontend", "Backend", "Data"]}
           />
         </div>
       </Specimen>
