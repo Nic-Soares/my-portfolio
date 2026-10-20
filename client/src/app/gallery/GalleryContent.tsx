@@ -197,6 +197,8 @@ export default function GalleryContent() {
               "secondary-container",
               "tertiary",
               "tertiary-container",
+              "error",
+              "error-container",
             ] as const
           ).map((color) => (
             <Shape

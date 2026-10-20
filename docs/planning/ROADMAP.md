@@ -688,10 +688,10 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
   - [x] Cone over Soft boom — Triangle added to `shapePaths.ts` (exported from the Kit Shape Set, shows in the gallery Shape row); `StateIllustration` `decor` now takes any number of shapes in Figma layer order, so the off-center cone (81,87 / 178) uses the same geometry as the corner shapes
   - [ ] Revisit the illustration (approved 2026-10-19 with a caveat): the cone over Soft boom doesn't blend well — redesign in Figma first, then update the `decor` numbers
 - **TK-10.2.3** — Something Went Wrong / 500 (new)
-  - [ ] Burst in error-container with "!"
-  - [ ] `Try again` and `Back to home`
-  - [ ] Root `ErrorBoundary` falling into this screen
-  - [ ] `/error` route for visual review
+  - [x] Burst in error-container with "!" — Diamond (error) and Circle (secondary-container) around it; `Shape` gained the `error` and `error-container` colors (also in the gallery Colors row)
+  - [x] `Try again` and `Back to home` — `Try again` reloads the page by default; inside the boundary it re-renders instead
+  - [x] Root `ErrorBoundary` falling into this screen — wraps the routes inside `PageContent`, so the rail and navigation bar stay usable; cleared by Try again or any navigation (`location.key`, so it also resets when the failing page is `/`)
+  - [x] `/error` route for visual review — dev-only, like `/__gallery`
 - **TK-10.2.4** — No Projects Found (new)
   - [ ] Search icon over 12-sided cookie
   - [ ] Used inline by Projects Index, not as a route
