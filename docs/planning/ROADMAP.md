@@ -594,7 +594,7 @@ Context: the chips and `SearchBar` are designed and rendered, but filter nothing
   - [x] Debounced search — 250ms, then the URL updates
   - [x] Clear filters button — in the empty state
 - **TK-08.1.3** — Empty state
-  - [ ] Render `EP-10`'s `EmptyState` when the filter returns nothing — interim message + Clear filters until `EP-10`
+  - [x] Render `EP-10`'s `EmptyState` when the filter returns nothing — `NoProjectsFound` (TK-10.2.4) replaced the interim message
   - [ ] Actions: `Clear filters` and `View all projects`
 
 ### ST-08.2 — Tablet and mobile views
@@ -693,8 +693,8 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
   - [x] Root `ErrorBoundary` falling into this screen — wraps the routes inside `PageContent`, so the rail and navigation bar stay usable; cleared by Try again or any navigation (`location.key`, so it also resets when the failing page is `/`)
   - [x] `/error` route for visual review — dev-only, like `/__gallery`
 - **TK-10.2.4** — No Projects Found (new)
-  - [ ] Search icon over 12-sided cookie
-  - [ ] Used inline by Projects Index, not as a route
+  - [x] Search icon over 12-sided cookie — surface-container-high, with 4-sided cookie (new in the Shape Set paths) and Circle; `Shape` gained `surface-container-high`; the Material Symbols icon scales with the illustration (132 / 101 / 78)
+  - [x] Used inline by Projects Index, not as a route — decided 2026-10-19 and drawn in Figma first ("Projects — No results" 1512 / 744 / 402): the header stays, the state replaces the grid with an h2, one action (`Clear filters`; `View all projects` did the same thing), and `StateLayout inline` drops the vertical padding to 24px at Large and up so it fits under the header at 1492×889 without scrolling
 - **TK-10.2.5** — Loading / Skeleton (new)
   - [ ] Projects Index skeleton: header + linear indeterminate + grid
   - [ ] `Suspense` on routes with the matching skeleton

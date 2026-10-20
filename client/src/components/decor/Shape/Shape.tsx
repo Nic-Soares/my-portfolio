@@ -10,7 +10,8 @@ export type ShapeColor =
   | "tertiary"
   | "tertiary-container"
   | "error"
-  | "error-container";
+  | "error-container"
+  | "surface-container-high";
 
 interface ShapeProps {
   shape: ShapeName;

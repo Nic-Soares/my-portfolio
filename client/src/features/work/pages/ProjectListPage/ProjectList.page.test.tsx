@@ -62,6 +62,9 @@ describe("ProjectListPage filters", () => {
       vi.advanceTimersByTime(300);
     });
     expect(titles()).toEqual([]);
+    expect(
+      screen.getByRole("heading", { level: 2, name: "No projects found" }),
+    ).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
     expect(titles()).toEqual(["Clone do Spotify", "Reference"]);
   });

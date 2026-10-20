@@ -39,6 +39,10 @@
   gap: 12px;
 }
 
+.state--inline {
+  padding-block: 24px;
+}
+
 @media (--medium) {
   .state {
     --state-illustration-size: 260px;

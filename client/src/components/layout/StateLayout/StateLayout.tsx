@@ -18,6 +18,9 @@ interface StateLayoutProps {
   actions?: [] | [StateAction] | [StateAction, StateAction];
   // h1 when the state is the page, h2 when it sits inside one
   headingLevel?: "h1" | "h2";
+  // Below a page header (Figma "Projects — No results"): 24px vertical
+  // padding at Large and up so it fits under the header without scrolling
+  inline?: boolean;
 }
 
 // Figma "EmptyState / …": the shared anatomy of the system states
@@ -29,13 +32,17 @@ const StateLayout = ({
   supportingText,
   actions = [],
   headingLevel: Heading = "h1",
+  inline = false,
 }: StateLayoutProps) => {
   const navigate = useNavigate();
   const sizeClass = useSizeClass();
   const headingId = useId();
 
   return (
-    <section className={styles.state} aria-labelledby={headingId}>
+    <section
+      className={`${styles.state} ${inline ? styles["state--inline"] : ""}`}
+      aria-labelledby={headingId}
+    >
       <div className={styles.state__illustration}>{illustration}</div>
       <div className={styles.state__copy}>
         <Heading id={headingId} className="display-small-emphasized">
