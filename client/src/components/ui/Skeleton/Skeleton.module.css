@@ -1,0 +1,19 @@
+.skeleton {
+  flex-shrink: 0;
+}
+
+.skeleton--pill {
+  border-radius: var(--md-sys-shape-corner-full);
+}
+
+.skeleton--rect {
+  border-radius: var(--md-sys-shape-corner-large);
+}
+
+.skeleton--high {
+  background: var(--md-sys-color-surface-container-high);
+}
+
+.skeleton--highest {
+  background: var(--md-sys-color-surface-container-highest);
+}

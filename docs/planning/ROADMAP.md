@@ -379,9 +379,9 @@ Figma: `Linear Progress` (Type = Indeterminate / Determinate) on the Components 
 Figma (Components page, section `Feedback`, created 2026-10-18): `Skeleton` (Shape = Pill / Rect × Tone = High / Highest), `Card Skeleton` and `Header Skeleton` (Size = Large / Medium / Compact). The 4 Loading screens now use these instances instead of loose rectangles.
 
 - **TK-04.4.1** — `Skeleton` primitive
-  - [ ] `pill` and `rect` shapes (Figma `Shape`; a pill on a square box is a circle) and `high`/`highest` tones (Figma `Tone`)
-  - [ ] Shimmer disabled under `prefers-reduced-motion`
-  - [ ] Colors in `surface-container-high`/`highest`, as in Figma
+  - [x] `pill` and `rect` shapes (Figma `Shape`; a pill on a square box is a circle) and `high`/`highest` tones (Figma `Tone`) — pill = corner full, rect = corner large (16); `width`/`height` props; `aria-hidden` (the LinearProgress announces the loading); gallery specimen at the Figma sizes
+  - [ ] Shimmer disabled under `prefers-reduced-motion` — not built: the Figma Skeleton is static and the Loading screens already show motion through the LinearProgress. Design a shimmer in Figma first if wanted (could go with the TK-12.1.2 motion pass)
+  - [x] Colors in `surface-container-high`/`highest`, as in Figma
 - **TK-04.4.2** — Skeleton compositions
   - [ ] `ProjectCardSkeleton` mirroring Figma `Card Skeleton`
   - [ ] `ProjectGridSkeleton` with count per breakpoint (4 col / 3 col / 2 col / 1 col)

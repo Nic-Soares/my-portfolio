@@ -13,6 +13,7 @@ import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/Connected
 import IconButton from "@/components/ui/IconButton/IconButton.tsx";
 import LinearProgress from "@/components/ui/LinearProgress/LinearProgress.tsx";
 import SearchBar from "@/components/ui/SearchBar/SearchBar.tsx";
+import Skeleton from "@/components/ui/Skeleton/Skeleton.tsx";
 import ProjectCard from "@/features/work/components/ProjectList/ProjectCard/ProjectCard.tsx";
 import styles from "./Gallery.module.css";
 
@@ -197,6 +198,17 @@ export default function GalleryContent() {
           <div style={{ width: 400 }}>
             <LinearProgress value={40} />
           </div>
+        </Row>
+      </Specimen>
+
+      <Specimen name="Skeleton" figma="Skeleton" source="Components page">
+        <Row label="Pill · High / Highest (120×40, as Figma)">
+          <Skeleton width={120} height={40} />
+          <Skeleton tone="highest" width={120} height={40} />
+        </Row>
+        <Row label="Rect · High / Highest (160×96, as Figma)">
+          <Skeleton shape="rect" width={160} height={96} />
+          <Skeleton shape="rect" tone="highest" width={160} height={96} />
         </Row>
       </Specimen>
 
