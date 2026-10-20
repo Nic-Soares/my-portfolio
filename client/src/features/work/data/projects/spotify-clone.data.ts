@@ -6,6 +6,8 @@ export const projectsData: ProjectData[] = [
     slug: "spotify-clone",
     name: "Clone do Spotify",
     description: "Plataforma fullstack de streaming de música.",
+    areas: ["Frontend", "Backend"],
+    context: "Personal project",
     hero: {
       type: "video",
       src: "https://kstatic.googleusercontent.com/files/e6ea31bb6dd2afb85d0b22d03faaafd95ccea9f5c1cca45028d33c33cc6488c7f770b455d43968d9fdb2ae5123d300663d1471dd050f18f8ed023b1b1a614477",

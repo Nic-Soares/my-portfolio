@@ -1,14 +1,8 @@
 import type { KeyboardEvent, ReactNode } from "react";
 import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup.tsx";
+import type { WorkArea } from "../../../data/project-data.types.ts";
 import styles from "./ProjectCard.module.css";
 
-type WorkCategory =
-  | "Frontend"
-  | "Backend"
-  | "Mobile"
-  | "Data"
-  | "DevOps"
-  | "Design";
 type SizeOption = "xsmall" | "small" | "medium" | "large" | "xlarge";
 
 interface ButtonOption {
@@ -20,7 +14,7 @@ interface ButtonOption {
 
 interface ProjectCardProps {
   // Project-specific props
-  categories?: WorkCategory[];
+  categories?: WorkArea[];
   title?: string;
   company?: string;
   imageUrl?: string;
