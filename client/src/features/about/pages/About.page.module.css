@@ -222,25 +222,36 @@
 .degrees {
   display: flex;
   flex-direction: column;
+  gap: 9px; /* 4px, the 1px divider, 4px (Figma "Degrees") */
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .degree {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 16px;
   padding: var(--row-pad) 0;
 }
 
-.degree + .degree {
-  background:
-    linear-gradient(
-      var(--md-sys-color-outline-variant),
-      var(--md-sys-color-outline-variant)
-    )
-    56px 0 / calc(100% - 56px) 1px no-repeat;
+/* Title over school · period, 2px apart (Figma "Degree / N") */
+.degree > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Inset divider in the middle of the gap, starting at the text (40 + 16) */
+.degree + .degree::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 0;
+  left: 56px;
+  height: 1px;
+  background: var(--md-sys-color-outline-variant);
 }
 
 .degreeIcon {
@@ -254,11 +265,14 @@
   color: var(--md-sys-color-on-secondary-container);
 }
 
-/* Figma "Certifications block": label over a wrapping chip row */
+/* Figma "Certifications block": label over a wrapping chip row, anchored
+   to the bottom of the card so Education closes full (spare height sits
+   between the degrees and the certifications) */
 .certifications {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-top: auto;
   padding-top: var(--cert-gap);
 }
 
@@ -323,13 +337,31 @@
 }
 
 /* Large (Figma 1512): 440px sidebar, 330px photo */
+/* Large (Figma 1512 at the 889px browser viewport): a 520px sidebar so the
+   certifications take two rows, and tighter vertical spacing so the page
+   fits a MacBook browser without scrolling */
 @media (--large) {
   .page {
-    grid-template-columns: minmax(0, 1fr) 440px;
+    grid-template-columns: minmax(0, 1fr) 520px;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 
   .hero {
     --photo: 330px;
+  }
+
+  .side {
+    --card-pad: 12px;
+    --row-pad: 6px;
+    --cert-gap: 6px;
+
+    gap: 6px;
+  }
+
+  .contact {
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 }
 

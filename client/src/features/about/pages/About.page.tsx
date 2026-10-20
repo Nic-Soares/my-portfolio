@@ -74,7 +74,7 @@ const AboutPage = () => {
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div className={styles.jobCopy}>
-                  <h3 className={`title-large-emphasized ${styles.jobTitle}`}>
+                  <h3 className={`title-medium-emphasized ${styles.jobTitle}`}>
                     {job.role} · {job.company}
                   </h3>
                   <p className={`body-large ${styles.jobSummary}`}>
