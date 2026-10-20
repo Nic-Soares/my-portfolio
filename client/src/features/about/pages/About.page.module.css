@@ -160,7 +160,15 @@
 }
 
 /* ---- Sidebar ---- */
+/* Sidebar spacing per Figma frame: compact on Large (1512), roomier on
+   Extra-large (1920), where there is height to spare */
 .side {
+  --card-pad: 16px;
+  --card-gap: 4px;
+  --group-gap: 6px;
+  --row-pad: 6px;
+  --cert-gap: 8px;
+
   grid-area: side;
   display: flex;
   flex-direction: column;
@@ -170,8 +178,8 @@
 .sideCard {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 16px 20px;
+  gap: var(--card-gap);
+  padding: var(--card-pad) 20px;
   border-radius: var(--md-sys-shape-corner-large);
   background: var(--md-sys-color-surface-container-low);
   color: var(--md-sys-color-on-surface-variant);
@@ -205,28 +213,53 @@
 .stackGroup {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--group-gap);
   margin-top: 4px;
 }
 
-/* Figma "Card / Education" spreads label, degrees and dividers over its
-   height (space-between), so the list lends its items to the card */
-.sideCard--fill {
-  justify-content: space-between;
-}
-
+/* M3 list (Figma "Card / Education"): rows packed at the top, 40px
+   leading icon, dividers inset to the text (40 + 16px) */
 .degrees {
-  display: contents;
-}
-
-.degrees > li {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
 
-/* Divider above every degree but the first (Figma: 1px Outline Variant) */
-.divided {
-  padding-top: 6px;
-  border-top: 1px solid var(--md-sys-color-outline-variant);
+.degree {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: var(--row-pad) 0;
+}
+
+.degree + .degree {
+  background:
+    linear-gradient(
+      var(--md-sys-color-outline-variant),
+      var(--md-sys-color-outline-variant)
+    )
+    56px 0 / calc(100% - 56px) 1px no-repeat;
+}
+
+.degreeIcon {
+  display: flex;
+  flex: 0 0 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/* Figma "Certifications block": label over a wrapping chip row */
+.certifications {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: var(--cert-gap);
 }
 
 .degreeTitle {
@@ -274,6 +307,19 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
+}
+
+/* Extra-large (Figma 1920): roomier sidebar */
+@media (--extra-large) {
+  .side {
+    --card-pad: 20px;
+    --card-gap: 8px;
+    --group-gap: 8px;
+    --row-pad: 10px;
+    --cert-gap: 12px;
+
+    gap: 12px;
+  }
 }
 
 /* Large (Figma 1512): 440px sidebar, 330px photo */
@@ -332,6 +378,11 @@
 
   .contactActions {
     flex-wrap: wrap;
+  }
+
+  .side {
+    --row-pad: 8px;
+    --cert-gap: 12px;
   }
 }
 

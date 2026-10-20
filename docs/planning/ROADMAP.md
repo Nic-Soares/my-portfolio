@@ -541,7 +541,7 @@ Context: `Sidebar` has 2 destinations (Home, Projects); Figma has 3 (Home, About
 Context: in Figma the 1920 fits **exactly** into 1080px, with no scroll. The height isn't a guessed fixed value: the frame is fixed, the hero and contact strip are `hug`, and the body absorbs the rest. Worth reproducing this with `grid-template-rows: auto 1fr auto` instead of a magic height.
 
 - **TK-07.2.1** — Structure
-  - [x] `100dvh` with hero + body + contact strip — no scroll on desktop (2026-10-19): the page needed 974px at 1512 (sidebar alone 804px), more than a MacBook browser shows. Reworked in Figma and code following M3: two stacked containers (on top, main pane beside the supporting pane; below, the full-width contact strip that closes the page — Nicolas's structure), tighter sidebar spacing (8px between cards, 4px label-to-text), Body Large (16/24) instead of the custom Body Large Plus (20/28) for body copy, Headline Small section titles, 16px card padding, Headline Medium email, and a hero photo that gives way (up to 420/330px) so the hero absorbs the height. Fits without scrolling at 1512 from 800px tall up (minimum 792), and at 1920×1080; Figma updated to the same structure and spacing
+  - [x] `100dvh` with hero + body + contact strip — no scroll on desktop (2026-10-19): the page needed 974px at 1512 (sidebar alone 804px), more than a MacBook browser shows. Reworked in Figma and code following M3: two stacked containers (on top, main pane beside the supporting pane; below, the full-width contact strip that closes the page — Nicolas's structure), tighter sidebar spacing (8px between cards, 4px label-to-text), Body Large (16/24) instead of the custom Body Large Plus (20/28) for body copy, Headline Small section titles, 16px card padding, Headline Medium email, and a hero photo that gives way (up to 420/330px) so the hero absorbs the height. Figma updated to the same structure and spacing. With the certifications the desktop minimum is 954px at 1512 and 1038px at 1920 — it fits the Figma frames, but a shorter browser window scrolls
   - [x] Two-column body: fluid main column, 520px sidebar (440px at 1512)
   - [x] Columns ending together — the hero (main) and Education (sidebar) absorb the height
 - **TK-07.2.2** — Hero
@@ -555,7 +555,7 @@ Context: in Figma the 1920 fits **exactly** into 1080px, with no scroll. The hei
 - **TK-07.2.4** — Sidebar
   - [x] Quick facts (tertiary container)
   - [x] Stack: chips grouped by work area
-  - [x] Education: multiple entries with a divider — spread over the card height as Figma (space-between)
+  - [x] Education: multiple entries with a divider — reworked 2026-10-19 (Figma first, then code): M3 list with a 40px leading school icon and inset dividers, rows packed at the top, plus a Certifications chip row (chosen over three other options reviewed in Figma). Certifications are placeholders (`aboutData.pending`). Sidebar spacing per frame: compact on Large, roomier on Extra-large (Body Large Plus lists, 20px padding)
   - [x] Speaks (secondary container)
   - [x] Distribution filling the height, without stretching a card and clipping content
 - **TK-07.2.5** — Contact strip

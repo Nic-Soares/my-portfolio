@@ -49,6 +49,12 @@ export const aboutData: AboutData = {
     },
     { title: "B.Sc. Computer Science", school: "UFMG", period: "2018—22" },
   ],
+  certifications: [
+    "PL-300 · Power BI Data Analyst",
+    "AWS Cloud Practitioner",
+    "dbt Fundamentals",
+    "Google Data Analytics",
+  ],
   languages: [
     "Portuguese — native",
     "English — professional",
@@ -67,6 +73,7 @@ export const aboutData: AboutData = {
   pending: [
     "experience (companies and results)",
     "education (schools and years)",
+    "certifications",
     "contact.email",
     "contact.social links",
     "contact.cvHref",

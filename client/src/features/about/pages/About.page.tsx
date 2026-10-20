@@ -12,7 +12,11 @@ import styles from "./About.page.module.css";
 // below, the full-width contact strip. Desktop fits the viewport; below
 // Large it is one scrolling column.
 const AboutPage = () => {
-  const compact = useSizeClass() === "compact";
+  const sizeClass = useSizeClass();
+  const compact = sizeClass === "compact";
+  // Figma: the roomier 1920 sidebar sets its lists in Body Large Plus
+  const sideBody =
+    sizeClass === "extra-large" ? "body-large-plus" : "body-large";
 
   return (
     <div className={styles.page}>
@@ -93,7 +97,7 @@ const AboutPage = () => {
           <h2 className={`label-medium-emphasized ${styles.label}`}>
             Quick facts
           </h2>
-          <ul className={`body-large ${styles.lines}`}>
+          <ul className={`${sideBody} ${styles.lines}`}>
             {about.quickFacts.map((fact) => (
               <li key={fact}>{fact}</li>
             ))}
@@ -120,28 +124,48 @@ const AboutPage = () => {
           <h2 className={`label-medium-emphasized ${styles.label}`}>
             Education
           </h2>
+          {/* M3 list: leading icon, two lines, inset dividers */}
           <ul className={styles.degrees}>
-            {about.education.map((degree, index) => (
-              <li
-                key={degree.title}
-                className={index > 0 ? styles.divided : undefined}
-              >
-                <p className={`title-medium-emphasized ${styles.degreeTitle}`}>
-                  {degree.title}
-                </p>
-                <p className={`body-medium ${styles.degreeMeta}`}>
-                  {degree.school} · {degree.period}
-                </p>
+            {about.education.map((degree) => (
+              <li key={degree.title} className={styles.degree}>
+                <span className={styles.degreeIcon} aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path
+                      d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+                <div>
+                  <p
+                    className={`title-medium-emphasized ${styles.degreeTitle}`}
+                  >
+                    {degree.title}
+                  </p>
+                  <p className={`body-medium ${styles.degreeMeta}`}>
+                    {degree.school} · {degree.period}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>
+          <div className={styles.certifications}>
+            <h3 className={`label-medium-emphasized ${styles.label}`}>
+              Certifications
+            </h3>
+            <ChipRow ariaLabel="Certifications">
+              {about.certifications.map((cert) => (
+                <Chip key={cert} label={cert} />
+              ))}
+            </ChipRow>
+          </div>
         </section>
 
         <section
           className={`${styles.sideCard} ${styles["sideCard--secondary"]}`}
         >
           <h2 className={`label-medium-emphasized ${styles.label}`}>Speaks</h2>
-          <ul className={`body-large ${styles.lines}`}>
+          <ul className={`${sideBody} ${styles.lines}`}>
             {about.languages.map((language) => (
               <li key={language}>{language}</li>
             ))}

@@ -34,6 +34,7 @@ export interface AboutData {
   experience: Experience[];
   stack: StackGroup[];
   education: Degree[];
+  certifications: string[];
   languages: string[];
   contact: {
     email: string;
