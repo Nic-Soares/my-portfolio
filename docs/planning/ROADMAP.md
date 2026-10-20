@@ -684,8 +684,9 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
   - [x] "404" numeral over the Very sunny shape — Gem and Pill around it as in Figma; the illustration is `aria-hidden`, screen readers get "Page not found"
   - [x] `Back to home` (filled) and `View projects` (text)
 - **TK-10.2.2** — Under Construction (fix)
-  - [ ] Migrate `UnderConstruction` to `StateLayout`
-  - [ ] Cone over Soft boom
+  - [x] Migrate `UnderConstruction` to `StateLayout` — old CSS and 🚧 emoji removed; copy and actions (`Back to home`, `View projects`) from Figma
+  - [x] Cone over Soft boom — Triangle added to `shapePaths.ts` (exported from the Kit Shape Set, shows in the gallery Shape row); `StateIllustration` `decor` now takes any number of shapes in Figma layer order, so the off-center cone (81,87 / 178) uses the same geometry as the corner shapes
+  - [ ] Revisit the illustration (approved 2026-10-19 with a caveat): the cone over Soft boom doesn't blend well — redesign in Figma first, then update the `decor` numbers
 - **TK-10.2.3** — Something Went Wrong / 500 (new)
   - [ ] Burst in error-container with "!"
   - [ ] `Try again` and `Back to home`

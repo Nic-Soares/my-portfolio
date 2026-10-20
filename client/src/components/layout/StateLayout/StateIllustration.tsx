@@ -16,8 +16,9 @@ export interface StateDecor {
 interface StateIllustrationProps {
   shape: ShapeName;
   color: ShapeColor;
-  // Small shapes off the top-right and bottom-left corners
-  decor: [StateDecor, StateDecor];
+  // Shapes over the main one, in Figma layer order: the small ones off the
+  // corners and, when the state has one, a shape in the middle (the cone)
+  decor: StateDecor[];
   // Centered over the main shape: a numeral, a glyph or an icon
   mark?: ReactNode;
   markColor?: `on-${string}`; // scheme role, e.g. "on-primary-container"
