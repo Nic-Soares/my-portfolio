@@ -680,9 +680,9 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 ### ST-10.2 — The five states
 
 - **TK-10.2.1** — 404 (fix)
-  - [ ] Migrate `NotFound` to `StateLayout`
-  - [ ] "404" numeral over the Very sunny shape
-  - [ ] `Back to home` (filled) and `View projects` (text)
+  - [x] Migrate `NotFound` to `StateLayout` — `NotFound.module.css` deleted (hand-typed sizes); unknown paths still redirect to `/404`, covered by `NotFound.test.tsx`
+  - [x] "404" numeral over the Very sunny shape — Gem and Pill around it as in Figma; the illustration is `aria-hidden`, screen readers get "Page not found"
+  - [x] `Back to home` (filled) and `View projects` (text)
 - **TK-10.2.2** — Under Construction (fix)
   - [ ] Migrate `UnderConstruction` to `StateLayout`
   - [ ] Cone over Soft boom
