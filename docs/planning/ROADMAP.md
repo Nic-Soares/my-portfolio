@@ -616,7 +616,7 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
 - **TK-08.3.1** — Columns per breakpoint
   - [x] 4 / 3 / 2 / 1 per Figma — card widths 421 / 427 / 326 / 334 (Figma 420 / 433 / 326 / 334), every card 395px tall; rows no longer stretch to the page height
   - [x] Token-based gap — 24px (Figma uses 25)
-  - [ ] Skeleton with the same column count — no loading state yet (projects are static data); goes with `EP-10`'s skeleton
+  - [x] Skeleton with the same column count — `ProjectGridSkeleton` reuses the card grid (EP-10)
 - **TK-08.3.2** — `ProjectCard` parity with Figma `Project Card` (Size L/M/C)
   - [x] Tags: `ConnectedButtonGroup` is `nowrap` + `overflow: hidden`, so 4 tags clip on 744/402 cards; Figma wraps them (Small size, 2px gap) — allow `flex-wrap` below 1512 — wraps below Large; rows are 48px apart (touch targets) vs Figma's 42
   - [x] Title `title-large`, subtitle `body-large`, sized by the responsive typescale (`ST-03.2`) — no per-breakpoint classes. The title was an unstyled `<h3>` (wrong class) and the subtitle hardcoded 16px. Also fixed the empty band below the card content noted in `ST-04.1`
@@ -696,17 +696,17 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
   - [x] Search icon over 12-sided cookie — surface-container-high, with 4-sided cookie (new in the Shape Set paths) and Circle; `Shape` gained `surface-container-high`; the Material Symbols icon scales with the illustration (132 / 101 / 78)
   - [x] Used inline by Projects Index, not as a route — decided 2026-10-19 and drawn in Figma first ("Projects — No results" 1512 / 744 / 402): the header stays, the state replaces the grid with an h2, one action (`Clear filters`; `View all projects` did the same thing), and `StateLayout inline` drops the vertical padding to 24px at Large and up so it fits under the header at 1492×889 without scrolling
 - **TK-10.2.5** — Loading / Skeleton (new)
-  - [ ] Projects Index skeleton: header + linear indeterminate + grid
-  - [ ] `Suspense` on routes with the matching skeleton
-  - [ ] Minimum duration floor to avoid flashing on fast connections
+  - [x] Projects Index skeleton: header + linear indeterminate + grid — `ProjectListSkeleton`, spacing from the Figma Loading frames (10px stack, 16px above the grid; grid heights 1218 / 1206 / 1038 as in Figma)
+  - [x] `Suspense` on routes with the matching skeleton — decided 2026-10-19: only `/projects` is code-split (`lazyWithFloor`), the only page with a designed loading state; the rest stays in the main bundle. `App` now imports `ProjectDetailPage` from its file so the barrel doesn't pull the list page back in
+  - [x] Minimum duration floor to avoid flashing on fast connections — the skeleton appears only after 150ms (`DelayedFallback`) and, once shown, stays at least 400ms (`withFloor`); checked in the browser with the chunk delayed
 
 ### ST-10.3 — Integration
 
 - **TK-10.3.1** — Wire up to real flows
-  - [ ] Nonexistent slug falls to 404
-  - [ ] Data load failure falls to 500
-  - [ ] Loading shows a skeleton, not a blank screen
-  - [ ] Test each path
+  - [x] Nonexistent slug falls to 404 — `ProjectDetailPage` already rendered `NotFound`; now tested through `App`
+  - [x] Data load failure falls to 500 — project data is static, so the failure that can happen is the code-split chunk failing; the root `ErrorBoundary` catches it (tested)
+  - [x] Loading shows a skeleton, not a blank screen — blank only for the first 150ms, by design
+  - [x] Test each path — `SystemStates.test.tsx` and `lazyRoute.test.tsx`
 
 ---
 

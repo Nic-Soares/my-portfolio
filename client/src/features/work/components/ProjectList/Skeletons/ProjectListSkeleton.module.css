@@ -1,0 +1,11 @@
+/* Figma "Loading": PageContent stacks its blocks 10px apart; the grid adds
+   16px above the cards */
+.loading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.loading__grid {
+  margin-top: 16px;
+}

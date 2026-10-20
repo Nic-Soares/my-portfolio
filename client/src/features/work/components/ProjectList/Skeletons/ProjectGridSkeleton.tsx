@@ -6,10 +6,13 @@ import ProjectCardSkeleton from "./ProjectCardSkeleton.tsx";
 // the Figma Loading screens show
 const COUNT = { "extra-large": 8, large: 8, medium: 6, compact: 3 } as const;
 
-const ProjectGridSkeleton = () => {
+const ProjectGridSkeleton = ({ className }: { className?: string }) => {
   const sizeClass = useSizeClass();
   return (
-    <div className={gridStyles.cards} aria-hidden="true">
+    <div
+      className={`${gridStyles.cards} ${className ?? ""}`}
+      aria-hidden="true"
+    >
       {Array.from({ length: COUNT[sizeClass] }, (_, index) => (
         <ProjectCardSkeleton key={index} />
       ))}
