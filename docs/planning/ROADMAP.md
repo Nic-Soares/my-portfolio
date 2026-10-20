@@ -586,40 +586,40 @@ Context: in Figma the 1920 fits **exactly** into 1080px, with no scroll. The hei
 Context: the chips and `SearchBar` are designed and rendered, but filter nothing.
 
 - **TK-08.1.1** — Filter state
-  - [ ] `useProjectFilters` hook with tags and search term
-  - [ ] Reflect in the URL as a query string (shareable, survives reload)
-  - [ ] Multi-select tags
+  - [x] `useProjectFilters` hook with tags and search term — filters by work areas (`ProjectData.areas`, new; plus `context` for the card subtitle) and searches name, description and areas
+  - [x] Reflect in the URL as a query string (shareable, survives reload) — `?area=data,frontend&q=spotify`
+  - [x] Multi-select tags — `ConnectedButtonGroup` gained a configurable `selectionMode` (`"single"` default, `"multiple"` with `selectedIndices`), approved by Nicolas; grouped buttons now expose `aria-pressed`. The filter uses `multiple`: a project shows if it has any selected area (`?area=data,frontend`), and "All" clears the selection. Gallery specimen added
 - **TK-08.1.2** — Wire up the UI
-  - [ ] Selectable chips with counts
-  - [ ] Debounced search
-  - [ ] Clear filters button
+  - [x] Selectable chips with counts — "All · N" plus up to four areas with their counts, in the connected button group (Figma)
+  - [x] Debounced search — 250ms, then the URL updates
+  - [x] Clear filters button — in the empty state
 - **TK-08.1.3** — Empty state
-  - [ ] Render `EP-10`'s `EmptyState` when the filter returns nothing
+  - [ ] Render `EP-10`'s `EmptyState` when the filter returns nothing — interim message + Clear filters until `EP-10`
   - [ ] Actions: `Clear filters` and `View all projects`
 
 ### ST-08.2 — Tablet and mobile views
 
-Context: Figma has three variations at 744 and 402 — Search view, Filter view, and Selector.
+Context: Figma has three variations at 744 and 402 — Search view, Filter view, and Selector. Read 2026-10-19: they are three states of the header, not separate screens. "Selector" shows the title with a Filter / Search button pair; each opens its tool in place with a back button. There is no bottom sheet or card selection in Figma — the earlier tasks below were rewritten to match it.
 
 - **TK-08.2.1** — Search view
-  - [ ] Expanded search filling the bar
-  - [ ] Auto-focus and Esc key to exit
+  - [x] Expanded search filling the bar — back button + search bar beside the title on Medium; on Compact the title row keeps the back button and the bar takes its own row (as Figma)
+  - [x] Auto-focus and Esc key to exit
 - **TK-08.2.2** — Filter view
-  - [ ] Filter panel as a bottom sheet
-  - [ ] Apply and clear
+  - [x] The area filter beside a back button, scrolling sideways when it doesn't fit (Figma "Filter chips carousel")
+  - [x] Back returns to the selector; the selector shows the active filter/search count ("Filter · 2", "Search · 1")
 - **TK-08.2.3** — Selector
-  - [ ] Multi-select cards
-  - [ ] Contextual action bar
+  - [x] Filter / Search button pair (Figma connected group with icons) beside the title
+  - Back buttons follow Figma: tonal on Medium, outline on Compact. Desktop keeps filter and search side by side
 
 ### ST-08.3 — Responsive grid
 
 - **TK-08.3.1** — Columns per breakpoint
-  - [ ] 4 / 3 / 2 / 1 per Figma
-  - [ ] Token-based gap
-  - [ ] Skeleton with the same column count
+  - [x] 4 / 3 / 2 / 1 per Figma — card widths 421 / 427 / 326 / 334 (Figma 420 / 433 / 326 / 334), every card 395px tall; rows no longer stretch to the page height
+  - [x] Token-based gap — 24px (Figma uses 25)
+  - [ ] Skeleton with the same column count — no loading state yet (projects are static data); goes with `EP-10`'s skeleton
 - **TK-08.3.2** — `ProjectCard` parity with Figma `Project Card` (Size L/M/C)
-  - [ ] Tags: `ConnectedButtonGroup` is `nowrap` + `overflow: hidden`, so 4 tags clip on 744/402 cards; Figma wraps them (Small size, 2px gap) — allow `flex-wrap` below 1512
-  - [ ] Title `title-large`, subtitle `body-large`, sized by the responsive typescale (`ST-03.2`) — no per-breakpoint classes
+  - [x] Tags: `ConnectedButtonGroup` is `nowrap` + `overflow: hidden`, so 4 tags clip on 744/402 cards; Figma wraps them (Small size, 2px gap) — allow `flex-wrap` below 1512 — wraps below Large; rows are 48px apart (touch targets) vs Figma's 42
+  - [x] Title `title-large`, subtitle `body-large`, sized by the responsive typescale (`ST-03.2`) — no per-breakpoint classes. The title was an unstyled `<h3>` (wrong class) and the subtitle hardcoded 16px. Also fixed the empty band below the card content noted in `ST-04.1`
 
 ---
 

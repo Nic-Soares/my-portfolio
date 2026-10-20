@@ -135,6 +135,17 @@ export default function GalleryContent() {
             />
           </Row>
         ))}
+        <Row label="selectionMode=multiple (try it)">
+          <ConnectedButtonGroup
+            selectionMode="multiple"
+            options={[
+              { label: "Data" },
+              { label: "Frontend" },
+              { label: "Backend" },
+              { label: "Design" },
+            ]}
+          />
+        </Row>
       </Specimen>
 
       <Specimen name="Chip" figma="Input chip" source="M3 library">
@@ -231,7 +242,7 @@ export default function GalleryContent() {
           <ProjectCard
             title="Spotify Clone"
             company="Personal Project"
-            categories={["Frontend", "Backend"]}
+            categories={["Design", "Frontend", "Backend", "Data"]}
           />
         </div>
       </Specimen>

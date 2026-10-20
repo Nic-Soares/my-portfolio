@@ -17,6 +17,7 @@ interface ButtonProps {
   visible?: boolean;
   interactive?: boolean;
   grouped?: boolean;
+  ariaPressed?: boolean; // toggle state for assistive tech (button groups)
 }
 
 const Button = ({
@@ -35,6 +36,7 @@ const Button = ({
   visible = true,
   interactive = true,
   grouped = false,
+  ariaPressed,
 }: ButtonProps) => {
   // Use internal state only when toggleable and selected is uncontrolled.
   const [internalSelected, setInternalSelected] = useState(false);
@@ -93,6 +95,7 @@ const Button = ({
       disabled={disabled}
       tabIndex={isInteractive ? 0 : -1}
       aria-disabled={!isInteractive}
+      aria-pressed={ariaPressed}
     >
       <div className={styles["button__content"]}>
         <div className={styles["button__state-layer"]}>

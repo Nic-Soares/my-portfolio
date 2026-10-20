@@ -73,11 +73,23 @@ export interface ProjectTab {
   content: ContentBlock[];
 }
 
+// Work areas a project belongs to; they drive the Projects filter and the
+// card tags.
+export type WorkArea =
+  | "Data"
+  | "Frontend"
+  | "Backend"
+  | "Automation"
+  | "DevOps"
+  | "Design";
+
 // Defines the complete project structure.
 export interface ProjectData {
   slug: string; // e.g. "spotify-clone", used in the URL.
   name: string; // Project name.
   description: string; // Short description.
+  areas: WorkArea[]; // At least one; first is the main one.
+  context: string; // Card subtitle, e.g. "Personal project" or a company.
   hero?: {
     // Optional hero image or video.
     type: "image" | "video";
