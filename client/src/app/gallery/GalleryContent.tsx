@@ -11,6 +11,7 @@ import ChipRow from "@/components/ui/Chip/ChipRow.tsx";
 import CompanyLogo from "@/components/ui/CompanyLogo/CompanyLogo.tsx";
 import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup.tsx";
 import IconButton from "@/components/ui/IconButton/IconButton.tsx";
+import LinearProgress from "@/components/ui/LinearProgress/LinearProgress.tsx";
 import SearchBar from "@/components/ui/SearchBar/SearchBar.tsx";
 import ProjectCard from "@/features/work/components/ProjectList/ProjectCard/ProjectCard.tsx";
 import styles from "./Gallery.module.css";
@@ -179,6 +180,23 @@ export default function GalleryContent() {
             onClick={() => {}}
             onRemove={() => {}}
           />
+        </Row>
+      </Specimen>
+
+      <Specimen
+        name="LinearProgress"
+        figma="Linear Progress"
+        source="Components page"
+      >
+        <Row label="Indeterminate (400px, as Figma)">
+          <div style={{ width: 400 }}>
+            <LinearProgress />
+          </div>
+        </Row>
+        <Row label="Determinate 40% (400px, as Figma)">
+          <div style={{ width: 400 }}>
+            <LinearProgress value={40} />
+          </div>
         </Row>
       </Specimen>
 

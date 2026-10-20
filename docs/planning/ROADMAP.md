@@ -368,9 +368,9 @@ Rule (2026-10-18): every component in the gallery must exist in Figma — as a l
 Figma: `Linear Progress` (Type = Indeterminate / Determinate) on the Components page, section `Feedback` (created 2026-10-18 from the Loading screens). Circular progress and the M3 Expressive loading indicator are not in the design.
 
 - **TK-04.3.1** — `LinearProgress`
-  - [ ] Determinate and indeterminate
-  - [ ] Indeterminate animation in CSS, respecting `prefers-reduced-motion`
-  - [ ] `role="progressbar"` with `aria-valuenow`/`aria-valuetext`
+  - [x] Determinate and indeterminate — `value` 0–100, omitted = indeterminate (as the Figma description says); 4px track in surface-container-highest, primary indicator, full corners; gallery specimen at the Figma 400px width
+  - [x] Indeterminate animation in CSS, respecting `prefers-reduced-motion` — the Figma bar (38.7% of the track) sweeps across in 1.6s with the standard easing; under reduced motion it stands where Figma draws it (12.9%)
+  - [x] `role="progressbar"` with `aria-valuenow`/`aria-valuetext` — only when determinate (clamped to 0–100); `aria-label` defaults to "Loading"
 - ~~**TK-04.3.2** — `CircularProgress`~~ — dropped 2026-10-18: not in the design
 - ~~**TK-04.3.3** — `LoadingIndicator` (M3 Expressive)~~ — dropped 2026-10-18: not in the design. Design it in Figma first if wanted
 

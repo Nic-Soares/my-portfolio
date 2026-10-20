@@ -1,0 +1,46 @@
+.progress {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  overflow: hidden;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--md-sys-color-surface-container-highest);
+}
+
+.progress__indicator {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: var(--progress-value, 0%);
+  border-radius: inherit;
+  background: var(--md-sys-color-primary);
+  transition: width 250ms ease-out;
+}
+
+/* Indeterminate: the Figma bar (38.7% of the track) sweeps across */
+.progress--indeterminate .progress__indicator {
+  width: 38.7%;
+  transition: none;
+  animation: progress-sweep 1.6s cubic-bezier(0.2, 0, 0, 1) infinite;
+}
+
+@keyframes progress-sweep {
+  from {
+    left: -38.7%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+/* Reduced motion: the bar stays where Figma draws it */
+@media (prefers-reduced-motion: reduce) {
+  .progress--indeterminate .progress__indicator {
+    left: 12.9%;
+    animation: none;
+  }
+
+  .progress__indicator {
+    transition: none;
+  }
+}
