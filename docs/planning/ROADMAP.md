@@ -671,10 +671,11 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
 Context: in Figma the 5 states share the same anatomy — shape illustration, headline, supporting text, and up to two actions.
 
 - **TK-10.1.1** — `StateLayout`
-  - [ ] Props: illustration, headline, supporting text, actions
-  - [ ] Centered in `PageContent`, filling the available height
-  - [ ] Illustration scale per breakpoint (340 / 340 / 260 / 200)
-  - [ ] Actions in a column on mobile
+  - [x] Props: illustration, headline, supporting text, actions — at most two actions (tuple type), the first filled and the second text; each one runs `onClick` or navigates with `to`; `headingLevel` h1/h2 (h2 when inline in a page that already has an h1)
+  - [x] Centered in `PageContent`, filling the available height — fits the 1492×889 viewport without scrolling (content 756px)
+  - [x] Illustration scale per breakpoint (340 / 340 / 260 / 200) — `StateIllustration` takes the decor in Figma px on the 340 box and positions it in %, so it scales with the box; the mark uses `hero-display`, whose token already scales 96 / 57 / 45
+  - [x] Actions in a column on mobile — Button Large on Medium and up, Medium on Compact (`useSizeClass`)
+  - Not in the gallery: it has no Figma component, only the `EmptyState / …` frames; it is reviewed on the state routes
 
 ### ST-10.2 — The five states
 
@@ -749,6 +750,7 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
   - [ ] Screen reader across states and navigation
 - **TK-12.1.2** — Motion
   - [ ] `prefers-reduced-motion` respected by decor, skeleton, progress, and carousel
+  - [ ] Idea (2026-10-19, design in Figma first): animate the decor shapes site-wide — small shapes float a few px (~6s, staggered), main shape rotates very slowly; still under reduced motion. Goes into `StateIllustration` (all 4 states) and `HeroDecor` together
 - **TK-12.1.3** — Decorative and brand SVGs
   - [ ] Add `<title>` (or `aria-hidden="true"` for purely decorative ones) to every SVG flagged by `deno task check`'s `lint/a11y/noSvgWithoutTitle`: favicon, icons (`dashboard`, `github`, `linkedin`, `telegram`), the M3 shape set (`forms.svg`), and the partner logos (`AlphaWave`, `Boltshift`, `CoreOS`, etc.) — pre-existing, unrelated to `ST-01.0`
 

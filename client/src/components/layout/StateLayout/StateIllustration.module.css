@@ -1,0 +1,29 @@
+/* Fills the StateLayout box; the decor overflows its corners as in Figma */
+.illustration {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.illustration__decor {
+  position: absolute;
+  left: calc(var(--decor-x) / 340 * 100%);
+  top: calc(var(--decor-y) / 340 * 100%);
+  width: calc(var(--decor-size) / 340 * 100%);
+  height: calc(var(--decor-size) / 340 * 100%);
+}
+
+/* Numeral or glyph in Hero display (the token already scales 96 / 57 / 45) */
+.illustration__mark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--hero-display-font);
+  font-weight: var(--hero-display-weight);
+  font-size: var(--hero-display-size);
+  line-height: var(--hero-display-line-height);
+  letter-spacing: var(--hero-display-tracking);
+  color: var(--state-mark-color);
+}
