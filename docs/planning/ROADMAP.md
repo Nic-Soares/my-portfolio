@@ -383,9 +383,9 @@ Figma (Components page, section `Feedback`, created 2026-10-18): `Skeleton` (Sha
   - [ ] Shimmer disabled under `prefers-reduced-motion` — not built: the Figma Skeleton is static and the Loading screens already show motion through the LinearProgress. Design a shimmer in Figma first if wanted (could go with the TK-12.1.2 motion pass)
   - [x] Colors in `surface-container-high`/`highest`, as in Figma
 - **TK-04.4.2** — Skeleton compositions
-  - [ ] `ProjectCardSkeleton` mirroring Figma `Card Skeleton`
-  - [ ] `ProjectGridSkeleton` with count per breakpoint (4 col / 3 col / 2 col / 1 col)
-  - [ ] `ProjectsHeaderSkeleton` mirroring Figma `Header Skeleton` (title + chips + search)
+  - [x] `ProjectCardSkeleton` mirroring Figma `Card Skeleton` — sizes by breakpoint in CSS (390 / 386 / 330 tall, checked against Figma); fills its grid column like the real card instead of the Figma fixed width
+  - [x] `ProjectGridSkeleton` with count per breakpoint (4 col / 3 col / 2 col / 1 col) — reuses the card grid styles; 8 / 8 / 6 / 3 placeholders, as the Figma Loading screens. Not in the gallery (no Figma component; it's the Loading frame's grid)
+  - [x] `ProjectsHeaderSkeleton` mirroring Figma `Header Skeleton` (title + chips + search) — 5 chips + search at Large, 3 chips at Medium, 2 smaller chips at Compact (88 / 72 / 64 tall)
 
 ### ST-04.5 — Decorative primitives
 

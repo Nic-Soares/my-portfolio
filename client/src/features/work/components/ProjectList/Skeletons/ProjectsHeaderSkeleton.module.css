@@ -1,0 +1,59 @@
+@import "@/styles/breakpoints.css";
+
+/* Sizes from Figma "Header Skeleton": Large (Extra-large and Large),
+   Medium, Compact */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 24px;
+}
+
+.header__title {
+  width: 180px;
+  height: 40px;
+}
+
+.header__filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__chip {
+  width: 96px;
+  height: 40px;
+}
+
+.header__search {
+  width: 280px;
+  height: 56px;
+}
+
+@media (--medium), (--compact) {
+  .header__chip--large-only,
+  .header__search {
+    display: none;
+  }
+}
+
+@media (--compact) {
+  .header {
+    padding: 16px;
+  }
+
+  .header__title {
+    width: 120px;
+    height: 32px;
+  }
+
+  .header__chip {
+    width: 64px;
+    height: 32px;
+  }
+
+  .header__chip--medium-up {
+    display: none;
+  }
+}

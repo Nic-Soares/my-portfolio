@@ -15,6 +15,8 @@ import LinearProgress from "@/components/ui/LinearProgress/LinearProgress.tsx";
 import SearchBar from "@/components/ui/SearchBar/SearchBar.tsx";
 import Skeleton from "@/components/ui/Skeleton/Skeleton.tsx";
 import ProjectCard from "@/features/work/components/ProjectList/ProjectCard/ProjectCard.tsx";
+import ProjectCardSkeleton from "@/features/work/components/ProjectList/Skeletons/ProjectCardSkeleton.tsx";
+import ProjectsHeaderSkeleton from "@/features/work/components/ProjectList/Skeletons/ProjectsHeaderSkeleton.tsx";
 import styles from "./Gallery.module.css";
 
 const SIZES = ["xsmall", "small", "medium", "large", "xlarge"] as const;
@@ -209,6 +211,30 @@ export default function GalleryContent() {
         <Row label="Rect · High / Highest (160×96, as Figma)">
           <Skeleton shape="rect" width={160} height={96} />
           <Skeleton shape="rect" tone="highest" width={160} height={96} />
+        </Row>
+      </Specimen>
+
+      <Specimen
+        name="ProjectsHeaderSkeleton"
+        figma="Header Skeleton"
+        source="Components page"
+      >
+        <Row label="Size follows the preview width (Large / Medium / Compact)">
+          <div style={{ width: "100%" }}>
+            <ProjectsHeaderSkeleton />
+          </div>
+        </Row>
+      </Specimen>
+
+      <Specimen
+        name="ProjectCardSkeleton"
+        figma="Card Skeleton"
+        source="Components page"
+      >
+        <Row label="Size follows the preview width; card at the Figma width">
+          <div style={{ width: 420 }}>
+            <ProjectCardSkeleton />
+          </div>
         </Row>
       </Specimen>
 
