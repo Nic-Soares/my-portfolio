@@ -15,6 +15,8 @@
   column-gap: 20px;
   grid-template-columns: 76px minmax(0, 1fr);
   overflow-x: visible;
+  /* Summary links land the block below the sticky tab bar */
+  scroll-margin-top: calc(var(--top-app-bar-height) + 120px);
 }
 
 .block.section:not(:first-child) {

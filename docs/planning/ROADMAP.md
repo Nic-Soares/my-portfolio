@@ -656,8 +656,8 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
 ### ST-09.3 — SummaryNav and project-to-project navigation
 
 - **TK-09.3.1** — Review SummaryNav
-  - [ ] Sticky, with the active item tracking scroll position
-  - [ ] Hide on mobile or turn into a selector
+  - [x] Sticky, with the active item tracking scroll position — sticky at Large (top 136px); `useActiveSection` marks the last heading past the sticky tab bar (or the last one at the page bottom) with `aria-current="location"`; links land the block below the tab bar (`scroll-margin-top`). Styles from Figma `Summary` / `Summary Link`: overline body-small, links body-medium in primary, Hovered surface-variant, Selected body-medium-emphasized
+  - [x] Hide on mobile or turn into a selector — neither: the Figma 744 / 402 frames keep the Summary as a list above the content, as it is now
 - **TK-09.3.2** — Previous/next (Figma `Project Pager`: Horizontal on desktop, Vertical on mobile)
   - Decided 2026-10-19: the pager goes to other **projects** (the Figma frames walk the tabs — update Figma first, then code)
   - [ ] Derive from the data layer's ordering
