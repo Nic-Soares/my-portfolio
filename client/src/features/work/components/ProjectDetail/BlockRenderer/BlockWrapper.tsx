@@ -8,6 +8,7 @@ interface BlockWrapperProps {
   showCopyButton?: boolean;
   isSnug?: boolean;
   isNested?: boolean;
+  startsSection?: boolean; // level-2 header: section spacing above
   dangerouslySetInnerHTML?: { __html: string };
 }
 
@@ -17,6 +18,7 @@ export const BlockWrapper = ({
   showCopyButton = true,
   isSnug = false,
   isNested = false,
+  startsSection = false,
   dangerouslySetInnerHTML,
 }: BlockWrapperProps) => {
   const handleCopyLink = () => {
@@ -28,8 +30,13 @@ export const BlockWrapper = ({
 
   return (
     <div
-      role="region"
-      className={`${isNested ? "" : styles.block} ${isSnug ? styles.snug : ""}`.trim()}
+      className={[
+        isNested ? "" : styles.block,
+        isSnug ? styles.snug : "",
+        startsSection ? styles.section : "",
+      ]
+        .join(" ")
+        .trim()}
       id={id}
     >
       {/* Copy link button */}

@@ -638,11 +638,12 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
 - **TK-09.1.2** — Project facts and intro
   - [x] `ProjectData` has no facts field — add `facts: { label: string; value: string }[]` (Role / Stack / Year / Type) — `ProjectFact[]`, optional; filled for Spotify Web (rendered by `ProjectIntro`, next task)
   - [x] `ProjectIntro` mirroring Figma `Project Intro`: facts beside the intro paragraph at Large, stacked at Medium/Compact — new `intro` content block (the page renders it with the project's `facts`); facts as a `<dl>`; labels `headline-large-emphasized` in Roboto Condensed Medium Italic (decided 2026-10-19: self-hosted Roboto Italic with the width axis, +70 KB, not preloaded), values `headline-small`, paragraph `body-large-plus`. The Figma section "Icon Rail" is the existing copy-link button of `BlockWrapper`
-  - Note for TK-09.1.3: the content column is narrower than Figma below Large (294px vs 370 at 402, 636 vs 664 at 744) because of the `BlockWrapper` 68px copy-button column
 - **TK-09.1.3** — Block parity with the Figma `Block / *` components
-  - [ ] List items: `ListBlock.module.css` uses `body-medium`, Figma uses `body/large-plus`
-  - [ ] Image block: lock a default aspect ratio (Figma ratios 16:9 / 3:2 / 4:3 / 1:1 / 5:2)
-  - [ ] `columns` block matches `Block / Media Columns` (side by side at Large, stacked below)
+  - [x] List items: `ListBlock.module.css` uses `body-medium`, Figma uses `body/large-plus` — plus the Figma markers (• / "1.", 12px before the text) and 8px between items; paragraphs moved to `body-large-plus` too (Block / Paragraph Size=Large)
+  - [x] Image block: lock a default aspect ratio (Figma ratios 16:9 / 3:2 / 4:3 / 1:1 / 5:2) — 16:9 unless the data sets one; secondary-container fill while loading, caption 8px below
+  - [x] `columns` block matches `Block / Media Columns` (side by side at Large, stacked below) — refined from the Spotify frames: media-only rows (screens, code) stay side by side on Medium and stack on Compact; rows with text stack from Medium; 24px gutters
+  - [x] Beyond the list (2026-10-19): `CodeBlock` was unstyled (empty CSS) — now Figma `Block / Code`; table cells on the body-medium tokens; block rhythm from the Figma frames (24px within a section, 96px before a level-2 header, rows of 76 + 20 + 996px at Large, 40 / 16px page margins below Large, copy-link rail hidden below Large). Measured against the Spotify frames at 1512 / 744 / 402: every block lands on the Figma y, x and width (the Overview intro section is 8px shorter than in Figma)
+  - [ ] Open question (Nicolas): the hero title is small; Figma uses hero-display (96px) — not in this list
 
 ### ST-09.2 — Footer
 

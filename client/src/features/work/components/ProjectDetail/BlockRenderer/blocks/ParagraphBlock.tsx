@@ -9,7 +9,11 @@ export const ParagraphBlock: React.FC<
 > = ({ block, blockId, isNested }) => {
   return (
     <BlockWrapper id={blockId} isSnug={block.snug} isNested={isNested}>
-      <p dangerouslySetInnerHTML={{ __html: block.text }} />
+      {/* Figma "Block / Paragraph" Size=Large */}
+      <p
+        className="body-large-plus"
+        dangerouslySetInnerHTML={{ __html: block.text }}
+      />
     </BlockWrapper>
   );
 };

@@ -16,7 +16,7 @@ export const ListBlock: React.FC<
         {block.items.map((item, idx) => (
           <li
             key={idx}
-            className={styles.listItem}
+            className={`body-large-plus ${styles.listItem}`}
             dangerouslySetInnerHTML={{ __html: item }}
           />
         ))}

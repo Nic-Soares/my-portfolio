@@ -15,11 +15,8 @@ export const ImageBlock: React.FC<
               src={block.src}
               alt={block.alt}
               className={`${styles.image} ${block.className || ""}`.trim()}
-              style={
-                block.aspectRatio
-                  ? { aspectRatio: block.aspectRatio }
-                  : undefined
-              }
+              // Figma "Block / Image" locks a ratio; 16:9 unless the data says
+              style={{ aspectRatio: block.aspectRatio ?? "16 / 9" }}
             />
           </div>
           {block.caption && (
