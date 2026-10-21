@@ -829,6 +829,9 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 | 4 | Real About Me data — the two postgraduate degrees in Figma are fictional | `EP-07` |
 | 5 | i18n with a library or a custom solution | `EP-11` |
 | 6 | Deploy host — must also run the Express server (`EP-13`) | `EP-12`, `EP-13` |
+| 7 | **Deferred to the end (decided 2026-10-21):** Spotify Web repository URL for "Source — GitHub repository" | `EP-09` |
+| 8 | **Deferred to the end:** the architecture diagram in Figma is titled "MY PORTFOLIO — ARCHITECTURE", not Spotify Web — confirm or replace | `EP-09` |
+| 9 | **Deferred to the end:** Footer links — GitHub, LinkedIn, Telegram, Email and Résumé (`#` for now) | `EP-09` |
 
 ## 5. Execution notes
 
