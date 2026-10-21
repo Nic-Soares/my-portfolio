@@ -18,7 +18,7 @@ const ProjectDetailHero = ({
   hero,
 }: ProjectDetailHeroProps) => {
   return (
-    <header>
+    <header className="projectDetailHero">
       <div className="splitAsset">
         <TitleCard title={title} subtitle={description} />
         {hero && (

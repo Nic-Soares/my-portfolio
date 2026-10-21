@@ -1,6 +1,7 @@
 @import "@/styles/breakpoints.css";
 
-header {
+/* Plain (global) CSS: scoped by class, or it styles every <header> */
+.projectDetailHero {
   width: 100%;
   max-width: 1760px;
   margin: 0 auto;
@@ -20,7 +21,7 @@ header {
 /* Below Large the page shell already adds 10px, so the panels land on the
    Figma x (10px at Medium, 16px at Compact) */
 @media (--medium) {
-  header {
+  .projectDetailHero {
     padding: 0;
   }
 
@@ -31,7 +32,7 @@ header {
 }
 
 @media (--compact) {
-  header {
+  .projectDetailHero {
     padding: 0 6px;
   }
 
