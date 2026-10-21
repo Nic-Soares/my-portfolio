@@ -19,10 +19,22 @@
   flex-direction: column;
 }
 
+/* Figma Hero title: material-theme/display/hero (96 / 57 / 45 per breakpoint) */
+.title {
+  font-family: var(--hero-display-font);
+  font-weight: var(--hero-display-weight);
+  font-size: var(--hero-display-size);
+  line-height: var(--hero-display-line-height);
+  letter-spacing: var(--hero-display-tracking);
+}
+
 .description {
-  margin-top: 16px;
+  margin-top: 20px;
   font-family: var(--title-large-font);
+  font-weight: var(--title-large-weight);
   font-size: var(--title-large-size);
+  line-height: var(--title-large-line-height);
+  letter-spacing: var(--title-large-tracking);
 }
 
 /* --- Lógica de Tamanhos (SM, MD, Default) --- */

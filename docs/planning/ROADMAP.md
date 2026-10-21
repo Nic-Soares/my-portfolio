@@ -643,7 +643,7 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
   - [x] Image block: lock a default aspect ratio (Figma ratios 16:9 / 3:2 / 4:3 / 1:1 / 5:2) — 16:9 unless the data sets one; secondary-container fill while loading, caption 8px below
   - [x] `columns` block matches `Block / Media Columns` (side by side at Large, stacked below) — refined from the Spotify frames: media-only rows (screens, code) stay side by side on Medium and stack on Compact; rows with text stack from Medium; 24px gutters
   - [x] Beyond the list (2026-10-19): `CodeBlock` was unstyled (empty CSS) — now Figma `Block / Code`; table cells on the body-medium tokens; block rhythm from the Figma frames (24px within a section, 96px before a level-2 header, rows of 76 + 20 + 996px at Large, 40 / 16px page margins below Large, copy-link rail hidden below Large). Measured against the Spotify frames at 1512 / 744 / 402: every block lands on the Figma y, x and width (the Overview intro section is 8px shorter than in Figma)
-  - [ ] Open question (Nicolas): the hero title is small; Figma uses hero-display (96px) — not in this list
+  - [x] Hero matches Figma `Hero` (2026-10-21): title on `display/hero` (96 / 57 / 45, was the global h1 `display-large`), description `title/large` 20px below; panels 580px tall at Large and 400px at Medium (text wider than the image, 10px apart, 30px padding), stacked on Compact with a 260px image; side margins on the Figma x at 744 / 402
 
 ### ST-09.2 — Footer
 

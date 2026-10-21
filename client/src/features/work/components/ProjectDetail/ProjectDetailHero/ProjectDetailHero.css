@@ -1,14 +1,43 @@
+@import "@/styles/breakpoints.css";
+
 header {
   width: 100%;
   max-width: 1760px;
   margin: 0 auto;
   padding: 0 8px;
+  box-sizing: border-box;
 }
 
+/* Figma "Hero": text panel a bit wider than the image, 10px apart, 580px
+   tall at Large and 400px at Medium; stacked on Compact (image 260px) */
 .splitAsset {
   display: grid;
-  grid-gap: 8px;
-  gap: 8px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-flow: row;
+  gap: 10px;
+  grid-template-columns: minmax(0, 715fr) minmax(0, 655fr);
+  height: 580px;
+}
+
+/* Below Large the page shell already adds 10px, so the panels land on the
+   Figma x (10px at Medium, 16px at Compact) */
+@media (--medium) {
+  header {
+    padding: 0;
+  }
+
+  .splitAsset {
+    grid-template-columns: minmax(0, 387fr) minmax(0, 327fr);
+    height: 400px;
+  }
+}
+
+@media (--compact) {
+  header {
+    padding: 0 6px;
+  }
+
+  .splitAsset {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 260px;
+    height: auto;
+  }
 }

@@ -31,7 +31,7 @@ export default function TitleCard({
         {date && <span className={styles.date}>{date}</span>}
 
         <div className={styles.titleGroup}>
-          <h1>{title}</h1>
+          <h1 className={styles.title}>{title}</h1>
           {subtitle && <p className={styles.description}>{subtitle}</p>}
         </div>
       </div>
