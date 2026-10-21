@@ -660,8 +660,10 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
   - [x] Hide on mobile or turn into a selector — neither: the Figma 744 / 402 frames keep the Summary as a list above the content, as it is now
 - **TK-09.3.2** — Previous/next (Figma `Project Pager`: Horizontal on desktop, Vertical on mobile)
   - Decided 2026-10-19: the pager goes to other **projects** (the Figma frames walk the tabs — update Figma first, then code)
-  - [ ] Derive from the data layer's ordering
-  - [ ] Edge state at the first and last item
+  - [x] Figma updated (2026-10-21): `Pager Card` labels "Previous project" / "Next project", Title default "Project name"; `Project Pager` gained `Show previous` / `Show next`; review frame "Project Pager — States" (first / middle / last)
+  - [x] Derive from the data layer's ordering — `getAdjacentProjects` in `useProjectData` (the `projectsData` order); `ProjectPager` at the end of Project Detail, 104px below the last block and 20px above the footer, as in the Spotify frames
+  - [x] Edge state at the first and last item — the missing card is left out and the other fills the row; no pager when there is only one project
+  - [x] Moving to another project starts on its first tab at the top of the page (the page is keyed by slug)
 
 ---
 
