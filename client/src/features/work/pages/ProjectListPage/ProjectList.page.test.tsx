@@ -31,7 +31,7 @@ describe("ProjectListPage filters", () => {
 
   it("shows every project with counts", () => {
     renderAt("/projects");
-    expect(titles()).toEqual(["Clone do Spotify", "Reference"]);
+    expect(titles()).toEqual(["Spotify Web", "Reference"]);
     expect(screen.getByRole("button", { name: "All · 2" })).toBeInTheDocument();
   });
 
@@ -41,14 +41,14 @@ describe("ProjectListPage filters", () => {
 
     const backend = screen.getByRole("button", { name: "Backend · 1" });
     fireEvent.click(backend); // Design + Backend: either area matches
-    expect(titles()).toEqual(["Clone do Spotify", "Reference"]);
+    expect(titles()).toEqual(["Spotify Web", "Reference"]);
     expect(backend).toHaveAttribute("aria-pressed", "true");
 
     fireEvent.click(screen.getByRole("button", { name: "Design · 1" }));
-    expect(titles()).toEqual(["Clone do Spotify"]);
+    expect(titles()).toEqual(["Spotify Web"]);
 
     fireEvent.click(screen.getByRole("button", { name: "All · 2" }));
-    expect(titles()).toEqual(["Clone do Spotify", "Reference"]);
+    expect(titles()).toEqual(["Spotify Web", "Reference"]);
     expect(backend).toHaveAttribute("aria-pressed", "false");
   });
 
@@ -66,7 +66,7 @@ describe("ProjectListPage filters", () => {
       screen.getByRole("heading", { level: 2, name: "No projects found" }),
     ).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
-    expect(titles()).toEqual(["Clone do Spotify", "Reference"]);
+    expect(titles()).toEqual(["Spotify Web", "Reference"]);
   });
 
   it("shows one tool at a time below Large", () => {

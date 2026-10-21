@@ -1,0 +1,166 @@
+@import "@/styles/breakpoints.css";
+
+/* Figma "Footer": 120px above the divider at Large, 64px below */
+.footer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 120px;
+  overflow: hidden;
+  /* No fill: sits on the page container's background */
+  background: transparent;
+  color: var(--md-sys-color-on-surface);
+}
+
+/* Wave divider: the 1920px path is clipped to the footer width, left aligned.
+   The asset's fill is primary; set from the token so it follows the theme */
+.divider {
+  height: 12px;
+  overflow: hidden;
+}
+
+.divider svg {
+  display: block;
+}
+
+.divider path {
+  fill: var(--md-sys-color-primary);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 64px 104px;
+}
+
+.main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 440px;
+  max-width: 100%;
+}
+
+.logo {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+
+.logo svg {
+  display: block;
+}
+
+.tagline {
+  margin: 0;
+}
+
+.links {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* Figma "Footer Link Column": title, 20px, links 16px apart */
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.columnTitle {
+  margin: 0;
+  color: var(--md-sys-color-on-surface);
+}
+
+.columnLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  color: var(--md-sys-color-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.bottomBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+}
+
+.bottomBar p {
+  margin: 0;
+}
+
+.copyright {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+/* The asset strokes black; follow the text color instead */
+.copyrightIcon {
+  flex-shrink: 0;
+}
+
+.copyrightIcon path {
+  stroke: currentColor;
+}
+
+/* Medium: brand above the links, columns spread across the width */
+@media (--medium), (--compact) {
+  /* Full bleed: the page shell's 10px padding is outside the Figma frame */
+  .footer {
+    margin-inline: -10px;
+    padding-top: 64px;
+  }
+
+  .content {
+    padding: 64px 40px;
+  }
+
+  .main {
+    flex-direction: column;
+  }
+
+  .brand {
+    width: 100%;
+  }
+
+  .links {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+/* Compact: 16px margins and the bottom bar stacked, 8px apart */
+@media (--compact) {
+  .content {
+    padding: 64px 16px;
+  }
+
+  .bottomBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

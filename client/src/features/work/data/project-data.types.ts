@@ -8,6 +8,8 @@ export type ContentBlock =
       snug?: boolean;
     }
   | { type: "paragraph"; text: string; id?: string; snug?: boolean }
+  // Overview intro: the project facts beside this lead paragraph
+  | { type: "intro"; text: string; id?: string }
   | {
       type: "image";
       src: string;
@@ -83,6 +85,12 @@ export type WorkArea =
   | "DevOps"
   | "Design";
 
+// One row of the project facts table, e.g. { label: "Year", value: "2025" }.
+export interface ProjectFact {
+  label: string;
+  value: string;
+}
+
 // Defines the complete project structure.
 export interface ProjectData {
   slug: string; // e.g. "spotify-clone", used in the URL.
@@ -90,6 +98,7 @@ export interface ProjectData {
   description: string; // Short description.
   areas: WorkArea[]; // At least one; first is the main one.
   context: string; // Card subtitle, e.g. "Personal project" or a company.
+  facts?: ProjectFact[]; // Figma "Project Facts": Role / Stack / Year / Type.
   hero?: {
     // Optional hero image or video.
     type: "image" | "video";

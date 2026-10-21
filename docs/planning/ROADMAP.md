@@ -631,31 +631,39 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
 ### ST-09.1 — Real content
 
 - **TK-09.1.1** — Replace the placeholder
-  - [ ] Port the Spotify Web case study from Figma into `spotify-clone.data.ts` (Overview, Architecture, Repository tabs), in English
+  - [x] Port the Spotify Web case study from Figma into `spotify-clone.data.ts` (Overview, Architecture, Repository tabs), in English — copy verbatim from Figma; renamed "Clone do Spotify" → "Spotify Web" everywhere (slug kept); images exported from Figma as webp in `assets/images/projects/spotify-web/` (hero illustration, architecture diagram, and the 3 real screenshots that sat beside the frames fill the empty Screens slots — decided 2026-10-19); the Overview "Section 3" placeholder link dropped
+  - [ ] PENDING (Nicolas): GitHub repository URL for "Source — GitHub repository" (the old data had `#`)
+  - [ ] PENDING (Nicolas): the architecture diagram in Figma is titled "MY PORTFOLIO — ARCHITECTURE", not Spotify Web — confirm or replace
   - [x] Confirm every block in the design exists in the `blockRegistry` (done in `TK-02.2.1` — no missing block types)
 - **TK-09.1.2** — Project facts and intro
-  - [ ] `ProjectData` has no facts field — add `facts: { label: string; value: string }[]` (Role / Stack / Year / Type)
-  - [ ] `ProjectIntro` mirroring Figma `Project Intro`: facts beside the intro paragraph at Large, stacked at Medium/Compact
+  - [x] `ProjectData` has no facts field — add `facts: { label: string; value: string }[]` (Role / Stack / Year / Type) — `ProjectFact[]`, optional; filled for Spotify Web (rendered by `ProjectIntro`, next task)
+  - [x] `ProjectIntro` mirroring Figma `Project Intro`: facts beside the intro paragraph at Large, stacked at Medium/Compact — new `intro` content block (the page renders it with the project's `facts`); facts as a `<dl>`; labels `headline-large-emphasized` in Roboto Condensed Medium Italic (decided 2026-10-19: self-hosted Roboto Italic with the width axis, +70 KB, not preloaded), values `headline-small`, paragraph `body-large-plus`. The Figma section "Icon Rail" is the existing copy-link button of `BlockWrapper`
 - **TK-09.1.3** — Block parity with the Figma `Block / *` components
-  - [ ] List items: `ListBlock.module.css` uses `body-medium`, Figma uses `body/large-plus`
-  - [ ] Image block: lock a default aspect ratio (Figma ratios 16:9 / 3:2 / 4:3 / 1:1 / 5:2)
-  - [ ] `columns` block matches `Block / Media Columns` (side by side at Large, stacked below)
+  - [x] List items: `ListBlock.module.css` uses `body-medium`, Figma uses `body/large-plus` — plus the Figma markers (• / "1.", 12px before the text) and 8px between items; paragraphs moved to `body-large-plus` too (Block / Paragraph Size=Large)
+  - [x] Image block: lock a default aspect ratio (Figma ratios 16:9 / 3:2 / 4:3 / 1:1 / 5:2) — 16:9 unless the data sets one; secondary-container fill while loading, caption 8px below
+  - [x] `columns` block matches `Block / Media Columns` (side by side at Large, stacked below) — refined from the Spotify frames: media-only rows (screens, code) stay side by side on Medium and stack on Compact; rows with text stack from Medium; 24px gutters
+  - [x] Beyond the list (2026-10-19): `CodeBlock` was unstyled (empty CSS) — now Figma `Block / Code`; table cells on the body-medium tokens; block rhythm from the Figma frames (24px within a section, 96px before a level-2 header, rows of 76 + 20 + 996px at Large, 40 / 16px page margins below Large, copy-link rail hidden below Large). Measured against the Spotify frames at 1512 / 744 / 402: every block lands on the Figma y, x and width (the Overview intro section is 8px shorter than in Figma)
+  - [x] Hero matches Figma `Hero` (2026-10-21): title on `display/hero` (96 / 57 / 45, was the global h1 `display-large`), description `title/large` 20px below; panels 580px tall at Large and 400px at Medium (text wider than the image, 10px apart, 30px padding), stacked on Compact with a 260px image; side margins on the Figma x at 744 / 402
 
 ### ST-09.2 — Footer
 
 - **TK-09.2.1** — Footer component (Figma `Footer`, Size L/M/C + `Footer Link Column`)
-  - [ ] Navigation and Resources columns, Social, and the copyright line
-  - [ ] Labels in English (Navigation, About, Work, Contact, Resources, Résumé)
-  - [ ] Reusable across other pages
+  - [x] Navigation and Resources columns, Social, and the copyright line — `components/layout/Footer` with the Figma wave divider, logo and copyright icon as assets (divider and icon recolored from tokens for dark mode); the year comes from the clock; no fill of its own (transparent on the page container, decided 2026-10-21; Figma uses surface). Measured at 1512 / 744 / 402: 524 / 624 / 666px tall, as in Figma
+  - [x] Labels in English (Navigation, About, Work, Contact, Resources, Résumé)
+  - [x] Reusable across other pages — no props, content in `footer.data.ts`; on Project Detail for now
+  - [ ] Pending (Nicolas): real URLs for GitHub, LinkedIn, Telegram, Email and Résumé (`#` for now); Contact points to `/about`; Figma "Project 1 / Project 2" became Spotify Web (the only public case study)
 
 ### ST-09.3 — SummaryNav and project-to-project navigation
 
 - **TK-09.3.1** — Review SummaryNav
-  - [ ] Sticky, with the active item tracking scroll position
-  - [ ] Hide on mobile or turn into a selector
+  - [x] Sticky, with the active item tracking scroll position — sticky at Large (top 136px); `useActiveSection` marks the last heading past the sticky tab bar (or the last one at the page bottom) with `aria-current="location"`; links land the block below the tab bar (`scroll-margin-top`). Styles from Figma `Summary` / `Summary Link`: overline body-small, links body-medium in primary, Hovered surface-variant, Selected body-medium-emphasized
+  - [x] Hide on mobile or turn into a selector — neither: the Figma 744 / 402 frames keep the Summary as a list above the content, as it is now
 - **TK-09.3.2** — Previous/next (Figma `Project Pager`: Horizontal on desktop, Vertical on mobile)
-  - [ ] Derive from the data layer's ordering
-  - [ ] Edge state at the first and last item
+  - Decided 2026-10-19: the pager goes to other **projects** (the Figma frames walk the tabs — update Figma first, then code)
+  - [x] Figma updated (2026-10-21): `Pager Card` labels "Previous project" / "Next project", Title default "Project name"; `Project Pager` gained `Show previous` / `Show next`; review frame "Project Pager — States" (first / middle / last)
+  - [x] Derive from the data layer's ordering — `getAdjacentProjects` in `useProjectData` (the `projectsData` order); `ProjectPager` at the end of Project Detail, 104px below the last block and 20px above the footer, as in the Spotify frames
+  - [x] Edge state at the first and last item — the missing card is left out and the other fills the row; no pager when there is only one project
+  - [x] Moving to another project starts on its first tab at the top of the page (the page is keyed by slug)
 
 ---
 
@@ -821,6 +829,9 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 | 4 | Real About Me data — the two postgraduate degrees in Figma are fictional | `EP-07` |
 | 5 | i18n with a library or a custom solution | `EP-11` |
 | 6 | Deploy host — must also run the Express server (`EP-13`) | `EP-12`, `EP-13` |
+| 7 | **Deferred to the end (decided 2026-10-21):** Spotify Web repository URL for "Source — GitHub repository" | `EP-09` |
+| 8 | **Deferred to the end:** the architecture diagram in Figma is titled "MY PORTFOLIO — ARCHITECTURE", not Spotify Web — confirm or replace | `EP-09` |
+| 9 | **Deferred to the end:** Footer links — GitHub, LinkedIn, Telegram, Email and Résumé (`#` for now) | `EP-09` |
 
 ## 5. Execution notes
 

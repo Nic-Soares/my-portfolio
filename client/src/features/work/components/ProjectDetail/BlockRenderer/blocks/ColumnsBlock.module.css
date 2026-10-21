@@ -1,22 +1,31 @@
 @import "@/styles/breakpoints.css";
 
+/* Figma gallery / code-row: 24px gutters */
 .columnsContainer {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 24px;
   width: 100%;
 }
 
 .column {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
-/* Side by side at Large and up, stacked below (Figma `Block / Media Columns`) */
-@media (--compact), (--medium) {
+/* Stacked on Compact; text + media also stacks on Medium (Figma
+   `Block / Media Columns`) */
+@media (--compact) {
   .columnsContainer {
+    flex-direction: column;
+  }
+}
+
+@media (--medium) {
+  .columnsContainer--text {
     flex-direction: column;
   }
 }

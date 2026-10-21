@@ -18,10 +18,19 @@ const ProjectDetailHero = ({
   hero,
 }: ProjectDetailHeroProps) => {
   return (
-    <header>
+    <header className="projectDetailHero">
       <div className="splitAsset">
         <TitleCard title={title} subtitle={description} />
-        {hero && <MediaCard type={hero.type} src={hero.src} alt={hero.alt} />}
+        {hero && (
+          // The hero row sets the height (Figma Hero), not the card
+          <MediaCard
+            type={hero.type}
+            src={hero.src}
+            alt={hero.alt}
+            minHeight="0"
+            maxHeight="none"
+          />
+        )}
       </div>
     </header>
   );

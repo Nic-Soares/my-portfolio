@@ -1,60 +1,42 @@
+/* Figma "Block / List Item" Size=Large: body-large-plus, 8px between items,
+   the marker 12px before the text (• for bullets, "1." for numbers) */
 .listBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin: 0;
-  padding-left: 0;
+  padding: 0;
+  list-style: none;
   width: 100%;
 }
 
-.unorderedList {
-  list-style: disc;
-  padding-left: 20px;
-}
-
 .orderedList {
-  list-style: none;
-  counter-reset: custom-counter;
+  counter-reset: list-item;
 }
 
 .listItem {
-  margin-bottom: 8px;
-  font-family: var(--body-medium-font, inherit);
-  font-size: var(--body-medium-size, 1rem);
-  font-weight: var(--body-medium-weight, 400);
-  letter-spacing: var(--body-medium-tracking, normal);
-  line-height: var(--body-medium-line-height, 1.5);
-  color: var(--md-sys-color-on-surface, #1b1c15);
+  position: relative;
+  padding-left: 19px; /* marker (7px) + 12px gap */
+  color: var(--md-sys-color-on-surface);
+}
+
+.unorderedList .listItem::before {
+  content: "•";
+  position: absolute;
+  left: 0;
 }
 
 .orderedList .listItem {
-  position: relative;
-  padding-left: 36px;
-  counter-increment: custom-counter;
-  margin-bottom: 20px;
+  padding-left: 30px; /* "1." (18px) + 12px gap */
+  counter-increment: list-item;
 }
 
 .orderedList .listItem::before {
-  font-family: var(--label-large-font, inherit);
-  font-size: var(--label-large-size, 0.875rem);
-  font-weight: var(--label-large-weight, 500);
-  letter-spacing: var(--label-large-tracking, normal);
-  line-height: var(--label-large-line-height, 1.5);
-  display: block;
-  width: 24px;
-  height: 32px;
+  content: counter(list-item) ".";
   position: absolute;
   left: 0;
-  top: -4px;
-  border-radius: var(--md-sys-shape-corner-medium);
-  background: var(--md-sys-color-inverse-surface, #303129);
-  color: var(--md-sys-color-inverse-on-surface, #f2f1e5);
-  line-height: 32px;
-  text-align: center;
-  content: counter(custom-counter);
 }
 
-.listItem > :first-child {
-  margin-top: 0;
-}
-
-.listItem > :last-child {
-  margin-bottom: 0;
+.listItem a {
+  color: var(--md-sys-color-primary);
 }

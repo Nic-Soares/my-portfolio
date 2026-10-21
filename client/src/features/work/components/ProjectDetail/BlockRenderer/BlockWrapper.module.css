@@ -1,22 +1,33 @@
+@import "@/styles/breakpoints.css";
+
+/* Figma Project Detail "Row": an "Icon Rail" (76px, the copy-link button),
+   20px and a 996px content column (the Row's empty 20px on the right is
+   left out so the summary fits beside it); 24px between blocks of a section,
+   96px before the next section (a level-2 header) */
 .block {
   display: grid;
   position: relative;
-  max-width: 1112px;
+  box-sizing: border-box;
+  max-width: 1092px;
   width: 100%;
-  margin: 0px auto;
-  padding-bottom: 104px;
-  gap: 20px;
-  grid-template-columns: 68px repeat(auto-fit, minmax(calc(25% - 20px), 1fr));
+  margin: 0;
+  padding-bottom: 24px;
+  column-gap: 20px;
+  grid-template-columns: 76px minmax(0, 1fr);
   overflow-x: visible;
+  /* Summary links land the block below the sticky tab bar */
+  scroll-margin-top: calc(var(--top-app-bar-height) + 120px);
 }
 
-.block.snug {
-  padding-bottom: 56px;
+.block.section:not(:first-child) {
+  margin-top: 72px;
 }
 
-/* Copy button container positioned on the left */
+/* Copy button container positioned on the left; zero height so the button
+   never stretches the row (a 40px heading stays 40px, as in Figma) */
 .copy-button-container {
   position: relative;
+  height: 0;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
@@ -38,7 +49,7 @@
 
 .chunk {
   display: block;
-  grid-column: 2 / -1;
+  grid-column: -2 / -1;
 }
 
 /* Text chunk styles */
@@ -53,10 +64,21 @@
 .text-chunk p {
   margin-block-start: 1em;
   margin-block-end: 1em;
-  max-width: 760px;
 }
 
 .text-chunk ul,
 .text-chunk ol {
-  max-width: 760px;
+  margin: 0;
+}
+
+/* Below Large the rail is hidden (no hover on touch) and the content takes
+   the full width */
+@media (--medium), (--compact) {
+  .block {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .copy-button-container {
+    display: none;
+  }
 }

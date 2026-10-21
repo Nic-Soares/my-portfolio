@@ -11,8 +11,9 @@
 }
 
 .hero {
-  padding: 56px;
-  min-height: 544px;
+  /* Figma Hero "Text Panel": 30px padding, height from the hero row */
+  padding: 30px;
+  height: 100%;
 
   /* Cores e Background */
   background: var(--md-sys-color-surface-container);

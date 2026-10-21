@@ -7,7 +7,12 @@ export const HeaderBlock: React.FC<
 > = ({ block, blockId, isNested }) => {
   const Tag = `h${block.level}` as "h1" | "h2" | "h3";
   return (
-    <BlockWrapper id={blockId} isSnug={true} isNested={isNested}>
+    <BlockWrapper
+      id={blockId}
+      isSnug={true}
+      isNested={isNested}
+      startsSection={block.level === 2}
+    >
       {React.createElement(Tag, null, block.text)}
     </BlockWrapper>
   );

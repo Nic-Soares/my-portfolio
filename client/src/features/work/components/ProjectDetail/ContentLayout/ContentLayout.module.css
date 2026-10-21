@@ -8,7 +8,6 @@
 
 .carbon-container {
   flex: 1 1 0%;
-  max-width: -moz-fit-content;
   max-width: fit-content;
   overflow: visible;
 }
@@ -23,9 +22,15 @@ article {
   display: block;
 }
 
+/* Figma: the main column has 116px on the left, and its 1112px rows are
+   centered in what's left (1054px), so they start 29px earlier */
 @media (--large), (--extra-large) {
+  .content-container {
+    justify-content: space-between; /* content left, summary at the right edge */
+  }
+
   .carbon-container {
-    margin-left: 116px;
+    margin-left: 87px;
   }
 }
 
@@ -39,5 +44,14 @@ article {
   .carbon-container {
     min-width: 0;
     max-width: 100%;
+    /* Figma: 40px from the page edge at Medium, 16px at Compact; PageContent
+       already pads 10px */
+    padding-inline: 30px;
+  }
+}
+
+@media (--compact) {
+  .carbon-container {
+    padding-inline: 6px;
   }
 }

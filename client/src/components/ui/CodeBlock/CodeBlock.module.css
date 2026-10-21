@@ -1,0 +1,36 @@
+/* Figma "Block / Code": label-large title 8px above a rounded box in
+   surface-container-high, 20px padding. Monospace at the body-medium size
+   and line height (Figma Roboto Mono 14/20; not loaded, so the system mono) */
+.codeWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.codeTitle {
+  font-family: var(--label-large-font);
+  font-weight: var(--label-large-weight);
+  font-size: var(--label-large-size);
+  line-height: var(--label-large-line-height);
+  letter-spacing: var(--label-large-tracking);
+  color: var(--md-sys-color-on-surface);
+}
+
+/* The pre carries the code size too, so its line box doesn't add height */
+.pre {
+  margin: 0;
+  font-size: var(--body-medium-size);
+  line-height: var(--body-medium-line-height);
+  padding: 20px;
+  overflow-x: auto;
+  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-sys-color-surface-container-high);
+}
+
+.code {
+  font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: var(--body-medium-size);
+  line-height: var(--body-medium-line-height);
+  color: var(--md-sys-color-on-surface);
+}
