@@ -1,6 +1,7 @@
 import type React from "react";
 import { useParams } from "react-router-dom";
 import NotFound from "@/app/pages/NotFound/NotFound.tsx";
+import Footer from "@/components/layout/Footer/Footer.tsx";
 import TabbedNavigation from "@/components/layout/navigation/TabbedNavigation/TabbedNavigation.tsx";
 import {
   BlockRenderer,
@@ -66,6 +67,7 @@ const ProjectDetailPage: React.FC = () => {
           </main>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -648,9 +648,10 @@ Context: Figma has three variations at 744 and 402 — Search view, Filter view,
 ### ST-09.2 — Footer
 
 - **TK-09.2.1** — Footer component (Figma `Footer`, Size L/M/C + `Footer Link Column`)
-  - [ ] Navigation and Resources columns, Social, and the copyright line
-  - [ ] Labels in English (Navigation, About, Work, Contact, Resources, Résumé)
-  - [ ] Reusable across other pages
+  - [x] Navigation and Resources columns, Social, and the copyright line — `components/layout/Footer` with the Figma wave divider, logo and copyright icon as assets (divider and icon recolored from tokens for dark mode); the year comes from the clock; no fill of its own (transparent on the page container, decided 2026-10-21; Figma uses surface). Measured at 1512 / 744 / 402: 524 / 624 / 666px tall, as in Figma
+  - [x] Labels in English (Navigation, About, Work, Contact, Resources, Résumé)
+  - [x] Reusable across other pages — no props, content in `footer.data.ts`; on Project Detail for now
+  - [ ] Pending (Nicolas): real URLs for GitHub, LinkedIn, Telegram, Email and Résumé (`#` for now); Contact points to `/about`; Figma "Project 1 / Project 2" became Spotify Web (the only public case study)
 
 ### ST-09.3 — SummaryNav and project-to-project navigation
 
