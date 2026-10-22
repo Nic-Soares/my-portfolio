@@ -13,7 +13,12 @@ export const ImageBlock: React.FC<
           <div className={styles.imageWrapper}>
             <img
               src={block.src}
+              srcSet={block.srcSet}
+              sizes={block.sizes}
               alt={block.alt}
+              // Case-study images sit below the hero: load as they come near
+              loading="lazy"
+              decoding="async"
               className={`${styles.image} ${block.className || ""}`.trim()}
               // Figma "Block / Image" locks a ratio; 16:9 unless the data says
               style={{ aspectRatio: block.aspectRatio ?? "16 / 9" }}

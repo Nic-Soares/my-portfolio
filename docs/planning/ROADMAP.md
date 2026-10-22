@@ -774,15 +774,16 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 ### ST-12.2 — Performance
 
 - **TK-12.2.1** — Cost of the decor
-  - [ ] Measure the paint impact of the large `filter: blur()` uses
-  - [ ] Consider pre-rendering as an image if the cost is high
+  - [x] Measure the paint impact of the large `filter: blur()` uses — Lighthouse (mobile, throttled): TBT 0 ms and CLS ≤ 0.005 on every page; the decor doesn't show up as a cost
+  - [x] Consider pre-rendering as an image if the cost is high — not needed
 - **TK-12.2.2** — Assets
-  - [ ] Responsive photo and project media, in a modern format
-  - [ ] Lazy load below the fold
-  - [ ] Bundle budget and per-route code splitting
+  - [x] Responsive photo and project media, in a modern format — webp already; Spotify screens and hero now 800 + 1600px with `srcset`/`sizes` (`spotify-web.media.ts`, shared by the three locales): page weight 683 → 425 KB
+  - [x] Lazy load below the fold — case-study images `loading="lazy"`; the project hero `fetchpriority="high"` (it is the LCP)
+  - [x] Material Symbols cut to the 13 icons in use and self-hosted (`public/fonts/material-symbols`, regeneration URL in `styles/fonts.css`): 3.9 MB → 14 KB and no render-blocking Google CSS; `src/test/iconFont.test.ts` fails when an icon is missing from the file
+  - [ ] Bundle budget and per-route code splitting — one 136 KB (gzip) chunk today, mostly the three locales' content; worth splitting with the content (load a locale's data on demand) once there are more projects
 - **TK-12.2.3** — Lighthouse
-  - [ ] Baseline across the 4 pages
-  - [ ] Target and fixes
+  - [x] Baseline across the 4 pages (2026-10-21, production build, median of 3): mobile perf 94–97 (Spotify 85 after its first fix), desktop 100; accessibility and best practices 100; SEO 82 (no meta description / robots.txt — ST-12.3)
+  - [x] Target and fixes — target ≥ 90 mobile, 100 desktop. After: Home 98, Projects 96, About 98, Spotify Web 90 (LCP 3.3 s: the hero is found only after the JS runs, inherent to the SPA); desktop 100 everywhere. FCP mobile 2.0–2.3 → 1.7–2.1 s
 
 ### ST-12.3 — SEO and metadata
 
@@ -840,6 +841,7 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 | 7 | **Deferred to the end (decided 2026-10-21):** Spotify Web repository URL for "Source — GitHub repository" | `EP-09` |
 | 8 | **Deferred to the end:** the architecture diagram in Figma is titled "MY PORTFOLIO — ARCHITECTURE", not Spotify Web — confirm or replace | `EP-09` |
 | 9 | **Deferred to the end:** Footer links — GitHub, LinkedIn, Telegram, Email and Résumé (`#` for now) | `EP-09` |
+| 10 | **Deferred (decided 2026-10-21):** split the JS per route — today everything ships in one 136 KB (gzip) chunk, mostly the three locales' content; worth it once there are more projects | `EP-12` |
 
 ## 5. Execution notes
 

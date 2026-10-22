@@ -1,9 +1,5 @@
-import architectureDiagram from "@assets/images/projects/spotify-web/architecture.webp";
-import heroImage from "@assets/images/projects/spotify-web/hero.webp";
-import screenArtist from "@assets/images/projects/spotify-web/screen-artist.webp";
-import screenHome from "@assets/images/projects/spotify-web/screen-home.webp";
-import screenPlayer from "@assets/images/projects/spotify-web/screen-player.webp";
 import type { ProjectData } from "../project-data.types.ts";
+import { spotifyWebMedia as media } from "./spotify-web.media.ts";
 
 // Spanish translation of spotify-clone.data.ts
 export const projectsDataEs: ProjectData[] = [
@@ -25,7 +21,7 @@ export const projectsDataEs: ProjectData[] = [
     ],
     hero: {
       type: "image",
-      src: heroImage,
+      ...media.hero,
       alt: "Ilustración de un hombre con audífonos cuidando un huerto, rodeado de notas musicales",
     },
     tabs: [
@@ -53,7 +49,7 @@ export const projectsDataEs: ProjectData[] = [
               [
                 {
                   type: "image",
-                  src: screenHome,
+                  ...media.screenHome,
                   alt: "Pantalla de inicio con los artistas y canciones más populares",
                   aspectRatio: "3 / 2",
                   caption: "Inicio — artistas y canciones top",
@@ -62,7 +58,7 @@ export const projectsDataEs: ProjectData[] = [
               [
                 {
                   type: "image",
-                  src: screenArtist,
+                  ...media.screenArtist,
                   alt: "Pantalla de artista con la discografía",
                   aspectRatio: "3 / 2",
                   caption: "Artista — discografía",
@@ -71,7 +67,7 @@ export const projectsDataEs: ProjectData[] = [
               [
                 {
                   type: "image",
-                  src: screenPlayer,
+                  ...media.screenPlayer,
                   alt: "Pantalla del reproductor con la canción en reproducción",
                   aspectRatio: "3 / 2",
                   caption: "Reproductor — sonando ahora",
@@ -102,7 +98,7 @@ export const projectsDataEs: ProjectData[] = [
           },
           {
             type: "image",
-            src: architectureDiagram,
+            ...media.architecture,
             alt: "Diagrama de arquitectura: el navegador carga el build de React, que llama a la API de Express; Express lee las colecciones de artistas y canciones de MongoDB Atlas y recurre a index.html para las rutas del lado del cliente",
             aspectRatio: "3 / 2",
           },

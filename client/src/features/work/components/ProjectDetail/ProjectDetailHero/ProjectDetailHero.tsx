@@ -8,6 +8,8 @@ interface ProjectDetailHeroProps {
   hero?: {
     type: "image" | "video";
     src: string;
+    srcSet?: string;
+    sizes?: string;
     alt?: string;
   };
 }
@@ -26,6 +28,8 @@ const ProjectDetailHero = ({
           <MediaCard
             type={hero.type}
             src={hero.src}
+            srcSet={hero.srcSet}
+            sizes={hero.sizes}
             alt={hero.alt}
             minHeight="0"
             maxHeight="none"

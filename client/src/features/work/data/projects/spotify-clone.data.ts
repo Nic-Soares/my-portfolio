@@ -1,9 +1,5 @@
-import architectureDiagram from "@assets/images/projects/spotify-web/architecture.webp";
-import heroImage from "@assets/images/projects/spotify-web/hero.webp";
-import screenArtist from "@assets/images/projects/spotify-web/screen-artist.webp";
-import screenHome from "@assets/images/projects/spotify-web/screen-home.webp";
-import screenPlayer from "@assets/images/projects/spotify-web/screen-player.webp";
 import type { ProjectData } from "../project-data.types.ts";
+import { spotifyWebMedia as media } from "./spotify-web.media.ts";
 
 // Case study ported from Figma "Project — Spotify W" (Overview, Architecture,
 // Repository), copy verbatim
@@ -26,7 +22,7 @@ export const projectsData: ProjectData[] = [
     ],
     hero: {
       type: "image",
-      src: heroImage,
+      ...media.hero,
       alt: "Illustration of a man with headphones tending a garden bed, surrounded by music notes",
     },
     tabs: [
@@ -54,7 +50,7 @@ export const projectsData: ProjectData[] = [
               [
                 {
                   type: "image",
-                  src: screenHome,
+                  ...media.screenHome,
                   alt: "Home screen with the top artists and songs",
                   aspectRatio: "3 / 2",
                   caption: "Home — top artists & songs",
@@ -63,7 +59,7 @@ export const projectsData: ProjectData[] = [
               [
                 {
                   type: "image",
-                  src: screenArtist,
+                  ...media.screenArtist,
                   alt: "Artist screen with the discography",
                   aspectRatio: "3 / 2",
                   caption: "Artist — discography",
@@ -72,7 +68,7 @@ export const projectsData: ProjectData[] = [
               [
                 {
                   type: "image",
-                  src: screenPlayer,
+                  ...media.screenPlayer,
                   alt: "Player screen with the track now playing",
                   aspectRatio: "3 / 2",
                   caption: "Player — now playing",
@@ -103,7 +99,7 @@ export const projectsData: ProjectData[] = [
           },
           {
             type: "image",
-            src: architectureDiagram,
+            ...media.architecture,
             alt: "Architecture diagram: the browser loads the React build, which calls the Express API; Express reads the artists and songs collections from MongoDB Atlas and falls back to index.html for client-side routes",
             aspectRatio: "3 / 2",
           },
