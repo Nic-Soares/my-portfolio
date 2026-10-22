@@ -1,0 +1,70 @@
+/* Figma "Language Menu" (M3 Menu, Standard): 208px wide, Corner Large,
+   Surface Container Low, Elevation 3, 2px above and below the items */
+.menu {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 208px;
+  padding: 2px 0;
+  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-sys-color-surface-container-low);
+  box-shadow: var(--m3-elevation-3);
+}
+
+/* Beside the rail button, aligned to its bottom edge */
+.menu--right-end {
+  bottom: 0;
+  left: calc(100% + 8px);
+}
+
+/* Under the top app bar button, aligned to its right edge */
+.menu--bottom-end {
+  top: calc(100% + 8px);
+  right: 0;
+}
+
+/* Menu item: 2px / 4px around a 44px content (12px padding), Corner
+   Extra-small; the selected one is Tertiary Container with Corner Medium */
+.item {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 2px 4px;
+  border: 0;
+  background: none;
+  color: var(--md-sys-color-on-surface);
+  text-align: start;
+  cursor: pointer;
+}
+
+.content {
+  display: block;
+  padding: 12px;
+  border-radius: var(--md-sys-shape-corner-extra-small);
+  transition: background-color 0.2s ease;
+}
+
+.item:hover .content {
+  background: color-mix(
+    in srgb,
+    var(--md-sys-color-on-surface) 8%,
+    transparent
+  );
+}
+
+.item:focus-visible {
+  outline: none;
+}
+
+.item:focus-visible .content {
+  outline: 3px solid var(--md-sys-color-secondary);
+  outline-offset: -3px;
+}
+
+.item--selected .content,
+.item--selected:hover .content {
+  border-radius: var(--md-sys-shape-corner-medium);
+  background: var(--md-sys-color-tertiary-container);
+}

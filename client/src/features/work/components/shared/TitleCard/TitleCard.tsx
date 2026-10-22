@@ -1,4 +1,6 @@
 import Container from "@/components/layout/container/Container.tsx";
+import { FitLines } from "@/components/ui/FitLines/FitLines.tsx";
+import { useFitText } from "@/hooks/useFitText.ts";
 import styles from "./TitleCard.module.css";
 
 type TitleCardProps = {
@@ -18,6 +20,8 @@ export default function TitleCard({
   backgroundColor,
   borderRadius,
 }: TitleCardProps) {
+  // The hero panel has a fixed height: a long title or description shrinks
+  const wrapperRef = useFitText<HTMLDivElement>();
   const sizeClass =
     size === "md" ? styles.sizeMd : size === "sm" ? styles.sizeSm : "";
 
@@ -27,12 +31,24 @@ export default function TitleCard({
       backgroundColor={backgroundColor}
       borderRadius={borderRadius}
     >
-      <div className={`${styles.wrapper} ${sizeClass}`}>
+      <div
+        ref={wrapperRef}
+        className={`fit-text ${styles.wrapper} ${sizeClass}`}
+      >
         {date && <span className={styles.date}>{date}</span>}
 
         <div className={styles.titleGroup}>
-          <h1 className={styles.title}>{title}</h1>
-          {subtitle && <p className={styles.description}>{subtitle}</p>}
+          <FitLines as="h1" lines={2} className={styles.title}>
+            {title}
+          </FitLines>
+          {subtitle && (
+            <FitLines
+              lines={{ "extra-large": 2, large: 2, medium: 4, compact: 4 }}
+              className={styles.description}
+            >
+              {subtitle}
+            </FitLines>
+          )}
         </div>
       </div>
     </Container>

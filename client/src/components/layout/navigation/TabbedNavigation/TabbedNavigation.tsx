@@ -1,5 +1,6 @@
 import type React from "react";
 import { useMemo } from "react";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import styles from "./TabbedNavigation.module.css";
 import {
   getVisibleTabs,
@@ -43,6 +44,7 @@ const TabbedNavigation: React.FC<Props> = ({
   buttonStyle = "filled",
   buttonWidth = "default",
 }) => {
+  const { t } = useI18n();
   // Normalize tabs to respect visibility bounds (but keep invisible items where provided).
   const normalizedTabs = useMemo(() => normalizeTabs(tabs), [tabs]);
 
@@ -69,7 +71,7 @@ const TabbedNavigation: React.FC<Props> = ({
       <nav
         ref={navRef}
         className={`${styles["nav"]} ${isSticky ? styles["nav--sticky"] : ""} ${className}`.trim()}
-        aria-label="Tabbed navigation"
+        aria-label={t.layout.tabs}
       >
         {/* Use the provided navigation-container styles */}
         <div

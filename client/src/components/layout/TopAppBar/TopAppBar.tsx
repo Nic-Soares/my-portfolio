@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import Logo from "../navigation/Logo/Logo.tsx";
 import { LanguageAction, ThemeAction } from "../navigation/NavActions.tsx";
 import styles from "./TopAppBar.module.css";
@@ -8,10 +9,11 @@ import styles from "./TopAppBar.module.css";
 // The Figma title layer is hidden, so there is no title.
 export default function TopAppBar() {
   const scrolled = useScrolled();
+  const { t } = useI18n();
 
   return (
     <header className={styles.bar} data-scrolled={scrolled || undefined}>
-      <Link to="/" className={styles.logo} aria-label="Home">
+      <Link to="/" className={styles.logo} aria-label={t.layout.home}>
         <Logo />
       </Link>
       <div className={styles.actions}>

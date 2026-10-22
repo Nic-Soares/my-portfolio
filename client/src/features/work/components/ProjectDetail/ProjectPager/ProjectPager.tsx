@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import styles from "./ProjectPager.module.css";
 
 interface PagerProject {
@@ -14,10 +15,11 @@ interface ProjectPagerProps {
 // Figma "Project Pager": a Previous / Next project card at the end of a
 // project page. The first project has no Previous, the last no Next.
 export const ProjectPager = ({ previous, next }: ProjectPagerProps) => {
+  const { t } = useI18n();
   if (!previous && !next) return null;
 
   return (
-    <nav className={styles.pager} aria-label="More projects">
+    <nav className={styles.pager} aria-label={t.work.moreProjects}>
       {previous && (
         <Link
           to={`/projects/${previous.slug}`}
@@ -25,7 +27,7 @@ export const ProjectPager = ({ previous, next }: ProjectPagerProps) => {
           rel="prev"
         >
           <span className={`title-small-emphasized ${styles.overline}`}>
-            <span aria-hidden="true">←</span> Previous project
+            <span aria-hidden="true">←</span> {t.work.previousProject}
           </span>
           <span className={`title-medium-emphasized ${styles.title}`}>
             {previous.name}
@@ -39,7 +41,7 @@ export const ProjectPager = ({ previous, next }: ProjectPagerProps) => {
           rel="next"
         >
           <span className={`title-small-emphasized ${styles.overline}`}>
-            Next project <span aria-hidden="true">→</span>
+            {t.work.nextProject} <span aria-hidden="true">→</span>
           </span>
           <span className={`title-medium-emphasized ${styles.title}`}>
             {next.name}

@@ -16,6 +16,7 @@ import { AboutPage } from "@/features/about/index.ts";
 import { HomePage as Home } from "@/features/home/index.ts";
 import ProjectListSkeleton from "@/features/work/components/ProjectList/Skeletons/ProjectListSkeleton.tsx";
 import ProjectDetailPage from "@/features/work/pages/ProjectDetailPage/ProjectDetail.page.tsx";
+import { I18nProvider, useI18n } from "@/i18n/I18nProvider.tsx";
 
 // Dev-only component gallery. `import.meta.env.DEV` is false in production
 // builds, so the import is dropped and the route never exists there.
@@ -29,10 +30,11 @@ const ProjectListPage = lazyWithFloor(
 );
 
 function SiteShell() {
+  const { t } = useI18n();
   return (
     <>
       <a href="#main-content" className="skip-link">
-        Skip to content
+        {t.layout.skipToContent}
       </a>
       {/* Rail at Large and up; top app bar + navigation bar below (CSS) */}
       <TopAppBar />
@@ -75,21 +77,23 @@ function SiteShell() {
 function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
-        <Routes>
-          {GalleryPage && (
-            <Route
-              path="/__gallery"
-              element={
-                <Suspense fallback={null}>
-                  <GalleryPage />
-                </Suspense>
-              }
-            />
-          )}
-          <Route path="*" element={<SiteShell />} />
-        </Routes>
-      </BrowserRouter>
+      <I18nProvider>
+        <BrowserRouter>
+          <Routes>
+            {GalleryPage && (
+              <Route
+                path="/__gallery"
+                element={
+                  <Suspense fallback={null}>
+                    <GalleryPage />
+                  </Suspense>
+                }
+              />
+            )}
+            <Route path="*" element={<SiteShell />} />
+          </Routes>
+        </BrowserRouter>
+      </I18nProvider>
     </ThemeProvider>
   );
 }

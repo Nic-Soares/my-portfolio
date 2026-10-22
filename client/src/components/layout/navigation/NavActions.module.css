@@ -1,0 +1,5 @@
+/* Positions the language menu against its button */
+.anchor {
+  position: relative;
+  display: inline-flex;
+}

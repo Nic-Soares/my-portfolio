@@ -1,45 +1,47 @@
-// Footer content (Figma "Footer" / "Footer Link Column"). Internal links use
-// the router; "#" marks a link whose real URL is still pending.
+import type { Messages } from "@/i18n/messages.ts";
+
+// Footer links (Figma "Footer" / "Footer Link Column"). Labels come from the
+// layout.footer catalog, except brand and project names, which stay as they
+// are. Internal links use the router; "#" marks a URL that is still pending.
+type FooterMessages = Messages["layout"]["footer"];
+
 export interface FooterLink {
-  label: string;
+  // A key in layout.footer.links, or a literal name (brands, projects)
+  label: { key: keyof FooterMessages["links"] } | { name: string };
   href: string;
   external?: boolean;
 }
 
 export interface FooterColumn {
-  title: string;
+  title: keyof FooterMessages["columns"];
   links: FooterLink[];
 }
 
-export const footerTagline =
-  "Full-stack developer building real products end-to-end — from interface to database.";
-
 export const footerOwner = "Nicolas Soares";
-export const footerRole = "Fullstack Developer";
 
 export const footerColumns: FooterColumn[] = [
   {
-    title: "Social",
+    title: "social",
     links: [
-      { label: "GitHub", href: "#", external: true },
-      { label: "LinkedIn", href: "#", external: true },
-      { label: "Telegram", href: "#", external: true },
-      { label: "Email", href: "#", external: true },
+      { label: { name: "GitHub" }, href: "#", external: true },
+      { label: { name: "LinkedIn" }, href: "#", external: true },
+      { label: { name: "Telegram" }, href: "#", external: true },
+      { label: { key: "email" }, href: "#", external: true },
     ],
   },
   {
-    title: "Navigation",
+    title: "navigation",
     links: [
-      { label: "About", href: "/about" },
-      { label: "Work", href: "/projects" },
-      { label: "Contact", href: "/about" },
+      { label: { key: "about" }, href: "/about" },
+      { label: { key: "work" }, href: "/projects" },
+      { label: { key: "contact" }, href: "/about" },
     ],
   },
   {
-    title: "Resources",
+    title: "resources",
     links: [
-      { label: "Résumé", href: "#", external: true },
-      { label: "Spotify Web", href: "/projects/spotify-clone" },
+      { label: { key: "resume" }, href: "#", external: true },
+      { label: { name: "Spotify Web" }, href: "/projects/spotify-clone" },
     ],
   },
 ];

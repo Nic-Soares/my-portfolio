@@ -1,5 +1,6 @@
 import type { KeyboardEvent, ReactNode } from "react";
 import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/ConnectedButtonGroup.tsx";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import type { WorkArea } from "../../../data/project-data.types.ts";
 import styles from "./ProjectCard.module.css";
 
@@ -50,11 +51,12 @@ const ProjectCard = ({
   disabled = false,
   tabIndex = 0,
 }: ProjectCardProps) => {
+  const { t } = useI18n();
   // Use buttonGroupOptions if provided, otherwise convert categories to options
   const options =
     buttonGroupOptions ||
     categories.map((category) => ({
-      label: category,
+      label: t.work.areas[category],
     }));
 
   const handleClick = () => {
