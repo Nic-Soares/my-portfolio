@@ -758,15 +758,18 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 ### ST-12.1 — Accessibility
 
 - **TK-12.1.1** — Audit
-  - [ ] Keyboard-only navigation across the 4 pages
-  - [ ] Visible focus on every interactive element
-  - [ ] Contrast in both themes (watch text over light containers)
-  - [ ] Screen reader across states and navigation
+  - Audited 2026-10-21 with axe-core and a Tab walk (Home, Projects, Project Detail, About, 404; Light and Dark; 1492 and 402): 0 axe violations after the fixes below
+  - [x] Keyboard-only navigation across the 4 pages — every control is reachable; the search's clear (×) was a `div` with `tabindex=-1`, now a `<button>`
+  - [x] Visible focus on every interactive element — 3px Secondary ring everywhere; the SearchBar had none (only its elevation), now it has the ring too
+  - [x] Contrast in both themes (watch text over light containers) — no axe contrast failures in Light or Dark
+  - [x] Screen reader across states and navigation (automated) — one `<main>` landmark (the shell; Project Detail had its own, now a `div`), no duplicate banners, card titles `h2` after the page `h1`, display-only buttons (Project Card tags) render as `span` so no control sits inside another
+  - [ ] Screen reader, manual pass (Nicolas): VoiceOver over the 4 pages and the language menu
 - **TK-12.1.2** — Motion
-  - [ ] `prefers-reduced-motion` respected by decor, skeleton, progress, and carousel
+  - [x] `prefers-reduced-motion` respected by decor, skeleton, progress, and carousel — verified with the browser emulating it: no animation runs on any page (the logo marquee, carousel and progress already handled it; added the search clear icon and the SummaryNav smooth scroll)
   - [ ] Idea (2026-10-19, design in Figma first): animate the decor shapes site-wide — small shapes float a few px (~6s, staggered), main shape rotates very slowly; still under reduced motion. Goes into `StateIllustration` (all 4 states) and `HeroDecor` together
 - **TK-12.1.3** — Decorative and brand SVGs
-  - [ ] Add `<title>` (or `aria-hidden="true"` for purely decorative ones) to every SVG flagged by `deno task check`'s `lint/a11y/noSvgWithoutTitle`: favicon, icons (`dashboard`, `github`, `linkedin`, `telegram`), the M3 shape set (`forms.svg`), and the partner logos (`AlphaWave`, `Boltshift`, `CoreOS`, etc.) — pre-existing, unrelated to `ST-01.0`
+  - [x] Add `<title>` (or `aria-hidden="true"` for purely decorative ones) to every SVG flagged by `deno task check`'s `lint/a11y/noSvgWithoutTitle` — the inline SVGs (About education icon, `GithubIcon`) are `aria-hidden`; asset files get their name or `aria-hidden` where they are used (CompanyLogo, Footer), so the rule is off for `assets/**/*.svg` and `public/**/*.svg` (biome.json override). No a11y lint finding left
+  - [ ] Unused assets to delete or use (Nicolas): `assets/icons/{dashboard,github,linkedin,telegram}.svg` and `components/ui/GithubIcon` are imported nowhere
 
 ### ST-12.2 — Performance
 

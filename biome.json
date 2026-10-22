@@ -22,7 +22,9 @@
       "suspicious": {
         "noUnknownAtRules": {
           "level": "error",
-          "options": { "ignore": ["custom-media"] }
+          "options": {
+            "ignore": ["custom-media"]
+          }
         }
       },
       "correctness": {
@@ -43,5 +45,17 @@
         "organizeImports": "on"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["client/src/assets/**/*.svg", "client/public/**/*.svg"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noSvgWithoutTitle": "off"
+          }
+        }
+      }
+    }
+  ]
 }

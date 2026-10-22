@@ -18,8 +18,14 @@ export const SummaryNav = ({ title, items }: SummaryNavProps) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      // Smoothly scroll to the section heading.
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Scroll to the section heading; smoothly unless motion is reduced
+      const reduce = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      element.scrollIntoView({
+        behavior: reduce ? "auto" : "smooth",
+        block: "start",
+      });
     }
   };
 

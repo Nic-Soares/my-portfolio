@@ -39,7 +39,7 @@ function SiteShell() {
       {/* Rail at Large and up; top app bar + navigation bar below (CSS) */}
       <TopAppBar />
       <Sidebar />
-      <div id="main-content" className="main-content" tabIndex={-1}>
+      <main id="main-content" className="main-content" tabIndex={-1}>
         <ErrorBoundary>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -68,7 +68,7 @@ function SiteShell() {
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
         </ErrorBoundary>
-      </div>
+      </main>
       <NavigationBar />
     </>
   );

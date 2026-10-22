@@ -43,7 +43,8 @@ const ProjectDetail = ({ slug }: { slug: string | undefined }) => {
     <div className={styles["page-content"]}>
       <div className={styles["content-conteiner"]}>
         <div className={styles["article-page"]}>
-          <main className={styles["main-content"]}>
+          {/* The site shell is the <main> landmark */}
+          <div className={styles["main-content"]}>
             <ProjectDetailHero
               title={project.name}
               description={project.description}
@@ -81,7 +82,7 @@ const ProjectDetail = ({ slug }: { slug: string | undefined }) => {
             </ContentLayout>
 
             <ProjectPager {...getAdjacentProjects(project.slug)} />
-          </main>
+          </div>
         </div>
       </div>
       <Footer />

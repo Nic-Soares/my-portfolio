@@ -108,6 +108,8 @@ body {
 }
 
 .material-symbols-outlined {
+  /* An icon font: a generic fallback would spell the ligature names out */
+  /* biome-ignore lint/a11y/useGenericFontNames: icon font */
   font-family: "Material Symbols Outlined";
   font-variation-settings:
     "FILL" 0,

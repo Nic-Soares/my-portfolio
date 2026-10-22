@@ -101,6 +101,8 @@ const ProjectListHero = ({
   const active = selectedAreas.length + (query.trim() ? 1 : 0);
 
   return (
+    // Escape bubbling up from the search or filter closes it
+    // biome-ignore lint/a11y/noStaticElementInteractions: delegated key handling
     <header
       className={`${styles["projects__header"]} ${styles["projects__header--bar"]}`}
       onKeyDown={(event) => {
