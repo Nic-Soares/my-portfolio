@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import type { ProjectData, WorkArea } from "../data/project-data.types.ts";
 
 const SEARCH_DELAY = 250; // ms the search waits for typing to pause
@@ -8,6 +9,7 @@ const SEARCH_DELAY = 250; // ms the search waits for typing to pause
 // so a filtered list can be shared and survives a reload. Several areas can
 // be selected; a project shows if it has any of them.
 export function useProjectFilters(projects: ProjectData[]) {
+  const { t } = useI18n();
   const [params, setParams] = useSearchParams();
   const areaParam = (params.get("area") ?? "").split(",").filter(Boolean);
   const queryParam = params.get("q") ?? "";
@@ -71,7 +73,8 @@ export function useProjectFilters(projects: ProjectData[]) {
       (selectedAreas.length === 0 ||
         project.areas.some((area) => selectedAreas.includes(area))) &&
       (!term ||
-        `${project.name} ${project.description} ${project.areas.join(" ")}`
+        // Areas match by id and by their label in the current language
+        `${project.name} ${project.description} ${project.areas.join(" ")} ${project.areas.map((area) => t.work.areas[area]).join(" ")}`
           .toLowerCase()
           .includes(term)),
   );

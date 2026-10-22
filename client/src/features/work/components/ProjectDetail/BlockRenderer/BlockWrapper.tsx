@@ -1,4 +1,5 @@
 import type React from "react";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import IconButton from "../../../../../components/ui/IconButton/IconButton.tsx";
 import styles from "./BlockWrapper.module.css";
 
@@ -21,6 +22,7 @@ export const BlockWrapper = ({
   startsSection = false,
   dangerouslySetInnerHTML,
 }: BlockWrapperProps) => {
+  const { t } = useI18n();
   const handleCopyLink = () => {
     if (id) {
       const url = `${window.location.origin}${window.location.pathname}#${id}`;
@@ -47,6 +49,7 @@ export const BlockWrapper = ({
             size="small"
             style="standard"
             icon="link"
+            ariaLabel={t.work.copyLink}
             onClick={handleCopyLink}
           />
         </div>

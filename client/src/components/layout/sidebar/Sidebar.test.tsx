@@ -1,7 +1,8 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ThemeProvider } from "@/app/theme/ThemeProvider.tsx";
+import { I18nProvider } from "@/i18n/I18nProvider.tsx";
 import Sidebar from "./Sidebar.tsx";
 
 function renderSidebar(path = "/") {
@@ -83,12 +84,66 @@ describe("Sidebar destinations", () => {
       "aria-current",
     );
   });
+});
 
-  it("shows the language action as not available yet", () => {
-    renderSidebar();
+describe("Sidebar language menu", () => {
+  beforeEach(() => {
+    localStorage.clear();
+    vi.stubGlobal(
+      "matchMedia",
+      vi.fn(() => ({
+        matches: false,
+        addEventListener: () => {},
+        removeEventListener: () => {},
+      })),
+    );
+  });
 
+  function renderWithI18n() {
+    render(
+      <ThemeProvider>
+        <I18nProvider>
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </I18nProvider>
+      </ThemeProvider>,
+    );
+  }
+
+  it("opens the menu with the current language checked", async () => {
+    renderWithI18n();
+    const button = screen.getByRole("button", { name: /Language/ });
+    expect(button).toHaveAttribute("aria-expanded", "false");
+
+    fireEvent.click(button);
+
+    expect(button).toHaveAttribute("aria-expanded", "true");
+    const menu = screen.getByRole("menu", { name: "Language" });
     expect(
-      screen.getByRole("button", { name: "Language (coming soon)" }),
-    ).toBeDisabled();
+      within(menu).getByRole("menuitemradio", { name: "English" }),
+    ).toHaveAttribute("aria-checked", "true");
+    expect(
+      within(menu).getByRole("menuitemradio", { name: "English" }),
+    ).toHaveFocus();
+  });
+
+  it("switches the UI language and remembers it", () => {
+    renderWithI18n();
+    fireEvent.click(screen.getByRole("button", { name: /Language/ }));
+    fireEvent.click(screen.getByRole("menuitemradio", { name: "Português" }));
+
+    expect(screen.queryByRole("menu")).toBeNull();
+    expect(screen.getByRole("link", { name: /Sobre mim/ })).toBeInTheDocument();
+    expect(localStorage.getItem("locale")).toBe("pt");
+    expect(document.documentElement.lang).toBe("pt-BR");
+  });
+
+  it("closes on Escape", () => {
+    renderWithI18n();
+    fireEvent.click(screen.getByRole("button", { name: /Language/ }));
+    fireEvent.keyDown(screen.getByRole("menu"), { key: "Escape" });
+
+    expect(screen.queryByRole("menu")).toBeNull();
   });
 });

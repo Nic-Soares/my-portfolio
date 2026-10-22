@@ -1,3 +1,4 @@
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import styles from "./Chip.module.css";
 
 interface ChipProps {
@@ -24,8 +25,9 @@ const Chip = ({
   onClick,
   href,
   onRemove,
-  removeLabel = `Remove ${label}`,
+  removeLabel,
 }: ChipProps) => {
+  const { t } = useI18n();
   const className = [
     styles.chip,
     selected ? styles["chip--selected"] : "",
@@ -73,7 +75,7 @@ const Chip = ({
         <button
           type="button"
           className={styles.chip__remove}
-          aria-label={removeLabel}
+          aria-label={removeLabel ?? t.ui.remove(String(label))}
           disabled={disabled}
           onClick={onRemove}
         >

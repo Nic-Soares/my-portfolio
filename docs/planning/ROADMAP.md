@@ -718,7 +718,7 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 
 ---
 
-## EP-11 — Internationalization (pt/en)
+## EP-11 — Internationalization (en/pt/es)
 
 **Goal:** wire up the rail's language action, which is already designed.
 **Dependencies:** `EP-06`…`EP-10` (no point extracting strings from a screen that's about to change). **Size:** M.
@@ -726,23 +726,28 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 ### ST-11.1 — Infrastructure
 
 - **TK-11.1.1** — Choose the approach
-  - [ ] Lightweight custom solution vs. a library (record as an ADR)
-  - [ ] English as the default language (the design is already entirely in English)
-  - [ ] Detect via `navigator.language` and persist the choice
+  - Decided 2026-10-21: three languages (English, Português, Español), UI **and** content (Home, About, case studies)
+  - [x] Lightweight custom solution vs. a library (record as an ADR) — custom, `docs/adr/005-custom-i18n.md`
+  - [x] English as the default language (the design is already entirely in English)
+  - [x] Detect via `navigator.language` and persist the choice — stored choice, then `navigator.languages`, then English; `localStorage` key `locale`; `<html lang>` set before first paint too (`index.html`)
 - **TK-11.1.2** — Catalog structure
-  - [ ] Typed `locales/en.ts` and `locales/pt.ts`
-  - [ ] A missing key breaks the typecheck
-  - [ ] Namespaces per feature
+  - [x] Typed `locales/en.ts`, `locales/pt.ts` and `locales/es.ts` (`client/src/i18n`)
+  - [x] A missing key breaks the typecheck — `Messages` is derived from `en`; values with numbers or names are functions
+  - [x] Namespaces per feature — layout, ui, home, work, about, system
+  - [x] Content per locale — `*.pt.data.ts` / `*.es.data.ts` beside each data file, read through `useProjectData()` / `useAboutData()`
 
 ### ST-11.2 — Extraction
 
 - **TK-11.2.1** — Extract UI strings
-  - [ ] One pass per feature: home, work, about, system, layout
-  - [ ] Locale-aware date and number formatting
-  - [ ] `lang` on `<html>` tracking the locale
+  - [x] One pass per feature: home, work, about, system, layout (plus the shared SearchBar / Chip / LinearProgress defaults and the missing copy-link label)
+  - [x] Locale-aware date and number formatting — nothing to format: years and periods are text in the data ("2024—atual"); project search also matches the translated area names
+  - [x] `lang` on `<html>` tracking the locale
+  - [x] Longer translations never clip (decided 2026-10-21: shrink, don't shorten the copy) — `useFitText` + `.fit-text` scale the text of a fixed-size box down in 5% steps (zoom keeps the typescale proportions, never below 75%) on the service cards, the Home hero heading and the Project Detail hero; English stays at 100%. Today only the automation card at 1492 shrinks (pt 90%, es 80%)
+  - [x] Switching language doesn't reflow headline-level text — `useFitLines` / `<FitLines>` keep a text within the lines the English copy uses, per size class, shrinking the font (never below 80%): Home headline (3), service card titles (1) and descriptions, carousel description, Project Detail hero title and description, footer tagline, About role. Measured on every page at 1492 / 744 / 402: on Home nothing gains a line in pt or es (headline 80–85%); reading text (case-study paragraphs and lists, About bio and job summaries) still flows
 - **TK-11.2.2** — Wire up the selector
-  - [ ] Connect the rail's language `IconButton`
-  - [ ] Visible current-language state
+  - [x] Figma: new `Language Menu` (M3 Menu Standard + Menu item/Standard, `Current=English | Português | Español`, Selected = Tertiary Container), Components page
+  - [x] Connect the rail's language `IconButton` — opens `components/ui/Menu` (menuitemradio, arrows, Escape, click outside); beside the rail, under the top app bar
+  - [x] Visible current-language state — checked item in the menu; the button's name includes the language
 
 ---
 
@@ -827,7 +832,7 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 | 2 | ~~Test runner~~ — **resolved:** Vitest (ADR-004) | ~~`EP-01`~~ |
 | 3 | ~~Real content for Project — Detail~~ — **resolved:** Spotify Web case study in Figma | ~~`EP-09`~~ |
 | 4 | Real About Me data — the two postgraduate degrees in Figma are fictional | `EP-07` |
-| 5 | i18n with a library or a custom solution | `EP-11` |
+| 5 | ~~i18n with a library or a custom solution~~ — **resolved 2026-10-21:** custom (ADR-005), en / pt / es | ~~`EP-11`~~ |
 | 6 | Deploy host — must also run the Express server (`EP-13`) | `EP-12`, `EP-13` |
 | 7 | **Deferred to the end (decided 2026-10-21):** Spotify Web repository URL for "Source — GitHub repository" | `EP-09` |
 | 8 | **Deferred to the end:** the architecture diagram in Figma is titled "MY PORTFOLIO — ARCHITECTURE", not Spotify Web — confirm or replace | `EP-09` |

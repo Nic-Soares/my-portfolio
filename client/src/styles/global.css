@@ -77,6 +77,13 @@ body {
   }
 }
 
+/* Text that shrinks to fit a fixed-size box (useFitText sets the scale).
+   zoom scales font size, line height and gaps together, so the typescale
+   keeps its proportions. */
+.fit-text > * {
+  zoom: var(--fit-scale, 1);
+}
+
 /* Visible only when focused with the keyboard */
 .skip-link {
   position: fixed;

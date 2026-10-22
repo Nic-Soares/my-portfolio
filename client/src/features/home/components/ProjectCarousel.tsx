@@ -2,7 +2,9 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Shape from "@/components/decor/Shape/Shape.tsx";
 import Button from "@/components/ui/Button/Button.tsx";
-import { projectsData } from "@/features/work/data/projects/index.ts";
+import { FitLines } from "@/components/ui/FitLines/FitLines.tsx";
+import { useProjectData } from "@/features/work/hooks/useProjectData.ts";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import styles from "./ProjectCarousel.module.css";
 
 const SWIPE_THRESHOLD = 48; // px a finger must travel to change card
@@ -13,6 +15,8 @@ const SWIPE_THRESHOLD = 48; // px a finger must travel to change card
 // large card also takes the missing neighbour's room. Swipe works on touch.
 const ProjectCarousel = () => {
   const navigate = useNavigate();
+  const { t } = useI18n();
+  const projectsData = useProjectData().getAllProjects();
   const [current, setCurrent] = useState(0);
   const swipeStart = useRef<number | null>(null);
 
@@ -22,8 +26,8 @@ const ProjectCarousel = () => {
   return (
     <section
       className={styles.carousel}
-      aria-label="Projects"
-      aria-roledescription="carousel"
+      aria-label={t.home.projects}
+      aria-roledescription={t.home.carousel}
       onPointerDown={(event) => {
         if (event.pointerType === "touch") swipeStart.current = event.clientX;
       }}
@@ -46,8 +50,11 @@ const ProjectCarousel = () => {
             key={project.slug}
             className={`${styles.card} ${isCurrent ? styles["card--current"] : styles["card--peek"]}`}
             role="group"
-            aria-roledescription="slide"
-            aria-label={`${number} of ${String(projectsData.length).padStart(2, "0")}`}
+            aria-roledescription={t.home.slide}
+            aria-label={t.home.slideOf(
+              number,
+              String(projectsData.length).padStart(2, "0"),
+            )}
           >
             {/* Placeholder art, as the Figma card image */}
             <div className={styles.media} aria-hidden="true">
@@ -61,15 +68,18 @@ const ProjectCarousel = () => {
                 <p className={`title-large-emphasized ${styles.index}`}>
                   {number}
                 </p>
-                <p className={`body-large ${styles.description}`}>
+                <FitLines
+                  lines={{ "extra-large": 2, large: 2, medium: 2, compact: 4 }}
+                  className={`body-large ${styles.description}`}
+                >
                   {project.name} — {project.description}
-                </p>
+                </FitLines>
                 <Button
                   type="square"
                   size="medium"
                   style="filled"
                   icon={null}
-                  label="More"
+                  label={t.home.more}
                   onClick={() => navigate(`/projects/${project.slug}`)}
                 />
               </div>
@@ -78,7 +88,7 @@ const ProjectCarousel = () => {
               <button
                 type="button"
                 className={styles.peekButton}
-                aria-label={`Show project ${number}: ${project.name}`}
+                aria-label={t.home.showProject(number, project.name)}
                 onClick={() => go(index)}
               />
             )}

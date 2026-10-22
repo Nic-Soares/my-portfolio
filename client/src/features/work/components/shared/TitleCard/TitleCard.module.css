@@ -1,7 +1,10 @@
 @import "@/styles/breakpoints.css";
 
+/* Fills the panel (useFitText measures it); the copy stays centered */
 .wrapper {
   display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
   flex-direction: column;
   justify-content: center;
   max-width: 840px;

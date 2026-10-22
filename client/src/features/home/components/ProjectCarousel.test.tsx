@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
-import { projectsData } from "@/features/work/data/projects/index.ts";
+import { projectsByLocale } from "@/features/work/data/projects/index.ts";
 import ProjectCarousel from "./ProjectCarousel.tsx";
 
 // Descriptions are matched as plain text (they may contain "+" and the like)
@@ -15,7 +15,7 @@ describe("ProjectCarousel", () => {
         <ProjectCarousel />
       </MemoryRouter>,
     );
-    const [first, second] = projectsData;
+    const [first, second] = projectsByLocale.en;
 
     // The first project is the large card; the second is compressed
     expect(screen.getByText(text(first.description))).toBeInTheDocument();

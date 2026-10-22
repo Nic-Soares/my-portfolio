@@ -3,6 +3,7 @@ import ConnectedButtonGroup from "@/components/ui/ConnectedButtonGroup/Connected
 import IconButton from "@/components/ui/IconButton/IconButton.tsx";
 import SearchBar from "@/components/ui/SearchBar/SearchBar.tsx";
 import { useSizeClass } from "@/hooks/useSizeClass.ts";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import type { WorkArea } from "../../../data/project-data.types.ts";
 import styles from "./ProjectListHero.module.css";
 
@@ -31,6 +32,7 @@ const ProjectListHero = ({
   query,
   onQueryChange,
 }: ProjectListHeroProps) => {
+  const { t } = useI18n();
   const sizeClass = useSizeClass();
   const desktop = sizeClass === "large" || sizeClass === "extra-large";
   const compact = sizeClass === "compact";
@@ -38,8 +40,10 @@ const ProjectListHero = ({
 
   const shown = areas.slice(0, 4);
   const options = [
-    { label: `All · ${total}` },
-    ...shown.map((entry) => ({ label: `${entry.area} · ${entry.count}` })),
+    { label: t.work.all(total) },
+    ...shown.map((entry) => ({
+      label: `${t.work.areas[entry.area]} · ${entry.count}`,
+    })),
   ];
   const selectedIndices = selectedAreas.length
     ? shown
@@ -65,7 +69,7 @@ const ProjectListHero = ({
 
   const search = (autoFocus: boolean) => (
     <SearchBar
-      placeholder="Search projects"
+      placeholder={t.work.searchProjects}
       value={query}
       onChange={onQueryChange}
       autoFocus={autoFocus}
@@ -75,7 +79,7 @@ const ProjectListHero = ({
   if (desktop) {
     return (
       <header className={styles["projects__header"]}>
-        <h1 className={styles["projects__title"]}>Projects</h1>
+        <h1 className={styles["projects__title"]}>{t.work.title}</h1>
         <div className={styles["projects__actions"]}>
           <div className={styles["projects__button-group"]}>{filter}</div>
           <div className={styles["projects__search-bar"]}>{search(false)}</div>
@@ -90,7 +94,7 @@ const ProjectListHero = ({
       size="small"
       style={compact ? "outline" : "tonal"}
       icon="arrow_back"
-      ariaLabel={mode === "search" ? "Close search" : "Close filter"}
+      ariaLabel={mode === "search" ? t.work.closeSearch : t.work.closeFilter}
       onClick={() => setMode("selector")}
     />
   );
@@ -104,7 +108,7 @@ const ProjectListHero = ({
       }}
     >
       <div className={styles["projects__row"]}>
-        <h1 className={styles["projects__title"]}>Projects</h1>
+        <h1 className={styles["projects__title"]}>{t.work.title}</h1>
 
         {mode === "selector" && (
           <ConnectedButtonGroup
@@ -112,10 +116,15 @@ const ProjectListHero = ({
             options={[
               {
                 label:
-                  active && !query.trim() ? `Filter · ${active}` : "Filter",
+                  active && !query.trim()
+                    ? t.work.filterCount(active)
+                    : t.work.filter,
                 icon: "filter_list",
               },
-              { label: query.trim() ? "Search · 1" : "Search", icon: "search" },
+              {
+                label: query.trim() ? t.work.searchActive : t.work.search,
+                icon: "search",
+              },
             ]}
             selectedIndex={-1}
             onSelectionChange={(index) =>

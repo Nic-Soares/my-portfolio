@@ -1,4 +1,5 @@
 import CompanyLogo from "@/components/ui/CompanyLogo/CompanyLogo.tsx";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import ServiceCard from "./ServiceCard/ServiceCard.tsx";
 import styles from "./ServicesStack.module.css";
 
@@ -14,46 +15,51 @@ const COMPANIES = [
 ];
 
 // Figma "ServicesStack": two service cards over the trusted companies bar
-const ServicesStack = () => (
-  <section className={styles.stack} aria-label="Services">
-    <ServiceCard
-      title="Systems & Process Automation"
-      description="I automate processes, integrate systems and turn manual tasks into efficient, reliable flows."
-      tone="secondary"
-      mediaSide="start"
-      shapes={["gem", "burst", "pill"]}
-    />
-    <ServiceCard
-      title="Data Engineering & Analysis"
-      description="From raw data to dashboards: I deliver clarity, automation and insights."
-      tone="tertiary"
-      mediaSide="end"
-      shapes={["diamond", "12-sided-cookie", "circle"]}
-    />
+const ServicesStack = () => {
+  const { t } = useI18n();
+  return (
+    <section className={styles.stack} aria-label={t.home.services}>
+      <ServiceCard
+        title={t.home.automationTitle}
+        description={t.home.automationText}
+        tone="secondary"
+        mediaSide="start"
+        shapes={["gem", "burst", "pill"]}
+        descriptionLines={{ "extra-large": 2, large: 3, medium: 3, compact: 2 }}
+      />
+      <ServiceCard
+        title={t.home.dataTitle}
+        description={t.home.dataText}
+        tone="tertiary"
+        mediaSide="end"
+        shapes={["diamond", "12-sided-cookie", "circle"]}
+        descriptionLines={2}
+      />
 
-    {/* Logos drift slowly to the left in a loop; the second copy only fills
+      {/* Logos drift slowly to the left in a loop; the second copy only fills
         the gap and is hidden from assistive tech */}
-    <div className={styles.companies}>
-      <div className={styles.viewport}>
-        <div className={styles.track}>
-          <ul className={styles.logos} aria-label="Companies I've worked with">
-            {COMPANIES.map((company) => (
-              <li key={company.logo}>
-                <CompanyLogo company={company} />
-              </li>
-            ))}
-          </ul>
-          <ul className={styles.logos} aria-hidden="true">
-            {COMPANIES.map((company) => (
-              <li key={company.logo}>
-                <CompanyLogo company={company} />
-              </li>
-            ))}
-          </ul>
+      <div className={styles.companies}>
+        <div className={styles.viewport}>
+          <div className={styles.track}>
+            <ul className={styles.logos} aria-label={t.home.companies}>
+              {COMPANIES.map((company) => (
+                <li key={company.logo}>
+                  <CompanyLogo company={company} />
+                </li>
+              ))}
+            </ul>
+            <ul className={styles.logos} aria-hidden="true">
+              {COMPANIES.map((company) => (
+                <li key={company.logo}>
+                  <CompanyLogo company={company} />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default ServicesStack;

@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import Container from "@/components/layout/container/Container.tsx";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import styles from "./MediaCard.module.css";
 
 type MediaCardProps = {
@@ -21,6 +22,7 @@ export default function MediaCard({
   minHeight = "400px",
   maxHeight = "544px",
 }: MediaCardProps) {
+  const { t } = useI18n();
   const [mediaError, setMediaError] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -53,7 +55,7 @@ export default function MediaCard({
           className={styles.mediaFallback}
           role="status"
           aria-live="polite"
-          aria-label={alt || "Media unavailable"}
+          aria-label={alt || t.work.mediaUnavailable}
           style={{
             display: "flex",
             flexDirection: "column",
@@ -66,14 +68,14 @@ export default function MediaCard({
             padding: "12px",
           }}
         >
-          <p style={{ margin: 0 }}>Unable to load media.</p>
+          <p style={{ margin: 0 }}>{t.work.mediaError}</p>
           <a
             href={src}
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: "#1ea7fd", textDecoration: "underline" }}
           >
-            Open in a new tab
+            {t.work.openInNewTab}
           </a>
         </div>
       ) : type === "video" ? (
@@ -93,7 +95,7 @@ export default function MediaCard({
         <img
           className={styles.mediaObject}
           src={src}
-          alt={alt || "Media content"}
+          alt={alt || t.work.mediaContent}
           onError={handleError}
         />
       )}

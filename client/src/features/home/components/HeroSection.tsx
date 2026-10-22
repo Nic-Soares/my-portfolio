@@ -4,22 +4,27 @@ import Shape from "@/components/decor/Shape/Shape.tsx";
 import Button from "@/components/ui/Button/Button.tsx";
 import Chip from "@/components/ui/Chip/Chip.tsx";
 import ChipRow from "@/components/ui/Chip/ChipRow.tsx";
+import { FitLines } from "@/components/ui/FitLines/FitLines.tsx";
+import { useFitText } from "@/hooks/useFitText.ts";
 import { useSizeClass } from "@/hooks/useSizeClass.ts";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import styles from "./HeroSection.module.css";
-
-const SKILLS = [
-  "#Python",
-  "3+ Years in Data",
-  "Power BI · SQL",
-  "TypeScript",
-  "Applied AI",
-];
 
 // Figma "HeroSection": copy and CTAs beside the profile photo on desktop,
 // stacked and centered below Large, over HeroDecor.
 const HeroSection = () => {
   const navigate = useNavigate();
   const sizeClass = useSizeClass();
+  const { t } = useI18n();
+  // The hero has the viewport's height on desktop: a long headline shrinks
+  const headingRef = useFitText<HTMLDivElement>();
+  const skills = [
+    "#Python",
+    t.home.skillYears,
+    "Power BI · SQL",
+    "TypeScript",
+    t.home.skillAi,
+  ];
   const desktop = sizeClass === "large" || sizeClass === "extra-large";
 
   // Figma HeroActions: Round Large on desktop, Square Large on Medium,
@@ -41,18 +46,24 @@ const HeroSection = () => {
       <HeroDecor />
 
       <div className={styles.copy}>
-        <div className={styles.heading}>
-          <p className={`${eyebrowStyle} ${styles.eyebrow}`}>Hello there!</p>
-          <h1
+        <div ref={headingRef} className={`fit-text ${styles.heading}`}>
+          <p className={`${eyebrowStyle} ${styles.eyebrow}`}>
+            {t.home.eyebrow}
+          </p>
+          <FitLines
+            as="h1"
+            lines={3}
             id="hero-headline"
             className={`${headlineStyle} ${styles.headline}`}
           >
-            I’m <span className={styles.name}>Nicolas Soares</span>,
-            <br />I turn data into visual experiences that drive smart
-            decisions.
-          </h1>
-          <ChipRow ariaLabel="Skills">
-            {SKILLS.map((skill) => (
+            {t.home.headlineBefore}
+            <span className={styles.name}>Nicolas Soares</span>
+            {t.home.headlineAfter}
+            <br />
+            {t.home.headlineLine2}
+          </FitLines>
+          <ChipRow ariaLabel={t.home.skills}>
+            {skills.map((skill) => (
               <Chip key={skill} label={skill} />
             ))}
           </ChipRow>
@@ -64,7 +75,7 @@ const HeroSection = () => {
             size={buttonSize}
             style="filled"
             icon={null}
-            label="See My Projects"
+            label={t.home.seeProjects}
             onClick={() => navigate("/projects")}
           />
           <Button
@@ -72,7 +83,7 @@ const HeroSection = () => {
             size={buttonSize}
             style="tonal"
             icon={null}
-            label="Contact me"
+            label={t.home.contactMe}
             onClick={() => navigate("/about")}
           />
         </div>

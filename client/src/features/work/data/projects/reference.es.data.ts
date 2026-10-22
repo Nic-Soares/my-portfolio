@@ -1,0 +1,435 @@
+import type { ProjectData } from "../project-data.types.ts";
+
+// Spanish translation of reference.data.ts
+export const referenceDataEs: ProjectData = {
+  slug: "reference",
+  name: "Referencia",
+  description: "La elevación es la distancia entre dos superficies en el eje z",
+  areas: ["Design", "Frontend"],
+  context: "Página de referencia",
+  hero: {
+    type: "image",
+    src: "https://kstatic.googleusercontent.com/files/e6ea31bb6dd2afb85d0b22d03faaafd95ccea9f5c1cca45028d33c33cc6488c7f770b455d43968d9fdb2ae5123d300663d1471dd050f18f8ed023b1b1a614477",
+    alt: "Elevación",
+  },
+  tabs: [
+    {
+      id: "overview",
+      title: "Resumen",
+      sidebarItems: [
+        { label: "Disponibilidad y recursos", anchorId: "availability" },
+        { label: "Diferencias con M2", anchorId: "differences" },
+        { label: "Todas las superficies y componentes", anchorId: "surfaces" },
+      ],
+      content: [
+        {
+          id: "elevation",
+          type: "list",
+          items: [
+            "La elevación se aplica a todas las superficies y componentes",
+            "Los tokens codifican la distancia en el eje z para que los componentes se vean de forma coherente entre sí",
+            "Los tokens no tienen sombras ni color; cada plataforma determina las sombras y valores específicos para cada nivel de elevación",
+            "La elevación puede mostrarse con colores tonales de superficie o con sombras",
+            "Evita cambiar la elevación predeterminada de los componentes de Material 3",
+            "Usa solo una pequeña cantidad de niveles de elevación",
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "La elevación se mide como la distancia entre componentes a lo largo del eje z en píxeles independientes de la densidad (dp).",
+          snug: true,
+        },
+        {
+          type: "image",
+          src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykafum-1.png?alt=media&token=686eda7a-aed0-4d34-a749-0b01f2a50a86",
+          alt: "1 diagrama muestra un cuadrado morado claro y un cuadrado morado más oscuro. Otro muestra una vista lateral de los cuadrados en elevación, donde el cuadrado claro está a menor elevación que el oscuro.",
+          aspectRatio: "3.413333 / 1",
+          caption: `<p>La elevación representa la distancia entre elementos. El producto aplica color para representar la elevación.</p>
+          <ol class="decimal">
+              <li>
+                  <p>Una superficie a 1dp de elevación y otra a 8dp de elevación, vistas de frente</p>
+              </li>
+              <li>
+                  <p>La diferencia de elevación entre las dos superficies es de 7dp, vista de lado</p>
+              </li>
+          </ol>`,
+        },
+        {
+          id: "availability",
+          type: "header",
+          level: 2,
+          text: "Disponibilidad y recursos",
+        },
+        {
+          type: "table",
+          headers: ["", "Recurso", "Estado"],
+          rows: [
+            ["Diseño", "Design Kit (Figma)", "Disponible"],
+            ["Implementación", "Flutter", "Disponible"],
+            ["", "Jetpack Compose", "Disponible"],
+            ["", "MDC - Android", "Disponible"],
+            ["", "MWC - Web", "Disponible"],
+          ],
+        },
+        {
+          id: "differences",
+          type: "header",
+          level: 2,
+          text: "Diferencias con M2",
+        },
+        {
+          type: "columns",
+          columns: [
+            [
+              {
+                type: "list",
+                items: [
+                  "<strong>Sombras:</strong> En lugar de aplicar sombras por defecto en todos los niveles, usa sombras solo cuando sea necesario para crear protección adicional frente a un fondo o para fomentar la interacción",
+                  "<strong>Color:</strong> Nuevas asignaciones de color y compatibilidad con color dinámico",
+                  "<strong>Niveles:</strong> La elevación ahora se describe en términos de niveles",
+                ],
+              },
+            ],
+            [
+              {
+                type: "image",
+                src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykc8yv-2.png?alt=media&token=7c4a4e4e-ff37-47d2-a375-579c3f945893",
+                alt: "Diagrama de 2 cuadrados concéntricos. El cuadrado interior está a 12dp y tiene una sombra mayor que el exterior, que está a 3dp. M2: sombras aplicadas en todos los niveles",
+                caption: "<p>M2: sombras aplicadas en todos los niveles</p>",
+              },
+            ],
+            [
+              {
+                type: "image",
+                src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykckey-3.png?alt=media&token=fd1c5548-7048-4d2c-9123-17308e339731",
+                alt: "Diagrama de 2 cuadrados concéntricos sin sombras. En su lugar, el cuadrado interior está en un nivel y es tonalmente más oscuro que el exterior, que está en el nivel 2. M3: uso de color en lugar de sombras para comunicar la elevación",
+                caption:
+                  "<p>M3: uso de color en lugar de sombras para comunicar la elevación</p>",
+              },
+            ],
+          ],
+        },
+        {
+          id: "surfaces",
+          type: "header",
+          level: 2,
+          text: "Todas las superficies y componentes tienen valores de elevación",
+        },
+        {
+          type: "columns",
+          layout: "1-2",
+          columns: [
+            [
+              {
+                type: "paragraph",
+                text: "Las superficies a distintas elevaciones hacen lo siguiente:",
+              },
+              {
+                type: "list",
+                ordered: true,
+                items: [
+                  "Permiten que las superficies se muevan delante y detrás de otras, como el contenido que se desplaza detrás de las barras de app",
+                  "Reflejan relaciones espaciales, como la sombra de un FAB que indica que está separado de una colección de tarjetas",
+                  "Centran la atención en la mayor elevación, como un diálogo que aparece temporalmente delante de otras superficies",
+                ],
+              },
+            ],
+            [
+              {
+                type: "video",
+                src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykjf69-GM3-Styles-Elevation-Overview-1-v01.mp4?alt=media&token=6a6f026f-2264-474b-9b2d-cab3cd08393e",
+                aspectRatio: "1.194346 / 1",
+                caption:
+                  "<p>La elevación puede representarse con sombras u otras señales visuales, como rellenos de superficie con una diferencia de tono</p>",
+              },
+            ],
+          ],
+        },
+        {
+          type: "header",
+          level: 3,
+          text: "Elevación en reposo (predeterminada)",
+        },
+        {
+          type: "columns",
+          layout: "1-2",
+          columns: [
+            [
+              {
+                type: "paragraph",
+                text: "Todos los componentes tienen una elevación en reposo predeterminada. Evita cambiar la elevación predeterminada de los componentes de Material.",
+              },
+            ],
+            [
+              {
+                type: "image",
+                src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykcxkh-5.png?alt=media&token=d0b226cf-0e17-4719-9f5c-8a186936d003",
+                alt: "Un botón de acción flotante con sombra. Todos los componentes tienen una elevación predeterminada que debe usarse",
+                caption:
+                  "<p>Todos los componentes tienen una elevación predeterminada que debe usarse</p>",
+              },
+            ],
+          ],
+        },
+        {
+          type: "header",
+          level: 3,
+          text: "Cambiar la elevación",
+        },
+        {
+          type: "paragraph",
+          text: "Los componentes deben cambiar de elevación en respuesta a eventos del sistema o a la interacción del usuario, como pasar el cursor. Este cambio de elevación debe ser coherente en todos los elementos similares.",
+        },
+        {
+          type: "paragraph",
+          text: "Por ejemplo, pasar el cursor sobre un FAB aumenta temporalmente la elevación en 1 nivel, del nivel 3 al nivel 4. Todos los botones de Material aumentan su elevación en 1 nivel al pasar el cursor.",
+        },
+        {
+          type: "image",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Hovering",
+          alt: "Pasar el cursor sobre un botón aumenta su elevación para mostrar la interacción del usuario",
+        },
+      ],
+    },
+    {
+      id: "applying-elevation",
+      title: "Aplicar la elevación",
+      sidebarItems: [
+        { label: "Aplicar la elevación", anchorId: "applying" },
+        { label: "Representar la elevación", anchorId: "depicting" },
+        { label: "Diferencia tonal", anchorId: "tonal" },
+        {
+          label: "Roles de color de superficie y elevación",
+          anchorId: "surface",
+        },
+        { label: "Sombras", anchorId: "shadows" },
+        { label: "Cuándo usar sombras visibles", anchorId: "when-to-use" },
+        { label: "Scrims", anchorId: "scrims" },
+      ],
+      content: [
+        {
+          id: "applying",
+          type: "header",
+          level: 2,
+          text: "Aplicar la elevación",
+        },
+        {
+          type: "paragraph",
+          text: "El sistema de elevación de Material 3 está limitado deliberadamente a unos pocos niveles. Esta restricción creativa implica que debes tomar decisiones meditadas sobre la historia de elevación de tu UI.",
+        },
+        {
+          type: "image",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Diagram+5+elevation+levels",
+          alt: "Diagrama que muestra los 5 niveles de elevación y sus valores en dp.",
+        },
+        {
+          type: "paragraph",
+          text: "Material usa seis niveles de elevación, cada uno con un valor en dp correspondiente. Estos valores se nombran según su distancia relativa sobre la superficie de la UI: 0, +1, +2, +3, +4 y +5. El estado en reposo de un elemento puede estar en los niveles 0 a +3, mientras que los niveles +4 y +5 se reservan para estados de interacción del usuario, como hover y arrastre.",
+        },
+        {
+          id: "depicting",
+          type: "header",
+          level: 2,
+          text: "Representar la elevación",
+        },
+        {
+          type: "paragraph",
+          text: "La elevación puede representarse con sombras u otras señales visuales, como rellenos de superficie con una diferencia de tono o scrims.",
+        },
+        {
+          type: "paragraph",
+          text: "Para representar bien la elevación, una superficie debe mostrar:",
+        },
+        {
+          type: "list",
+          items: [
+            "Bordes de superficie que la contrasten con su entorno",
+            "Superposición con otras superficies, ya sea en reposo o en movimiento",
+            "Distancia respecto a otras superficies",
+          ],
+        },
+        {
+          type: "image",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Overlapping+surfaces",
+          alt: "3 imágenes. La primera muestra un cuadrado violeta superpuesto a un cuadrado blanco. La segunda muestra 2 cuadrados superpuestos del mismo color, con sombras bajo el cuadrado superior. La tercera muestra un cuadrado violeta superpuesto a un cuadrado gris oscuro.",
+        },
+        {
+          type: "list",
+          items: [
+            "Dos superficies superpuestas con valores tonales distintos",
+            "Dos superficies superpuestas con los mismos valores tonales separadas por una sombra",
+            "Dos superficies superpuestas con los mismos valores tonales separadas por un scrim",
+          ],
+        },
+        {
+          id: "tonal",
+          type: "header",
+          level: 2,
+          text: "Diferencia tonal",
+        },
+        {
+          type: "paragraph",
+          text: "La diferencia tonal entre superficies ayuda a expresar la cualidad táctil de las superficies de Material. Muestra dónde termina una superficie y empieza otra al separar las distintas partes de una UI en componentes identificables. Por ejemplo, los bordes de una barra de app muestran que está separada de una lista en cuadrícula, lo que comunica al usuario que la lista se desplaza de forma independiente de la barra de app.",
+        },
+        {
+          type: "paragraph",
+          text: "Por defecto, las superficies de Material 3 usan la diferencia tonal para indicar separación. Se pueden usar otros métodos para indicar bordes, como:",
+        },
+        {
+          type: "list",
+          items: [
+            "Dar a las superficies una sombra proyectada",
+            "Colocar un scrim detrás de una superficie",
+          ],
+        },
+        {
+          type: "image",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Separation+methods",
+          alt: "Elevación, scrim y diferencias tonales usados para indicar separación.",
+        },
+        {
+          type: "paragraph",
+          text: "En los componentes interactivos, los bordes deben crear suficiente contraste entre superficies (cumpliendo o superando las relaciones de contraste accesibles) para que se perciban como separadas entre sí.",
+        },
+        {
+          id: "surface",
+          type: "header",
+          level: 2,
+          text: "Roles de color de superficie y elevación",
+        },
+        {
+          type: "paragraph",
+          text: "Puedes elegir entre una variedad de roles de color de superficie y de contenedor de superficie. Estos roles no están ligados a la elevación y ofrecen flexibilidad para definir áreas de contención.",
+        },
+        {
+          type: "paragraph",
+          text: "Las áreas de contención o los componentes que se superponen deben tener roles de color distintos para comunicar visualmente la separación.",
+        },
+        {
+          type: "image",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Surface+color+roles",
+          alt: "Diagrama de la pantalla de inicio de un correo, donde 1 indica el color de fondo de los elementos de la lista y 2 el color de fondo de la barra de navegación.",
+        },
+        {
+          id: "shadows",
+          type: "header",
+          level: 2,
+          text: "Sombras",
+        },
+        {
+          type: "paragraph",
+          text: "Las sombras pueden expresar el grado de elevación entre superficies de maneras que otras técnicas no pueden.",
+        },
+        {
+          type: "paragraph",
+          text: "Tanto el tamaño de una sombra como su grado de suavidad o difusión expresan la distancia entre dos superficies. Por ejemplo, una superficie con una sombra pequeña y nítida indica que está muy cerca de la superficie que tiene detrás. Las sombras más grandes y suaves expresan más distancia.",
+        },
+        {
+          type: "image",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Podcast+app+shadows+1",
+          alt: "App de podcasts con cada programa mostrado como una tarjeta separada del fondo mediante sombras oscuras pequeñas.",
+        },
+        {
+          type: "image",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Podcast+app+shadows+2",
+          alt: "App de podcasts con cada programa mostrado como una tarjeta separada del fondo mediante sombras más difusas y suaves.",
+        },
+        {
+          type: "paragraph",
+          text: "A la hora de aplicar sombras, menos es más. Cuantos menos niveles tenga tu UI, más poder tienen para dirigir la atención y la acción.",
+        },
+        {
+          id: "when-to-use",
+          type: "header",
+          level: 2,
+          text: "Cuándo usar sombras visibles",
+        },
+        {
+          type: "paragraph",
+          text: "<strong>Proteger elementos:</strong> Cuando un fondo tiene patrones o mucha carga visual, el estilo de línea fina puede no ofrecer suficiente protección. En esos casos, usa la elevación para separar y destacar elementos como tarjetas, chips o botones.",
+        },
+        {
+          type: "image",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Buttons+with+shadows",
+          alt: "Botones con sombras que los separan de una imagen de fondo.",
+        },
+        {
+          type: "paragraph",
+          text: "<strong>Fomentar la interacción:</strong> Los elementos pueden elevarse temporalmente al recibir foco, al seleccionarse o con otro tipo de interacción, como deslizar. Un elemento elevado también puede descender cuando aparece otro más alto.",
+        },
+        {
+          id: "scrims",
+          type: "header",
+          level: 2,
+          text: "Scrims",
+        },
+        {
+          type: "paragraph",
+          text: "Un scrim puede centrar la atención en elementos específicos al aumentar el contraste visual de una superficie grande en capas. Usa el scrim debajo de elementos como modales y menús de navegación expandidos.",
+        },
+        {
+          type: "paragraph",
+          text: "Los scrims usan el rol de color scrim con una opacidad del 32%.",
+        },
+        {
+          type: "image",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=News+app+scrim",
+          alt: "App de noticias en pantalla grande con un riel de navegación separado del contenido principal por un scrim.",
+        },
+      ],
+    },
+    {
+      id: "tokens",
+      title: "Tokens",
+      sidebarItems: [
+        { label: "Tokens", anchorId: "tokens-intro" },
+        { label: "Elevación de componentes", anchorId: "component-elevation" },
+        { label: "Nivel en reposo", anchorId: "resting-level" },
+      ],
+      content: [
+        {
+          id: "tokens-intro",
+          type: "header",
+          level: 2,
+          text: "Tokens",
+        },
+        {
+          type: "paragraph",
+          text: "Los niveles de elevación pueden implementarse con tokens. El color de tinte de superficie está obsoleto. Usa en su lugar los tokens de nivel de elevación (0–5). Más información sobre los design tokens",
+        },
+        {
+          type: "image",
+          src: "https://placehold.co/800x400/e0e0e0/000000?text=Elevation+Tokens",
+          alt: "Niveles de elevación de 0 a +5 con color de tinte de superficie",
+        },
+        {
+          id: "component-elevation",
+          type: "header",
+          level: 2,
+          text: "Elevación de componentes",
+        },
+        {
+          type: "paragraph",
+          text: "La mayoría de los componentes tienen una elevación predeterminada. La elevación de un componente solo se usa para determinar su posición respecto a otros componentes, incluso al pasar el cursor o recibir foco (lo que suele subir la elevación un nivel). Por defecto, la elevación no tiene sombra ni valor propio.",
+        },
+        {
+          id: "resting-level",
+          type: "header",
+          level: 3,
+          text: "Nivel en reposo",
+        },
+        {
+          type: "list",
+          items: [
+            "<strong>Nivel 5 (12dp):</strong> (no asignado como nivel en reposo)",
+            "<strong>Nivel 4 (8dp):</strong> (no asignado como nivel en reposo)",
+            "<strong>Nivel 3 (6dp):</strong> Selectores de fecha, Diálogos (modales), FAB extendido, FAB, Menú FAB (botón de cerrar), Búsqueda, Selectores de hora",
+            "<strong>Nivel 2 (3dp):</strong> Barra de app (con desplazamiento), Menú, Barra de navegación, Tooltip enriquecido, Barra de herramientas",
+            "<strong>Nivel 1 (1dp):</strong> Banner, Hoja inferior (modal), Botón (elevado), Tarjeta (elevada), Chips (elevados), Panel lateral de navegación (modal), Hoja lateral (modal)",
+            "<strong>Nivel 0 (0dp):</strong> Barra de app (sin desplazamiento), Botones (rellenos, tonales, con contorno), Grupos de botones, Tarjetas (rellenas, con contorno), Carrusel, Chips, Diálogo (pantalla completa), FAB extendido (en riel de navegación), FAB (en riel de navegación), Menú FAB (elementos de lista), Botones de ícono, Lista, Riel de navegación, Botón segmentado, Hoja lateral (fija), Control deslizante, Botón dividido, Pestañas",
+          ],
+        },
+      ],
+    },
+  ],
+};

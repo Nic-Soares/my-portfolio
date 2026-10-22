@@ -1,5 +1,6 @@
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
 import styles from "./SearchBar.module.css";
 
 interface SearchBarProps {
@@ -13,7 +14,7 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
-  placeholder = "Search...",
+  placeholder,
   onSearch,
   className = "",
   autoFocus = false,
@@ -21,6 +22,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   value: controlledValue,
   onChange,
 }) => {
+  const { t } = useI18n();
   const [internalQuery, setInternalQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -109,10 +111,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
-            placeholder={placeholder}
+            placeholder={placeholder ?? t.ui.search}
             className={styles.searchBar__input}
             disabled={disabled}
-            aria-label="Search input"
+            aria-label={t.ui.searchInput}
           />
         </div>
 
@@ -121,7 +123,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             className={styles.searchBar__trailingIcon}
             onClick={handleClear}
             role="button"
-            aria-label="Clear search"
+            aria-label={t.ui.clearSearch}
             tabIndex={-1}
           >
             <span className="material-symbols-outlined" aria-hidden="true">

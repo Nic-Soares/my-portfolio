@@ -3,8 +3,10 @@ import Shape from "@/components/decor/Shape/Shape.tsx";
 import Button from "@/components/ui/Button/Button.tsx";
 import Chip from "@/components/ui/Chip/Chip.tsx";
 import ChipRow from "@/components/ui/Chip/ChipRow.tsx";
+import { FitLines } from "@/components/ui/FitLines/FitLines.tsx";
 import { useSizeClass } from "@/hooks/useSizeClass.ts";
-import { aboutData as about } from "../data/about.data.ts";
+import { useI18n } from "@/i18n/I18nProvider.tsx";
+import { useAboutData } from "../data/useAboutData.ts";
 import styles from "./About.page.module.css";
 
 // Figma "About Me": on top, the main pane (hero, About, Work Experience)
@@ -12,6 +14,8 @@ import styles from "./About.page.module.css";
 // below, the full-width contact strip. Desktop fits the viewport; below
 // Large it is one scrolling column.
 const AboutPage = () => {
+  const { t } = useI18n();
+  const about = useAboutData();
   const sizeClass = useSizeClass();
   const compact = sizeClass === "compact";
   // Figma: the roomier 1920 sidebar sets its lists in Body Large Plus
@@ -33,9 +37,12 @@ const AboutPage = () => {
             >
               {about.name}
             </h1>
-            <p className={`body-large ${styles.role}`}>
+            <FitLines
+              lines={{ "extra-large": 1, large: 2, medium: 1, compact: 2 }}
+              className={`body-large ${styles.role}`}
+            >
               {about.role} · {about.location}
-            </p>
+            </FitLines>
           </div>
           <div className={styles.heroMedia}>
             {/* Figma "Profile photo" placeholder until the real photo */}
@@ -52,7 +59,7 @@ const AboutPage = () => {
             id="about-me"
             className={`headline-small-emphasized ${styles.title}`}
           >
-            About Me
+            {t.about.title}
           </h2>
           <p className={`body-large ${styles.card}`}>{about.bio}</p>
         </section>
@@ -62,7 +69,7 @@ const AboutPage = () => {
             id="about-experience"
             className={`headline-small-emphasized ${styles.title}`}
           >
-            Work Experience
+            {t.about.experience}
           </h2>
           <ol className={styles.experience}>
             {about.experience.map((job, index) => (
@@ -90,12 +97,12 @@ const AboutPage = () => {
         </section>
       </div>
 
-      <aside className={styles.side} aria-label="At a glance">
+      <aside className={styles.side} aria-label={t.about.atAGlance}>
         <section
           className={`${styles.sideCard} ${styles["sideCard--tertiary"]}`}
         >
           <h2 className={`label-medium-emphasized ${styles.label}`}>
-            Quick facts
+            {t.about.quickFacts}
           </h2>
           <ul className={`${sideBody} ${styles.lines}`}>
             {about.quickFacts.map((fact) => (
@@ -105,7 +112,9 @@ const AboutPage = () => {
         </section>
 
         <section className={styles.sideCard}>
-          <h2 className={`label-medium-emphasized ${styles.label}`}>Stack</h2>
+          <h2 className={`label-medium-emphasized ${styles.label}`}>
+            {t.about.stack}
+          </h2>
           {about.stack.map((group) => (
             <div key={group.area} className={styles.stackGroup}>
               <h3 className={`label-medium-emphasized ${styles.label}`}>
@@ -122,7 +131,7 @@ const AboutPage = () => {
 
         <section className={`${styles.sideCard} ${styles["sideCard--fill"]}`}>
           <h2 className={`label-medium-emphasized ${styles.label}`}>
-            Education
+            {t.about.education}
           </h2>
           {/* M3 list: leading icon, two lines, inset dividers */}
           <ul className={styles.degrees}>
@@ -151,9 +160,9 @@ const AboutPage = () => {
           </ul>
           <div className={styles.certifications}>
             <h3 className={`label-medium-emphasized ${styles.label}`}>
-              Certifications
+              {t.about.certifications}
             </h3>
-            <ChipRow ariaLabel="Certifications">
+            <ChipRow ariaLabel={t.about.certifications}>
               {about.certifications.map((cert) => (
                 <Chip key={cert} label={cert} />
               ))}
@@ -164,7 +173,9 @@ const AboutPage = () => {
         <section
           className={`${styles.sideCard} ${styles["sideCard--secondary"]}`}
         >
-          <h2 className={`label-medium-emphasized ${styles.label}`}>Speaks</h2>
+          <h2 className={`label-medium-emphasized ${styles.label}`}>
+            {t.about.speaks}
+          </h2>
           <ul className={`${sideBody} ${styles.lines}`}>
             {about.languages.map((language) => (
               <li key={language}>{language}</li>
@@ -179,7 +190,7 @@ const AboutPage = () => {
             id="about-contact"
             className={`label-medium-emphasized ${styles.contactLabel}`}
           >
-            Say hi!
+            {t.about.sayHi}
           </h2>
           <a
             className={`${compact ? "headline-small-emphasized" : "headline-medium-emphasized"} ${styles.email}`}
@@ -196,7 +207,7 @@ const AboutPage = () => {
             size="small"
             style="filled"
             icon={null}
-            label="Download CV"
+            label={t.about.downloadCv}
             onClick={() => window.open(about.contact.cvHref, "_blank")}
           />
         </div>
