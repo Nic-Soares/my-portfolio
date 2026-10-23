@@ -951,6 +951,7 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
 
 **Goal:** the site on the internet. **Dependencies:** `EP-15`, `EP-16`. **Size:** M.
 
+- [ ] Promote `develop` to `main` by PR (the `main` ruleset needs it, with `validate` green). Decided 2026-10-23 to wait until here: `main` is the pre-Deno project, 147 commits behind, with 17 Dependabot alerts (9 high) that go away with the promotion; nothing is published from it, so none of them is exposed
 - [ ] Cloudflare Workers with the client build as static assets; `wrangler.toml` with the R2 binding
 - [ ] Deploy workflow on `main`, preview per PR
 - [ ] Keys created and stored as listed in TK-15.3.3; R2 free-tier numbers checked on Cloudflare's own pricing page
