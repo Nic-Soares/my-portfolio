@@ -925,7 +925,10 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
 
 ### ST-16.3 — R2 and the server
 
-- [ ] Bucket and the media domain; `CatalogSource` for R2 (binding), with the catalog cached in memory (60 s) and the last good copy kept if R2 fails
+- [x] Bucket `portfolio-content` (Standard class) created 2026-10-23; read-only GitHub token and bucket-scoped R2 key pair created and checked (`docs/runbooks/keys.md`). First real run from the Mac (`npm run ingest`, keys in the ignored `.env`): Spotify Web read from `Nic-Soares/spotify-web` (commit `03a8956`, `.portfolio/` added there) and published to R2; a second run writes nothing
+- [ ] The scheduled workflow only runs from the default branch (`main`): `ingest.yml` is ready but starts with the `develop` → `main` promotion (EP-18). Until then, ingestion runs from the Mac
+- [ ] Media served through the server (`/media/*` from the bucket, same origin, immutable cache) instead of a public media domain until the domain exists (EP-18)
+- [ ] `CatalogSource` for R2 (Worker binding), with the catalog cached in memory (60 s) and the last good copy kept if R2 fails
 - [ ] Measure CPU per request against the free plan's 10 ms
 
 ### ST-16.4 — Client reads the API
