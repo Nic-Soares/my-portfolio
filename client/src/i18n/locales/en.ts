@@ -16,7 +16,7 @@ export const en = {
     footer: {
       nav: "Footer",
       tagline:
-        "Full-stack developer building real products end-to-end — from interface to database.",
+        "I turn data into clear answers and AI into tools people actually use.",
       role: "Data Analyst & Applied AI Engineer",
       copyright: "Copyright",
       copyrightLine: (year: number, owner: string, role: string) =>

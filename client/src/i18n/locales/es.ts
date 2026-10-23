@@ -17,7 +17,7 @@ export const es: Messages = {
     footer: {
       nav: "Pie de página",
       tagline:
-        "Desarrollador full-stack que crea productos reales de principio a fin — de la interfaz a la base de datos.",
+        "Convierto datos en respuestas claras e IA en herramientas que la gente usa de verdad.",
       role: "Analista de Datos e Ingeniero de IA Aplicada",
       copyright: "Derechos de autor",
       copyrightLine: (year, owner, role) => `${year} ${owner}. ${role}`,

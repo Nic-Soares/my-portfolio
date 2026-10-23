@@ -1,7 +1,7 @@
 import CopyrightIcon from "@assets/images/footer/copyright.svg?react";
 import Divider from "@assets/images/footer/divider.svg?react";
-import LogoMark from "@assets/images/footer/logo.svg?react";
 import { Link } from "react-router-dom";
+import Logo from "@/components/layout/navigation/Logo/Logo.tsx";
 import { FitLines } from "@/components/ui/FitLines/FitLines.tsx";
 import { useFitText } from "@/hooks/useFitText.ts";
 import { useI18n } from "@/i18n/I18nProvider.tsx";
@@ -50,7 +50,7 @@ export default function Footer() {
         <div className={styles.main}>
           <div className={styles.brand}>
             <Link to="/" className={styles.logo} aria-label={t.layout.home}>
-              <LogoMark aria-hidden="true" />
+              <Logo size={48} />
             </Link>
             <FitLines
               lines={{ "extra-large": 2, large: 2 }}

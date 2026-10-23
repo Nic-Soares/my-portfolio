@@ -17,7 +17,7 @@ export const pt: Messages = {
     footer: {
       nav: "Rodapé",
       tagline:
-        "Desenvolvedor full-stack que constrói produtos reais de ponta a ponta — da interface ao banco de dados.",
+        "Transformo dados em respostas claras e IA em ferramentas que as pessoas usam de verdade.",
       role: "Analista de Dados & Engenheiro de IA Aplicada",
       copyright: "Direitos autorais",
       copyrightLine: (year, owner, role) => `${year} ${owner}. ${role}`,
