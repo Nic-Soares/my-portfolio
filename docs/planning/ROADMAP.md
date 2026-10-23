@@ -16,7 +16,7 @@
 | `EP-04`…`EP-11` | ✅ Done — merged into `develop` (open items stay listed in each epic) | code |
 | `EP-12` Quality | 🟡 a11y, performance, SEO done on `feat/ep-12-quality` — merge into `develop`; deploy moved to `EP-17` | code |
 | `EP-13` Front-end fixes | ⏭️ **Next** — Nicolas's list of small fixes | code |
-| `EP-14` Backend foundation | Not started — the parked API (stash `backend: server/ + config`) is the starting point | code (`server/`) |
+| `EP-14` Backend foundation | Not started — from scratch (nothing in `server/` yet) | code (`server/`) |
 | `EP-15` Projects from GitHub | Not started — content, images and the sync job | code (`server/`) + project repos |
 | `EP-16` Contact and site services | Not started | code (`server/`) |
 | `EP-17` Deploy | Not started — last, once the backend exists (needs a host that runs the server) | infra |
@@ -830,13 +830,14 @@ Moved to `EP-17` (2026-10-23): the host must run the backend, so it comes after 
 
 **Goal:** the portfolio's own backend (`server/`) running next to the client, ready to serve content. **Dependencies:** none. **Size:** M. **Branch:** `feat/ep-14-backend`.
 
-Starting point: the first version is parked in `git stash` ("backend: server/ + config (EP-13, parked)") — Express + MongoDB Atlas, `GET /api/health`, `/api/artists`, `/api/songs`, the static build with SPA fallback, 2 `deno test` cases, `.env.example`.
+Starts from scratch: the portfolio has no backend yet. The Express + MongoDB code parked in `git stash` ("backend: server/ + config") is the Spotify Web project's API (`/api/artists`, `/api/songs`) and doesn't shape this one.
 
-### ST-14.1 — Bring the parked API in
+### ST-14.1 — Server skeleton
 
-- [ ] Restore the stash onto the branch; `server/` back with its tasks (`start`, `typecheck` and `test` cover it)
-- [ ] Current versions: Express 4 → 5 (`app.get("*")` becomes `"/{*splat}"`), mongodb 6 → 7, `@types/express` 5
-- [ ] CI passes without MongoDB credentials (tests use the in-memory repository)
+- [ ] Framework and storage chosen (decisions 14 and 15)
+- [ ] `server/` with `start`, `typecheck` and `test` tasks; CI runs them without real credentials
+- [ ] `GET /api/v1/health`; config from environment variables, documented in `.env.example`
+- [ ] Serves the client build (the SPA and its assets)
 
 ### ST-14.2 — Serve the site the way the build does
 
@@ -868,7 +869,7 @@ Starting point: the first version is parked in `git stash` ("backend: server/ + 
 
 - [ ] `Deno.cron` every 6 hours: list the repos with the topic, fetch `.portfolio/` through the GitHub API with ETags (unchanged repos cost no rate limit)
 - [ ] Validate against the schema; an invalid manifest keeps the last good version and is reported, never half-published
-- [ ] Store projects in MongoDB (`projects` collection, one document per slug and locale, with the commit SHA it came from)
+- [ ] Store the validated projects (one per slug and locale, with the commit SHA they came from) in the storage chosen in decision 15
 - [ ] GitHub webhook on push for instant updates; the cron stays as the safety net
 - [ ] Manual trigger: protected `POST /api/v1/sync`
 
@@ -895,7 +896,7 @@ Starting point: the first version is parked in `git stash` ("backend: server/ + 
 - [ ] Résumé download served by the API (one file per locale), so updating it needs no rebuild
 - [ ] `ErrorBoundary` reports to `POST /api/v1/errors` (was TK-12.4.2)
 - [ ] Privacy-respecting analytics: page views counted by the server, no cookies (was TK-12.4.2)
-- [ ] About data (experience, stack, links) in MongoDB too — optional; only if it changes often enough to be worth it
+- [ ] About data (experience, stack, links) served by the API too — optional; only if it changes often enough to be worth it
 
 ---
 
@@ -905,7 +906,7 @@ Starting point: the first version is parked in `git stash` ("backend: server/ + 
 
 - [ ] Choose the host (decision 6) — Deno Deploy runs the Deno server and has `Deno.cron` built in
 - [ ] Automatic deploy on `main`, preview per PR
-- [ ] Secrets: MongoDB URI, GitHub token, storage keys, e-mail key
+- [ ] Secrets: GitHub token, storage keys, e-mail key
 - [ ] Custom domain and HTTPS; set `VITE_SITE_URL`
 - [ ] Share image 1200×630 for the site (from ST-12.3)
 
@@ -926,9 +927,11 @@ Starting point: the first version is parked in `git stash` ("backend: server/ + 
 | 9 | **Deferred to the end:** Footer links — GitHub, LinkedIn, Telegram, Email and Résumé (`#` for now) | `EP-09` |
 | 10 | **Deferred (decided 2026-10-21):** split the JS per route — today everything ships in one 136 KB (gzip) chunk, mostly the three locales' content; worth it once there are more projects | `EP-12` |
 
-| 11 | Image storage for project media — recommended: Cloudflare R2 (S3 API, free tier, no egress fees); alternatives: MongoDB GridFS or keeping images in the repo | `EP-15` |
+| 11 | Image storage for project media — recommended: Cloudflare R2 (S3 API, free tier, no egress fees); alternative: keeping images in the portfolio repo | `EP-15` |
 | 12 | Manifest format — recommended: JSON per locale with a published JSON Schema (`.portfolio/project.<locale>.json`); alternative: Markdown with front matter (nicer to write prose, but the blocks — columns, tables, galleries — don't map cleanly) | `EP-15` |
 | 13 | Contact e-mail provider (e.g. Resend) | `EP-16` |
+| 14 | Server framework — recommended: Hono (small, built for Deno and other web-standard runtimes, typed routes); alternative: plain `Deno.serve` | `EP-14` |
+| 15 | Where synced projects live — recommended: no database at first (validated JSON in the same object storage as the images, cached in memory by the server); add a database only when something needs queries or writes (e.g. analytics) | `EP-14`, `EP-15` |
 
 ## 5. Execution notes
 
