@@ -113,6 +113,10 @@ export const es: Messages = {
     sayHi: "¡Saluda!",
     downloadCv: "Descargar CV",
   },
+  seo: {
+    projectsDescription:
+      "Casos de estudio en datos, automatización y desarrollo full-stack, de la interfaz a la base de datos.",
+  },
   system: {
     backHome: "Volver al inicio",
     viewProjects: "Ver proyectos",

@@ -115,6 +115,10 @@ export const en = {
     sayHi: "Say hi!",
     downloadCv: "Download CV",
   },
+  seo: {
+    projectsDescription:
+      "Case studies in data, automation and full-stack development, from interface to database.",
+  },
   system: {
     backHome: "Back to home",
     viewProjects: "View projects",

@@ -110,6 +110,7 @@ export interface ProjectData {
     alt?: string; // Image alternative text.
   };
   tabs: ProjectTab[]; // Project tabs.
+  noindex?: boolean; // Kept out of search engines and the sitemap.
 }
 
 // An image with width variants for srcset

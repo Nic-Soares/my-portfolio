@@ -11,5 +11,7 @@ interface ImportMeta {
     readonly DEV: boolean;
     readonly PROD: boolean;
     readonly MODE: string;
+    // Site origin for canonical, Open Graph and the sitemap (see app/seo)
+    readonly VITE_SITE_URL?: string;
   };
 }
