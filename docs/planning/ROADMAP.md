@@ -16,9 +16,9 @@
 | `EP-04`…`EP-11` | ✅ Done — merged into `develop` (open items stay listed in each epic) | code |
 | `EP-12` Quality | 🟡 a11y, performance, SEO done on `feat/ep-12-quality` — merge into `develop`; deploy moved to `EP-18` | code |
 | `EP-13` Front-end fixes | ⏭️ **Next** — Nicolas's list of small fixes | code |
-| `EP-14` Node migration | ✅ Done on `chore/ep-14-node` (2026-10-23) — Node 26 + npm + `tsc` 7 (ADR-006); merge into `develop` | code |
-| `EP-15` Backend foundation | Not started — contracts, local Hono server, security baseline (ADR-007, ADR-008) | code (`shared/`, `server/`) |
-| `EP-16` Projects from GitHub | Not started — ingestion, images, R2, client reads the API | code (`ingest/`) + project repos |
+| `EP-14` Node migration | ✅ Done — merged into `develop` 2026-10-23 (ADR-006) | code |
+| `EP-15` Backend foundation | ✅ Done — merged into `develop` 2026-10-23; Worker-side checks and public-repo rules land with EP-16 | code (`shared/`, `server/`) |
+| `EP-16` Projects from GitHub | ⏭️ **Next** — starts with the Cloudflare account and keys — ingestion, images, R2, client reads the API | code (`ingest/`) + project repos |
 | `EP-17` Site services | Not started — résumé and error reporting | code (`server/`) |
 | `EP-18` Deploy | Not started — Cloudflare Workers, R2, domain | infra |
 
