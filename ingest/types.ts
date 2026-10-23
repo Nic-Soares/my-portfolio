@@ -25,4 +25,7 @@ export interface ObjectStore {
   get(key: string): Promise<Uint8Array | null>;
   has(key: string): Promise<boolean>;
   put(key: string, body: Uint8Array, options: PutOptions): Promise<void>;
+  // Every key under a prefix ("catalog/", "media/")
+  list(prefix: string): Promise<string[]>;
+  delete(key: string): Promise<void>;
 }

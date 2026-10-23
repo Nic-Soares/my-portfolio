@@ -920,7 +920,9 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
 ### ST-16.2 — Images
 
 - [x] `sharp`: WebP 800 and 1600px (never enlarged), a 1200×630 JPG share image from the hero, originals up to 10 MB. The share image is the project's `og:image` now, with a `summary_large_image` card
-- [x] File names by content hash under `media/`, cache for a year (the server sends `immutable` for `/media/*`); the catalog carries `src`/`srcSet`/`sizes`, with `sizes` from where the image shows (hero, block, column)
+- [x] File names by content hash under `media/<slug>/` (one folder per project), cache for a year (the server sends `immutable` for `/media/*`); the catalog carries `src`/`srcSet`/`sizes`, with `sizes` from where the image shows (hero, block, column)
+- [x] Cleanup after each publish: the 10 newest catalog versions stay (rollback), media no kept version uses is deleted; it stops without deleting anything if a kept version can't be read
+- [x] `INGEST_FORMAT` in the catalog: when what ingestion writes changes, the next run re-reads every repository (format 2 moved media to `media/<slug>/`; the old flat layout was purged from R2 once)
 - [ ] Videos stay on their own host (link only)
 
 ### ST-16.3 — R2 and the server
@@ -935,7 +937,8 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
 
 - [ ] The list, the Home carousel, the pager and the detail page read `/api/v1/projects`; loading, error and empty states from EP-10
 - [ ] Spotify Web moves to its own repository's `.portfolio/` (images too); `client/src/features/work/data/projects/` goes away, and with it the locales' content from the JS bundle (decision 10)
-- [ ] The `Reference` placeholder is deleted or becomes a `draft`
+- [x] `Reference` became a local-only project (decided 2026-10-23): `server/fixtures/projects/reference/.portfolio/`, every block type for checking layouts with `npm run ingest:local` + `npm run serve`; its Google-hosted images replaced by 15 generated placeholders with the same proportions; `noindex`. Production ingestion reads GitHub only, so it never goes live
+- [ ] Delete the bundled `reference*.data.ts` with the rest of `data/projects/`
 
 ---
 

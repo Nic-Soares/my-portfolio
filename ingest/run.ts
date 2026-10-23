@@ -17,10 +17,15 @@ import {
   projectManifest,
   type ResponsiveImage,
 } from "../shared/project.ts";
+import { type Cleanup, cleanUp } from "./cleanup.ts";
 import { publishImage } from "./images.ts";
 import type { ObjectStore, RepoSnapshot, RepoSource } from "./types.ts";
 
 const CURRENT = "catalog/current.json";
+// Bump when what ingestion writes changes (paths, image variants…), so the
+// next run re-reads every repository instead of carrying old output over.
+// 2: media under media/<slug>/
+export const INGEST_FORMAT = 2;
 const NO_CACHE = "no-cache";
 
 export interface IngestReport {
@@ -32,6 +37,8 @@ export interface IngestReport {
   // The catalog version now current, and whether this run wrote it
   version: string;
   wrote: boolean;
+  // Old catalog versions and unused media deleted after writing
+  cleaned: Cleanup;
 }
 
 export interface IngestOptions {
@@ -104,6 +111,7 @@ async function readProject(
         options.store,
         bytes,
         options.mediaBase,
+        manifest.data.slug,
         { share: isHero },
       );
       published.set(path, result.image);
@@ -153,8 +161,10 @@ export async function ingest(options: IngestOptions): Promise<IngestReport> {
     fallbacks: {},
     version: "",
     wrote: false,
+    cleaned: { versions: [], media: [] },
   };
 
+  const sameFormat = previous?.format === INGEST_FORMAT;
   const fresh: SourceProject[] = [];
   const kept: string[] = [];
   const previousByRepo = new Map(
@@ -166,7 +176,7 @@ export async function ingest(options: IngestOptions): Promise<IngestReport> {
 
   for (const snapshot of await options.repos.list()) {
     const before = previousByRepo.get(snapshot.repo);
-    if (before && before.sha === snapshot.sha) {
+    if (before && before.sha === snapshot.sha && sameFormat) {
       kept.push(before.slug);
       report.unchanged.push(snapshot.repo);
       continue;
@@ -234,6 +244,7 @@ export async function ingest(options: IngestOptions): Promise<IngestReport> {
   const content = JSON.stringify({ projects, fallbacks, sources });
   const unchanged =
     previous &&
+    sameFormat &&
     content ===
       JSON.stringify({
         projects: previous.projects,
@@ -253,7 +264,13 @@ export async function ingest(options: IngestOptions): Promise<IngestReport> {
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
   const version = `${now().toISOString().replace(/[-:]/g, "").slice(0, 13)}Z-${hash}`;
-  const catalog: Catalog = { version, projects, fallbacks, sources };
+  const catalog: Catalog = {
+    version,
+    projects,
+    fallbacks,
+    sources,
+    format: INGEST_FORMAT,
+  };
   const encode = (value: unknown) =>
     new TextEncoder().encode(`${JSON.stringify(value)}\n`);
   // The version first, then the pointer: until the pointer moves, the site
@@ -268,5 +285,6 @@ export async function ingest(options: IngestOptions): Promise<IngestReport> {
   });
   report.version = version;
   report.wrote = true;
+  report.cleaned = await cleanUp(options.store);
   return report;
 }

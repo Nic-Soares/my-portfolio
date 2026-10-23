@@ -16,7 +16,10 @@ beforeEach(async () => {
   dir = await mkdtemp(join(tmpdir(), "ingest-"));
   projects = join(dir, "projects");
   storeDir = join(dir, "store");
-  await cp(FIXTURES, projects, { recursive: true });
+  // Only Spotify Web: the other fixtures (Reference) are for local browsing
+  await cp(join(FIXTURES, "spotify-clone"), join(projects, "spotify-clone"), {
+    recursive: true,
+  });
 });
 afterEach(() => rm(dir, { recursive: true, force: true }));
 
@@ -69,8 +72,10 @@ describe("ingest", () => {
     const project = catalog?.projects.pt[0];
     expect(project?.hero?.srcSet).toMatch(/800w, .*1600w$/);
     expect(project?.hero?.sizes).toBe("(width < 600px) 100vw, 50vw");
-    expect(project?.shareImage).toMatch(/^\/media\/\w+-share\.jpg$/);
-    const media = await readdir(join(storeDir, "media"));
+    expect(project?.shareImage).toMatch(
+      /^\/media\/spotify-clone\/\w+-share\.jpg$/,
+    );
+    const media = await readdir(join(storeDir, "media/spotify-clone"));
     expect(media.filter((file) => file.endsWith("-share.jpg"))).toHaveLength(1);
 
     const second = await run();
@@ -153,5 +158,69 @@ describe("ingest", () => {
     await run();
     const catalog = await loadCurrentCatalog(folderStore(storeDir));
     expect(catalog?.projects.en.map((p) => p.slug)).toEqual(["spotify-clone"]);
+  });
+});
+
+describe("cleanup", () => {
+  it("keeps the newest versions and deletes media no kept version uses", async () => {
+    let minute = 0;
+    const runAt = () =>
+      ingest({
+        repos: folderRepos(projects),
+        store: folderStore(storeDir),
+        mediaBase: "/media",
+        now: () => new Date(Date.UTC(2026, 9, 23, 12, minute++)),
+      });
+    await runAt();
+    const heroBefore = (await loadCurrentCatalog(folderStore(storeDir)))
+      ?.projects.en[0].hero?.src;
+
+    // A new hero image: the old one stays while a kept version uses it
+    await cp(
+      join(portfolio("spotify-clone"), "images/screen-home.webp"),
+      join(portfolio("spotify-clone"), "images/hero.webp"),
+    );
+    const second = await runAt();
+    expect(second.cleaned.media).toEqual([]);
+
+    const store = folderStore(storeDir);
+    const kept = await import("./cleanup.ts").then(({ cleanUp }) =>
+      cleanUp(store, 1),
+    );
+    expect(kept.versions).toHaveLength(1);
+    const heroKey = (heroBefore ?? "").replace(/^\//, "");
+    expect(kept.media).toContain(heroKey);
+    expect(await store.has(heroKey)).toBe(false);
+    expect((await store.list("catalog/")).length).toBe(2); // current + newest
+  });
+
+  it("never deletes media when a kept catalog can't be read", async () => {
+    await run();
+    const store = folderStore(storeDir);
+    const [version] = (await store.list("catalog/")).filter(
+      (key) => !key.endsWith("current.json"),
+    );
+    await store.delete(version);
+    const { cleanUp } = await import("./cleanup.ts");
+    await expect(cleanUp(store)).rejects.toThrow("unreadable");
+    expect((await store.list("media/")).length).toBeGreaterThan(0);
+  });
+});
+
+describe("ingestion format", () => {
+  it("re-reads every repository when the output format changes", async () => {
+    await run();
+    const store = folderStore(storeDir);
+    const catalog = await loadCurrentCatalog(store);
+    // A catalog written by an older ingestion (no format)
+    const older = { ...catalog, format: undefined };
+    await store.put(
+      `catalog/${catalog?.version}.json`,
+      new TextEncoder().encode(JSON.stringify(older)),
+      { contentType: "application/json", cacheControl: "no-cache" },
+    );
+    const report = await run();
+    expect(report.published).toEqual(["local/spotify-clone"]);
+    expect(report.wrote).toBe(true);
   });
 });

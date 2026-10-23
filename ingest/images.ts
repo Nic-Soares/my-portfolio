@@ -35,12 +35,13 @@ export interface PublishedImage {
   share?: string;
 }
 
-// Publishes one source image under media/; `mediaBase` is the URL prefix the
-// site serves media/ from ("/media" through the server)
+// Publishes one source image under media/<slug>/; `mediaBase` is the URL
+// prefix the site serves media/ from ("/media" through the server)
 export async function publishImage(
   store: ObjectStore,
   source: Uint8Array,
   mediaBase: string,
+  slug: string,
   { share = false }: { share?: boolean } = {},
 ): Promise<PublishedImage> {
   if (source.byteLength > MAX_IMAGE_BYTES) {
@@ -58,7 +59,7 @@ export async function publishImage(
 
   const urls: string[] = [];
   for (const width of unique) {
-    const key = `media/${hash}-${width}.webp`;
+    const key = `media/${slug}/${hash}-${width}.webp`;
     await putOnce(
       store,
       key,
@@ -71,7 +72,7 @@ export async function publishImage(
         ),
       "image/webp",
     );
-    urls.push(`${mediaBase}/${hash}-${width}.webp`);
+    urls.push(`${mediaBase}/${slug}/${hash}-${width}.webp`);
   }
 
   const largest = urls[urls.length - 1];
@@ -84,7 +85,7 @@ export async function publishImage(
       : { src: largest };
   if (!share) return { image };
 
-  const shareKey = `media/${hash}-share.jpg`;
+  const shareKey = `media/${slug}/${hash}-share.jpg`;
   await putOnce(
     store,
     shareKey,
@@ -98,5 +99,5 @@ export async function publishImage(
     "image/jpeg",
   );
 
-  return { image, share: `${mediaBase}/${hash}-share.jpg` };
+  return { image, share: `${mediaBase}/${slug}/${hash}-share.jpg` };
 }

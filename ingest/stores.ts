@@ -1,5 +1,12 @@
-import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
-import { dirname, join, normalize, sep } from "node:path";
+import {
+  mkdir,
+  readdir,
+  readFile,
+  rm,
+  stat,
+  writeFile,
+} from "node:fs/promises";
+import { dirname, join, normalize, relative, sep } from "node:path";
 import { AwsClient } from "aws4fetch";
 import type { ObjectStore } from "./types.ts";
 
@@ -29,8 +36,32 @@ export function folderStore(root: string): ObjectStore {
       await mkdir(dirname(path(key)), { recursive: true });
       await writeFile(path(key), body);
     },
+    async list(prefix) {
+      const entries = await readdir(join(root, prefix), {
+        recursive: true,
+        withFileTypes: true,
+      }).catch(() => []);
+      return entries
+        .filter((entry) => entry.isFile())
+        .map((entry) =>
+          relative(root, join(entry.parentPath, entry.name))
+            .split(sep)
+            .join("/"),
+        );
+    },
+    async delete(key) {
+      await rm(path(key), { force: true });
+    },
   };
 }
+
+const decodeXml = (text: string) =>
+  text
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&quot;", '"')
+    .replaceAll("&apos;", "'")
+    .replaceAll("&amp;", "&");
 
 export interface R2Config {
   accountId: string;
@@ -68,6 +99,29 @@ export function r2Store(config: R2Config): ObjectStore {
       if (response.status === 404) return false;
       if (!response.ok) await fail(response, `HEAD ${key}`);
       return true;
+    },
+    async list(prefix) {
+      const keys: string[] = [];
+      let token: string | undefined;
+      do {
+        const query = new URLSearchParams({ "list-type": "2", prefix });
+        if (token) query.set("continuation-token", token);
+        const response = await client.fetch(`${base}?${query}`);
+        if (!response.ok) await fail(response, `LIST ${prefix}`);
+        const xml = await response.text();
+        for (const match of xml.matchAll(/<Key>([^<]+)<\/Key>/g)) {
+          keys.push(decodeXml(match[1]));
+        }
+        token = /<NextContinuationToken>([^<]+)<\/NextContinuationToken>/.exec(
+          xml,
+        )?.[1];
+      } while (token);
+      return keys;
+    },
+    async delete(key) {
+      const response = await client.fetch(url(key), { method: "DELETE" });
+      if (!response.ok && response.status !== 404)
+        await fail(response, `DELETE ${key}`);
     },
     async put(key, body, { contentType, cacheControl }) {
       const response = await client.fetch(url(key), {

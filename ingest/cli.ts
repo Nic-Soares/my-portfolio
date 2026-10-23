@@ -46,6 +46,7 @@ function summary(report: IngestReport): string {
     "",
     `- Updated: ${report.published.join(", ") || "none"}`,
     `- Unchanged: ${report.unchanged.join(", ") || "none"}`,
+    `- Cleaned up: ${report.cleaned.versions.length} old catalog versions, ${report.cleaned.media.length} unused images`,
   ];
   for (const [slug, locales] of Object.entries(report.fallbacks)) {
     lines.push(`- ${slug} shows English for: ${locales.join(", ")}`);

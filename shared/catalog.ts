@@ -29,6 +29,8 @@ export interface Catalog {
   // Where each project came from: ingestion skips a repository whose
   // .portfolio/ hasn't changed since this commit
   sources: Record<string, { repo: string; sha: string; order?: number }>;
+  // Ingestion's output format; when it changes, every repository is re-read
+  format?: number;
 }
 
 // Turns a repository image path (images/hero.webp) into a published image;
