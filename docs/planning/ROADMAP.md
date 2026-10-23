@@ -852,6 +852,35 @@ Starts from scratch: the portfolio has no backend yet. The Express + MongoDB cod
 - [ ] Shared types between `server/` and `client/` (the `ProjectData` types move to a shared module)
 - [ ] Structured logs and a request id
 
+### ST-14.4 — Security baseline
+
+Architecture proposal, "Segurança": https://claude.ai/artifact/S7nzn4A29CTYEGXcjrYgoW
+
+- **TK-14.4.1** — Text as Markdown, no raw HTML (decision 17)
+  - [ ] Minimal inline Markdown (`**bold**`, `*italic*`, `` `code` ``, `[link](https://…)`, lists) rendered to React elements; `dangerouslySetInnerHTML` removed from `ParagraphBlock`, `ListBlock`, `TableBlock` and `ImageBlock`
+  - [ ] Migrate the bundled content (today: `<strong>` ×33, `<p>` ×21, `<li>` ×6, `<ol>` ×3, `<a>` ×3)
+  - [ ] Schema rejects tags (`<`) and non-`https` links; the `content-group` block (free HTML) leaves the public format
+  - [ ] Test: no `dangerouslySetInnerHTML` left in `client/src` (fails the build if one comes back)
+- **TK-14.4.2** — Security headers from the server
+  - [ ] CSP: scripts and styles only from the site itself, images from the site and the media domain, `frame-ancestors 'none'`; checked with the browser console clean on every page
+  - [ ] `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`
+- **TK-14.4.3** — Keys (five keys, six secret values; least privilege, one place each)
+  - [ ] `PORTFOLIO_GITHUB_TOKEN` — fine-grained, read-only Contents + Metadata on your repos; Actions secret; 1-year expiry (EP-15)
+  - [ ] `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` — Object Read & Write on the portfolio bucket only; Actions secret (EP-15)
+  - [ ] `RESEND_API_KEY` — sending access, your domain only; Worker secret (EP-16)
+  - [ ] `TURNSTILE_SECRET_KEY` — Worker secret (EP-16)
+  - [ ] `CLOUDFLARE_API_TOKEN` — Workers Scripts: Edit only; Actions secret; 1-year expiry (EP-17)
+  - [ ] Not secret: `CLOUDFLARE_ACCOUNT_ID`, `R2_BUCKET` (Actions variables); `VITE_SITE_URL`, `VITE_TURNSTILE_SITE_KEY` (client build)
+  - [ ] Worker R2 binding: grants the whole bucket, so the Worker code only calls `get`/`head` — a test fails on any write call
+  - [ ] No `repository_dispatch` token in project repos (it would need write access to the portfolio repo): hourly cron + manual button instead
+  - [ ] `.env.example` lists every name; a runbook in `docs/runbooks/` says where each key is created and how to rotate it
+- **TK-14.4.4** — Rules for public repositories (implemented in EP-15)
+  - [ ] Discovery: only repos owned by you with the `portfolio` topic, forks excluded
+  - [ ] Read only the default branch; never PRs or other branches
+  - [ ] The ingest workflow never uses `pull_request_target`; triggers are `schedule` and `workflow_dispatch` only
+  - [ ] Secret scanning and push protection on in the portfolio and project repos
+  - [ ] `draft: true` hides a project from the site, not from the repo — sensitive drafts go in a private repo
+
 ---
 
 ## EP-15 — Projects from GitHub
@@ -862,16 +891,15 @@ Starts from scratch: the portfolio has no backend yet. The Express + MongoDB cod
 
 - [ ] A `.portfolio/` folder per repository: `project.en.json`, `project.pt.json`, `project.es.json` (same shape as `ProjectData`: blocks, facts, areas) and `images/`
 - [ ] A JSON Schema generated from the TypeScript types and published by the portfolio; each file points at it with `$schema`, so the editor autocompletes and flags mistakes while writing
-- [ ] Opt-in: the sync only reads repositories with the `portfolio` topic; `order` and `draft` fields in the manifest
+- [ ] Opt-in: the sync only reads your own repositories (no forks) with the `portfolio` topic, default branch only (TK-14.4.4); `order` and `draft` fields in the manifest
 - [ ] Missing pt/es falls back to English (flagged in the sync report)
 
 ### ST-15.2 — Sync job
 
-- [ ] `Deno.cron` every 6 hours: list the repos with the topic, fetch `.portfolio/` through the GitHub API with ETags (unchanged repos cost no rate limit)
+- [ ] GitHub Actions workflow, hourly and manual (`schedule` + `workflow_dispatch`): list the repos, fetch `.portfolio/` through the GitHub API with ETags (unchanged repos cost no rate limit)
 - [ ] Validate against the schema; an invalid manifest keeps the last good version and is reported, never half-published
 - [ ] Store the validated projects (one per slug and locale, with the commit SHA they came from) in the storage chosen in decision 15
-- [ ] GitHub webhook on push for instant updates; the cron stays as the safety net
-- [ ] Manual trigger: protected `POST /api/v1/sync`
+- [ ] Run summary in the Actions job: what was published, what was rejected and why
 
 ### ST-15.3 — Images
 
@@ -906,7 +934,7 @@ Starts from scratch: the portfolio has no backend yet. The Express + MongoDB cod
 
 - [ ] Choose the host (decision 6) — Deno Deploy runs the Deno server and has `Deno.cron` built in
 - [ ] Automatic deploy on `main`, preview per PR
-- [ ] Secrets: GitHub token, storage keys, e-mail key
+- [ ] Secrets created and stored as listed in TK-14.4.3
 - [ ] Custom domain and HTTPS; set `VITE_SITE_URL`
 - [ ] Share image 1200×630 for the site (from ST-12.3)
 
