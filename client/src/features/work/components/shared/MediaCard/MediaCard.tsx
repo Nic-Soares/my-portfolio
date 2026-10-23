@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import Container from "@/components/layout/container/Container.tsx";
+import Container from "@/components/layout/Container/Container.tsx";
 import { useI18n } from "@/i18n/I18nProvider.tsx";
 import styles from "./MediaCard.module.css";
 

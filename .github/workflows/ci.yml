@@ -18,12 +18,14 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: denoland/setup-deno@v2
+      - uses: actions/setup-node@v7
         with:
-          deno-version: v2.x
-          cache: true
+          node-version-file: .nvmrc
+          cache: npm
 
-      - run: deno task typecheck
-      - run: deno task test
-      - run: deno task lint
-      - run: deno task build
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run lint
+      - run: npm run build
+      - run: npm audit --audit-level=high

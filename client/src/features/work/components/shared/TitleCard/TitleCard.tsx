@@ -1,4 +1,4 @@
-import Container from "@/components/layout/container/Container.tsx";
+import Container from "@/components/layout/Container/Container.tsx";
 import { FitLines } from "@/components/ui/FitLines/FitLines.tsx";
 import { useFitText } from "@/hooks/useFitText.ts";
 import styles from "./TitleCard.module.css";

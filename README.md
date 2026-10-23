@@ -20,19 +20,21 @@ my-portfolio/
 │
 ├── docs/adr/                       # Architecture Decision Records
 │
-├── deno.json                       # Single manifest: deps, tasks, compilerOptions
-├── deno.lock                       # Deno lockfile
+├── package.json                    # Dependencies and scripts
+├── package-lock.json               # npm lockfile
+├── tsconfig.json                   # TypeScript (tsc 7, type-check only)
+├── .nvmrc                          # Node version (26)
 ├── biome.json                      # Lint/format config (Biome)
 └── README.md
 ```
 
-> `server/` (backend) doesn't exist in this repository yet — it will be added as a separate workspace once development starts.
+> The backend (`shared/`, `server/`, `ingest/`) is planned in `docs/planning/ROADMAP.md` (EP-15 onward) and ADR-007.
 
 ## 🚀 Technologies Used
 
-- **Runtime**: Deno
-- **Frontend**: React 19, TypeScript
-- **Build Tool**: Vite (running via `npm:vite` under Deno, no Node installed)
+- **Runtime**: Node 26 + npm (moved from Deno, ADR-006)
+- **Frontend**: React 19, TypeScript 7
+- **Build Tool**: Vite
 - **UI Framework**: Material Design 3 (Material Web Components)
 - **Styling**: CSS Modules
 - **Lint/Format**: Biome
@@ -41,36 +43,38 @@ my-portfolio/
 ## 📦 Installation and Running
 
 ### Prerequisites
-- [Deno](https://deno.com) 2.x
+- [Node.js](https://nodejs.org) 26 (see `.nvmrc`) and npm
 
-Node.js, npm, and manually managed `node_modules` are not required — Deno resolves the `npm:` dependencies declared in `deno.json` on demand.
+```bash
+npm ci
+```
 
 ### Commands
 
 ```bash
 # Development mode (hot reload)
-deno task dev
+npm run dev
 
 # Production build
-deno task build
+npm run build
 
 # Preview the production build
-deno task preview
+npm run preview
 
-# Type checking (deno check)
-deno task typecheck
+# Type checking (tsc 7)
+npm run typecheck
 
 # Lint (Biome)
-deno task lint
+npm run lint
 
 # Format (Biome)
-deno task format
+npm run format
 
 # Lint + format + import organization, with fixes
-deno task check
+npm run check
 ```
 
-With `deno task dev` running, open `/__gallery` to see every component next to its Figma name, in Light/Dark and at the four Figma widths. The gallery only exists in development.
+With `npm run dev` running, open `/__gallery` to see every component next to its Figma name, in Light/Dark and at the four Figma widths. The gallery only exists in development.
 
 ## 🎨 Design System
 
@@ -104,7 +108,7 @@ Don't write raw pixel media queries — use these names. Lightning CSS resolves 
 
 ## 📁 Import Aliases
 
-The project is configured with import aliases, declared both in the `deno.json` import map and in `client/vite.config.ts`'s `resolve.alias`:
+The project is configured with import aliases, declared both in `tsconfig.json` (`paths`) and in `client/vite.config.ts`'s `resolve.alias`:
 
 ```typescript
 // Components and source code (client/src/*)
@@ -114,14 +118,14 @@ import Sidebar from "@/components/layout/Sidebar/Sidebar.tsx";
 import Logo from "@assets/logos/logo.svg?react";
 ```
 
-Relative and alias imports use an **explicit extension** (`.ts`/`.tsx`/`/index.ts`) — that's how `deno check` resolves modules, unlike `tsc`'s `moduleResolution: "bundler"`, which infers extensions automatically.
+Relative and alias imports use an **explicit extension** (`.ts`/`.tsx`/`/index.ts`), a convention kept from the Deno days (`allowImportingTsExtensions` in `tsconfig.json`).
 
 ## 🔧 Configuration
 
-### Deno
-- `deno.json` is the project's single manifest: import map (dependencies via `npm:`), `compilerOptions`, and `tasks`.
-- `nodeModulesDir: "auto"` — Deno manages a `node_modules/` internally only for compatibility with Vite and its plugins, which still expect that layout.
-- `deno check` is the only typechecker (there's no `tsc`/`typescript` in the project).
+### Node and npm
+- `package.json` holds the dependencies and the scripts; `package-lock.json` pins exact versions. Install with `npm ci`.
+- Biome is pinned to an exact version; see `docs/runbooks/dependency-upgrades.md`.
+- CI runs `npm audit --audit-level=high`; Dependabot opens weekly update PRs.
 
 ### Vite
 - Config in `client/vite.config.ts`, with an implicit root at `client/` (where `index.html` lives).
@@ -129,12 +133,12 @@ Relative and alias imports use an **explicit extension** (`.ts`/`.tsx`/`/index.t
 - **Build**: `dist/client/` — compiled build, resolved relative to `client/`.
 - **Plugins**: React, SVGR for importing SVGs as components.
 - **CSS**: Lightning CSS (`css.transformer: "lightningcss"`) with the `customMedia` draft enabled, for the breakpoint names above.
-- The `deno.json` tasks run `cd client && vite` via Deno's native shell (`deno_task_shell`), not bash/Node.
+- The npm scripts run `cd client && vite`.
 
 ### TypeScript
-- `compilerOptions` lives inside `deno.json` (there's no `tsconfig.json`).
-- `jsx: "react-jsx"` with `jsxImportSource: "react"`.
-- Ambient modules (`*.svg?react`, `*.mp4`) are declared in `client/src/types/assets.d.ts` and `client/src/custom.d.ts`, referenced explicitly from the entry point via `/// <reference path>` — Deno doesn't auto-include `.d.ts` files the way `tsc` does.
+- `tsconfig.json` at the root, type-check only (`noEmit`); `tsc` 7 checks `client/src` (tests included) and the client config files.
+- `jsx: "react-jsx"`; `types` are `vite/client`, `vite-plugin-svgr/client` and `node`.
+- Ambient modules (`*.svg?react`, `*.mp4`) are declared in `client/src/types/assets.d.ts` and `client/src/custom.d.ts`; project env vars extend `ImportMetaEnv` there.
 - Strict mode enabled.
 
 ## 🎯 Features
@@ -164,7 +168,7 @@ Every new component added under `client/src/components/ui/` must include at leas
 Run the test suite with:
 
 ```bash
-deno task test
+npm test
 ```
 
 ## 📄 License

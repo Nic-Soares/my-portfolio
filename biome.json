@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["client/**", "*.ts", "*.json"]
+    "includes": ["client/**", "*.ts", "*.json", "!package-lock.json"]
   },
   "formatter": {
     "enabled": true,
@@ -20,6 +20,7 @@
     "rules": {
       "preset": "recommended",
       "suspicious": {
+        "noArrayIndexKey": "warn",
         "noUnknownAtRules": {
           "level": "error",
           "options": {
@@ -30,6 +31,9 @@
       "correctness": {
         "noUnknownMediaFeatureName": "off",
         "noInvalidGridAreas": "off"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "warn"
       }
     }
   },

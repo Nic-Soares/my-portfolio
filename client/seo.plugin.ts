@@ -1,3 +1,4 @@
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { type Plugin, type ResolvedConfig, runnerImport } from "vite";
 import svgr from "vite-plugin-svgr";
@@ -33,7 +34,7 @@ export function seoPages(): Plugin {
       );
       const { staticPages, sitemap, robots, SITE_URL } = module;
       const outDir = config.build.outDir;
-      const template = await Deno.readTextFile(join(outDir, "index.html"));
+      const template = await readFile(join(outDir, "index.html"), "utf8");
       if (!SEO_BLOCK.test(template)) {
         throw new Error("seo-pages: index.html has no seo:start/seo:end block");
       }
@@ -44,14 +45,11 @@ export function seoPages(): Plugin {
         // vite preview) serve it at /about, matching the canonical
         const file = page.path === "/" ? "index" : page.path.slice(1);
         const target = join(outDir, `${file}.html`);
-        await Deno.mkdir(dirname(target), { recursive: true });
-        await Deno.writeTextFile(
-          target,
-          template.replace(SEO_BLOCK, page.head),
-        );
+        await mkdir(dirname(target), { recursive: true });
+        await writeFile(target, template.replace(SEO_BLOCK, page.head));
       }
-      await Deno.writeTextFile(join(outDir, "sitemap.xml"), sitemap(pages));
-      await Deno.writeTextFile(join(outDir, "robots.txt"), robots());
+      await writeFile(join(outDir, "sitemap.xml"), sitemap(pages));
+      await writeFile(join(outDir, "robots.txt"), robots());
 
       if (!config.env.VITE_SITE_URL) {
         config.logger.warn(
