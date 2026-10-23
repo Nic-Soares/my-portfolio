@@ -16,7 +16,8 @@
     "check": "biome check --write .",
     "schema": "node shared/schema/build.ts && biome format --write shared/schema",
     "serve": "node server/local.ts",
-    "ingest:local": "node ingest/cli.ts --local"
+    "ingest:local": "node ingest/cli.ts --local",
+    "ingest": "node --env-file-if-exists=.env ingest/cli.ts"
   },
   "dependencies": {
     "@hono/node-server": "^2.1.5",
