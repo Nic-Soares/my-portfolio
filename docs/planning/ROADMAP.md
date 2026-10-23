@@ -960,6 +960,8 @@ Architecture proposal, "Segurança": https://claude.ai/artifact/S7nzn4A29CTYEGXc
 | 13 | Contact e-mail provider (e.g. Resend) | `EP-16` |
 | 14 | Server framework — recommended: Hono (small, built for Deno and other web-standard runtimes, typed routes); alternative: plain `Deno.serve` | `EP-14` |
 | 15 | Where synced projects live — recommended: no database at first (validated JSON in the same object storage as the images, cached in memory by the server); add a database only when something needs queries or writes (e.g. analytics) | `EP-14`, `EP-15` |
+| 16 | Deno as the repo toolchain — Deno joined Cloudflare (2026-10-09); runtime maintenance for about a year. Keep it for now, ADR to move the tasks to Node or Bun before ~2027-10; new code (`shared/`, `server/`, `ingest/`) uses web-standard APIs only | `EP-14` |
+| 17 | ~~Formatted text in project content~~ — **resolved 2026-10-23:** minimal Markdown rendered to React elements + CSP; no raw HTML (TK-14.4.1) | ~~`EP-14`~~ |
 
 ## 5. Execution notes
 
