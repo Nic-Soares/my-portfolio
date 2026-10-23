@@ -36,7 +36,7 @@ describe("Footer", () => {
 
     expect(
       screen.getByText(
-        `${new Date().getFullYear()} Nicolas Soares. Fullstack Developer`,
+        `${new Date().getFullYear()} Nicolas Soares. Data Analyst & Applied AI Engineer`,
         {
           exact: false,
         },

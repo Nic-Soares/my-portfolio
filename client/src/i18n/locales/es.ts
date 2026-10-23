@@ -18,7 +18,7 @@ export const es: Messages = {
       nav: "Pie de página",
       tagline:
         "Desarrollador full-stack que crea productos reales de principio a fin — de la interfaz a la base de datos.",
-      role: "Desarrollador Fullstack",
+      role: "Analista de Datos e Ingeniero de IA Aplicada",
       copyright: "Derechos de autor",
       copyrightLine: (year, owner, role) => `${year} ${owner}. ${role}`,
       columns: {

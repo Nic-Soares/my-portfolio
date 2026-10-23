@@ -4,12 +4,12 @@ import type { AboutData } from "./about.types.ts";
 export const aboutDataEs: AboutData = {
   name: "Nicolas Soares",
   eyebrow: "¡Hola, hola! Soy",
-  role: "Analista de Datos y Arquitecto de Software",
+  role: "Analista de Datos e Ingeniero de IA Aplicada",
   location: "Belo Horizonte, Brasil",
   bio: "Convierto datos desordenados en respuestas claras y grandes ideas en sistemas que no se caen. Amable con los stakeholders, estricto con los esquemas — y dibujo diagramas de sistemas por diversión.",
   quickFacts: [
     "Belo Horizonte, Brasil",
-    "Analista de Datos y Arquitecto de Software",
+    "Analista de Datos e Ingeniero de IA Aplicada",
     "Disponible para proyectos remotos",
   ],
   experience: [

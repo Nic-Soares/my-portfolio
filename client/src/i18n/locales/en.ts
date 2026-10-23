@@ -17,7 +17,7 @@ export const en = {
       nav: "Footer",
       tagline:
         "Full-stack developer building real products end-to-end — from interface to database.",
-      role: "Fullstack Developer",
+      role: "Data Analyst & Applied AI Engineer",
       copyright: "Copyright",
       copyrightLine: (year: number, owner: string, role: string) =>
         `${year} ${owner}. ${role}`,
