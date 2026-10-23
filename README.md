@@ -25,10 +25,20 @@ my-portfolio/
 ├── tsconfig.json                   # TypeScript (tsc 7, type-check only)
 ├── .nvmrc                          # Node version (26)
 ├── biome.json                      # Lint/format config (Biome)
+├── shared/                         # Contracts used by client, server and ingestion
+│   ├── project.ts                  # Zod schema of a project (.portfolio/ and served)
+│   ├── catalog.ts                  # Catalog built from .portfolio/ folders
+│   ├── markdown.ts                 # Minimal Markdown for project text
+│   ├── pageMeta.ts                 # Per-route title, description, Open Graph
+│   └── schema/                     # JSON Schemas for .portfolio/ files
+├── server/                         # Hono server (ADR-007)
+│   ├── app.ts                      # Routes, head per page, API, security headers
+│   ├── local.ts                    # Runs it on Node (npm run serve)
+│   └── fixtures/projects/          # Local .portfolio/ projects
 └── README.md
 ```
 
-> The backend (`shared/`, `server/`, `ingest/`) is planned in `docs/planning/ROADMAP.md` (EP-15 onward) and ADR-007.
+> Architecture: ADR-006 to ADR-009 and `docs/planning/ROADMAP.md` (EP-15 onward). Ingestion (`ingest/`) comes in EP-16.
 
 ## 🚀 Technologies Used
 
@@ -72,6 +82,13 @@ npm run format
 
 # Lint + format + import organization, with fixes
 npm run check
+
+# Server: the build with each page's <head>, the projects API, sitemap
+# (build first; projects come from server/fixtures/projects)
+npm run build && npm run serve      # http://localhost:3000
+
+# Rewrite the JSON Schemas after changing shared/project.ts
+npm run schema
 ```
 
 With `npm run dev` running, open `/__gallery` to see every component next to its Figma name, in Light/Dark and at the four Figma widths. The gallery only exists in development.

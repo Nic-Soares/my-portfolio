@@ -14,9 +14,12 @@
     "lint": "biome lint .",
     "format": "biome format --write .",
     "check": "biome check --write .",
-    "schema": "node shared/schema/build.ts"
+    "schema": "node shared/schema/build.ts",
+    "serve": "node server/local.ts"
   },
   "dependencies": {
+    "@hono/node-server": "^2.1.5",
+    "hono": "^4.13.13",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-router-dom": "^7.18.4",

@@ -6,7 +6,6 @@ import { aboutData } from "@/features/about/data/about.data.ts";
 import { projectsByLocale } from "@/features/work/data/projects/index.ts";
 import { en } from "@/i18n/locales/en.ts";
 import RouteMeta from "./RouteMeta.tsx";
-import { sitemap, staticPages } from "./staticPages.ts";
 
 const sources = { t: en, about: aboutData, projects: projectsByLocale.en };
 
@@ -30,25 +29,6 @@ describe("pageMeta", () => {
       title: `Page not found · ${aboutData.name}`,
       noindex: true,
     });
-  });
-});
-
-describe("staticPages", () => {
-  const pages = staticPages();
-
-  it("lists only indexable pages in the sitemap", () => {
-    const xml = sitemap(pages);
-    expect(xml).toContain("/projects/spotify-clone</loc>");
-    expect(xml).not.toContain("/projects/reference");
-    expect(xml).not.toContain("/404");
-  });
-
-  it("adds Person JSON-LD to Home and About only", () => {
-    const head = (path: string) =>
-      pages.find((page) => page.path === path)?.head ?? "";
-    expect(head("/")).toContain('"@type":"Person"');
-    expect(head("/about")).toContain('"@type":"Person"');
-    expect(head("/projects")).not.toContain("ld+json");
   });
 });
 

@@ -21,5 +21,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["client/src", "client/*.ts", "shared"]
+  "include": ["client/src", "client/*.ts", "shared", "server"]
 }
