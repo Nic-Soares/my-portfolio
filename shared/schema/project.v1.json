@@ -1,0 +1,55 @@
+{
+  "title": "Portfolio project (.portfolio/project.json)",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "areas": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Data",
+          "Frontend",
+          "Backend",
+          "Automation",
+          "DevOps",
+          "Design"
+        ]
+      }
+    },
+    "order": {
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    },
+    "draft": {
+      "type": "boolean"
+    },
+    "noindex": {
+      "type": "boolean"
+    },
+    "hero": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "type": "string",
+          "pattern": "^images\\/[\\w./-]+\\.(png|jpe?g|webp)$"
+        }
+      },
+      "required": ["image"]
+    }
+  },
+  "required": ["schemaVersion", "slug", "areas"]
+}

@@ -864,10 +864,10 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
 
 ### ST-15.1 — Contracts (`shared/`)
 
-- [ ] Zod schema for `project.json` and `content.<locale>.json`; the TypeScript types come from it and replace `project-data.types.ts`
-- [ ] JSON Schema exported from the Zod schema (published later by the server at `/schema/*.v1.json`)
-- [ ] `pageMeta.ts` moves from `client/src/app/seo` to `shared/`
-- [ ] Spotify Web converted to the new format as a local `.portfolio/` fixture — the first catalog
+- [x] Zod schema for `project.json` and `content.<locale>.json` (`shared/project.ts`), plus the served `projectData`; `project-data.types.ts` re-exports the shared types. The recursive block type is written out next to the schema (TypeScript can't infer it), and `content.test.ts` validates the bundled data against it. Dropped from the format: `className` on images and videos (unused)
+- [x] JSON Schema exported from the Zod schema: `npm run schema` writes `shared/schema/{project,content}.v1.json`; `schema.test.ts` fails when they're stale (published by the server in ST-15.2)
+- [x] `pageMeta.ts` moves to `shared/`; the site origin is a parameter now (`client/src/app/seo/siteUrl.ts` reads `VITE_SITE_URL`), and its inputs are structural types, so the server can call it
+- [x] Spotify Web converted to the new format: `server/fixtures/projects/spotify-clone/.portfolio/` (3 locales, 5 images at 1600px; each file validated on export). `Reference` stays out: its images live on Google's hosts, so it can't be a `.portfolio/` project (ST-16.4 decides its fate)
 
 ### ST-15.2 — Server (`server/`)
 

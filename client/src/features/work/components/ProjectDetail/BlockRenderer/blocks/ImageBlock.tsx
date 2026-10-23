@@ -20,7 +20,7 @@ export const ImageBlock: React.FC<
               // Case-study images sit below the hero: load as they come near
               loading="lazy"
               decoding="async"
-              className={`${styles.image} ${block.className || ""}`.trim()}
+              className={styles.image}
               // Figma "Block / Image" locks a ratio; 16:9 unless the data says
               style={{ aspectRatio: block.aspectRatio ?? "16 / 9" }}
             />

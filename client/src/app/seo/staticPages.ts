@@ -1,16 +1,17 @@
 // Build-time pages for seo.plugin.ts: the <head> of every route, the
 // sitemap and robots.txt. English, the default locale.
-import { aboutData } from "@/features/about/data/about.data.ts";
-import { projectsByLocale } from "@/features/work/data/projects/index.ts";
-import { en } from "@/i18n/locales/en.ts";
+
 import {
   type HeadTag,
   headTags,
   type PageMeta,
   pageMeta,
   personJsonLd,
-  SITE_URL,
-} from "./pageMeta.ts";
+} from "@shared/pageMeta.ts";
+import { aboutData } from "@/features/about/data/about.data.ts";
+import { projectsByLocale } from "@/features/work/data/projects/index.ts";
+import { en } from "@/i18n/locales/en.ts";
+import { SITE_URL } from "./siteUrl.ts";
 
 const PERSON_PAGES = new Set(["/", "/about"]);
 
@@ -30,10 +31,10 @@ function renderTag({ tag, attrs, text }: HeadTag): string {
 }
 
 function renderHead(meta: PageMeta): string {
-  const tags = headTags(meta, aboutData.name).map(renderTag);
+  const tags = headTags(meta, aboutData.name, SITE_URL).map(renderTag);
   if (PERSON_PAGES.has(meta.path)) {
     // `<` escaped so the JSON can never close the script tag
-    const json = JSON.stringify(personJsonLd(aboutData)).replaceAll(
+    const json = JSON.stringify(personJsonLd(aboutData, SITE_URL)).replaceAll(
       "<",
       "\\u003c",
     );

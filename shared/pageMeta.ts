@@ -1,17 +1,8 @@
-// Per-route title, description and social tags. One source for both the
-// browser (RouteMeta keeps <head> in sync while navigating) and the build
-// (seo.plugin.ts writes one HTML file per route, so link previews, which
-// don't run JS, still get the right page).
-import type { AboutData } from "@/features/about/data/about.types.ts";
-import type { ProjectData } from "@/features/work/data/project-data.types.ts";
-import type { Messages } from "@/i18n/messages.ts";
-
-// Absolute origin for canonical, Open Graph and the sitemap. Set
-// VITE_SITE_URL once the domain exists (ST-12.4); until then the local
-// preview origin keeps the URLs well formed.
-export const SITE_URL = (
-  import.meta.env.VITE_SITE_URL ?? "http://localhost:4173"
-).replace(/\/+$/, "");
+// Per-route title, description and social tags. One source for the browser
+// (RouteMeta keeps <head> in sync while navigating), the build (seo.plugin.ts)
+// and the server, which fills each page's <head> per request (ADR-007), so
+// link previews, which don't run JS, still get the right page.
+import type { ProjectData } from "./project.ts";
 
 // Square icon until there is a designed 1200×630 share image
 const SHARE_IMAGE = "/web-app-manifest-512x512.png";
@@ -23,10 +14,34 @@ export interface PageMeta {
   noindex?: boolean;
 }
 
+// The UI strings a page's meta reads (a slice of the client's i18n catalog)
+export interface PageTexts {
+  home: { headlineLine2: string };
+  about: { title: string };
+  work: { title: string };
+  seo: { projectsDescription: string };
+  system: {
+    underConstruction: string;
+    underConstructionText: string;
+    notFound: string;
+    notFoundText: string;
+  };
+}
+
+// The About data a page's meta and the Person JSON-LD read
+export interface Person {
+  name: string;
+  role: string;
+  bio: string;
+  location: string;
+  stack: { skills: string[] }[];
+  contact: { social: { href: string }[] };
+}
+
 export interface MetaSources {
-  t: Messages;
-  about: AboutData;
-  projects: ProjectData[];
+  t: PageTexts;
+  about: Person;
+  projects: Pick<ProjectData, "slug" | "name" | "description" | "noindex">[];
 }
 
 export function pageMeta(
@@ -86,8 +101,13 @@ export interface HeadTag {
   text?: string;
 }
 
-export function headTags(meta: PageMeta, siteName: string): HeadTag[] {
-  const url = `${SITE_URL}${meta.path === "/" ? "/" : meta.path}`;
+// siteUrl: the absolute origin, without a trailing slash
+export function headTags(
+  meta: PageMeta,
+  siteName: string,
+  siteUrl: string,
+): HeadTag[] {
+  const url = `${siteUrl}${meta.path}`;
   const named = (name: string, content: string): HeadTag => ({
     tag: "meta",
     key: ["name", name],
@@ -113,7 +133,7 @@ export function headTags(meta: PageMeta, siteName: string): HeadTag[] {
     property("og:title", meta.title),
     property("og:description", meta.description),
     property("og:url", url),
-    property("og:image", `${SITE_URL}${SHARE_IMAGE}`),
+    property("og:image", `${siteUrl}${SHARE_IMAGE}`),
     named("twitter:card", "summary"),
     named("twitter:title", meta.title),
     named("twitter:description", meta.description),
@@ -121,7 +141,10 @@ export function headTags(meta: PageMeta, siteName: string): HeadTag[] {
 }
 
 // schema.org Person for the Home and About pages
-export function personJsonLd(about: AboutData): Record<string, unknown> {
+export function personJsonLd(
+  about: Person,
+  siteUrl: string,
+): Record<string, unknown> {
   const sameAs = about.contact.social
     .map((link) => link.href)
     .filter((href) => href.startsWith("http"));
@@ -131,7 +154,7 @@ export function personJsonLd(about: AboutData): Record<string, unknown> {
     name: about.name,
     jobTitle: about.role,
     description: about.bio,
-    url: `${SITE_URL}/`,
+    url: `${siteUrl}/`,
     homeLocation: { "@type": "Place", name: about.location },
     knowsAbout: about.stack.flatMap((group) => group.skills),
     ...(sameAs.length > 0 && { sameAs }),

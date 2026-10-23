@@ -1,0 +1,274 @@
+{
+  "$schema": "../../../../../shared/schema/content.v1.json",
+  "name": "Spotify Web",
+  "description": "A full-stack music catalog and player — React front end, Express + MongoDB API, deployed end-to-end on Render.",
+  "context": "Personal project",
+  "heroAlt": "Illustration of a man with headphones tending a garden bed, surrounded by music notes",
+  "facts": [
+    {
+      "label": "Role",
+      "value": "Solo developer — design, front end, back end, deploy"
+    },
+    {
+      "label": "Stack",
+      "value": "React · TypeScript · Express · MongoDB"
+    },
+    {
+      "label": "Year",
+      "value": "2025"
+    },
+    {
+      "label": "Type",
+      "value": "Personal project"
+    }
+  ],
+  "tabs": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "sidebarItems": [
+        {
+          "label": "Role & stack",
+          "anchorId": "role-stack"
+        },
+        {
+          "label": "Screens",
+          "anchorId": "screens"
+        }
+      ],
+      "content": [
+        {
+          "type": "intro",
+          "id": "role-stack",
+          "text": "Spotify Web is a full-stack music catalog and player built end-to-end: a curated library of 20 Brazilian artists and 200 songs, browsable by artist or track, with a custom audio player for playback. What started as a front-end-only clone was rebuilt around a real Express and MongoDB API to practice shipping one complete slice — UI, API, database, and deployment — as a single working product."
+        },
+        {
+          "type": "header",
+          "level": 2,
+          "text": "Screens",
+          "id": "screens"
+        },
+        {
+          "type": "paragraph",
+          "text": "Three core screens: browse artists, drill into an artist’s discography, and play a track with the custom audio player."
+        },
+        {
+          "type": "columns",
+          "columns": [
+            [
+              {
+                "type": "image",
+                "src": "images/screen-home.webp",
+                "alt": "Home screen with the top artists and songs",
+                "aspectRatio": "3 / 2",
+                "caption": "Home — top artists & songs"
+              }
+            ],
+            [
+              {
+                "type": "image",
+                "src": "images/screen-artist.webp",
+                "alt": "Artist screen with the discography",
+                "aspectRatio": "3 / 2",
+                "caption": "Artist — discography"
+              }
+            ],
+            [
+              {
+                "type": "image",
+                "src": "images/screen-player.webp",
+                "alt": "Player screen with the track now playing",
+                "aspectRatio": "3 / 2",
+                "caption": "Player — now playing"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "title": "Architecture",
+      "sidebarItems": [
+        {
+          "label": "Request flow",
+          "anchorId": "request-flow"
+        },
+        {
+          "label": "Tech stack",
+          "anchorId": "tech-stack"
+        },
+        {
+          "label": "Data model",
+          "anchorId": "data-model"
+        }
+      ],
+      "content": [
+        {
+          "type": "header",
+          "level": 2,
+          "text": "Architecture & stack",
+          "id": "request-flow"
+        },
+        {
+          "type": "paragraph",
+          "text": "One process serves both sides: Express exposes two read endpoints backed by MongoDB Atlas, then falls back to the compiled React build for every other route — so client-side routes survive a hard refresh."
+        },
+        {
+          "type": "image",
+          "src": "images/architecture.webp",
+          "alt": "Architecture diagram: the browser loads the React build, which calls the Express API; Express reads the artists and songs collections from MongoDB Atlas and falls back to index.html for client-side routes",
+          "aspectRatio": "3 / 2"
+        },
+        {
+          "type": "table",
+          "id": "tech-stack",
+          "headers": [
+            "Layer",
+            "Technology"
+          ],
+          "rows": [
+            [
+              "Front end",
+              "React 19 · TypeScript · Vite · React Router"
+            ],
+            [
+              "Back end",
+              "Node.js · Express 4 · TypeScript"
+            ],
+            [
+              "Database",
+              "MongoDB Atlas"
+            ],
+            [
+              "Hosting",
+              "Render (single service, front end + API)"
+            ]
+          ]
+        },
+        {
+          "type": "header",
+          "level": 3,
+          "text": "Data model",
+          "id": "data-model"
+        },
+        {
+          "type": "paragraph",
+          "text": "Two flat, denormalized MongoDB collections — no joins, no relations. The front end fetches both in full and does all filtering client-side."
+        },
+        {
+          "type": "columns",
+          "columns": [
+            [
+              {
+                "type": "code",
+                "title": "artists",
+                "language": "json",
+                "code": "{\n  \"_id\": ObjectId,\n  \"name\": \"Henrique & Juliano\",\n  \"image\": \"https://...\",\n  \"banner\": \"https://...\"\n}"
+              }
+            ],
+            [
+              {
+                "type": "code",
+                "title": "songs",
+                "language": "json",
+                "code": "{\n  \"_id\": ObjectId,\n  \"name\": \"Última Saudade\",\n  \"duration\": \"02:30\",\n  \"artist\": \"Henrique & Juliano\",\n  \"audio\": \"https://....mp3\"\n}"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "repository",
+      "title": "Repository",
+      "sidebarItems": [
+        {
+          "label": "Setup & links",
+          "anchorId": "setup-links"
+        },
+        {
+          "label": "Key decisions",
+          "anchorId": "key-decisions"
+        },
+        {
+          "label": "What I’d do next",
+          "anchorId": "next-steps"
+        }
+      ],
+      "content": [
+        {
+          "type": "header",
+          "level": 2,
+          "text": "Setup & links",
+          "id": "setup-links"
+        },
+        {
+          "type": "paragraph",
+          "text": "The whole project — front end and back end — lives in one repo as two independent Node projects, orchestrated from a root package.json so a single build/start pair covers both."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Live demo — [spotify-web-ehgp.onrender.com](https://spotify-web-ehgp.onrender.com)",
+            "Source — GitHub repository"
+          ]
+        },
+        {
+          "type": "columns",
+          "columns": [
+            [
+              {
+                "type": "code",
+                "title": "back-end",
+                "language": "bash",
+                "code": "cd back-end\nnpm install\nnpm run dev\n# http://localhost:3001"
+              }
+            ],
+            [
+              {
+                "type": "code",
+                "title": "front-end",
+                "language": "bash",
+                "code": "cd front-end\nnpm install\nnpm run dev\n# http://localhost:5173"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "header",
+          "level": 2,
+          "text": "Key decisions & outcome",
+          "id": "key-decisions"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Eager data loading: the whole artist and song catalog loads once at startup and is filtered in memory client-side — simple at 20 artists / 200 songs, a deliberate trade-off that would need pagination and search to scale further.",
+            "Custom audio player built directly on the `<audio>` element: play/pause, a polled progress bar, and next/previous that jumps to a random track by the same artist rather than a fixed queue.",
+            "Single Express service serves both the API and the compiled front end, so one Render deployment covers the whole stack instead of two."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The result is a working, publicly deployed app with a real catalog, artist and song detail pages, and a functioning custom player — plus a self-authored architecture doc that names its own gaps (no auth, no search, config that should move to environment variables) as concrete next steps rather than hiding them."
+        },
+        {
+          "type": "header",
+          "level": 3,
+          "text": "What I’d do next",
+          "id": "next-steps"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pagination and search once the catalog stops being small enough to hold in memory",
+            "Loading and error states for the API calls",
+            "A real play queue instead of random shuffle",
+            "Config through environment variables instead of hardcoded values"
+          ]
+        }
+      ]
+    }
+  ]
+}

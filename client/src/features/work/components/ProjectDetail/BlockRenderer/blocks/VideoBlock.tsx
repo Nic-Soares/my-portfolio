@@ -14,7 +14,7 @@ export const VideoBlock: React.FC<
           <div className={styles.videoWrapper}>
             <video
               src={block.src}
-              className={`${styles.video} ${block.className || ""}`.trim()}
+              className={styles.video}
               autoPlay
               loop
               muted

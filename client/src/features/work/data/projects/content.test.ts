@@ -1,4 +1,5 @@
 import { markdownProblems } from "@shared/markdown.ts";
+import { projectData } from "@shared/project.ts";
 import { describe, expect, it } from "vitest";
 import { projectsByLocale } from "./index.ts";
 
@@ -27,5 +28,16 @@ describe("project text is safe Markdown", () => {
     it(locale, () => {
       expect(textProblems(projectsByLocale[locale])).toEqual([]);
     });
+  }
+});
+
+describe("bundled projects match the served contract", () => {
+  for (const locale of ["en", "pt", "es"] as const) {
+    for (const project of projectsByLocale[locale]) {
+      it(`${locale} ${project.slug}`, () => {
+        const result = projectData.safeParse(project);
+        expect(result.success ? [] : result.error.issues).toEqual([]);
+      });
+    }
   }
 });

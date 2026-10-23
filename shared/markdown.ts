@@ -80,7 +80,10 @@ export function parseInline(text: string): Inline[] {
       const end = findSingleStar(text, i + 1);
       if (end > i + 1) {
         flush();
-        nodes.push({ type: "em", children: parseInline(text.slice(i + 1, end)) });
+        nodes.push({
+          type: "em",
+          children: parseInline(text.slice(i + 1, end)),
+        });
         i = end + 1;
         continue;
       }

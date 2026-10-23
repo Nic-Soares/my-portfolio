@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../../../shared/schema/project.v1.json",
+  "schemaVersion": 1,
+  "slug": "spotify-clone",
+  "areas": [
+    "Frontend",
+    "Backend"
+  ],
+  "order": 10,
+  "hero": {
+    "image": "images/hero.webp"
+  }
+}
