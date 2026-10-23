@@ -911,15 +911,16 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
 
 ### ST-16.1 — Ingestion (`ingest/` + `.github/workflows/ingest.yml`)
 
-- [ ] Hourly `schedule` + `workflow_dispatch`; lists your repos with the `portfolio` topic (no forks), reads `.portfolio/` on the default branch with ETags
-- [ ] Validates with the shared schema; a missing `pt`/`es` falls back to English; an invalid project keeps its last good version
-- [ ] Writes only when something changed; publishes `catalog/<version>.json`, then points `catalog/current.json` at it
-- [ ] Run summary in the job: published, rejected (file, field, error), fallbacks
+- [ ] Hourly `schedule` + `workflow_dispatch` (`.github/workflows/ingest.yml`)
+- [x] `ingest/` with two sources behind one interface: `githubRepos` (your repos with the `portfolio` topic, owner checked, no forks or archived, default branch only) and `folderRepos` (`npm run ingest:local`, from `server/fixtures/projects` into `.data/store`). Change detection by the last commit that touched `.portfolio/` (one call per repo) instead of ETags: an unchanged repo isn't read at all
+- [x] Validates with the shared schema; a missing `pt`/`es` falls back to English; an invalid project keeps its last good version, the others still update
+- [x] Writes only when something changed; publishes `catalog/<version>.json`, then points `catalog/current.json` at it
+- [x] Run summary (console and `GITHUB_STEP_SUMMARY`): published, unchanged, rejected (file, field, error), fallbacks; a rejected project is a warning, not a failed run
 
 ### ST-16.2 — Images
 
-- [ ] `sharp`: WebP 800 and 1600px, a 1200×630 JPG share image per project (from the hero when the repo has none), originals up to 10 MB
-- [ ] File names by content hash under `media/`, cache for a year; the catalog carries `src`/`srcSet`/`sizes`/width/height
+- [x] `sharp`: WebP 800 and 1600px (never enlarged), a 1200×630 JPG share image from the hero, originals up to 10 MB. The share image is the project's `og:image` now, with a `summary_large_image` card
+- [x] File names by content hash under `media/`, cache for a year (the server sends `immutable` for `/media/*`); the catalog carries `src`/`srcSet`/`sizes`, with `sizes` from where the image shows (hero, block, column)
 - [ ] Videos stay on their own host (link only)
 
 ### ST-16.3 — R2 and the server

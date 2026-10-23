@@ -38,3 +38,6 @@ DENO-MIGRATION.local.md
 .env
 .env.*
 !.env.example
+
+# Local ingestion output (npm run ingest:local)
+.data/

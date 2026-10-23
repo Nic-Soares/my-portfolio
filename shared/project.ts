@@ -228,6 +228,8 @@ export const projectData = z.object({
     })
     .optional(),
   tabs: z.array(tabSchema(contentBlock)),
+  // 1200×630 image for link previews (Open Graph), made from the hero
+  shareImage: z.string().optional(),
   noindex: z.boolean().optional(),
 });
 

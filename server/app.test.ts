@@ -80,6 +80,8 @@ describe("projects API", () => {
     const catalog = buildCatalog(
       [
         {
+          repo: "test/only-en",
+          sha: "abc",
           manifest: { schemaVersion: 1, slug: "only-en", areas: ["Data"] },
           contents: {
             en: {

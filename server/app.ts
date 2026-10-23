@@ -44,7 +44,8 @@ const localeQuery = z.object({
   locale: z.enum(LOCALES).default(DEFAULT_LOCALE),
 });
 
-const HASHED_ASSET = /^\/assets\//;
+// Build assets and published images have a content hash in the name
+const HASHED_ASSET = /^\/(assets|media)\//;
 const HAS_EXTENSION = /\.[a-z0-9]+$/i;
 
 // One shape for every API error

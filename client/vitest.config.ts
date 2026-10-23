@@ -20,6 +20,7 @@ export default defineConfig({
       "client/src/**/*.test.{ts,tsx}",
       "shared/**/*.test.ts",
       "server/**/*.test.ts",
+      "ingest/**/*.test.ts",
     ],
     setupFiles: "./src/test/setup.ts",
   },

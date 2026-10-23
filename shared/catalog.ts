@@ -26,28 +26,63 @@ export interface Catalog {
   projects: Record<Locale, ProjectData[]>;
   // Locales a project fell back to English for
   fallbacks: Record<string, Locale[]>;
+  // Where each project came from: ingestion skips a repository whose
+  // .portfolio/ hasn't changed since this commit
+  sources: Record<string, { repo: string; sha: string; order?: number }>;
 }
 
-// Turns a repository image path (images/hero.webp) into a published image
-export type ImageResolver = (path: string) => ResponsiveImage;
+// Turns a repository image path (images/hero.webp) into a published image;
+// `sizes` is how wide it shows, for srcset
+export type ImageResolver = (path: string, sizes: string) => ResponsiveImage;
+
+// How wide an image shows (stacked full width on Compact)
+export const IMAGE_SIZES = {
+  hero: "(width < 600px) 100vw, 50vw",
+  block: "(width < 600px) 100vw, 760px",
+  column: (count: number) =>
+    `(width < 600px) 100vw, ${Math.round(100 / count)}vw`,
+};
 
 function resolveBlocks(
   blocks: SourceBlock[],
   resolve: ImageResolver,
+  sizes: string,
 ): ContentBlock[] {
   return blocks.map((block): Block<ResponsiveImage> => {
     if (block.type === "image") {
       const { src, ...rest } = block;
-      return { ...rest, ...resolve(src) };
+      return { ...rest, ...resolve(src, sizes) };
     }
     if (block.type === "columns") {
+      const columnSizes = IMAGE_SIZES.column(block.columns.length);
       return {
         ...block,
-        columns: block.columns.map((column) => resolveBlocks(column, resolve)),
+        columns: block.columns.map((column) =>
+          resolveBlocks(column, resolve, columnSizes),
+        ),
       };
     }
     return block;
   });
+}
+
+// Every image path a project uses, so ingestion can publish them first
+export function imagePaths(
+  manifest: ProjectManifest,
+  contents: ProjectContent[],
+): string[] {
+  const paths = new Set<string>();
+  if (manifest.hero) paths.add(manifest.hero.image);
+  const visit = (blocks: SourceBlock[]) => {
+    for (const block of blocks) {
+      if (block.type === "image") paths.add(block.src);
+      if (block.type === "columns") block.columns.forEach(visit);
+    }
+  };
+  for (const content of contents) {
+    for (const tab of content.tabs) visit(tab.content);
+  }
+  return [...paths];
 }
 
 // One project in one locale, in the served format
@@ -55,6 +90,7 @@ export function toProjectData(
   manifest: ProjectManifest,
   content: ProjectContent,
   resolve: ImageResolver,
+  shareImage?: string,
 ): ProjectData {
   return {
     slug: manifest.slug,
@@ -66,23 +102,29 @@ export function toProjectData(
     ...(manifest.hero && {
       hero: {
         type: "image" as const,
-        ...resolve(manifest.hero.image),
+        ...resolve(manifest.hero.image, IMAGE_SIZES.hero),
         ...(content.heroAlt && { alt: content.heroAlt }),
       },
     }),
     tabs: content.tabs.map((tab) => ({
       ...tab,
-      content: resolveBlocks(tab.content, resolve),
+      content: resolveBlocks(tab.content, resolve, IMAGE_SIZES.block),
     })),
+    ...(shareImage && { shareImage }),
     ...(manifest.noindex && { noindex: true }),
   };
 }
 
 export interface SourceProject {
+  // owner/name and the commit the content came from
+  repo: string;
+  sha: string;
   manifest: ProjectManifest;
   // English is required; a missing locale falls back to it
   contents: Partial<Record<Locale, ProjectContent>> & { en: ProjectContent };
   resolve: ImageResolver;
+  // The published 1200×630 share image (Open Graph), when there's a hero
+  shareImage?: string;
 }
 
 // The catalog from validated projects: drafts left out, ordered by `order`
@@ -112,8 +154,19 @@ export function buildCatalog(
         source.manifest,
         content ?? source.contents.en,
         source.resolve,
+        source.shareImage,
       );
     });
   }
-  return { version, projects, fallbacks };
+  const catalogSources: Catalog["sources"] = {};
+  for (const source of published) {
+    catalogSources[source.manifest.slug] = {
+      repo: source.repo,
+      sha: source.sha,
+      ...(source.manifest.order !== undefined && {
+        order: source.manifest.order,
+      }),
+    };
+  }
+  return { version, projects, fallbacks, sources: catalogSources };
 }
