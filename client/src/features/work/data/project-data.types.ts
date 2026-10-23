@@ -47,7 +47,6 @@ export type ContentBlock =
       caption?: string;
       snug?: boolean;
     }
-  | { type: "content-group"; html: string; id?: string; snug?: boolean }
   | {
       type: "table";
       headers: string[];

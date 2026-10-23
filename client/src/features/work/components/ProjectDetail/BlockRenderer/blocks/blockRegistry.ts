@@ -1,7 +1,6 @@
 import type React from "react";
 import { CodeBlock } from "./CodeBlock.tsx";
 import { ColumnsBlock } from "./ColumnsBlock.tsx";
-import { ContentGroupBlock } from "./ContentGroupBlock.tsx";
 import { HeaderBlock } from "./HeaderBlock.tsx";
 import { ImageBlock } from "./ImageBlock.tsx";
 import { ListBlock } from "./ListBlock.tsx";
@@ -23,6 +22,4 @@ export const blockRegistry: Record<
   video: VideoBlock as React.ComponentType<BaseBlockComponentProps>,
   columns:
     ColumnsBlock as unknown as React.ComponentType<BaseBlockComponentProps>,
-  "content-group":
-    ContentGroupBlock as React.ComponentType<BaseBlockComponentProps>,
 };

@@ -1,4 +1,5 @@
 import type React from "react";
+import { Markdown } from "@/components/ui/Markdown/Markdown.tsx";
 import { BlockWrapper } from "../BlockWrapper.tsx";
 import type { BlockComponentProps } from "./types.ts";
 import styles from "./VideoBlock.module.css";
@@ -28,10 +29,9 @@ export const VideoBlock: React.FC<
           </div>
           {block.caption && (
             <figcaption className={styles.figcaption}>
-              <span
-                className={styles.caption}
-                dangerouslySetInnerHTML={{ __html: block.caption }}
-              />
+              <span className={styles.caption}>
+                <Markdown text={block.caption} inline />
+              </span>
             </figcaption>
           )}
         </figure>

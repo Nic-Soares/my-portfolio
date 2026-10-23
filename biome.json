@@ -33,7 +33,7 @@
         "noInvalidGridAreas": "off"
       },
       "security": {
-        "noDangerouslySetInnerHtml": "warn"
+        "noDangerouslySetInnerHtml": "error"
       }
     }
   },

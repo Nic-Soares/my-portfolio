@@ -881,10 +881,10 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
 ### ST-15.3 — Security baseline
 
 - **TK-15.3.1** — Text as Markdown, no raw HTML (ADR-008)
-  - [ ] Minimal inline Markdown (`**bold**`, `*italic*`, `` `code` ``, `[link](https://…)`, lists) rendered to React elements; `dangerouslySetInnerHTML` removed from `ParagraphBlock`, `ListBlock`, `TableBlock` and `ImageBlock`
-  - [ ] Migrate the bundled content (today: `<strong>` ×33, `<p>` ×21, `<li>` ×6, `<ol>` ×3, `<a>` ×3)
-  - [ ] Schema rejects tags (`<`) and non-`https` links; the `content-group` block leaves the public format
-  - [ ] Guard: `lint/security/noDangerouslySetInnerHtml` back to `error` in `biome.json` (set to `warn` in EP-14, when Biome's React rules switched on with `package.json`)
+  - [x] Minimal Markdown (`**bold**`, `*italic*`, `` `code` ``, `[link](https://…)`, paragraphs, lists): parser in `shared/markdown.ts`, rendered by `components/ui/Markdown` as React elements; `dangerouslySetInnerHTML` removed from `ParagraphBlock`, `ListBlock`, `TableBlock`, `ImageBlock`, `VideoBlock` and `BlockWrapper`
+  - [x] Migrate the bundled content (`<strong>` ×33, `<p>` ×21, `<li>` ×6, `<ol>` ×3, `<a>` ×3, plus `&lt;audio&gt;` ×3, which rendered raw once HTML was gone — now `` `<audio>` ``). Compared against the previous build: the Reference caption is pixel-identical; `<audio>` now shows in the code font
+  - [x] `markdownProblems()` rejects tags and entities outside code and non-`https` links (used by the schema in ST-15.1; `content.test.ts` runs it over the bundled data today); the `content-group` block is gone
+  - [x] Guard: `lint/security/noDangerouslySetInnerHtml` back to `error` in `biome.json`
 - **TK-15.3.2** — Security headers from the server
   - [ ] CSP: scripts and styles only from the site, images from the site and the media domain, `frame-ancestors 'none'`; browser console clean on every page
   - [ ] `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`

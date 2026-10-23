@@ -45,15 +45,8 @@ export const referenceData: ProjectData = {
           src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykafum-1.png?alt=media&token=686eda7a-aed0-4d34-a749-0b01f2a50a86",
           alt: "1 diagram shows a light purple square and a darker purple square. A second one shows a side view of the squares in elevation, showing that the light square is lower in elevation than the dark square.",
           aspectRatio: "3.413333 / 1",
-          caption: `<p>Elevation represents the distance between elements. The product applies color to represent elevation.</p>
-          <ol class="decimal">
-              <li>
-                  <p>One surface at 1dp elevation and another surface at 8dp elevation, as viewed from the front</p>
-              </li>
-              <li>
-                  <p>The difference in elevation between the two surfaces is 7dp, as viewed from the side</p>
-              </li>
-          </ol>`,
+          caption:
+            "Elevation represents the distance between elements. The product applies color to represent elevation.\n\n1. One surface at 1dp elevation and another surface at 8dp elevation, as viewed from the front\n2. The difference in elevation between the two surfaces is 7dp, as viewed from the side",
         },
         {
           id: "availability",
@@ -85,9 +78,9 @@ export const referenceData: ProjectData = {
               {
                 type: "list",
                 items: [
-                  "<strong>Shadows:</strong> Instead of applying shadows by default to all levels, use shadows only when required to create additional protection against a background or to encourage interaction",
-                  "<strong>Color:</strong> New color mappings and compatibility with dynamic color",
-                  "<strong>Levels:</strong> Elevation is now described in terms of levels",
+                  "**Shadows:** Instead of applying shadows by default to all levels, use shadows only when required to create additional protection against a background or to encourage interaction",
+                  "**Color:** New color mappings and compatibility with dynamic color",
+                  "**Levels:** Elevation is now described in terms of levels",
                 ],
               },
             ],
@@ -96,7 +89,7 @@ export const referenceData: ProjectData = {
                 type: "image",
                 src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykc8yv-2.png?alt=media&token=7c4a4e4e-ff37-47d2-a375-579c3f945893",
                 alt: "Diagram of 2 concentric squares. The inner square is at 12dp and has a larger shadow than the outer square, which is at 3dp. M2: Shadows applied at all levels",
-                caption: "<p>M2: Shadows applied at all levels</p>",
+                caption: "M2: Shadows applied at all levels",
               },
             ],
             [
@@ -105,7 +98,7 @@ export const referenceData: ProjectData = {
                 src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykckey-3.png?alt=media&token=fd1c5548-7048-4d2c-9123-17308e339731",
                 alt: "Diagram of 2 concentric squares without shadows. Instead, the inner square is at level and tonally darker than the outer square, which is at level 2. M3: Using color instead of shadows to communicate elevation",
                 caption:
-                  "<p>M3: Using color instead of shadows to communicate elevation</p>",
+                  "M3: Using color instead of shadows to communicate elevation",
               },
             ],
           ],
@@ -141,7 +134,7 @@ export const referenceData: ProjectData = {
                 src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykjf69-GM3-Styles-Elevation-Overview-1-v01.mp4?alt=media&token=6a6f026f-2264-474b-9b2d-cab3cd08393e",
                 aspectRatio: "1.194346 / 1",
                 caption:
-                  "<p>Elevation can be depicted using shadows or other visual cues, such as surface fills with a tone difference</p>",
+                  "Elevation can be depicted using shadows or other visual cues, such as surface fills with a tone difference",
               },
             ],
           ],
@@ -167,7 +160,7 @@ export const referenceData: ProjectData = {
                 src: "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Flwykcxkh-5.png?alt=media&token=d0b226cf-0e17-4719-9f5c-8a186936d003",
                 alt: "A floating action button with a shadow. All components have a default elevation which should be used",
                 caption:
-                  "<p>All components have a default elevation which should be used</p>",
+                  "All components have a default elevation which should be used",
               },
             ],
           ],
@@ -344,7 +337,7 @@ export const referenceData: ProjectData = {
         },
         {
           type: "paragraph",
-          text: "<strong>Protect elements:</strong> When a background is patterned or visually busy, the hairline style might not provide sufficient protection. In these cases, use elevation to separate and emphasize elements such as cards, chips, or buttons.",
+          text: "**Protect elements:** When a background is patterned or visually busy, the hairline style might not provide sufficient protection. In these cases, use elevation to separate and emphasize elements such as cards, chips, or buttons.",
         },
         {
           type: "image",
@@ -353,7 +346,7 @@ export const referenceData: ProjectData = {
         },
         {
           type: "paragraph",
-          text: "<strong>Encourage interaction:</strong> Elements can temporarily lift on focus, selection, or another kind of interaction, like swipe. A raised element can also lower when a higher element appears.",
+          text: "**Encourage interaction:** Elements can temporarily lift on focus, selection, or another kind of interaction, like swipe. A raised element can also lower when a higher element appears.",
         },
         {
           id: "scrims",
@@ -419,12 +412,12 @@ export const referenceData: ProjectData = {
         {
           type: "list",
           items: [
-            "<strong>Level 5 (12dp):</strong> (not assigned as resting level)",
-            "<strong>Level 4 (8dp):</strong> (not assigned as resting level)",
-            "<strong>Level 3 (6dp):</strong> Date pickers, Dialogs (modal), Extended FAB, FAB, FAB menu (close button), Search, Time pickers",
-            "<strong>Level 2 (3dp):</strong> App bar (scrolled), Menu, Navigation bar, Rich tooltip, Toolbar",
-            "<strong>Level 1 (1dp):</strong> Banner, Bottom sheet (modal), Button (elevated), Card (elevated), Chips (elevated), Navigation drawer (modal), Side sheet (modal)",
-            "<strong>Level 0 (0dp):</strong> App bar (not scrolled), Buttons (filled, tonal, outlined), Button groups, Cards (filled, outlined), Carousel, Chips, Dialog (full-screen), Extended FAB (in navigation rail), FAB (in navigation rail), FAB menu (list items), Icon buttons, List, Navigation rail, Segmented button, Side sheet (docked), Slider, Split button, Tabs",
+            "**Level 5 (12dp):** (not assigned as resting level)",
+            "**Level 4 (8dp):** (not assigned as resting level)",
+            "**Level 3 (6dp):** Date pickers, Dialogs (modal), Extended FAB, FAB, FAB menu (close button), Search, Time pickers",
+            "**Level 2 (3dp):** App bar (scrolled), Menu, Navigation bar, Rich tooltip, Toolbar",
+            "**Level 1 (1dp):** Banner, Bottom sheet (modal), Button (elevated), Card (elevated), Chips (elevated), Navigation drawer (modal), Side sheet (modal)",
+            "**Level 0 (0dp):** App bar (not scrolled), Buttons (filled, tonal, outlined), Button groups, Cards (filled, outlined), Carousel, Chips, Dialog (full-screen), Extended FAB (in navigation rail), FAB (in navigation rail), FAB menu (list items), Icon buttons, List, Navigation rail, Segmented button, Side sheet (docked), Slider, Split button, Tabs",
           ],
         },
       ],

@@ -29,6 +29,7 @@ export default defineConfig({
     alias: {
       "@": join(rootDir, "src"),
       "@assets": join(rootDir, "src/assets"),
+      "@shared": join(rootDir, "../shared"),
     },
   },
 });
