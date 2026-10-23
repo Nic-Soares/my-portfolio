@@ -12,6 +12,8 @@ export interface PageMeta {
   title: string;
   description: string;
   noindex?: boolean;
+  // Share image (Open Graph) path; the site icon when absent
+  image?: string;
 }
 
 // The UI strings a page's meta reads (a slice of the client's i18n catalog)
@@ -41,7 +43,10 @@ export interface Person {
 export interface MetaSources {
   t: PageTexts;
   about: Person;
-  projects: Pick<ProjectData, "slug" | "name" | "description" | "noindex">[];
+  projects: Pick<
+    ProjectData,
+    "slug" | "name" | "description" | "noindex" | "shareImage"
+  >[];
 }
 
 export function pageMeta(
@@ -83,6 +88,7 @@ export function pageMeta(
       title: titled(project.name),
       description: project.description,
       noindex: project.noindex,
+      image: project.shareImage,
     };
   }
   return {
@@ -133,8 +139,9 @@ export function headTags(
     property("og:title", meta.title),
     property("og:description", meta.description),
     property("og:url", url),
-    property("og:image", `${siteUrl}${SHARE_IMAGE}`),
-    named("twitter:card", "summary"),
+    property("og:image", `${siteUrl}${meta.image ?? SHARE_IMAGE}`),
+    // A wide card when there's a 1200×630 image, a square one otherwise
+    named("twitter:card", meta.image ? "summary_large_image" : "summary"),
     named("twitter:title", meta.title),
     named("twitter:description", meta.description),
   ];

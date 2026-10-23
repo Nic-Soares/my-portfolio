@@ -3,6 +3,7 @@ export type {
   ContentBlock,
   ProjectData,
   ProjectFact,
+  ProjectSummary,
   ProjectTab,
   ResponsiveImage,
   SidebarItem,

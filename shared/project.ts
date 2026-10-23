@@ -228,8 +228,39 @@ export const projectData = z.object({
     })
     .optional(),
   tabs: z.array(tabSchema(contentBlock)),
+  // 1200×630 image for link previews (Open Graph), made from the hero
+  shareImage: z.string().optional(),
   noindex: z.boolean().optional(),
 });
+
+// What lists need (Projects, Home carousel, pager, page titles): the API's
+// /projects answer, without the tabs
+export type ProjectSummary = Pick<
+  ProjectData,
+  | "slug"
+  | "name"
+  | "description"
+  | "areas"
+  | "context"
+  | "hero"
+  | "noindex"
+  | "shareImage"
+>;
+
+export function toSummary(project: ProjectData): ProjectSummary {
+  const { slug, name, description, areas, context, hero, noindex, shareImage } =
+    project;
+  return {
+    slug,
+    name,
+    description,
+    areas,
+    context,
+    ...(hero && { hero }),
+    ...(noindex && { noindex }),
+    ...(shareImage && { shareImage }),
+  };
+}
 
 export type ProjectManifest = z.infer<typeof projectManifest>;
 export type ProjectContent = z.infer<typeof projectContent>;

@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { lazy, Suspense } from "react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { renderLoaded } from "@/test/projectsApi.tsx";
 import App from "./App.tsx";
 import ErrorBoundary from "./ErrorBoundary/ErrorBoundary.tsx";
 
@@ -21,19 +22,19 @@ describe("System states in real flows", () => {
     window.history.pushState({}, "", "/");
   });
 
-  it("shows the 404 for a project slug that doesn't exist", () => {
+  it("shows the 404 for a project slug that doesn't exist", async () => {
     window.history.pushState({}, "", "/projects/does-not-exist");
-    render(<App />);
+    await renderLoaded(<App />);
     expect(
-      screen.getByRole("heading", { level: 1, name: "Page not found" }),
+      await screen.findByRole("heading", { level: 1, name: "Page not found" }),
     ).toBeInTheDocument();
   });
 
-  it("shows the 404 for an unknown path", () => {
+  it("shows the 404 for an unknown path", async () => {
     window.history.pushState({}, "", "/nowhere");
-    render(<App />);
+    await renderLoaded(<App />);
     expect(
-      screen.getByRole("heading", { level: 1, name: "Page not found" }),
+      await screen.findByRole("heading", { level: 1, name: "Page not found" }),
     ).toBeInTheDocument();
   });
 
@@ -58,7 +59,7 @@ describe("System states in real flows", () => {
 
   it("shows the projects page once its code has loaded", async () => {
     window.history.pushState({}, "", "/projects");
-    render(<App />);
+    await renderLoaded(<App />);
     expect(
       await screen.findByRole("heading", { level: 1, name: "Projects" }),
     ).toBeInTheDocument();

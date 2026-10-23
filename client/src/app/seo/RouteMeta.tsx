@@ -2,7 +2,7 @@ import { headTags, pageMeta } from "@shared/pageMeta.ts";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useAboutData } from "@/features/about/data/useAboutData.ts";
-import { useProjectData } from "@/features/work/hooks/useProjectData.ts";
+import { useProjects } from "@/features/work/hooks/useProjectData.ts";
 import { useI18n } from "@/i18n/I18nProvider.tsx";
 import { SITE_URL } from "./siteUrl.ts";
 
@@ -13,10 +13,10 @@ export default function RouteMeta() {
   const { pathname } = useLocation();
   const { t } = useI18n();
   const about = useAboutData();
-  const { getAllProjects } = useProjectData();
+  const projects = useProjects();
 
   useEffect(() => {
-    const meta = pageMeta(pathname, { t, about, projects: getAllProjects() });
+    const meta = pageMeta(pathname, { t, about, projects });
     for (const { tag, key, attrs, text } of headTags(
       meta,
       about.name,
@@ -36,7 +36,7 @@ export default function RouteMeta() {
         element.setAttribute(name, content);
       }
     }
-  }, [pathname, t, about, getAllProjects]);
+  }, [pathname, t, about, projects]);
 
   return null;
 }

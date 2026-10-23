@@ -1,8 +1,8 @@
-// The client build (dist/client) and the fixtures' images from disk
+// The client build (dist/client) and the published images (media/ in the
+// local store that npm run ingest:local writes)
 import { readFile } from "node:fs/promises";
 import { extname, join, normalize, sep } from "node:path";
 import type { AssetSource } from "../sources.ts";
-import { findProjects } from "./fixtureCatalog.ts";
 
 const TYPES: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
@@ -28,20 +28,15 @@ async function readInside(root: string, relative: string) {
   return readFile(file).catch(() => null);
 }
 
-export function fileAssets(distDir: string, fixturesDir: string): AssetSource {
+export function fileAssets(distDir: string, mediaDir: string): AssetSource {
   return {
     async get(path) {
       const decoded = decodeURIComponent(path);
-      let body: Buffer | null = null;
-      const media = /^\/media\/([a-z0-9-]+)\/(.+)$/.exec(decoded);
-      if (media) {
-        const folder = (await findProjects(fixturesDir)).get(media[1]);
-        body = folder
-          ? await readInside(join(folder, "images"), media[2])
-          : null;
-      } else {
-        body = await readInside(distDir, decoded);
-      }
+      let body: Buffer | null;
+      const media = /^\/media\/(.+)$/.exec(decoded);
+      body = media
+        ? await readInside(mediaDir, media[1])
+        : await readInside(distDir, decoded);
       if (!body) return null;
       return new Response(new Uint8Array(body), {
         headers: {

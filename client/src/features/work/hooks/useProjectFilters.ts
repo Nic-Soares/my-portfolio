@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useI18n } from "@/i18n/I18nProvider.tsx";
-import type { ProjectData, WorkArea } from "../data/project-data.types.ts";
+import type { ProjectSummary, WorkArea } from "../data/project-data.types.ts";
 
 const SEARCH_DELAY = 250; // ms the search waits for typing to pause
 
 // Projects filter state, kept in the URL (?area=data,frontend&q=spotify)
 // so a filtered list can be shared and survives a reload. Several areas can
 // be selected; a project shows if it has any of them.
-export function useProjectFilters(projects: ProjectData[]) {
+export function useProjectFilters(projects: ProjectSummary[]) {
   const { t } = useI18n();
   const [params, setParams] = useSearchParams();
   const areaParam = (params.get("area") ?? "").split(",").filter(Boolean);

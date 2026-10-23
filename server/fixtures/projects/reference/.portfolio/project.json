@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../shared/schema/project.v1.json",
+  "schemaVersion": 1,
+  "slug": "reference",
+  "areas": ["Design", "Frontend"],
+  "order": 90,
+  "noindex": true,
+  "hero": {
+    "image": "images/placeholder-01.webp"
+  }
+}

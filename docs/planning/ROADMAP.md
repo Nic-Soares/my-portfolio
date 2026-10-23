@@ -18,7 +18,7 @@
 | `EP-13` Front-end fixes | ⏭️ **Next** — Nicolas's list of small fixes | code |
 | `EP-14` Node migration | ✅ Done — merged into `develop` 2026-10-23 (ADR-006) | code |
 | `EP-15` Backend foundation | ✅ Done — merged into `develop` 2026-10-23; Worker-side checks and public-repo rules land with EP-16 | code (`shared/`, `server/`) |
-| `EP-16` Projects from GitHub | ⏭️ **Next** — starts with the Cloudflare account and keys — ingestion, images, R2, client reads the API | code (`ingest/`) + project repos |
+| `EP-16` Projects from GitHub | 🟡 Built on `feat/ep-16-github-projects` — ingestion, R2, client on the API; the scheduled workflow and the Worker's R2 source wait for EP-18 — ingestion, images, R2, client reads the API | code (`ingest/`) + project repos |
 | `EP-17` Site services | Not started — résumé and error reporting | code (`server/`) |
 | `EP-18` Deploy | Not started — Cloudflare Workers, R2, domain | infra |
 
@@ -911,27 +911,35 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
 
 ### ST-16.1 — Ingestion (`ingest/` + `.github/workflows/ingest.yml`)
 
-- [ ] Hourly `schedule` + `workflow_dispatch`; lists your repos with the `portfolio` topic (no forks), reads `.portfolio/` on the default branch with ETags
-- [ ] Validates with the shared schema; a missing `pt`/`es` falls back to English; an invalid project keeps its last good version
-- [ ] Writes only when something changed; publishes `catalog/<version>.json`, then points `catalog/current.json` at it
-- [ ] Run summary in the job: published, rejected (file, field, error), fallbacks
+- [ ] Hourly `schedule` + `workflow_dispatch` (`.github/workflows/ingest.yml`)
+- [x] `ingest/` with two sources behind one interface: `githubRepos` (your repos with the `portfolio` topic, owner checked, no forks or archived, default branch only) and `folderRepos` (`npm run ingest:local`, from `server/fixtures/projects` into `.data/store`). Change detection by the last commit that touched `.portfolio/` (one call per repo) instead of ETags: an unchanged repo isn't read at all
+- [x] Validates with the shared schema; a missing `pt`/`es` falls back to English; an invalid project keeps its last good version, the others still update
+- [x] Writes only when something changed; publishes `catalog/<version>.json`, then points `catalog/current.json` at it
+- [x] Run summary (console and `GITHUB_STEP_SUMMARY`): published, unchanged, rejected (file, field, error), fallbacks; a rejected project is a warning, not a failed run
 
 ### ST-16.2 — Images
 
-- [ ] `sharp`: WebP 800 and 1600px, a 1200×630 JPG share image per project (from the hero when the repo has none), originals up to 10 MB
-- [ ] File names by content hash under `media/`, cache for a year; the catalog carries `src`/`srcSet`/`sizes`/width/height
+- [x] `sharp`: WebP 800 and 1600px (never enlarged), a 1200×630 JPG share image from the hero, originals up to 10 MB. The share image is the project's `og:image` now, with a `summary_large_image` card
+- [x] File names by content hash under `media/<slug>/` (one folder per project), cache for a year (the server sends `immutable` for `/media/*`); the catalog carries `src`/`srcSet`/`sizes`, with `sizes` from where the image shows (hero, block, column)
+- [x] Cleanup after each publish: the 10 newest catalog versions stay (rollback), media no kept version uses is deleted; it stops without deleting anything if a kept version can't be read
+- [x] `INGEST_FORMAT` in the catalog: when what ingestion writes changes, the next run re-reads every repository (format 2 moved media to `media/<slug>/`; the old flat layout was purged from R2 once)
 - [ ] Videos stay on their own host (link only)
 
 ### ST-16.3 — R2 and the server
 
-- [ ] Bucket and the media domain; `CatalogSource` for R2 (binding), with the catalog cached in memory (60 s) and the last good copy kept if R2 fails
+- [x] Bucket `portfolio-content` (Standard class) created 2026-10-23; read-only GitHub token and bucket-scoped R2 key pair created and checked (`docs/runbooks/keys.md`). First real run from the Mac (`npm run ingest`, keys in the ignored `.env`): Spotify Web read from `Nic-Soares/spotify-web` (commit `03a8956`, `.portfolio/` added there) and published to R2; a second run writes nothing
+- [ ] The scheduled workflow only runs from the default branch (`main`): `ingest.yml` is ready but starts with the `develop` → `main` promotion (EP-18). Until then, ingestion runs from the Mac
+- [ ] Media served through the server (`/media/*` from the bucket, same origin, immutable cache) instead of a public media domain until the domain exists (EP-18)
+- [ ] `CatalogSource` for R2 (Worker binding), with the catalog cached in memory (60 s) and the last good copy kept if R2 fails
 - [ ] Measure CPU per request against the free plan's 10 ms
 
 ### ST-16.4 — Client reads the API
 
-- [ ] The list, the Home carousel, the pager and the detail page read `/api/v1/projects`; loading, error and empty states from EP-10
-- [ ] Spotify Web moves to its own repository's `.portfolio/` (images too); `client/src/features/work/data/projects/` goes away, and with it the locales' content from the JS bundle (decision 10)
-- [ ] The `Reference` placeholder is deleted or becomes a `draft`
+- [x] The list, the Home carousel, the pager, the detail page and the page titles read `/api/v1/projects` (`projectsApi.ts`, `useProjects`/`useProject`). Suspense fallbacks: the Projects skeleton, a progress bar on the detail page, nothing for the carousel and the titles; API errors reach the 500 state, unknown slugs the 404. Settled data renders at once on revisits. Suspends by throwing the pending request (React's `use()` re-suspended pages whose router updates run as transitions). `npm run dev` proxies `/api` and `/media` to the local server
+- [x] Spotify Web lives in `Nic-Soares/spotify-web/.portfolio/` (images too); `client/src/features/work/data/projects/` and `assets/images/projects/` are gone: main JS 145.9 → 130.0 KB gzip (decision 10)
+- [x] `Reference` became a local-only project (decided 2026-10-23): `server/fixtures/projects/reference/.portfolio/`, every block type for checking layouts with `npm run ingest:local` + `npm run serve`; its Google-hosted images replaced by 15 generated placeholders with the same proportions; `noindex`. Production ingestion reads GitHub only, so it never goes live
+- [x] Delete the bundled `reference*.data.ts` with the rest of `data/projects/`
+- [x] Translation parity moved into ingestion (`shared/parity.ts`): a `content.<locale>.json` whose structure differs from English is rejected with the first differing path
 
 ---
 

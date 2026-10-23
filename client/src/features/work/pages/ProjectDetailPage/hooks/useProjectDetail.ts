@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { ProjectTab } from "../../../data/project-data.types.ts";
-import { useProjectData } from "../../../hooks/useProjectData.ts";
+import { useProject } from "../../../hooks/useProjectData.ts";
 
 /**
  * Hook: useProjectDetail
@@ -12,10 +12,9 @@ import { useProjectData } from "../../../hooks/useProjectData.ts";
  *
  * Accepts a projectSlug and returns the project and tab navigation state.
  */
-export const useProjectDetail = (projectSlug: string | undefined) => {
-  // Find the project from the aggregated projects data
-  const { getProjectBySlug } = useProjectData();
-  const project = getProjectBySlug(projectSlug as string);
+export const useProjectDetail = (projectSlug: string) => {
+  // Suspends until the API answers; null when the slug doesn't exist
+  const project = useProject(projectSlug);
 
   // Initial selected tab (first tab of the project, if any)
   const initialTabId = project?.tabs[0]?.id;

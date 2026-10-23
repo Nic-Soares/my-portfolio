@@ -1,13 +1,21 @@
 import { pageMeta } from "@shared/pageMeta.ts";
-import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import { aboutData } from "@/features/about/data/about.data.ts";
-import { projectsByLocale } from "@/features/work/data/projects/index.ts";
 import { en } from "@/i18n/locales/en.ts";
+import { renderLoaded } from "@/test/projectsApi.tsx";
 import RouteMeta from "./RouteMeta.tsx";
 
-const sources = { t: en, about: aboutData, projects: projectsByLocale.en };
+const projects = [
+  { slug: "spotify-clone", name: "Spotify Web", description: "A player" },
+  {
+    slug: "reference",
+    name: "Reference",
+    description: "Blocks",
+    noindex: true,
+  },
+];
+const sources = { t: en, about: aboutData, projects };
 
 describe("pageMeta", () => {
   it("titles each route after its page and the owner", () => {
@@ -33,8 +41,8 @@ describe("pageMeta", () => {
 });
 
 describe("RouteMeta", () => {
-  it("syncs the title and description with the route", () => {
-    render(
+  it("syncs the title and description with the route", async () => {
+    await renderLoaded(
       <MemoryRouter initialEntries={["/projects"]}>
         <RouteMeta />
       </MemoryRouter>,

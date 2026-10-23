@@ -62,7 +62,9 @@ npm ci
 ### Commands
 
 ```bash
-# Development mode (hot reload)
+# Development mode (hot reload). Projects come from the local server, so
+# run it in a second terminal first:
+#   npm run ingest:local && npm run serve
 npm run dev
 
 # Production build
@@ -83,9 +85,13 @@ npm run format
 # Lint + format + import organization, with fixes
 npm run check
 
-# Server: the build with each page's <head>, the projects API, sitemap
-# (build first; projects come from server/fixtures/projects)
-npm run build && npm run serve      # http://localhost:3000
+# Server: the build with each page's <head>, the projects API, sitemap.
+# Projects come from .data/store, written by the local ingestion
+# (server/fixtures/projects: Spotify Web and the Reference page)
+npm run build && npm run ingest:local && npm run serve   # http://localhost:3000
+
+# Real ingestion: your GitHub repos into R2 (keys in .env, docs/runbooks/keys.md)
+npm run ingest
 
 # Rewrite the JSON Schemas after changing shared/project.ts
 npm run schema

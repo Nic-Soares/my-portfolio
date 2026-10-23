@@ -1,4 +1,6 @@
 // @vitest-environment node
+import { cp, mkdtemp } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { aboutData } from "../client/src/features/about/data/about.data.ts";
@@ -24,7 +26,16 @@ const assets: AssetSource = {
   indexHtml: async () => TEMPLATE,
 };
 
-const fixtures = join(import.meta.dirname, "fixtures/projects");
+// Spotify Web only: the other fixtures (Reference) are for local browsing
+const fixtures = await (async () => {
+  const dir = await mkdtemp(join(tmpdir(), "server-fixtures-"));
+  await cp(
+    join(import.meta.dirname, "fixtures/projects/spotify-clone"),
+    join(dir, "spotify-clone"),
+    { recursive: true },
+  );
+  return dir;
+})();
 
 function app(overrides: Partial<AppOptions> = {}) {
   return createApp({
@@ -80,6 +91,8 @@ describe("projects API", () => {
     const catalog = buildCatalog(
       [
         {
+          repo: "test/only-en",
+          sha: "abc",
           manifest: { schemaVersion: 1, slug: "only-en", areas: ["Data"] },
           contents: {
             en: {

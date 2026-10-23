@@ -19,7 +19,43 @@ Worker code only reads.
 
 ## Creating each key
 
-Written step by step when each one is created (EP-16, EP-18).
+Locally the keys live in `.env` at the repo root (ignored by git; `npm run
+ingest` reads it). In CI they live in the repo's Actions secrets (EP-18).
+
+### `PORTFOLIO_GITHUB_TOKEN` (created 2026-10-23)
+
+1. https://github.com/settings/personal-access-tokens/new (fine-grained, not
+   classic).
+2. Name `portfolio-ingest`; resource owner `Nic-Soares`; expiration: custom,
+   one year.
+3. Repository access: **All repositories** — a new project only needs the
+   `portfolio` topic, no token change. The token still only reads.
+4. Repository permissions: **Contents: Read-only**, **Metadata: Read-only**;
+   nothing else.
+5. Generate, copy (starts with `github_pat_`), paste after
+   `PORTFOLIO_GITHUB_TOKEN=`.
+
+Check: it authenticates as `Nic-Soares`, lists the repos, and a write (PUT
+to contents) answers 403.
+
+### `R2_ACCESS_KEY_ID` + `R2_SECRET_ACCESS_KEY` (created 2026-10-23)
+
+1. Cloudflare dashboard → **R2 Object Storage** (the Account ID is on this
+   page → `CLOUDFLARE_ACCOUNT_ID`).
+2. **Manage API tokens → Create API token** (Account API token).
+3. Name `portfolio-ingest-write`; permission **Object Read & Write**; **Apply
+   to specific buckets only** → `portfolio-content`; TTL forever; no IP
+   filter.
+4. Copy **Access Key ID** and **Secret Access Key** (the secret is shown
+   once) into `R2_ACCESS_KEY_ID` and `R2_SECRET_ACCESS_KEY`. The "Token
+   value" and the S3 endpoint aren't needed.
+
+Check: `npm run ingest` publishes; the same key against any other bucket
+answers 403.
+
+### `CLOUDFLARE_API_TOKEN`
+
+Written when it's created (EP-18).
 
 ## Rotating a key
 

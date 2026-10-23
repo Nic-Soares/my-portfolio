@@ -70,6 +70,8 @@ export function fixtureCatalog(root: string): CatalogSource {
         if (!contents.en)
           throw new Error(`${slug}: content.en.json is missing`);
         sources.push({
+          repo: `local/${slug}`,
+          sha: "local",
           manifest,
           contents: { ...contents, en: contents.en },
           resolve: (path) => ({
