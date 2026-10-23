@@ -10,7 +10,6 @@ interface BlockWrapperProps {
   isSnug?: boolean;
   isNested?: boolean;
   startsSection?: boolean; // level-2 header: section spacing above
-  dangerouslySetInnerHTML?: { __html: string };
 }
 
 export const BlockWrapper = ({
@@ -20,7 +19,6 @@ export const BlockWrapper = ({
   isSnug = false,
   isNested = false,
   startsSection = false,
-  dangerouslySetInnerHTML,
 }: BlockWrapperProps) => {
   const { t } = useI18n();
   const handleCopyLink = () => {
@@ -60,14 +58,7 @@ export const BlockWrapper = ({
 
       {/* Main content */}
       <div className={isNested ? "" : styles.chunk}>
-        {dangerouslySetInnerHTML ? (
-          <div
-            className={styles["text-chunk"]}
-            dangerouslySetInnerHTML={dangerouslySetInnerHTML}
-          />
-        ) : (
-          <div className={styles["text-chunk"]}>{children}</div>
-        )}
+        <div className={styles["text-chunk"]}>{children}</div>
       </div>
     </div>
   );

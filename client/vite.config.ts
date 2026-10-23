@@ -2,13 +2,12 @@ import { join } from "node:path";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import svgr from "vite-plugin-svgr";
-import { seoPages } from "./seo.plugin.ts";
 
 const rootDir = import.meta.dirname;
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr(), seoPages()],
+  plugins: [react(), svgr()],
   css: {
     transformer: "lightningcss",
     lightningcss: {
@@ -29,6 +28,7 @@ export default defineConfig({
     alias: {
       "@": join(rootDir, "src"),
       "@assets": join(rootDir, "src/assets"),
+      "@shared": join(rootDir, "../shared"),
     },
   },
 });

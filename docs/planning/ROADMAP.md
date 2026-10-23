@@ -864,30 +864,30 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
 
 ### ST-15.1 — Contracts (`shared/`)
 
-- [ ] Zod schema for `project.json` and `content.<locale>.json`; the TypeScript types come from it and replace `project-data.types.ts`
-- [ ] JSON Schema exported from the Zod schema (published later by the server at `/schema/*.v1.json`)
-- [ ] `pageMeta.ts` moves from `client/src/app/seo` to `shared/`
-- [ ] Spotify Web converted to the new format as a local `.portfolio/` fixture — the first catalog
+- [x] Zod schema for `project.json` and `content.<locale>.json` (`shared/project.ts`), plus the served `projectData`; `project-data.types.ts` re-exports the shared types. The recursive block type is written out next to the schema (TypeScript can't infer it), and `content.test.ts` validates the bundled data against it. Dropped from the format: `className` on images and videos (unused)
+- [x] JSON Schema exported from the Zod schema: `npm run schema` writes `shared/schema/{project,content}.v1.json`; `schema.test.ts` fails when they're stale (published by the server in ST-15.2)
+- [x] `pageMeta.ts` moves to `shared/`; the site origin is a parameter now (`client/src/app/seo/siteUrl.ts` reads `VITE_SITE_URL`), and its inputs are structural types, so the server can call it
+- [x] Spotify Web converted to the new format: `server/fixtures/projects/spotify-clone/.portfolio/` (3 locales, 5 images at 1600px; each file validated on export). `Reference` stays out: its images live on Google's hosts, so it can't be a `.portfolio/` project (ST-16.4 decides its fate)
 
 ### ST-15.2 — Server (`server/`)
 
-- [ ] Hono app taking a `CatalogSource` (`load()`); local entry reads a folder on disk; tested with `app.request()` in Vitest
-- [ ] `GET /api/v1/health`, `/api/v1/projects?locale=`, `/api/v1/projects/:slug?locale=` — summaries in order, full project, the `locale` actually served, ETag = catalog version
-- [ ] Serves the client build: clean URLs (`/about` → `about.html`), `404.html` with a 404 status, SPA fallback
-- [ ] Per-request `<head>`: fills the `seo:start/seo:end` block from the catalog, so new projects need no rebuild; `sitemap.xml` and `robots.txt` move to the server (the build plugin goes)
-- [ ] Cache headers: hashed `/assets/*` immutable for a year, HTML `no-cache`
-- [ ] JSON errors in one shape, request validation with Zod, structured logs with a request id
+- [x] Hono app taking a `CatalogSource` and an `AssetSource` (`server/sources.ts`); local entry `server/local.ts` (`npm run serve`) reads `server/fixtures/projects` and `dist/client`; `cachedCatalog` keeps the last good copy if a reload fails; tested with `app.request()` in Vitest (`server/app.test.ts`)
+- [x] `GET /api/v1/health`, `/api/v1/projects?locale=`, `/api/v1/projects/:slug?locale=` — summaries in order, full project, the `locale` actually served, ETag = catalog version (304 on match); `/schema/*.v1.json` publishes the JSON Schemas
+- [x] Serves the client build: every page is `index.html` with its own `<head>`, unknown routes get the 404 tags and a 404 status
+- [x] Per-request `<head>`: fills the `seo:start/seo:end` block from the catalog, so new projects need no rebuild; `sitemap.xml` and `robots.txt` move to the server; `seo.plugin.ts` and `staticPages.ts` removed
+- [x] Cache headers: hashed `/assets/*` immutable for a year, other files a day, HTML and API `no-cache`
+- [x] JSON errors in one shape (`{ error: { code, message } }`), `locale` validated with Zod, one JSON log line per request with a request id
 
 ### ST-15.3 — Security baseline
 
 - **TK-15.3.1** — Text as Markdown, no raw HTML (ADR-008)
-  - [ ] Minimal inline Markdown (`**bold**`, `*italic*`, `` `code` ``, `[link](https://…)`, lists) rendered to React elements; `dangerouslySetInnerHTML` removed from `ParagraphBlock`, `ListBlock`, `TableBlock` and `ImageBlock`
-  - [ ] Migrate the bundled content (today: `<strong>` ×33, `<p>` ×21, `<li>` ×6, `<ol>` ×3, `<a>` ×3)
-  - [ ] Schema rejects tags (`<`) and non-`https` links; the `content-group` block leaves the public format
-  - [ ] Guard: `lint/security/noDangerouslySetInnerHtml` back to `error` in `biome.json` (set to `warn` in EP-14, when Biome's React rules switched on with `package.json`)
+  - [x] Minimal Markdown (`**bold**`, `*italic*`, `` `code` ``, `[link](https://…)`, paragraphs, lists): parser in `shared/markdown.ts`, rendered by `components/ui/Markdown` as React elements; `dangerouslySetInnerHTML` removed from `ParagraphBlock`, `ListBlock`, `TableBlock`, `ImageBlock`, `VideoBlock` and `BlockWrapper`
+  - [x] Migrate the bundled content (`<strong>` ×33, `<p>` ×21, `<li>` ×6, `<ol>` ×3, `<a>` ×3, plus `&lt;audio&gt;` ×3, which rendered raw once HTML was gone — now `` `<audio>` ``). Compared against the previous build: the Reference caption is pixel-identical; `<audio>` now shows in the code font
+  - [x] `markdownProblems()` rejects tags and entities outside code and non-`https` links (used by the schema in ST-15.1; `content.test.ts` runs it over the bundled data today); the `content-group` block is gone
+  - [x] Guard: `lint/security/noDangerouslySetInnerHtml` back to `error` in `biome.json`
 - **TK-15.3.2** — Security headers from the server
-  - [ ] CSP: scripts and styles only from the site, images from the site and the media domain, `frame-ancestors 'none'`; browser console clean on every page
-  - [ ] `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`
+  - [x] CSP: scripts and styles only from the site plus the sha256 of `index.html`'s inline bootstrap script (computed from the template), images from the site and the media domain, `frame-ancestors 'none'`; browser console clean on Home, Projects, Spotify Web and About through `npm run serve`
+  - [x] `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`, `X-Frame-Options: DENY` (Hono `secureHeaders`)
 - **TK-15.3.3** — Keys (three keys, four secret values; least privilege, one place each)
   - [ ] `PORTFOLIO_GITHUB_TOKEN` — fine-grained, read-only Contents + Metadata on your repos; Actions secret; 1-year expiry (EP-16)
   - [ ] `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` — Object Read & Write on the portfolio bucket only; Actions secret (EP-16)
@@ -895,7 +895,7 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
   - [ ] Not secret: `CLOUDFLARE_ACCOUNT_ID`, `R2_BUCKET` (Actions variables); `VITE_SITE_URL` (client build)
   - [ ] Worker R2 binding grants the whole bucket, so the Worker only calls `get`/`head` — a test fails on any write call
   - [ ] No `repository_dispatch` token in project repos: hourly cron + manual button instead
-  - [ ] `.env.example` lists every name; `docs/runbooks/keys.md` says where each key is created and how to rotate it
+  - [x] `.env.example` lists every name; `docs/runbooks/keys.md` has the table and the rotation steps (creation steps written as each key is created, EP-16/EP-18); `.env*` ignored except the example
 - **TK-15.3.4** — Rules for public repositories (implemented in EP-16)
   - [ ] Discovery: only repos owned by you with the `portfolio` topic, forks excluded
   - [ ] Read only the default branch; never PRs or other branches

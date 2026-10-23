@@ -175,7 +175,7 @@ export const projectsData: ProjectData[] = [
           {
             type: "list",
             items: [
-              'Live demo — <a href="https://spotify-web-ehgp.onrender.com" target="_blank" rel="noopener noreferrer">spotify-web-ehgp.onrender.com</a>',
+              "Live demo — [spotify-web-ehgp.onrender.com](https://spotify-web-ehgp.onrender.com)",
               // PENDING: the repository URL (waiting on Nicolas)
               "Source — GitHub repository",
             ],
@@ -217,7 +217,7 @@ npm run dev
             type: "list",
             items: [
               "Eager data loading: the whole artist and song catalog loads once at startup and is filtered in memory client-side — simple at 20 artists / 200 songs, a deliberate trade-off that would need pagination and search to scale further.",
-              "Custom audio player built directly on the &lt;audio&gt; element: play/pause, a polled progress bar, and next/previous that jumps to a random track by the same artist rather than a fixed queue.",
+              "Custom audio player built directly on the `<audio>` element: play/pause, a polled progress bar, and next/previous that jumps to a random track by the same artist rather than a fixed queue.",
               "Single Express service serves both the API and the compiled front end, so one Render deployment covers the whole stack instead of two.",
             ],
           },

@@ -179,7 +179,7 @@ export const projectsDataPt: ProjectData[] = [
           {
             type: "list",
             items: [
-              'Demo ao vivo — <a href="https://spotify-web-ehgp.onrender.com" target="_blank" rel="noopener noreferrer">spotify-web-ehgp.onrender.com</a>',
+              "Demo ao vivo — [spotify-web-ehgp.onrender.com](https://spotify-web-ehgp.onrender.com)",
               // PENDING: the repository URL (waiting on Nicolas)
               "Código-fonte — repositório no GitHub",
             ],
@@ -221,7 +221,7 @@ npm run dev
             type: "list",
             items: [
               "Carregamento antecipado dos dados: todo o catálogo de artistas e músicas é carregado uma vez na inicialização e filtrado em memória no cliente — simples com 20 artistas / 200 músicas, um trade-off deliberado que exigiria paginação e busca para escalar mais.",
-              "Player de áudio próprio construído diretamente sobre o elemento &lt;audio&gt;: play/pause, uma barra de progresso atualizada por polling e próxima/anterior que pula para uma faixa aleatória do mesmo artista, em vez de uma fila fixa.",
+              "Player de áudio próprio construído diretamente sobre o elemento `<audio>`: play/pause, uma barra de progresso atualizada por polling e próxima/anterior que pula para uma faixa aleatória do mesmo artista, em vez de uma fila fixa.",
               "Um único serviço Express serve tanto a API quanto o front end compilado, então um só deploy no Render cobre a stack inteira, em vez de dois.",
             ],
           },

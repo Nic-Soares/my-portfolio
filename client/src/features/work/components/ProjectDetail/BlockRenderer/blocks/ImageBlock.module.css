@@ -61,7 +61,13 @@
   counter-reset: item;
 }
 
+/* Item text sized like the caption's paragraphs (it used to sit in a <p>) */
 .caption ol > li {
+  font-family: var(--body-large-font, inherit);
+  font-size: var(--body-large-size, 1rem);
+  font-weight: var(--body-large-weight, 400);
+  letter-spacing: var(--body-large-tracking, normal);
+  line-height: var(--body-large-line-height, 1.5);
   margin-top: 4px;
   margin-bottom: 20px;
   margin-left: 36px;

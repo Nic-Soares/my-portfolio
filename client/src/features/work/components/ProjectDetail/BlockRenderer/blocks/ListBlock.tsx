@@ -1,4 +1,5 @@
 import type React from "react";
+import { Markdown } from "@/components/ui/Markdown/Markdown.tsx";
 import { BlockWrapper } from "../BlockWrapper.tsx";
 import styles from "./ListBlock.module.css";
 import type { BlockComponentProps } from "./types.ts";
@@ -14,11 +15,9 @@ export const ListBlock: React.FC<
     <BlockWrapper id={blockId} isSnug={block.snug} isNested={isNested}>
       <ListTag className={`${styles.listBlock} ${listClass}`}>
         {block.items.map((item, idx) => (
-          <li
-            key={idx}
-            className={`body-large-plus ${styles.listItem}`}
-            dangerouslySetInnerHTML={{ __html: item }}
-          />
+          <li key={idx} className={`body-large-plus ${styles.listItem}`}>
+            <Markdown text={item} inline />
+          </li>
         ))}
       </ListTag>
     </BlockWrapper>

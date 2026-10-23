@@ -4,7 +4,7 @@ import { blockRegistry } from "./blockRegistry.ts";
 import styles from "./ColumnsBlock.module.css";
 import type { BlockComponentProps } from "./types.ts";
 
-const TEXT_BLOCKS = new Set(["header", "paragraph", "list", "content-group"]);
+const TEXT_BLOCKS = new Set(["header", "paragraph", "list"]);
 
 export const ColumnsBlock: React.FC<
   BlockComponentProps<

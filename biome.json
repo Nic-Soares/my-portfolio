@@ -7,7 +7,15 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["client/**", "*.ts", "*.json", "!package-lock.json"]
+    "includes": [
+      "client/**",
+      "shared/**",
+      "server/**",
+      "ingest/**",
+      "*.ts",
+      "*.json",
+      "!package-lock.json"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -33,7 +41,7 @@
         "noInvalidGridAreas": "off"
       },
       "security": {
-        "noDangerouslySetInnerHtml": "warn"
+        "noDangerouslySetInnerHtml": "error"
       }
     }
   },
