@@ -14,6 +14,7 @@ import {
   type Locale,
 } from "../shared/catalog.ts";
 import type { PageTexts, Person } from "../shared/pageMeta.ts";
+import { toSummary } from "../shared/project.ts";
 import { jsonSchemas } from "../shared/schema/jsonSchemas.ts";
 import {
   fillHead,
@@ -87,25 +88,31 @@ export function createApp(options: AppOptions) {
     person: options.person,
   };
 
+  // Computed once from the built index.html. Without a build (API-only use
+  // during npm run dev) it has no hashes and is retried on the next request.
   let csp: Promise<string> | null = null;
   const contentSecurityPolicy = () => {
-    csp ??= assets.indexHtml().then(async (html) => {
-      const hashes = await inlineScriptHashes(html);
-      const media = mediaOrigin ? ` ${mediaOrigin}` : "";
-      return [
-        "default-src 'self'",
-        `script-src 'self' ${hashes.join(" ")}`.trim(),
-        "style-src 'self'",
-        `img-src 'self' data: blob:${media}`,
-        "font-src 'self'",
-        `media-src 'self' https:${media}`,
-        "connect-src 'self'",
-        "object-src 'none'",
-        "base-uri 'self'",
-        "form-action 'self'",
-        "frame-ancestors 'none'",
-      ].join("; ");
-    });
+    csp ??= assets
+      .indexHtml()
+      .catch(() => "")
+      .then(async (html) => {
+        if (!html) csp = null;
+        const hashes = await inlineScriptHashes(html);
+        const media = mediaOrigin ? ` ${mediaOrigin}` : "";
+        return [
+          "default-src 'self'",
+          `script-src 'self' ${hashes.join(" ")}`.trim(),
+          "style-src 'self'",
+          `img-src 'self' data: blob:${media}`,
+          "font-src 'self'",
+          `media-src 'self' https:${media}`,
+          "connect-src 'self'",
+          "object-src 'none'",
+          "base-uri 'self'",
+          "form-action 'self'",
+          "frame-ancestors 'none'",
+        ].join("; ");
+      });
     return csp;
   };
 
@@ -179,16 +186,7 @@ export function createApp(options: AppOptions) {
     const { catalog: loaded, locale } = result;
     return c.json({
       locale,
-      projects: loaded.projects[locale].map(
-        ({ slug, name, description, areas, context, hero }) => ({
-          slug,
-          name,
-          description,
-          areas,
-          context,
-          ...(hero && { hero }),
-        }),
-      ),
+      projects: loaded.projects[locale].map(toSummary),
     });
   });
 

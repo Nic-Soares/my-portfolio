@@ -10,6 +10,7 @@ import {
   type Locale,
   type SourceProject,
 } from "../shared/catalog.ts";
+import { structureDiff } from "../shared/parity.ts";
 import {
   type ProjectContent,
   type ProjectData,
@@ -94,6 +95,16 @@ async function readProject(
   }
   if (!contents.en && !problems.some((p) => p.startsWith("content.en"))) {
     problems.push("content.en.json is missing");
+  }
+  for (const locale of LOCALES) {
+    const content = contents[locale];
+    if (locale === "en" || !content || !contents.en) continue;
+    const diff = structureDiff(contents.en, content);
+    if (diff) {
+      problems.push(
+        `content.${locale}.json differs from content.en.json: ${diff}`,
+      );
+    }
   }
   if (problems.length > 0) throw problems;
 

@@ -1,35 +1,42 @@
-import { useCallback } from "react";
 import { useI18n } from "@/i18n/I18nProvider.tsx";
-import { projectsByLocale } from "../data/projects/index.ts";
+import type {
+  ProjectData,
+  ProjectSummary,
+} from "../data/project-data.types.ts";
+import {
+  projectRequest,
+  projectsRequest,
+  type Request,
+} from "../data/projectsApi.ts";
 
-// Projects in the current locale
-export function useProjectData() {
+// These suspend while loading (the nearest Suspense shows its fallback) and
+// throw to the nearest error boundary when the API fails. Settled data is
+// returned at once. Suspending by throwing the pending promise (not use()):
+// use() re-suspends a page whose router update runs as a transition.
+function read<T>(request: Request<T>): T {
+  if (request.status === "fulfilled") return request.value as T;
+  if (request.status === "rejected") throw request.error;
+  throw request.promise;
+}
+
+// Every published project in the current locale, in display order
+export function useProjects(): ProjectSummary[] {
   const { locale } = useI18n();
-  const projectsData = projectsByLocale[locale];
+  return read(projectsRequest(locale));
+}
 
-  const getAllProjects = useCallback(() => projectsData, [projectsData]);
+// One project in the current locale, or null when the slug doesn't exist
+export function useProject(slug: string): ProjectData | null {
+  const { locale } = useI18n();
+  return read(projectRequest(slug, locale));
+}
 
-  const getProjectBySlug = useCallback(
-    (slug: string) => projectsData.find((project) => project.slug === slug),
-    [projectsData],
-  );
-
-  // Neighbors in the data order (the project list order); null at the ends
-  const getAdjacentProjects = useCallback(
-    (slug: string) => {
-      const index = projectsData.findIndex((project) => project.slug === slug);
-      if (index === -1) return { previous: null, next: null };
-      return {
-        previous: projectsData[index - 1] ?? null,
-        next: projectsData[index + 1] ?? null,
-      };
-    },
-    [projectsData],
-  );
-
+// Neighbours in the list order; null at the ends
+export function adjacentProjects(projects: ProjectSummary[], slug: string) {
+  const index = projects.findIndex((project) => project.slug === slug);
+  if (index === -1) return { previous: null, next: null };
   return {
-    getAllProjects,
-    getProjectBySlug,
-    getAdjacentProjects,
+    previous: projects[index - 1] ?? null,
+    next: projects[index + 1] ?? null,
   };
 }

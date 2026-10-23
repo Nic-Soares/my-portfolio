@@ -16,6 +16,12 @@ export default defineConfig({
   },
   publicDir: "public",
   server: {
+    // The API and the published images come from the local server
+    // (npm run ingest:local && npm run serve, in another terminal)
+    proxy: {
+      "/api": "http://localhost:3000",
+      "/media": "http://localhost:3000",
+    },
     fs: {
       allow: [join(rootDir, "..")],
     },

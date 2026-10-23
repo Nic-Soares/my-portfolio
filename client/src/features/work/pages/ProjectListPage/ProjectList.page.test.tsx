@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { projectsRequest } from "@/features/work/data/projectsApi.ts";
 import ProjectListPage from "./ProjectList.page.tsx";
 
 // Desktop by default; `compact` makes the (width < 600px) query match
@@ -14,8 +15,11 @@ const stubViewport = (compact = false) =>
     })),
   );
 
-const renderAt = (url: string, compact = false) => {
+// The list is loaded first, so the page renders it at once (as on a revisit)
+// and the filters' URL updates run as they do in the browser
+const renderAt = async (url: string, compact = false) => {
   stubViewport(compact);
+  await projectsRequest("en").promise;
   return render(
     <MemoryRouter initialEntries={[url]}>
       <ProjectListPage />
@@ -32,14 +36,14 @@ const titles = () =>
 describe("ProjectListPage filters", () => {
   afterEach(() => vi.useRealTimers());
 
-  it("shows every project with counts", () => {
-    renderAt("/projects");
+  it("shows every project with counts", async () => {
+    await renderAt("/projects");
     expect(titles()).toEqual(["Spotify Web", "Reference"]);
     expect(screen.getByRole("button", { name: "All · 2" })).toBeInTheDocument();
   });
 
-  it("filters by the areas in the URL and toggles several at once", () => {
-    renderAt("/projects?area=design");
+  it("filters by the areas in the URL and toggles several at once", async () => {
+    await renderAt("/projects?area=design");
     expect(titles()).toEqual(["Reference"]);
 
     const backend = screen.getByRole("button", { name: "Backend · 1" });
@@ -55,9 +59,9 @@ describe("ProjectListPage filters", () => {
     expect(backend).toHaveAttribute("aria-pressed", "false");
   });
 
-  it("searches after typing pauses and clears", () => {
+  it("searches after typing pauses and clears", async () => {
     vi.useFakeTimers();
-    renderAt("/projects");
+    await renderAt("/projects");
     fireEvent.change(screen.getByPlaceholderText("Search projects"), {
       target: { value: "nothing like this" },
     });
@@ -72,8 +76,8 @@ describe("ProjectListPage filters", () => {
     expect(titles()).toEqual(["Spotify Web", "Reference"]);
   });
 
-  it("shows one tool at a time below Large", () => {
-    renderAt("/projects", true);
+  it("shows one tool at a time below Large", async () => {
+    await renderAt("/projects", true);
     expect(screen.queryByPlaceholderText("Search projects")).toBeNull();
 
     fireEvent.click(screen.getByRole("button", { name: /Search/ }));

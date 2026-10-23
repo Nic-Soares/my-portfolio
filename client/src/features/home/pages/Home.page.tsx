@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import HeroSection from "../components/HeroSection.tsx";
 import ProjectCarousel from "../components/ProjectCarousel.tsx";
 import ServicesStack from "../components/ServicesStack.tsx";
@@ -13,7 +14,10 @@ function HomePage() {
         <ServicesStack />
       </div>
       <div className={styles.home__carousel}>
-        <ProjectCarousel />
+        {/* The carousel's cell keeps its size while the projects load */}
+        <Suspense fallback={null}>
+          <ProjectCarousel />
+        </Suspense>
       </div>
     </div>
   );

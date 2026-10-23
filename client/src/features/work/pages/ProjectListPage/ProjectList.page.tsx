@@ -1,11 +1,11 @@
 import ProjectCardGrid from "../../components/ProjectList/ProjectCardGrid/ProjectCardGrid.tsx";
 import ProjectListHero from "../../components/ProjectList/ProjectListHero/ProjectListHero.tsx";
-import { useProjectData } from "../../hooks/useProjectData.ts";
+import { useProjects } from "../../hooks/useProjectData.ts";
 import { useProjectFilters } from "../../hooks/useProjectFilters.ts";
 import styles from "./ProjectList.page.module.css";
 
 const ProjectListPage = () => {
-  const projectsData = useProjectData().getAllProjects();
+  const projectsData = useProjects();
   const filters = useProjectFilters(projectsData);
 
   return (

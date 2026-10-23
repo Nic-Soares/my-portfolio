@@ -13,6 +13,7 @@ import { ThemeProvider } from "@/app/theme/ThemeProvider.tsx";
 import NavigationBar from "@/components/layout/NavigationBar/NavigationBar.tsx";
 import Sidebar from "@/components/layout/Sidebar/Sidebar.tsx";
 import TopAppBar from "@/components/layout/TopAppBar/TopAppBar.tsx";
+import LinearProgress from "@/components/ui/LinearProgress/LinearProgress.tsx";
 import { AboutPage } from "@/features/about/index.ts";
 import { HomePage as Home } from "@/features/home/index.ts";
 import ProjectListSkeleton from "@/features/work/components/ProjectList/Skeletons/ProjectListSkeleton.tsx";
@@ -34,7 +35,10 @@ function SiteShell() {
   const { t } = useI18n();
   return (
     <>
-      <RouteMeta />
+      {/* Page titles need the projects list; nothing to show while it loads */}
+      <Suspense fallback={null}>
+        <RouteMeta />
+      </Suspense>
       <a href="#main-content" className="skip-link">
         {t.layout.skipToContent}
       </a>
@@ -60,7 +64,20 @@ function SiteShell() {
                 </Suspense>
               }
             />
-            <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+            <Route
+              path="/projects/:slug"
+              element={
+                <Suspense
+                  fallback={
+                    <DelayedFallback>
+                      <LinearProgress label={t.work.loadingProject} />
+                    </DelayedFallback>
+                  }
+                >
+                  <ProjectDetailPage />
+                </Suspense>
+              }
+            />
             <Route path="/coming-soon" element={<UnderConstruction />} />
             <Route path="/404" element={<NotFound />} />
             {/* Dev-only, for reviewing the 500 state */}

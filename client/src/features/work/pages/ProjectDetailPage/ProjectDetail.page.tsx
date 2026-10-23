@@ -13,7 +13,7 @@ import {
 import ProjectDetailHero from "../../components/ProjectDetail/ProjectDetailHero/ProjectDetailHero.tsx";
 import ProjectIntro from "../../components/ProjectDetail/ProjectIntro/ProjectIntro.tsx";
 import type { ContentBlock } from "../../data/project-data.types.ts";
-import { useProjectData } from "../../hooks/useProjectData.ts";
+import { adjacentProjects, useProjects } from "../../hooks/useProjectData.ts";
 import { useProjectDetail } from "./hooks/useProjectDetail.ts";
 import styles from "./ProjectDetail.page.module.css";
 
@@ -21,11 +21,11 @@ import styles from "./ProjectDetail.page.module.css";
 // first tab and at the top of the page
 const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  return <ProjectDetail key={slug} slug={slug} />;
+  return <ProjectDetail key={slug} slug={slug ?? ""} />;
 };
 
-const ProjectDetail = ({ slug }: { slug: string | undefined }) => {
-  const { getAdjacentProjects } = useProjectData();
+const ProjectDetail = ({ slug }: { slug: string }) => {
+  const projects = useProjects();
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: runs once per project (the component is keyed by slug)
   useEffect(() => {
@@ -81,7 +81,7 @@ const ProjectDetail = ({ slug }: { slug: string | undefined }) => {
               )}
             </ContentLayout>
 
-            <ProjectPager {...getAdjacentProjects(project.slug)} />
+            <ProjectPager {...adjacentProjects(projects, project.slug)} />
           </div>
         </div>
       </div>

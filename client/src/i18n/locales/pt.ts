@@ -91,6 +91,7 @@ export const pt: Messages = {
       "Não encontramos projetos com esses filtros. Tente outra combinação ou limpe a pesquisa.",
     clearFilters: "Limpar filtros",
     loadingProjects: "Carregando projetos",
+    loadingProject: "Carregando projeto",
     moreProjects: "Mais projetos",
     previousProject: "Projeto anterior",
     nextProject: "Próximo projeto",

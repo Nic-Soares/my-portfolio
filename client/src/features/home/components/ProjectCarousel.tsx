@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Shape from "@/components/decor/Shape/Shape.tsx";
 import Button from "@/components/ui/Button/Button.tsx";
 import { FitLines } from "@/components/ui/FitLines/FitLines.tsx";
-import { useProjectData } from "@/features/work/hooks/useProjectData.ts";
+import { useProjects } from "@/features/work/hooks/useProjectData.ts";
 import { useI18n } from "@/i18n/I18nProvider.tsx";
 import styles from "./ProjectCarousel.module.css";
 
@@ -16,7 +16,7 @@ const SWIPE_THRESHOLD = 48; // px a finger must travel to change card
 const ProjectCarousel = () => {
   const navigate = useNavigate();
   const { t } = useI18n();
-  const projectsData = useProjectData().getAllProjects();
+  const projectsData = useProjects();
   const [current, setCurrent] = useState(0);
   const swipeStart = useRef<number | null>(null);
 

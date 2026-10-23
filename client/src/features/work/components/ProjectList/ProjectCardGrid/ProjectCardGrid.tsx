@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import type { ProjectData } from "../../../data/project-data.types.ts";
+import type { ProjectSummary } from "../../../data/project-data.types.ts";
 import NoProjectsFound from "../NoProjectsFound/NoProjectsFound.tsx";
 import ProjectCard from "../ProjectCard/ProjectCard.tsx";
 import styles from "./ProjectCardGrid.module.css";
 
 interface ProjectCardGridProps {
-  projects: ProjectData[];
+  projects: ProjectSummary[];
   onClearFilters: () => void;
 }
 

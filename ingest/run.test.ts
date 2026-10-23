@@ -224,3 +224,17 @@ describe("ingestion format", () => {
     expect(report.wrote).toBe(true);
   });
 });
+
+describe("translations", () => {
+  it("rejects a translation whose structure differs from English", async () => {
+    const file = join(portfolio("spotify-clone"), "content.pt.json");
+    const { readFile } = await import("node:fs/promises");
+    const content = JSON.parse(await readFile(file, "utf8"));
+    content.tabs[0].content.pop();
+    await writeFile(file, JSON.stringify(content));
+    const report = await run();
+    expect(report.rejected["local/spotify-clone"].join()).toMatch(
+      /content\.pt\.json differs from content\.en\.json: tabs\[0\]\.content has/,
+    );
+  });
+});

@@ -93,6 +93,7 @@ export const en = {
       "We couldn't find any projects with these filters. Try another combination or clear the search.",
     clearFilters: "Clear filters",
     loadingProjects: "Loading projects",
+    loadingProject: "Loading project",
     moreProjects: "More projects",
     previousProject: "Previous project",
     nextProject: "Next project",
