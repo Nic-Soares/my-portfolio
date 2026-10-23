@@ -78,9 +78,9 @@ const ProjectListHero = ({
 
   if (desktop) {
     return (
-      <header className={styles["projects__header"]}>
-        <h1 className={styles["projects__title"]}>{t.work.title}</h1>
-        <div className={styles["projects__actions"]}>
+      <header className={styles.projects__header}>
+        <h1 className={styles.projects__title}>{t.work.title}</h1>
+        <div className={styles.projects__actions}>
           <div className={styles["projects__button-group"]}>{filter}</div>
           <div className={styles["projects__search-bar"]}>{search(false)}</div>
         </div>
@@ -104,17 +104,17 @@ const ProjectListHero = ({
     // Escape bubbling up from the search or filter closes it
     // biome-ignore lint/a11y/noStaticElementInteractions: delegated key handling
     <header
-      className={`${styles["projects__header"]} ${styles["projects__header--bar"]}`}
+      className={`${styles.projects__header} ${styles["projects__header--bar"]}`}
       onKeyDown={(event) => {
         if (event.key === "Escape" && mode !== "selector") setMode("selector");
       }}
     >
-      <div className={styles["projects__row"]}>
-        <h1 className={styles["projects__title"]}>{t.work.title}</h1>
+      <div className={styles.projects__row}>
+        <h1 className={styles.projects__title}>{t.work.title}</h1>
 
         {mode === "selector" && (
           <ConnectedButtonGroup
-            className={styles["projects__selector"]}
+            className={styles.projects__selector}
             options={[
               {
                 label:
@@ -136,17 +136,17 @@ const ProjectListHero = ({
         )}
 
         {mode === "filter" && (
-          <div className={styles["projects__tool"]}>
+          <div className={styles.projects__tool}>
             {back}
             {/* Figma "Filter chips carousel": scrolls sideways if needed */}
-            <div className={styles["projects__carousel"]}>{filter}</div>
+            <div className={styles.projects__carousel}>{filter}</div>
           </div>
         )}
 
         {mode === "search" && !compact && (
-          <div className={styles["projects__tool"]}>
+          <div className={styles.projects__tool}>
             {back}
-            <div className={styles["projects__grow"]}>{search(true)}</div>
+            <div className={styles.projects__grow}>{search(true)}</div>
           </div>
         )}
 

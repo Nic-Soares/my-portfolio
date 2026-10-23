@@ -32,12 +32,14 @@
       (function () {
         var tags = { en: "en", pt: "pt-BR", es: "es" };
         var locale = null;
+        var languages;
+        var i;
         try {
           locale = localStorage.getItem("locale");
         } catch (e) {}
         if (!tags[locale]) {
-          var languages = navigator.languages || [navigator.language];
-          for (var i = 0; i < languages.length && !tags[locale]; i++) {
+          languages = navigator.languages || [navigator.language];
+          for (i = 0; i < languages.length && !tags[locale]; i++) {
             locale = String(languages[i] || "").toLowerCase().split("-")[0];
           }
         }

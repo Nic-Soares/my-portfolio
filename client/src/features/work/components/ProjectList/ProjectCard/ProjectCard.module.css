@@ -70,7 +70,6 @@
   bottom: 0;
   background: transparent;
   transition: background-color 0.2s ease;
-  border-radius: var(--md-sys-shape-corner-large);
   pointer-events: none;
   z-index: 1;
   border-radius: inherit;

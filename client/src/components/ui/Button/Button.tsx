@@ -53,7 +53,7 @@ const Button = ({
   if (!visible) return null;
 
   const className = [
-    styles["button"],
+    styles.button,
     styles[`button--${type}`],
     styles[`button--${size}`],
     styles[`button--${style}`],
@@ -88,10 +88,10 @@ const Button = ({
   };
 
   const content = (
-    <div className={styles["button__content"]}>
+    <div className={styles.button__content}>
       <div className={styles["button__state-layer"]}>
         {renderIcon()}
-        {label && <p className={styles["button__label"]}>{label}</p>}
+        {label && <p className={styles.button__label}>{label}</p>}
         {children}
       </div>
     </div>
