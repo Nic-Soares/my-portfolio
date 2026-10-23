@@ -18,7 +18,7 @@
 | `EP-13` Front-end fixes | ⏭️ **Next** — Nicolas's list of small fixes | code |
 | `EP-14` Backend foundation | Not started — from scratch (nothing in `server/` yet) | code (`server/`) |
 | `EP-15` Projects from GitHub | Not started — content, images and the sync job | code (`server/`) + project repos |
-| `EP-16` Contact and site services | Not started | code (`server/`) |
+| `EP-16` Site services | Not started — résumé and error reporting (contact form dropped 2026-10-23) | code (`server/`) |
 | `EP-17` Deploy | Not started — last, once the backend exists (needs a host that runs the server) | infra |
 
 ### Git workflow
@@ -115,7 +115,7 @@ EP-02 Design ────┘                          │            ├── E
                                                           EP-13 Front-end fixes ┤
                                                                                 │
                      EP-14 Backend foundation ── EP-15 Projects from GitHub ────┤
-                                    └──────────── EP-16 Contact & services ─────┴── EP-17 Deploy
+                                    └──────────── EP-16 Site services ──────────┴── EP-17 Deploy
 ```
 
 `EP-13` runs alongside the backend epics: it only touches the client.
@@ -821,6 +821,9 @@ Moved to `EP-17` (2026-10-23): the host must run the backend, so it comes after 
 
 ### ST-13.2 — Loose ends found on the way
 
+- [ ] "Copy e-mail" button next to the address in the About "Say hi!" strip (M3 icon button; design it in Figma first) — replaces the dropped contact form; `mailto:` stays
+- [ ] Build the e-mail address in JS at render time instead of shipping it ready in the HTML, so scrapers that don't run JS miss it
+
 - [ ] Delete unused images: `assets/images/inner-background.png` (10 MB) and `person-popout.png` (6 MB) are imported nowhere
 - [ ] Unused icons from TK-12.1.3: `assets/icons/{dashboard,github,linkedin,telegram}.svg` and `components/ui/GithubIcon`
 
@@ -864,13 +867,11 @@ Architecture proposal, "Segurança": https://claude.ai/artifact/S7nzn4A29CTYEGXc
 - **TK-14.4.2** — Security headers from the server
   - [ ] CSP: scripts and styles only from the site itself, images from the site and the media domain, `frame-ancestors 'none'`; checked with the browser console clean on every page
   - [ ] `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`
-- **TK-14.4.3** — Keys (five keys, six secret values; least privilege, one place each)
+- **TK-14.4.3** — Keys (three keys, four secret values; least privilege, one place each)
   - [ ] `PORTFOLIO_GITHUB_TOKEN` — fine-grained, read-only Contents + Metadata on your repos; Actions secret; 1-year expiry (EP-15)
   - [ ] `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` — Object Read & Write on the portfolio bucket only; Actions secret (EP-15)
-  - [ ] `RESEND_API_KEY` — sending access, your domain only; Worker secret (EP-16)
-  - [ ] `TURNSTILE_SECRET_KEY` — Worker secret (EP-16)
   - [ ] `CLOUDFLARE_API_TOKEN` — Workers Scripts: Edit only; Actions secret; 1-year expiry (EP-17)
-  - [ ] Not secret: `CLOUDFLARE_ACCOUNT_ID`, `R2_BUCKET` (Actions variables); `VITE_SITE_URL`, `VITE_TURNSTILE_SITE_KEY` (client build)
+  - [ ] Not secret: `CLOUDFLARE_ACCOUNT_ID`, `R2_BUCKET` (Actions variables); `VITE_SITE_URL` (client build)
   - [ ] Worker R2 binding: grants the whole bucket, so the Worker code only calls `get`/`head` — a test fails on any write call
   - [ ] No `repository_dispatch` token in project repos (it would need write access to the portfolio repo): hourly cron + manual button instead
   - [ ] `.env.example` lists every name; a runbook in `docs/runbooks/` says where each key is created and how to rotate it
@@ -916,15 +917,15 @@ Architecture proposal, "Segurança": https://claude.ai/artifact/S7nzn4A29CTYEGXc
 
 ---
 
-## EP-16 — Contact and site services
+## EP-16 — Site services
 
-**Goal:** what else the server does for the site. **Dependencies:** `EP-14`. **Size:** M.
+**Goal:** what else the server does for the site. **Dependencies:** `EP-14`. **Size:** S.
 
-- [ ] Contact form on About ("Say hi!" is a `mailto:` today): `POST /api/v1/contact`, validation, honeypot and rate limit, delivered by e-mail
 - [ ] Résumé download served by the API (one file per locale), so updating it needs no rebuild
 - [ ] `ErrorBoundary` reports to `POST /api/v1/errors` (was TK-12.4.2)
-- [ ] Privacy-respecting analytics: page views counted by the server, no cookies (was TK-12.4.2)
+- [ ] Privacy-respecting analytics: page views counted by the server, no cookies (was TK-12.4.2) — needs storage (decision 15)
 - [ ] About data (experience, stack, links) served by the API too — optional; only if it changes often enough to be worth it
+- ~~Contact form~~ — dropped 2026-10-23: the e-mail has to be visible on the page anyway, so a form hides nothing. With it went Resend, Turnstile, their two keys and `POST /api/v1/contact`. The "Copy e-mail" button is in ST-13.2
 
 ---
 
@@ -957,7 +958,7 @@ Architecture proposal, "Segurança": https://claude.ai/artifact/S7nzn4A29CTYEGXc
 
 | 11 | Image storage for project media — recommended: Cloudflare R2 (S3 API, free tier, no egress fees); alternative: keeping images in the portfolio repo | `EP-15` |
 | 12 | Manifest format — recommended: JSON per locale with a published JSON Schema (`.portfolio/project.<locale>.json`); alternative: Markdown with front matter (nicer to write prose, but the blocks — columns, tables, galleries — don't map cleanly) | `EP-15` |
-| 13 | Contact e-mail provider (e.g. Resend) | `EP-16` |
+| 13 | ~~Contact e-mail provider~~ — **dropped 2026-10-23** with the contact form | ~~`EP-16`~~ |
 | 14 | Server framework — recommended: Hono (small, built for Deno and other web-standard runtimes, typed routes); alternative: plain `Deno.serve` | `EP-14` |
 | 15 | Where synced projects live — recommended: no database at first (validated JSON in the same object storage as the images, cached in memory by the server); add a database only when something needs queries or writes (e.g. analytics) | `EP-14`, `EP-15` |
 | 16 | Deno as the repo toolchain — Deno joined Cloudflare (2026-10-09); runtime maintenance for about a year. Keep it for now, ADR to move the tasks to Node or Bun before ~2027-10; new code (`shared/`, `server/`, `ingest/`) uses web-standard APIs only | `EP-14` |
