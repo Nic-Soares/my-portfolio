@@ -2,7 +2,7 @@ import { act, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { DelayedFallback, withFloor } from "./lazyRoute.tsx";
 
-const after = <T,>(ms: number, value: T) =>
+const resolveAfter = <T,>(ms: number, value: T) =>
   new Promise<T>((resolve) => setTimeout(() => resolve(value), ms));
 
 describe("lazyRoute", () => {
@@ -24,14 +24,14 @@ describe("lazyRoute", () => {
 
   it("does not hold a fast load", async () => {
     const done = vi.fn();
-    withFloor(() => after(100, "page")).then(done);
+    withFloor(() => resolveAfter(100, "page")).then(done);
     await vi.advanceTimersByTimeAsync(100);
     expect(done).toHaveBeenCalledWith("page");
   });
 
   it("keeps a shown skeleton for at least 400ms", async () => {
     const done = vi.fn();
-    withFloor(() => after(200, "page")).then(done);
+    withFloor(() => resolveAfter(200, "page")).then(done);
     await vi.advanceTimersByTimeAsync(549);
     expect(done).not.toHaveBeenCalled();
     await vi.advanceTimersByTimeAsync(1);

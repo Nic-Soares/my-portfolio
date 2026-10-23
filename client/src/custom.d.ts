@@ -5,13 +5,8 @@ declare module "*.mp4" {
   export default src;
 }
 
-// Vite's compile-time env flags (statically replaced at build time)
-interface ImportMeta {
-  readonly env: {
-    readonly DEV: boolean;
-    readonly PROD: boolean;
-    readonly MODE: string;
-    // Site origin for canonical, Open Graph and the sitemap (see app/seo)
-    readonly VITE_SITE_URL?: string;
-  };
+// Project env vars on top of Vite's (DEV, PROD, MODE come from vite/client)
+interface ImportMetaEnv {
+  // Site origin for canonical, Open Graph and the sitemap (see app/seo)
+  readonly VITE_SITE_URL?: string;
 }

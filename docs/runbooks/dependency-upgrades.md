@@ -1,138 +1,96 @@
-# Runbook — Dependency and Toolchain Upgrades
+# Runbook — Dependency upgrades
 
-Objective guide for keeping Deno, `npm:` dependencies, and Biome up to
-date in this repository. `deno.json` is the single manifest (import map +
-tasks + compilerOptions) — there is no `package.json`.
+Objective guide for keeping Node, the npm dependencies and Biome up to date
+in this repository. `package.json` holds the ranges and the scripts;
+`package-lock.json` pins the exact versions (ADR-006).
+
+Dependabot opens weekly PRs for npm and GitHub Actions (minor and patch
+grouped). This runbook covers the manual path and major bumps.
 
 ---
 
-## 1. Check what's outdated
+## 1. See what's outdated
 
 ```bash
-deno outdated
+npm outdated
 ```
 
-Shows `Current` (installed) vs `Update` (compatible with the `deno.json`
-range) vs `Latest` (latest published version, may break the range).
+Shows `Current` (installed), `Wanted` (the newest version the range in
+`package.json` allows) and `Latest`.
 
----
-
-## 2. Update within the semver range (routine, low risk)
-
-Updates only `deno.lock`, without touching the ranges in `deno.json`:
+## 2. Check for vulnerabilities
 
 ```bash
-deno outdated --update
+npm audit
 ```
 
-Equivalent to `npm update`. Do this periodically (e.g. once per sprint)
-without much thought — it's the lowest-risk path.
+CI fails on `high` or `critical` (`npm audit --audit-level=high`). Fix with
+`npm audit fix` when the fix stays inside the declared ranges; otherwise
+bump the package that pulls in the vulnerable one.
 
----
-
-## 3. Update to the latest version (major/minor bump)
-
-Edits the ranges in `deno.json` and `deno.lock`:
+## 3. Routine update (within the declared ranges)
 
 ```bash
-# everything
-deno outdated --update --latest
-
-# a specific package (uses the import map alias, not the package name)
-deno outdated --update --latest "react*"
-deno outdated --update --latest vite
+npm update
 ```
 
-After a major bump (React, Vite, react-router), read the package's
-changelog before moving on to validation — breaking changes aren't
-caught by `deno check`.
+Updates `package-lock.json` only; `package.json` ranges stay as they are.
 
----
+## 4. Major update
 
-## 4. Update Deno itself
+Edit the range in `package.json` (or `npm install <pkg>@latest`), then read
+the package's changelog. Type errors from a major bump are caught by
+`npm run typecheck` (`tsc` 7).
+
+## 5. Update Node
+
+The version lives in `.nvmrc` and in `engines` in `package.json` (Node 26).
+CI reads `.nvmrc`. Locally, Node comes from Homebrew:
 
 ```bash
-deno --version          # check current version
+brew upgrade node
+node --version
 ```
 
-`deno upgrade` only works on a Deno binary built with the upgrade
-feature (the official install script / `deno_install`). On this
-machine Deno is installed via Homebrew, which ships a build without
-that feature — running `deno upgrade` fails with:
+Moving to a new major means updating `.nvmrc`, `engines` and `@types/node`
+together.
 
-```
-error: This deno was built without the "upgrade" feature. Please upgrade
-using the installation method originally used to install Deno.
-```
+## 6. Update Biome
 
-Update through Homebrew instead:
+Biome is pinned to an exact version (`@biomejs/biome` in `devDependencies`)
+because it adds rules and changes its config schema in minor releases:
 
-```bash
-brew update
-brew upgrade deno
-deno --version           # confirm the new version
-```
+1. `npm install --save-dev --save-exact @biomejs/biome@<version>`
+2. Update `$schema` in `biome.json` to the same version.
+3. Run `npm run check` and review the diff — new rules usually show up here.
 
-To pin a specific version through Homebrew, use `brew install deno@<version>`
-if that formula exists, or the official install script in a throwaway
-shell to check the version number first. Whichever method you used to
-install Deno is the one you must use to upgrade it — check with
-`which deno` if unsure (`/opt/homebrew/bin/deno` → Homebrew;
-`~/.deno/bin/deno` → official install script, where `deno upgrade`
-does work).
-
-The pinned runtime is Deno 2.x (see `README.md`). If you move to a new
-major, update the reference in `README.md` as well.
-
----
-
-## 5. Update Biome
-
-Biome isn't in the import map — it's invoked directly in the tasks via
-`npm:@biomejs/biome@2` (see `deno.json`). To update it:
-
-1. Change the pinned version in the three tasks (`lint`, `format`,
-   `check`) in [`deno.json`](../../deno.json).
-2. Update the `$schema` in [`biome.json`](../../biome.json) to the new
-   version (e.g. `https://biomejs.dev/schemas/2.x.x/schema.json`).
-3. Run `deno task check` and review the diff — Biome minor bumps often
-   ship new rules enabled by default.
-
----
-
-## 6. Validate after any update
+## 7. Validate after any update
 
 Run in this order, stopping at the first error:
 
 ```bash
-deno task typecheck   # deno check client/src/app/main.tsx
-deno task lint         # biome lint
-deno task build        # typecheck + vite build
-deno task dev           # manual smoke test in the browser
+npm run typecheck   # tsc 7
+npm test            # vitest
+npm run lint        # biome lint
+npm run build       # typecheck + vite build (+ SEO pages)
+npm run dev         # manual smoke test in the browser
 ```
 
-During `deno task dev`, walk through the main routes (`/`, `/projects`,
-`/projects/:slug`) and check the browser console — Vite/React bumps
-tend to produce warnings rather than build errors.
+During `npm run dev`, walk through the main routes (`/`, `/projects`,
+`/projects/:slug`, `/about`) and check the browser console — Vite/React
+bumps tend to produce warnings rather than build errors.
 
----
+## 8. Commit
 
-## 7. Commit
+- Always commit `package.json` and `package-lock.json` together.
+- Name what changed (e.g. `Bump vite to 9.x`) for an isolated major bump;
+  routine `npm update` bumps can share one commit.
 
-- Always commit `deno.json` and `deno.lock` together.
-- Write an objective message naming what changed (e.g. `Bump vite to
-  8.x`), not a generic "update dependencies" when it's an isolated
-  major bump.
-- Routine `deno outdated --update` bumps across several packages can be
-  grouped into a single commit.
-
-## 8. Rollback
-
-If something breaks after the bump:
+## 9. Rollback
 
 ```bash
-git checkout -- deno.json deno.lock
-deno install
+git checkout -- package.json package-lock.json
+npm ci
 ```
 
-Never edit `deno.lock` by hand — it's generated.
+Never edit `package-lock.json` by hand — it's generated.

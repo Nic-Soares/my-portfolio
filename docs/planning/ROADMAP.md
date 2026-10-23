@@ -16,7 +16,7 @@
 | `EP-04`…`EP-11` | ✅ Done — merged into `develop` (open items stay listed in each epic) | code |
 | `EP-12` Quality | 🟡 a11y, performance, SEO done on `feat/ep-12-quality` — merge into `develop`; deploy moved to `EP-18` | code |
 | `EP-13` Front-end fixes | ⏭️ **Next** — Nicolas's list of small fixes | code |
-| `EP-14` Node migration | Next after EP-13 — Deno → Node 26 + npm + `tsc` 7 (ADR-006) | code |
+| `EP-14` Node migration | ✅ Done on `chore/ep-14-node` (2026-10-23) — Node 26 + npm + `tsc` 7 (ADR-006); merge into `develop` | code |
 | `EP-15` Backend foundation | Not started — contracts, local Hono server, security baseline (ADR-007, ADR-008) | code (`shared/`, `server/`) |
 | `EP-16` Projects from GitHub | Not started — ingestion, images, R2, client reads the API | code (`ingest/`) + project repos |
 | `EP-17` Site services | Not started — résumé and error reporting | code (`server/`) |
@@ -823,6 +823,7 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
 ### ST-13.2 — Loose ends found on the way
 
 - [ ] "Copy e-mail" button next to the address in the About "Say hi!" strip (M3 icon button; design it in Figma first) — replaces the dropped contact form; `mailto:` stays
+- [ ] Stable keys instead of array indexes (10 places: `ColumnsBlock`, `ListBlock`, `TableBlock`, `ConnectedButtonGroup`, `ProjectDetail.page`, `ProjectGridSkeleton`), then `lint/suspicious/noArrayIndexKey` back to `error` (set to `warn` in EP-14)
 - [ ] Build the e-mail address in JS at render time instead of shipping it ready in the HTML, so scrapers that don't run JS miss it
 
 - [ ] Delete unused images: `assets/images/inner-background.png` (10 MB) and `person-popout.png` (6 MB) are imported nowhere
@@ -836,24 +837,24 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
 
 ### ST-14.1 — Toolchain
 
-- [ ] `package.json` + `package-lock.json` (npm, Node 26) replace `deno.json` + `deno.lock`; same versions as today
-- [ ] Scripts with the task names of today: `dev`, `build`, `preview`, `typecheck`, `test`, `lint`, `format`, `check`
-- [ ] `tsconfig.json` replaces the `compilerOptions`; `typecheck` runs `tsc` 7 (`--noEmit`); path aliases `@/` and `@assets/`, explicit `.ts`/`.tsx` imports kept
-- [ ] `client/vite.config.ts` (`jsr:@std/path`) and `client/seo.plugin.ts` (`Deno.*`) on Node APIs; `custom.d.ts` env types from `vite/client`
-- [ ] Biome pinned as a dev dependency (2.6.2)
+- [x] `package.json` + `package-lock.json` (npm, Node 26) replace `deno.json` + `deno.lock`; same versions as today. `@material/web` and `clsx` dropped — imported nowhere
+- [x] Scripts with the task names of today: `dev`, `build`, `preview`, `typecheck`, `test`, `lint`, `format`, `check`
+- [x] `tsconfig.json` replaces the `compilerOptions`; `typecheck` runs `tsc` 7 (`--noEmit`); path aliases `@/` and `@assets/`, explicit `.ts`/`.tsx` imports kept. `tsc` now also checks the tests and the client config files (`deno check` only checked `main.tsx`'s graph). It caught `layout/sidebar/` and `layout/container/` tracked in lowercase while the disk and every sibling folder are PascalCase — renamed to `Sidebar/` and `Container/`
+- [x] `client/vite.config.ts` (`jsr:@std/path`) and `client/seo.plugin.ts` (`Deno.*`) on Node APIs; `custom.d.ts` extends `ImportMetaEnv` from `vite/client`
+- [x] Biome pinned as a dev dependency (2.6.2). With a `package.json`, Biome switched on its React/test rules: `noDangerouslySetInnerHtml` (8, removed by TK-15.3.1) and `noArrayIndexKey` (10, ST-13.2) set to `warn` until fixed; one false positive (`noDuplicateTestHooks`, a helper named `after`) fixed by renaming it
 
 ### ST-14.2 — CI and upkeep
 
-- [ ] CI: `actions/setup-node` with npm cache, `npm ci`, then typecheck, test, lint, build, `npm audit --audit-level=high`
-- [ ] Dependabot for npm and GitHub Actions (weekly, grouped minor/patch)
-- [ ] `docs/runbooks/dependency-upgrades.md` and README on npm
-- [ ] `.nvmrc` / `engines` pin Node 26
+- [x] CI: `actions/setup-node` with npm cache, `npm ci`, then typecheck, test, lint, build, `npm audit --audit-level=high`
+- [x] Dependabot for npm and GitHub Actions (weekly, grouped minor/patch, into `develop`)
+- [x] `docs/runbooks/dependency-upgrades.md` and README on npm
+- [x] `.nvmrc` / `engines` pin Node 26
 
 ### ST-14.3 — Proof it changed nothing
 
-- [ ] 82 tests, lint, typecheck and build pass
-- [ ] The build emits the same files as the Deno build (names and sizes, except hashes) — 7 SEO pages, sitemap and robots included
-- [ ] Preview checked on Home, Projects, Spotify Web and About
+- [x] 82 tests, lint, typecheck and build pass; `npm audit`: 0 vulnerabilities
+- [x] The build emits the same files as the Deno build (names and sizes, except hashes) — 7 SEO pages, sitemap and robots included. Two expected differences: CSS Module class hashes (they come from the file path, and `sidebar/` became `Sidebar/`) and a 2-byte CJS interop flag in one chunk
+- [x] Preview checked on Home, Projects, Spotify Web and About: right title and `h1`, no console errors
 
 ---
 
@@ -883,7 +884,7 @@ Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after 
   - [ ] Minimal inline Markdown (`**bold**`, `*italic*`, `` `code` ``, `[link](https://…)`, lists) rendered to React elements; `dangerouslySetInnerHTML` removed from `ParagraphBlock`, `ListBlock`, `TableBlock` and `ImageBlock`
   - [ ] Migrate the bundled content (today: `<strong>` ×33, `<p>` ×21, `<li>` ×6, `<ol>` ×3, `<a>` ×3)
   - [ ] Schema rejects tags (`<`) and non-`https` links; the `content-group` block leaves the public format
-  - [ ] Test: no `dangerouslySetInnerHTML` left in `client/src`
+  - [ ] Guard: `lint/security/noDangerouslySetInnerHtml` back to `error` in `biome.json` (set to `warn` in EP-14, when Biome's React rules switched on with `package.json`)
 - **TK-15.3.2** — Security headers from the server
   - [ ] CSP: scripts and styles only from the site, images from the site and the media domain, `frame-ancestors 'none'`; browser console clean on every page
   - [ ] `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`
