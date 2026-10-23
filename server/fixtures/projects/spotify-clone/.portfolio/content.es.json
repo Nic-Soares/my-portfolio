@@ -123,27 +123,12 @@
         {
           "type": "table",
           "id": "tech-stack",
-          "headers": [
-            "Capa",
-            "Tecnología"
-          ],
+          "headers": ["Capa", "Tecnología"],
           "rows": [
-            [
-              "Front end",
-              "React 19 · TypeScript · Vite · React Router"
-            ],
-            [
-              "Back end",
-              "Node.js · Express 4 · TypeScript"
-            ],
-            [
-              "Base de datos",
-              "MongoDB Atlas"
-            ],
-            [
-              "Hosting",
-              "Render (un solo servicio, front end + API)"
-            ]
+            ["Front end", "React 19 · TypeScript · Vite · React Router"],
+            ["Back end", "Node.js · Express 4 · TypeScript"],
+            ["Base de datos", "MongoDB Atlas"],
+            ["Hosting", "Render (un solo servicio, front end + API)"]
           ]
         },
         {
