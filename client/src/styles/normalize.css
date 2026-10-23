@@ -96,6 +96,7 @@ a {
 abbr[title] {
   border-bottom: none; /* 1 */
   text-decoration: underline; /* 2 */
+  /* biome-ignore lint/suspicious/noDuplicateProperties: fallback for browsers without the shorthand */
   text-decoration: underline dotted; /* 2 */
 }
 

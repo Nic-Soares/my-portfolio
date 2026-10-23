@@ -2,6 +2,8 @@ import type { ProjectData } from "../project-data.types.ts";
 
 export const referenceData: ProjectData = {
   slug: "reference",
+  // Placeholder (Material 3 docs copy), not a real case study
+  noindex: true,
   name: "Reference",
   description: "Elevation is the distance between two surfaces on the z-axis",
   areas: ["Design", "Frontend"],

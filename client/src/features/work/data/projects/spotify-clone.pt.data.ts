@@ -1,9 +1,5 @@
-import architectureDiagram from "@assets/images/projects/spotify-web/architecture.webp";
-import heroImage from "@assets/images/projects/spotify-web/hero.webp";
-import screenArtist from "@assets/images/projects/spotify-web/screen-artist.webp";
-import screenHome from "@assets/images/projects/spotify-web/screen-home.webp";
-import screenPlayer from "@assets/images/projects/spotify-web/screen-player.webp";
 import type { ProjectData } from "../project-data.types.ts";
+import { spotifyWebMedia as media } from "./spotify-web.media.ts";
 
 // pt-BR translation of spotify-clone.data.ts
 export const projectsDataPt: ProjectData[] = [
@@ -25,7 +21,7 @@ export const projectsDataPt: ProjectData[] = [
     ],
     hero: {
       type: "image",
-      src: heroImage,
+      ...media.hero,
       alt: "Ilustração de um homem de fones de ouvido cuidando de um canteiro, cercado por notas musicais",
     },
     tabs: [
@@ -53,7 +49,7 @@ export const projectsDataPt: ProjectData[] = [
               [
                 {
                   type: "image",
-                  src: screenHome,
+                  ...media.screenHome,
                   alt: "Tela inicial com os principais artistas e músicas",
                   aspectRatio: "3 / 2",
                   caption: "Início — principais artistas & músicas",
@@ -62,7 +58,7 @@ export const projectsDataPt: ProjectData[] = [
               [
                 {
                   type: "image",
-                  src: screenArtist,
+                  ...media.screenArtist,
                   alt: "Tela do artista com a discografia",
                   aspectRatio: "3 / 2",
                   caption: "Artista — discografia",
@@ -71,7 +67,7 @@ export const projectsDataPt: ProjectData[] = [
               [
                 {
                   type: "image",
-                  src: screenPlayer,
+                  ...media.screenPlayer,
                   alt: "Tela do player com a faixa tocando agora",
                   aspectRatio: "3 / 2",
                   caption: "Player — tocando agora",
@@ -102,7 +98,7 @@ export const projectsDataPt: ProjectData[] = [
           },
           {
             type: "image",
-            src: architectureDiagram,
+            ...media.architecture,
             alt: "Diagrama de arquitetura: o navegador carrega o build do React, que chama a API em Express; o Express lê as coleções de artistas e músicas do MongoDB Atlas e devolve o index.html para as rotas do lado do cliente",
             aspectRatio: "3 / 2",
           },

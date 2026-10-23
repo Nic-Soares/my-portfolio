@@ -16,8 +16,8 @@ export const en = {
     footer: {
       nav: "Footer",
       tagline:
-        "Full-stack developer building real products end-to-end — from interface to database.",
-      role: "Fullstack Developer",
+        "I turn data into clear answers and AI into tools people actually use.",
+      role: "Data Analyst & Applied AI Engineer",
       copyright: "Copyright",
       copyrightLine: (year: number, owner: string, role: string) =>
         `${year} ${owner}. ${role}`,
@@ -114,6 +114,10 @@ export const en = {
     speaks: "Speaks",
     sayHi: "Say hi!",
     downloadCv: "Download CV",
+  },
+  seo: {
+    projectsDescription:
+      "Case studies in data, automation and full-stack development, from interface to database.",
   },
   system: {
     backHome: "Back to home",

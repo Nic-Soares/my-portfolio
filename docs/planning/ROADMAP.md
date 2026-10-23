@@ -1,8 +1,8 @@
 # Development Roadmap — Portfolio
 
 **Design source:** [Figma — Portfólio](https://www.figma.com/design/5Uw1Nxn0DgG9SU3z0Vb4vh/Portf%C3%B3lio)
-**Repository:** `my-portfolio` (Deno 2 + Vite 7 + React 19 + react-router 7 + CSS Modules + Biome)
-**Last updated:** 2026-10-18
+**Repository:** `my-portfolio` (Deno 2 → Node in EP-14 + Vite 8 + React 19 + react-router 7 + CSS Modules + Biome)
+**Last updated:** 2026-10-23
 
 ---
 
@@ -13,9 +13,14 @@
 | `EP-01` Baseline | ✅ Done — merged into `develop` (`4eca4d3`) | code |
 | `EP-02` Design source | ✅ Done in Figma — code follow-ups moved to `EP-08`/`EP-09` | Figma (`Portfólio`) + this file |
 | `EP-03` Tokens | ✅ Done — merged into `develop` 2026-10-18 | code |
-| `EP-04` Components | ⏭️ **Next** | code |
-| `EP-05`…`EP-12` | Not started | code |
-| `EP-13` Backend | 🟡 Built, not merged — branch `feat/server-express-api` | code (`server/`) |
+| `EP-04`…`EP-11` | ✅ Done — merged into `develop` (open items stay listed in each epic) | code |
+| `EP-12` Quality | 🟡 a11y, performance, SEO done on `feat/ep-12-quality` — merge into `develop`; deploy moved to `EP-18` | code |
+| `EP-13` Front-end fixes | ⏭️ **Next** — Nicolas's list of small fixes | code |
+| `EP-14` Node migration | Next after EP-13 — Deno → Node 26 + npm + `tsc` 7 (ADR-006) | code |
+| `EP-15` Backend foundation | Not started — contracts, local Hono server, security baseline (ADR-007, ADR-008) | code (`shared/`, `server/`) |
+| `EP-16` Projects from GitHub | Not started — ingestion, images, R2, client reads the API | code (`ingest/`) + project repos |
+| `EP-17` Site services | Not started — résumé and error reporting | code (`server/`) |
+| `EP-18` Deploy | Not started — Cloudflare Workers, R2, domain | infra |
 
 ### Git workflow
 
@@ -107,9 +112,14 @@ EP-02 Design ────┘                          │            ├── E
                                                          └── EP-10 System States
                                                                   │
                                                     EP-11 i18n ───┴── EP-12 Quality
-
-EP-13 Backend runs on its own track (no screen depends on it yet).
+                                                                                │
+                                                          EP-13 Front-end fixes ┤
+                                                                                │
+   EP-14 Node ── EP-15 Backend foundation ── EP-16 Projects from GitHub ───────┤
+                                    └──────── EP-17 Site services ─────────────┴── EP-18 Deploy
 ```
+
+`EP-13` runs alongside the backend epics: it only touches the client. Backend architecture: ADR-006 to ADR-009 and the approved proposal https://claude.ai/artifact/S7nzn4A29CTYEGXcjrYgoW
 
 ---
 
@@ -751,76 +761,200 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 
 ---
 
-## EP-12 — Quality, accessibility, performance, and deploy
+## EP-12 — Quality, accessibility, and performance
 
 **Dependencies:** all of the above. **Size:** M.
 
 ### ST-12.1 — Accessibility
 
 - **TK-12.1.1** — Audit
-  - [ ] Keyboard-only navigation across the 4 pages
-  - [ ] Visible focus on every interactive element
-  - [ ] Contrast in both themes (watch text over light containers)
-  - [ ] Screen reader across states and navigation
+  - Audited 2026-10-21 with axe-core and a Tab walk (Home, Projects, Project Detail, About, 404; Light and Dark; 1492 and 402): 0 axe violations after the fixes below
+  - [x] Keyboard-only navigation across the 4 pages — every control is reachable; the search's clear (×) was a `div` with `tabindex=-1`, now a `<button>`
+  - [x] Visible focus on every interactive element — 3px Secondary ring everywhere; the SearchBar had none (only its elevation), now it has the ring too
+  - [x] Contrast in both themes (watch text over light containers) — no axe contrast failures in Light or Dark
+  - [x] Screen reader across states and navigation (automated) — one `<main>` landmark (the shell; Project Detail had its own, now a `div`), no duplicate banners, card titles `h2` after the page `h1`, display-only buttons (Project Card tags) render as `span` so no control sits inside another
+  - [ ] Screen reader, manual pass (Nicolas): VoiceOver over the 4 pages and the language menu
 - **TK-12.1.2** — Motion
-  - [ ] `prefers-reduced-motion` respected by decor, skeleton, progress, and carousel
+  - [x] `prefers-reduced-motion` respected by decor, skeleton, progress, and carousel — verified with the browser emulating it: no animation runs on any page (the logo marquee, carousel and progress already handled it; added the search clear icon and the SummaryNav smooth scroll)
   - [ ] Idea (2026-10-19, design in Figma first): animate the decor shapes site-wide — small shapes float a few px (~6s, staggered), main shape rotates very slowly; still under reduced motion. Goes into `StateIllustration` (all 4 states) and `HeroDecor` together
 - **TK-12.1.3** — Decorative and brand SVGs
-  - [ ] Add `<title>` (or `aria-hidden="true"` for purely decorative ones) to every SVG flagged by `deno task check`'s `lint/a11y/noSvgWithoutTitle`: favicon, icons (`dashboard`, `github`, `linkedin`, `telegram`), the M3 shape set (`forms.svg`), and the partner logos (`AlphaWave`, `Boltshift`, `CoreOS`, etc.) — pre-existing, unrelated to `ST-01.0`
+  - [x] Add `<title>` (or `aria-hidden="true"` for purely decorative ones) to every SVG flagged by `deno task check`'s `lint/a11y/noSvgWithoutTitle` — the inline SVGs (About education icon, `GithubIcon`) are `aria-hidden`; asset files get their name or `aria-hidden` where they are used (CompanyLogo, Footer), so the rule is off for `assets/**/*.svg` and `public/**/*.svg` (biome.json override). No a11y lint finding left
+  - [ ] Unused assets to delete or use (Nicolas): `assets/icons/{dashboard,github,linkedin,telegram}.svg` and `components/ui/GithubIcon` are imported nowhere
 
 ### ST-12.2 — Performance
 
 - **TK-12.2.1** — Cost of the decor
-  - [ ] Measure the paint impact of the large `filter: blur()` uses
-  - [ ] Consider pre-rendering as an image if the cost is high
+  - [x] Measure the paint impact of the large `filter: blur()` uses — Lighthouse (mobile, throttled): TBT 0 ms and CLS ≤ 0.005 on every page; the decor doesn't show up as a cost
+  - [x] Consider pre-rendering as an image if the cost is high — not needed
 - **TK-12.2.2** — Assets
-  - [ ] Responsive photo and project media, in a modern format
-  - [ ] Lazy load below the fold
-  - [ ] Bundle budget and per-route code splitting
+  - [x] Responsive photo and project media, in a modern format — webp already; Spotify screens and hero now 800 + 1600px with `srcset`/`sizes` (`spotify-web.media.ts`, shared by the three locales): page weight 683 → 425 KB
+  - [x] Lazy load below the fold — case-study images `loading="lazy"`; the project hero `fetchpriority="high"` (it is the LCP)
+  - [x] Material Symbols cut to the 13 icons in use and self-hosted (`public/fonts/material-symbols`, regeneration URL in `styles/fonts.css`): 3.9 MB → 14 KB and no render-blocking Google CSS; `src/test/iconFont.test.ts` fails when an icon is missing from the file
+  - [ ] Bundle budget and per-route code splitting — one 136 KB (gzip) chunk today, mostly the three locales' content; worth splitting with the content (load a locale's data on demand) once there are more projects
 - **TK-12.2.3** — Lighthouse
-  - [ ] Baseline across the 4 pages
-  - [ ] Target and fixes
+  - [x] Baseline across the 4 pages (2026-10-21, production build, median of 3): mobile perf 94–97 (Spotify 85 after its first fix), desktop 100; accessibility and best practices 100; SEO 82 (no meta description / robots.txt — ST-12.3)
+  - [x] Target and fixes — target ≥ 90 mobile, 100 desktop. After: Home 98, Projects 96, About 98, Spotify Web 90 (LCP 3.3 s: the hero is found only after the JS runs, inherent to the SPA); desktop 100 everywhere. FCP mobile 2.0–2.3 → 1.7–2.1 s
 
 ### ST-12.3 — SEO and metadata
 
 - **TK-12.3.1** — Per-route meta
-  - [ ] Title and description
-  - [ ] Open Graph and Twitter card
-  - [ ] `sitemap.xml` and `robots.txt`
-  - [ ] `Person` JSON-LD
+  - [x] Title and description — `app/seo/pageMeta.ts` is the one source: Home `Name — Role`, other pages `Page · Name`; descriptions reuse page copy (hero line, About bio, project description), plus `seo.projectsDescription` in en/pt/es. `RouteMeta` keeps `<head>` in sync on navigation and language change
+  - [x] Open Graph and Twitter card — link previews don't run JS, so `client/seo.plugin.ts` writes one HTML per route at build time (`about.html`, `projects/spotify-clone.html`…, served at the clean URL) with that route's tags, in English. `/404`, `/coming-soon` and the Reference placeholder (`noindex` in its data) are `noindex`
+  - [x] `sitemap.xml` and `robots.txt` — generated by the same plugin from the routes and project data; the sitemap lists only indexable pages
+  - [x] `Person` JSON-LD — Home and About, from `aboutData` (social links join `sameAs` once they are real URLs)
+  - [ ] Set `VITE_SITE_URL` to the real origin (EP-18) — until then canonical, Open Graph and the sitemap point at `http://localhost:4173`, and the build warns
+  - [ ] Share image 1200×630 (design in Figma first) — the 512px app icon with a `summary` card for now (EP-18; project share images come from ingestion, EP-16)
+  - [ ] Server: serve `/about` from `about.html` (clean URLs) and `404.html` with a 404 status (EP-15, ST-15.2)
 
 ### ST-12.4 — Deploy
 
-- **TK-12.4.1** — Pipeline
-  - [ ] Choose the host (Deno Deploy is the natural fit for the runtime)
-  - [ ] Automatic deploy on the main branch
-  - [ ] Preview per PR
-  - [ ] SPA fallback for client-side routes
-- **TK-12.4.2** — Domain and observability
-  - [ ] Custom domain and HTTPS
-  - [ ] Privacy-respecting analytics
-  - [ ] `ErrorBoundary` error reporting
+Moved to `EP-18` (2026-10-23): the host must run the backend, so it comes after `EP-14`–`EP-17`.
 
 ---
 
-## EP-13 — Backend API
+## EP-13 — Front-end fixes
 
-**Goal:** the portfolio's own backend (`server/`, Express + MongoDB Atlas), kept healthy alongside the client.
-**Dependencies:** none (independent track). **Size:** S. **Branch:** `feat/server-express-api`.
+**Goal:** a slot for the small client fixes Nicolas collects while using the site. **Dependencies:** none. **Size:** S per item. **Branch:** `fix/ep-13-front-fixes` off `develop`.
 
-### ST-13.1 — Express API and static hosting
+### ST-13.1 — Fix list
 
-- **TK-13.1.1** — First version (built, waiting for merge)
-  - [x] `GET /api/artists` and `GET /api/songs` from the `artists`/`songs` collections
-  - [x] Serve the React build with an SPA refresh fallback
-  - [x] `start`, `typecheck`, and `test` tasks cover `server/`; 2 `deno test` cases pass
-  - [x] `.env.example` documented; local `.env*` ignored
-  - [x] Biome now checks `server/**` (it was outside `files.includes`)
-  - [ ] Commit on `feat/server-express-api` and merge into `develop`
-- **TK-13.1.2** — Run it in CI
-  - [ ] CI already runs `deno task typecheck`/`test`, which now include `server/` — confirm the job passes without MongoDB credentials
-- **TK-13.1.3** — Fit with the deploy plan
-  - [ ] Decide how the Express server relates to the `EP-12` host choice (decision 6)
+- [ ] (filled from Nicolas's list — one checkbox per fix, each a small commit)
+
+### ST-13.2 — Loose ends found on the way
+
+- [ ] "Copy e-mail" button next to the address in the About "Say hi!" strip (M3 icon button; design it in Figma first) — replaces the dropped contact form; `mailto:` stays
+- [ ] Build the e-mail address in JS at render time instead of shipping it ready in the HTML, so scrapers that don't run JS miss it
+
+- [ ] Delete unused images: `assets/images/inner-background.png` (10 MB) and `person-popout.png` (6 MB) are imported nowhere
+- [ ] Unused icons from TK-12.1.3: `assets/icons/{dashboard,github,linkedin,telegram}.svg` and `components/ui/GithubIcon`
+
+---
+
+## EP-14 — Node migration
+
+**Goal:** the repo runs on Node instead of Deno, with nothing else changing (ADR-006). **Dependencies:** none. **Size:** S (about half a day). **Branch:** `chore/ep-14-node`.
+
+### ST-14.1 — Toolchain
+
+- [ ] `package.json` + `package-lock.json` (npm, Node 26) replace `deno.json` + `deno.lock`; same versions as today
+- [ ] Scripts with the task names of today: `dev`, `build`, `preview`, `typecheck`, `test`, `lint`, `format`, `check`
+- [ ] `tsconfig.json` replaces the `compilerOptions`; `typecheck` runs `tsc` 7 (`--noEmit`); path aliases `@/` and `@assets/`, explicit `.ts`/`.tsx` imports kept
+- [ ] `client/vite.config.ts` (`jsr:@std/path`) and `client/seo.plugin.ts` (`Deno.*`) on Node APIs; `custom.d.ts` env types from `vite/client`
+- [ ] Biome pinned as a dev dependency (2.6.2)
+
+### ST-14.2 — CI and upkeep
+
+- [ ] CI: `actions/setup-node` with npm cache, `npm ci`, then typecheck, test, lint, build, `npm audit --audit-level=high`
+- [ ] Dependabot for npm and GitHub Actions (weekly, grouped minor/patch)
+- [ ] `docs/runbooks/dependency-upgrades.md` and README on npm
+- [ ] `.nvmrc` / `engines` pin Node 26
+
+### ST-14.3 — Proof it changed nothing
+
+- [ ] 82 tests, lint, typecheck and build pass
+- [ ] The build emits the same files as the Deno build (names and sizes, except hashes) — 7 SEO pages, sitemap and robots included
+- [ ] Preview checked on Home, Projects, Spotify Web and About
+
+---
+
+## EP-15 — Backend foundation
+
+**Goal:** contracts and a local server that serves the site and the projects, with the security baseline. Runs on your machine, no cloud (ADR-007, ADR-008). **Dependencies:** `EP-14`. **Size:** M. **Branch:** `feat/ep-15-backend`.
+
+### ST-15.1 — Contracts (`shared/`)
+
+- [ ] Zod schema for `project.json` and `content.<locale>.json`; the TypeScript types come from it and replace `project-data.types.ts`
+- [ ] JSON Schema exported from the Zod schema (published later by the server at `/schema/*.v1.json`)
+- [ ] `pageMeta.ts` moves from `client/src/app/seo` to `shared/`
+- [ ] Spotify Web converted to the new format as a local `.portfolio/` fixture — the first catalog
+
+### ST-15.2 — Server (`server/`)
+
+- [ ] Hono app taking a `CatalogSource` (`load()`); local entry reads a folder on disk; tested with `app.request()` in Vitest
+- [ ] `GET /api/v1/health`, `/api/v1/projects?locale=`, `/api/v1/projects/:slug?locale=` — summaries in order, full project, the `locale` actually served, ETag = catalog version
+- [ ] Serves the client build: clean URLs (`/about` → `about.html`), `404.html` with a 404 status, SPA fallback
+- [ ] Per-request `<head>`: fills the `seo:start/seo:end` block from the catalog, so new projects need no rebuild; `sitemap.xml` and `robots.txt` move to the server (the build plugin goes)
+- [ ] Cache headers: hashed `/assets/*` immutable for a year, HTML `no-cache`
+- [ ] JSON errors in one shape, request validation with Zod, structured logs with a request id
+
+### ST-15.3 — Security baseline
+
+- **TK-15.3.1** — Text as Markdown, no raw HTML (ADR-008)
+  - [ ] Minimal inline Markdown (`**bold**`, `*italic*`, `` `code` ``, `[link](https://…)`, lists) rendered to React elements; `dangerouslySetInnerHTML` removed from `ParagraphBlock`, `ListBlock`, `TableBlock` and `ImageBlock`
+  - [ ] Migrate the bundled content (today: `<strong>` ×33, `<p>` ×21, `<li>` ×6, `<ol>` ×3, `<a>` ×3)
+  - [ ] Schema rejects tags (`<`) and non-`https` links; the `content-group` block leaves the public format
+  - [ ] Test: no `dangerouslySetInnerHTML` left in `client/src`
+- **TK-15.3.2** — Security headers from the server
+  - [ ] CSP: scripts and styles only from the site, images from the site and the media domain, `frame-ancestors 'none'`; browser console clean on every page
+  - [ ] `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`
+- **TK-15.3.3** — Keys (three keys, four secret values; least privilege, one place each)
+  - [ ] `PORTFOLIO_GITHUB_TOKEN` — fine-grained, read-only Contents + Metadata on your repos; Actions secret; 1-year expiry (EP-16)
+  - [ ] `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` — Object Read & Write on the portfolio bucket only; Actions secret (EP-16)
+  - [ ] `CLOUDFLARE_API_TOKEN` — Workers Scripts: Edit only; Actions secret; 1-year expiry (EP-18)
+  - [ ] Not secret: `CLOUDFLARE_ACCOUNT_ID`, `R2_BUCKET` (Actions variables); `VITE_SITE_URL` (client build)
+  - [ ] Worker R2 binding grants the whole bucket, so the Worker only calls `get`/`head` — a test fails on any write call
+  - [ ] No `repository_dispatch` token in project repos: hourly cron + manual button instead
+  - [ ] `.env.example` lists every name; `docs/runbooks/keys.md` says where each key is created and how to rotate it
+- **TK-15.3.4** — Rules for public repositories (implemented in EP-16)
+  - [ ] Discovery: only repos owned by you with the `portfolio` topic, forks excluded
+  - [ ] Read only the default branch; never PRs or other branches
+  - [ ] The ingest workflow never uses `pull_request_target`; triggers are `schedule` and `workflow_dispatch` only
+  - [ ] Secret scanning and push protection on in the portfolio and project repos
+  - [ ] `draft: true` hides a project from the site, not from the repo — sensitive drafts go in a private repo
+
+---
+
+## EP-16 — Projects from GitHub
+
+**Goal:** adding a project means adding a `.portfolio/` folder to its repository; the portfolio picks it up within an hour (ADR-007, ADR-008). **Dependencies:** `EP-15`. **Size:** L.
+
+### ST-16.1 — Ingestion (`ingest/` + `.github/workflows/ingest.yml`)
+
+- [ ] Hourly `schedule` + `workflow_dispatch`; lists your repos with the `portfolio` topic (no forks), reads `.portfolio/` on the default branch with ETags
+- [ ] Validates with the shared schema; a missing `pt`/`es` falls back to English; an invalid project keeps its last good version
+- [ ] Writes only when something changed; publishes `catalog/<version>.json`, then points `catalog/current.json` at it
+- [ ] Run summary in the job: published, rejected (file, field, error), fallbacks
+
+### ST-16.2 — Images
+
+- [ ] `sharp`: WebP 800 and 1600px, a 1200×630 JPG share image per project (from the hero when the repo has none), originals up to 10 MB
+- [ ] File names by content hash under `media/`, cache for a year; the catalog carries `src`/`srcSet`/`sizes`/width/height
+- [ ] Videos stay on their own host (link only)
+
+### ST-16.3 — R2 and the server
+
+- [ ] Bucket and the media domain; `CatalogSource` for R2 (binding), with the catalog cached in memory (60 s) and the last good copy kept if R2 fails
+- [ ] Measure CPU per request against the free plan's 10 ms
+
+### ST-16.4 — Client reads the API
+
+- [ ] The list, the Home carousel, the pager and the detail page read `/api/v1/projects`; loading, error and empty states from EP-10
+- [ ] Spotify Web moves to its own repository's `.portfolio/` (images too); `client/src/features/work/data/projects/` goes away, and with it the locales' content from the JS bundle (decision 10)
+- [ ] The `Reference` placeholder is deleted or becomes a `draft`
+
+---
+
+## EP-17 — Site services
+
+**Goal:** what else the server does for the site. **Dependencies:** `EP-15`. **Size:** S.
+
+- [ ] Résumé download served by the API (one file per locale), so updating it needs no rebuild
+- [ ] `ErrorBoundary` reports to `POST /api/v1/errors` (was TK-12.4.2)
+- [ ] Privacy-respecting analytics: page views counted by the server, no cookies (was TK-12.4.2) — the first thing that would need a database (ADR-007)
+- [ ] About data (experience, stack, links) served by the API too — optional; only if it changes often enough to be worth it
+- ~~Contact form~~ — dropped 2026-10-23 (ADR-009)
+
+---
+
+## EP-18 — Deploy
+
+**Goal:** the site on the internet. **Dependencies:** `EP-15`, `EP-16`. **Size:** M.
+
+- [ ] Cloudflare Workers with the client build as static assets; `wrangler.toml` with the R2 binding
+- [ ] Deploy workflow on `main`, preview per PR
+- [ ] Keys created and stored as listed in TK-15.3.3; R2 free-tier numbers checked on Cloudflare's own pricing page
+- [ ] Domain (Cloudflare Registrar or Registro.br) and HTTPS; set `VITE_SITE_URL`
+- [ ] Share image 1200×630 for the site (from ST-12.3)
 
 ---
 
@@ -833,10 +967,19 @@ Context: in Figma the 5 states share the same anatomy — shape illustration, he
 | 3 | ~~Real content for Project — Detail~~ — **resolved:** Spotify Web case study in Figma | ~~`EP-09`~~ |
 | 4 | Real About Me data — the two postgraduate degrees in Figma are fictional | `EP-07` |
 | 5 | ~~i18n with a library or a custom solution~~ — **resolved 2026-10-21:** custom (ADR-005), en / pt / es | ~~`EP-11`~~ |
-| 6 | Deploy host — must also run the Express server (`EP-13`) | `EP-12`, `EP-13` |
+| 6 | ~~Deploy host~~ — **resolved 2026-10-23:** Cloudflare Workers (ADR-007) | ~~`EP-18`~~ |
 | 7 | **Deferred to the end (decided 2026-10-21):** Spotify Web repository URL for "Source — GitHub repository" | `EP-09` |
 | 8 | **Deferred to the end:** the architecture diagram in Figma is titled "MY PORTFOLIO — ARCHITECTURE", not Spotify Web — confirm or replace | `EP-09` |
 | 9 | **Deferred to the end:** Footer links — GitHub, LinkedIn, Telegram, Email and Résumé (`#` for now) | `EP-09` |
+| 10 | **Deferred (decided 2026-10-21):** split the JS per route — today everything ships in one 136 KB (gzip) chunk, mostly the three locales' content; worth it once there are more projects | `EP-12` |
+
+| 11 | ~~Image storage~~ — **resolved 2026-10-23:** Cloudflare R2 (ADR-007) | ~~`EP-16`~~ |
+| 12 | ~~Manifest format~~ — **resolved 2026-10-23:** `project.json` + `content.<locale>.json` with a JSON Schema (ADR-008) | ~~`EP-16`~~ |
+| 13 | ~~Contact e-mail provider~~ — **dropped 2026-10-23** with the contact form | ~~`EP-16`~~ |
+| 14 | ~~Server framework~~ — **resolved 2026-10-23:** Hono (ADR-007) | ~~`EP-15`~~ |
+| 15 | ~~Where synced projects live~~ — **resolved 2026-10-23:** catalog JSON in R2, no database until something needs writes (ADR-007) | ~~`EP-15`~~ |
+| 16 | ~~Deno as the repo toolchain~~ — **resolved 2026-10-23:** move to Node before the backend (ADR-006) | ~~`EP-14`~~ |
+| 17 | ~~Formatted text in project content~~ — **resolved 2026-10-23:** minimal Markdown rendered to React elements + CSP; no raw HTML (ADR-008, TK-15.3.1) | ~~`EP-14`~~ |
 
 ## 5. Execution notes
 

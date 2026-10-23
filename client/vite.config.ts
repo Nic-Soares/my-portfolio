@@ -2,12 +2,13 @@ import { join } from "jsr:@std/path@^1";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import svgr from "vite-plugin-svgr";
+import { seoPages } from "./seo.plugin.ts";
 
 const rootDir = import.meta.dirname;
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [react(), svgr(), seoPages()],
   css: {
     transformer: "lightningcss",
     lightningcss: {

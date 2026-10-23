@@ -8,6 +8,7 @@ import { DelayedFallback, lazyWithFloor } from "@/app/lazyRoute.tsx";
 import NotFound from "@/app/pages/NotFound/NotFound.tsx";
 import SomethingWentWrong from "@/app/pages/SomethingWentWrong/SomethingWentWrong.tsx";
 import UnderConstruction from "@/app/pages/UnderConstruction/UnderConstruction.tsx";
+import RouteMeta from "@/app/seo/RouteMeta.tsx";
 import { ThemeProvider } from "@/app/theme/ThemeProvider.tsx";
 import NavigationBar from "@/components/layout/NavigationBar/NavigationBar.tsx";
 import Sidebar from "@/components/layout/sidebar/Sidebar.tsx";
@@ -33,13 +34,14 @@ function SiteShell() {
   const { t } = useI18n();
   return (
     <>
+      <RouteMeta />
       <a href="#main-content" className="skip-link">
         {t.layout.skipToContent}
       </a>
       {/* Rail at Large and up; top app bar + navigation bar below (CSS) */}
       <TopAppBar />
       <Sidebar />
-      <div id="main-content" className="main-content" tabIndex={-1}>
+      <main id="main-content" className="main-content" tabIndex={-1}>
         <ErrorBoundary>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -68,7 +70,7 @@ function SiteShell() {
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
         </ErrorBoundary>
-      </div>
+      </main>
       <NavigationBar />
     </>
   );

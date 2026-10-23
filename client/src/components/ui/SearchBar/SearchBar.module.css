@@ -151,9 +151,20 @@
   opacity: 0.38;
 }
 
-/* No separate focus ring on the clear icon */
-.searchBar__trailingIcon:focus {
-  outline: none;
+/* The clear icon is a real button (keyboard reachable): no button chrome,
+   the standard focus ring */
+.searchBar__trailingIcon {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+
+.searchBar__trailingIcon:focus-visible {
+  outline: 3px solid var(--md-sys-color-secondary);
+  outline-offset: 2px;
+  border-radius: var(--md-sys-shape-corner-full);
 }
 
 /* ============================================
@@ -238,9 +249,19 @@
   }
 }
 
-/* Focus visible for keyboard navigation */
-.searchBar:focus-within {
-  outline: none;
+/* The clear icon just appears under reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .searchBar__trailingIcon {
+    animation: none;
+  }
+}
+
+/* Focus ring, as on the other controls (3px Secondary), on top of the
+   focused elevation: text fields are always :focus-visible, so it shows
+   for keyboard and pointer alike */
+.searchBar:has(.searchBar__input:focus-visible) {
+  outline: 3px solid var(--md-sys-color-secondary);
+  outline-offset: 2px;
 }
 
 .searchBar__input:focus-visible {

@@ -5,6 +5,8 @@ import styles from "./MediaCard.module.css";
 
 type MediaCardProps = {
   src: string;
+  srcSet?: string; // image width variants, with sizes
+  sizes?: string;
   type: "image" | "video";
   alt?: string;
   autoPlay?: boolean;
@@ -15,6 +17,8 @@ type MediaCardProps = {
 
 export default function MediaCard({
   src,
+  srcSet,
+  sizes,
   type,
   alt,
   autoPlay = true,
@@ -95,7 +99,11 @@ export default function MediaCard({
         <img
           className={styles.mediaObject}
           src={src}
+          srcSet={srcSet}
+          sizes={sizes}
           alt={alt || t.work.mediaContent}
+          // The project hero: the page's largest paint, fetched first
+          fetchPriority="high"
           onError={handleError}
         />
       )}

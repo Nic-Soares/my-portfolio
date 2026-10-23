@@ -1,8 +1,9 @@
 import CopyrightIcon from "@assets/images/footer/copyright.svg?react";
 import Divider from "@assets/images/footer/divider.svg?react";
-import LogoMark from "@assets/images/footer/logo.svg?react";
 import { Link } from "react-router-dom";
+import Logo from "@/components/layout/navigation/Logo/Logo.tsx";
 import { FitLines } from "@/components/ui/FitLines/FitLines.tsx";
+import { useFitText } from "@/hooks/useFitText.ts";
 import { useI18n } from "@/i18n/I18nProvider.tsx";
 import styles from "./Footer.module.css";
 import { type FooterLink, footerColumns, footerOwner } from "./footer.data.ts";
@@ -38,6 +39,8 @@ function FooterAnchor({ link }: { link: FooterLink }) {
 export default function Footer() {
   const { t } = useI18n();
   const footer = t.layout.footer;
+  // One line on a phone too: longer roles (pt, es) shrink instead of clipping
+  const copyrightRef = useFitText<HTMLParagraphElement>();
   return (
     <footer className={styles.footer}>
       <div className={styles.divider} aria-hidden="true">
@@ -47,7 +50,7 @@ export default function Footer() {
         <div className={styles.main}>
           <div className={styles.brand}>
             <Link to="/" className={styles.logo} aria-label={t.layout.home}>
-              <LogoMark aria-hidden="true" />
+              <Logo size={48} />
             </Link>
             <FitLines
               lines={{ "extra-large": 2, large: 2 }}
@@ -80,17 +83,22 @@ export default function Footer() {
         </div>
         <div className={styles.bottomBar}>
           <p className="label-medium-emphasized">{footerOwner}</p>
-          <p className={`body-small ${styles.copyright}`}>
+          <p
+            ref={copyrightRef}
+            className={`body-small fit-text ${styles.copyright}`}
+          >
             <CopyrightIcon
               className={styles.copyrightIcon}
               role="img"
               aria-label={footer.copyright}
             />
-            {footer.copyrightLine(
-              new Date().getFullYear(),
-              footerOwner,
-              footer.role,
-            )}
+            <span>
+              {footer.copyrightLine(
+                new Date().getFullYear(),
+                footerOwner,
+                footer.role,
+              )}
+            </span>
           </p>
         </div>
       </div>

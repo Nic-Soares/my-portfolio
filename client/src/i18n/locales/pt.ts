@@ -17,8 +17,8 @@ export const pt: Messages = {
     footer: {
       nav: "Rodapé",
       tagline:
-        "Desenvolvedor full-stack que constrói produtos reais de ponta a ponta — da interface ao banco de dados.",
-      role: "Desenvolvedor Fullstack",
+        "Transformo dados em respostas claras e IA em ferramentas que as pessoas usam de verdade.",
+      role: "Analista de Dados & Engenheiro de IA Aplicada",
       copyright: "Direitos autorais",
       copyrightLine: (year, owner, role) => `${year} ${owner}. ${role}`,
       columns: {
@@ -112,6 +112,10 @@ export const pt: Messages = {
     speaks: "Idiomas",
     sayHi: "Diga oi!",
     downloadCv: "Baixar currículo",
+  },
+  seo: {
+    projectsDescription:
+      "Estudos de caso em dados, automação e desenvolvimento full-stack, da interface ao banco de dados.",
   },
   system: {
     backHome: "Voltar ao início",

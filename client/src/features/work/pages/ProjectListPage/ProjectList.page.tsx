@@ -9,7 +9,7 @@ const ProjectListPage = () => {
   const filters = useProjectFilters(projectsData);
 
   return (
-    <div className={styles["projects"]}>
+    <div className={styles.projects}>
       <ProjectListHero
         total={projectsData.length}
         areas={filters.areas}

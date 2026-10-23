@@ -13,6 +13,8 @@ export type ContentBlock =
   | {
       type: "image";
       src: string;
+      srcSet?: string; // width variants, with sizes
+      sizes?: string;
       alt: string;
       id?: string;
       className?: string;
@@ -103,7 +105,17 @@ export interface ProjectData {
     // Optional hero image or video.
     type: "image" | "video";
     src: string;
+    srcSet?: string; // width variants (images), with sizes
+    sizes?: string;
     alt?: string; // Image alternative text.
   };
   tabs: ProjectTab[]; // Project tabs.
+  noindex?: boolean; // Kept out of search engines and the sitemap.
+}
+
+// An image with width variants for srcset
+export interface ResponsiveImage {
+  src: string;
+  srcSet?: string;
+  sizes?: string;
 }

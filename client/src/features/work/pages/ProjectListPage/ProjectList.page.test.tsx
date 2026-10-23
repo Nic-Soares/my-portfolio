@@ -23,8 +23,11 @@ const renderAt = (url: string, compact = false) => {
   );
 };
 
+// Card titles: the level-2 headings inside the card buttons
 const titles = () =>
-  screen.queryAllByRole("heading", { level: 3 }).map((h) => h.textContent);
+  screen
+    .queryAllByRole("button")
+    .flatMap((card) => card.querySelector("h2")?.textContent ?? []);
 
 describe("ProjectListPage filters", () => {
   afterEach(() => vi.useRealTimers());

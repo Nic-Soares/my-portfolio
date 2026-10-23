@@ -3,6 +3,8 @@ import type { ProjectData } from "../project-data.types.ts";
 // Spanish translation of reference.data.ts
 export const referenceDataEs: ProjectData = {
   slug: "reference",
+  // Placeholder (Material 3 docs copy), not a real case study
+  noindex: true,
   name: "Referencia",
   description: "La elevación es la distancia entre dos superficies en el eje z",
   areas: ["Design", "Frontend"],

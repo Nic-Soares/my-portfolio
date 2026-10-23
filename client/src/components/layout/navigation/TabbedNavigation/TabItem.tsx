@@ -66,7 +66,7 @@ const TabItem = ({
   const isInteractive = interactive && !disabled;
 
   const className = [
-    styles["tab"],
+    styles.tab,
 
     styles[`tab--${size}`],
     styles[`tab--${style}`],
@@ -109,10 +109,10 @@ const TabItem = ({
       aria-disabled={!isInteractive}
       type="button"
     >
-      <div className={styles["tab__content"]}>
+      <div className={styles.tab__content}>
         <div className={styles["tab__state-layer"]}>
           {renderIcon()}
-          {label && <p className={styles["tab__label"]}>{label}</p>}
+          {label && <p className={styles.tab__label}>{label}</p>}
           {children}
         </div>
       </div>

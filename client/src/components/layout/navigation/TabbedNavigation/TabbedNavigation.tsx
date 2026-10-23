@@ -70,7 +70,7 @@ const TabbedNavigation: React.FC<Props> = ({
 
       <nav
         ref={navRef}
-        className={`${styles["nav"]} ${isSticky ? styles["nav--sticky"] : ""} ${className}`.trim()}
+        className={`${styles.nav} ${isSticky ? styles["nav--sticky"] : ""} ${className}`.trim()}
         aria-label={t.layout.tabs}
       >
         {/* Use the provided navigation-container styles */}
@@ -82,7 +82,7 @@ const TabbedNavigation: React.FC<Props> = ({
             {renderTabs.map((tab) => {
               const isSelected = currentSelectedId === tab.id;
               return (
-                <div className={styles["tab"]} key={tab.id}>
+                <div className={styles.tab} key={tab.id}>
                   <TabItem
                     label={tab.label}
                     icon={tab.icon}

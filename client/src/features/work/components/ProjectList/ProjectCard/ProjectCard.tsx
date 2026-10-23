@@ -105,9 +105,9 @@ const ProjectCard = ({
             interactive={interactive}
           />
           <div>
-            <h3 className={`title-large ${styles["project-card__title"]}`}>
+            <h2 className={`title-large ${styles["project-card__title"]}`}>
               {title}
-            </h3>
+            </h2>
             <p className={`body-large ${styles["project-card__subtitle"]}`}>
               {company}
             </p>

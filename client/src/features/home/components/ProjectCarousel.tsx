@@ -46,6 +46,8 @@ const ProjectCarousel = () => {
         const isCurrent = offset === 0;
 
         return (
+          // The APG carousel pattern: each slide is a role="group"
+          // biome-ignore lint/a11y/useSemanticElements: not a form fieldset
           <div
             key={project.slug}
             className={`${styles.card} ${isCurrent ? styles["card--current"] : styles["card--peek"]}`}

@@ -32,3 +32,21 @@
     U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+/*
+ * Material Symbols Outlined, self-hosted and cut down to the icons the site
+ * uses (the full variable font is ~3.9 MB; this file is 14 KB). Axes: opsz
+ * 20–48, wght 100–700, FILL 0–1, GRAD -50–200. Apache 2.0 (Google).
+ * src/test/iconFont.test.ts fails when a component uses an icon missing
+ * here. To add one, regenerate the file from (names sorted):
+ * https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,close,dark_mode,favorite,filter_list,folder,home,light_mode,link,person,search,stars,translate&display=block
+ * and download the woff2 it points to over this one.
+ */
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: block;
+  src: url("/fonts/material-symbols/material-symbols-outlined-subset.woff2")
+    format("woff2");
+}

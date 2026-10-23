@@ -90,6 +90,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
     .join(" ");
 
   return (
+    // The click only forwards focus to the input, which the keyboard reaches
+    // directly; role="search" rather than <search> for older browsers
+    // biome-ignore lint/a11y/useKeyWithClickEvents: pointer convenience only
+    // biome-ignore lint/a11y/useSemanticElements: see above
     <div
       className={containerClasses}
       onClick={handleContainerClick}
@@ -119,17 +123,16 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </div>
 
         {query && (
-          <div
+          <button
+            type="button"
             className={styles.searchBar__trailingIcon}
             onClick={handleClear}
-            role="button"
             aria-label={t.ui.clearSearch}
-            tabIndex={-1}
           >
             <span className="material-symbols-outlined" aria-hidden="true">
               close
             </span>
-          </div>
+          </button>
         )}
       </div>
     </div>

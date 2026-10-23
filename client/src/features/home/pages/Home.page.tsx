@@ -9,10 +9,10 @@ function HomePage() {
       <div className={styles["home__hero-section"]}>
         <HeroSection />
       </div>
-      <div className={styles["home__experience"]}>
+      <div className={styles.home__experience}>
         <ServicesStack />
       </div>
-      <div className={styles["home__carousel"]}>
+      <div className={styles.home__carousel}>
         <ProjectCarousel />
       </div>
     </div>

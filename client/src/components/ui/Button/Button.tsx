@@ -53,7 +53,7 @@ const Button = ({
   if (!visible) return null;
 
   const className = [
-    styles["button"],
+    styles.button,
     styles[`button--${type}`],
     styles[`button--${size}`],
     styles[`button--${style}`],
@@ -87,6 +87,23 @@ const Button = ({
     }
   };
 
+  const content = (
+    <div className={styles.button__content}>
+      <div className={styles["button__state-layer"]}>
+        {renderIcon()}
+        {label && <p className={styles.button__label}>{label}</p>}
+        {children}
+      </div>
+    </div>
+  );
+
+  // Display-only (e.g. the tags inside a Project Card, which is itself the
+  // control): same look, but not a button, so there is no control nested in
+  // another one for assistive tech
+  if (!interactive && !disabled) {
+    return <span className={className}>{content}</span>;
+  }
+
   return (
     <button
       type="button"
@@ -97,13 +114,7 @@ const Button = ({
       aria-disabled={!isInteractive}
       aria-pressed={ariaPressed}
     >
-      <div className={styles["button__content"]}>
-        <div className={styles["button__state-layer"]}>
-          {renderIcon()}
-          {label && <p className={styles["button__label"]}>{label}</p>}
-          {children}
-        </div>
-      </div>
+      {content}
     </button>
   );
 };
